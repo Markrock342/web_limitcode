@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LIMIT CODE STUDIO — เว็บไซต์ทีม + Live Showcase
 
-## Getting Started
+เว็บไซต์ Landing Page สำหรับทีมฟรีแลนซ์สายพัฒนา **LIMIT CODE STUDIO**
+พร้อม **ผลงานตัวอย่างแบบกดดูได้จริง (Live Demo)** หลายแนวในเว็บเดียว
 
-First, run the development server:
+> ติดต่อหลักผ่าน LINE OA: **@026iaomj**
+
+## ฟีเจอร์
+
+- **หน้าแรก (`/`)** — Landing Page ภาษาไทยครบทุก section
+  - Hero · บริการ 6 แบบ · ทำไมต้องเรา · ขั้นตอนการทำงาน 5 สเต็ป · ตัวอย่างการใช้งาน · ผลงานตัวอย่าง · Tech Stack · ติดต่อ · Footer
+- **ผลงานตัวอย่าง (`/showcase`)** — แกลเลอรีให้ลูกค้า "เลือกแนว" เว็บ พร้อมตัวกรองหมวดหมู่
+- **Live Demo (`/demo/*`)** — ตัวอย่างเว็บที่กดเข้าไปใช้งานได้จริง เปิดผ่านเว็บของทีม
+  - `/demo/restaurant` — เว็บร้านอาหาร/คาเฟ่ + เมนู + จองโต๊ะ
+  - `/demo/shop` — เว็บขายของออนไลน์ + ตะกร้า + เช็คเอาท์
+  - `/demo/booking` — ระบบจองบริการคลินิก/ความงาม (multi-step)
+  - `/demo/dashboard` — ระบบหลังบ้าน Dashboard + กราฟ + ตารางออเดอร์
+  - `/demo/corporate` — เว็บไซต์บริษัท B2B
+- Responsive รองรับมือถือเต็มรูปแบบ + animation แบบ scroll-reveal เบา ๆ
+
+## เทคโนโลยี
+
+- **Next.js 16** (App Router) + **React 19**
+- **Tailwind CSS v4**
+- **TypeScript**
+- ฟอนต์ไทย `IBM Plex Sans Thai` + ฟอนต์ display `Sora` (self-hosted ผ่าน `next/font`)
+
+## เริ่มใช้งาน
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # เปิด http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build / Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## โครงสร้างหลัก
 
-## Learn More
+```
+src/
+  app/
+    page.tsx                 # หน้าแรก (Landing)
+    showcase/page.tsx        # แกลเลอรีผลงาน + ตัวกรอง
+    demo/<slug>/page.tsx     # หน้า Live Demo แต่ละแนว
+  components/
+    landing/                 # section ของหน้าแรก
+    demos/                   # ตัว Live Demo (Restaurant, Shop, Booking, Dashboard, Corporate)
+    DemoChrome.tsx           # กรอบครอบ demo (แถบ LIMIT CODE + สลับ demo อื่น)
+    ...                      # Navbar, Footer, DemoCard, ui, ฯลฯ
+  lib/
+    site.ts                  # ข้อมูลแบรนด์ บริการ ขั้นตอน tech stack + LINE OA
+    demos.ts                 # ข้อมูลผลงานตัวอย่าง
+```
 
-To learn more about Next.js, take a look at the following resources:
+## แก้ข้อมูลติดต่อ / เนื้อหา
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- LINE OA และข้อความแบรนด์: `src/lib/site.ts` (ตัวแปร `LINE_ID`, `LINE_URL`, `BRAND`)
+- รายการผลงานตัวอย่าง: `src/lib/demos.ts`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
+Deploy ได้ทันทีบน **Vercel** (แนะนำ) — import repo แล้ว Vercel จะตรวจจับ Next.js ให้อัตโนมัติ
+หรือใช้ `npm run build && npm run start` บนเซิร์ฟเวอร์ Node ใดก็ได้
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ออกแบบและพัฒนาโดยทีม LIMIT CODE STUDIO
