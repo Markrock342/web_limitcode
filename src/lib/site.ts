@@ -166,18 +166,3 @@ export const USE_CASES: { icon: IconName; title: string; desc: string }[] = [
     desc: "สร้างเวอร์ชันแรกเพื่อทดสอบไอเดียกับผู้ใช้จริง ก่อนลงทุนเต็มรูปแบบ",
   },
 ];
-
-export const TECH: { name: string; group: string }[] = [
-  { name: "React", group: "Frontend" },
-  { name: "Next.js", group: "Frontend" },
-  { name: "React Native", group: "Mobile" },
-  { name: "Expo", group: "Mobile" },
-  { name: "Node.js", group: "Backend" },
-  { name: "Firebase", group: "Backend" },
-  { name: "Cloud Functions", group: "Backend" },
-  { name: "Firestore", group: "Database" },
-  { name: "PostgreSQL", group: "Database" },
-  { name: "Vercel", group: "Hosting" },
-  { name: "Google Maps API", group: "Integration" },
-  { name: "LINE OA", group: "Integration" },
-];
