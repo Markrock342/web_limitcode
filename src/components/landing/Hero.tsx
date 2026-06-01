@@ -1,7 +1,15 @@
+import Image from "next/image";
+import Link from "next/link";
 import { LINE_ID } from "@/lib/site";
 import { Container, LineButton, GhostButton, LineGlyph } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
+
+const HERO_SHOTS = [
+  { src: "/showcase/dashboard.jpg", alt: "ตัวอย่างระบบหลังบ้าน LCS Business Dashboard", href: "/demo/dashboard", label: "ระบบหลังบ้าน" },
+  { src: "/showcase/shop.jpg", alt: "ตัวอย่างเว็บขายของ SweetShop", href: "/demo/shop", label: "เว็บขายของ" },
+  { src: "/showcase/restaurant.jpg", alt: "ตัวอย่างเว็บร้านอาหาร BISTRO CAFÉ", href: "/demo/restaurant", label: "เว็บร้านอาหาร" },
+];
 
 export function Hero() {
   return (
@@ -70,56 +78,61 @@ export function Hero() {
 }
 
 function HeroVisual() {
+  const [main, ...rest] = HERO_SHOTS;
+
   return (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-      {/* main browser card */}
-      <div className="relative rounded-2xl border border-slate-200 bg-white shadow-lift">
-        <div className="flex items-center gap-1.5 border-b border-slate-100 px-4 py-3">
-          <span className="size-3 rounded-full bg-rose-400" />
-          <span className="size-3 rounded-full bg-amber-400" />
-          <span className="size-3 rounded-full bg-emerald-400" />
-          <span className="ml-3 h-5 flex-1 rounded-md bg-slate-100" />
+      {/* main — real dashboard screenshot */}
+      <Link
+        href={main.href}
+        className="group relative block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lift transition-all hover:-translate-y-1 hover:shadow-[0_32px_64px_-24px_rgba(11,60,130,0.35)]"
+      >
+        <div className="relative aspect-[16/10] overflow-hidden">
+          <Image
+            src={main.src}
+            alt={main.alt}
+            fill
+            sizes="(max-width:1024px) 100vw, 520px"
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+            priority
+          />
         </div>
-        <div className="space-y-4 p-5">
-          <div className="flex items-center justify-between">
-            <div className="h-3 w-24 rounded-full bg-slate-200" />
-            <div className="h-7 w-20 rounded-full bg-gradient-to-r from-brand-500 to-violet-500" />
-          </div>
-          <div className="grid grid-cols-3 gap-3">
-            {["from-rose-400 to-orange-400", "from-sky-400 to-cyan-400", "from-emerald-400 to-teal-400"].map(
-              (g) => (
-                <div key={g} className="space-y-2 rounded-xl border border-slate-100 p-3">
-                  <div className={`h-10 rounded-lg bg-gradient-to-br ${g}`} />
-                  <div className="h-2 w-3/4 rounded-full bg-slate-200" />
-                  <div className="h-2 w-1/2 rounded-full bg-slate-100" />
-                </div>
-              )
-            )}
-          </div>
-          <div className="rounded-xl border border-slate-100 p-4">
-            <div className="mb-3 flex items-center justify-between">
-              <div className="h-2.5 w-20 rounded-full bg-slate-200" />
-              <div className="h-2.5 w-10 rounded-full bg-brand-200" />
-            </div>
-            <div className="flex items-end gap-2">
-              {[40, 65, 50, 80, 60, 95, 72].map((h, i) => (
-                <div
-                  key={i}
-                  className="flex-1 rounded-t-md bg-gradient-to-t from-brand-500 to-violet-400"
-                  style={{ height: `${h * 0.6}px` }}
-                />
-              ))}
-            </div>
-          </div>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent px-4 pb-4 pt-16">
+          <p className="text-xs font-medium text-white/70">ผลงานตัวอย่างจริง · กดดูได้</p>
+          <p className="font-display text-sm font-bold text-white">{main.label}</p>
         </div>
-      </div>
+      </Link>
+
+      {/* secondary real screenshots */}
+      {rest.map((shot, i) => (
+        <Link
+          key={shot.href}
+          href={shot.href}
+          className={`group absolute hidden overflow-hidden rounded-xl border-2 border-white bg-white shadow-lift transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-16px_rgba(11,60,130,0.3)] sm:block ${
+            i === 0 ? "-left-5 top-12 w-[42%]" : "-right-4 bottom-8 w-[44%]"
+          }`}
+        >
+          <div className="relative aspect-[16/10]">
+            <Image
+              src={shot.src}
+              alt={shot.alt}
+              fill
+              sizes="220px"
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/70 to-transparent px-2.5 pb-2 pt-8">
+            <p className="text-[11px] font-semibold text-white">{shot.label}</p>
+          </div>
+        </Link>
+      ))}
 
       {/* floating badges */}
-      <div className="absolute -left-4 top-16 hidden animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift sm:block">
+      <div className="absolute -left-4 top-4 hidden animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift sm:block">
         <p className="text-xs text-slate-500">ระบบจอง</p>
         <p className="font-display text-sm font-bold text-emerald-600">+ Dashboard</p>
       </div>
-      <div className="absolute -right-3 bottom-10 hidden animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift [animation-delay:1.5s] sm:block">
+      <div className="absolute -right-3 top-1/2 hidden -translate-y-1/2 animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift [animation-delay:1.5s] sm:block">
         <p className="text-xs text-slate-500">เริ่มจาก</p>
         <p className="font-display text-sm font-bold text-brand-600">MVP ก่อนได้</p>
       </div>
