@@ -1,14 +1,22 @@
-import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Container, LineButton } from "@/components/ui";
 import { ShowcaseGrid } from "@/components/ShowcaseGrid";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "ผลงานตัวอย่าง — LIMIT CODE STUDIO",
+export const metadata = pageMetadata({
+  title: "ผลงานตัวอย่าง — รับทำเว็บหลายแนว",
   description:
-    "รวมตัวอย่างเว็บไซต์หลายแนวจาก LIMIT CODE STUDIO ทั้งเว็บร้านอาหาร เว็บขายของ ระบบจอง ระบบหลังบ้าน และเว็บบริษัท เปิดดูตัวอย่างจริงได้ทันที",
-};
+    "ดูตัวอย่างเว็บไซต์จริงจาก LIMIT CODE STUDIO ทั้งเว็บร้านอาหาร เว็บขายของ ระบบจอง ระบบหลังบ้าน และเว็บบริษัท กดเข้าไปใช้งานเดโมได้ทันที",
+  path: "/showcase",
+  keywords: [
+    "ผลงานเว็บไซต์",
+    "ตัวอย่างเว็บร้านอาหาร",
+    "ตัวอย่างเว็บขายของ",
+    "ตัวอย่างระบบจอง",
+    "LIMIT CODE STUDIO",
+  ],
+});
 
 export default function ShowcasePage() {
   return (
