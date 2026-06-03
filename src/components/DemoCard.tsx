@@ -3,12 +3,16 @@ import Image from "next/image";
 import type { Demo } from "@/lib/demos";
 import { Icon } from "./Icon";
 
+const cardClass =
+  "group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-soft transition-all hover:-translate-y-1 hover:border-brand-200 hover:shadow-lift";
+
 export function DemoCard({ demo }: { demo: Demo }) {
-  return (
-    <Link
-      href={`/demo/${demo.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-soft transition-all hover:-translate-y-1 hover:border-brand-200 hover:shadow-lift"
-    >
+  const href = demo.liveUrl ?? `/demo/${demo.slug}`;
+  const isExternal = Boolean(demo.liveUrl);
+  const ctaLabel = isExternal ? "เปิดเว็บจริง" : "เปิดดูตัวอย่าง";
+
+  const inner = (
+    <>
       {/* real preview */}
       <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
         <Image
@@ -24,9 +28,14 @@ export function DemoCard({ demo }: { demo: Demo }) {
           {demo.category}
         </span>
         <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 rounded-full bg-ink/85 px-3 py-1.5 text-xs font-semibold text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
-          เปิดดูตัวอย่าง
+          {ctaLabel}
           <Icon name="arrow" className="size-3.5" />
         </span>
+        {isExternal ? (
+          <span className="absolute right-3 top-3 rounded-full bg-emerald-600/95 px-2.5 py-1 text-[11px] font-semibold text-white shadow-sm">
+            Live
+          </span>
+        ) : null}
       </div>
 
       <div className="flex flex-1 flex-col p-5">
@@ -44,6 +53,20 @@ export function DemoCard({ demo }: { demo: Demo }) {
           ))}
         </div>
       </div>
+    </>
+  );
+
+  if (isExternal) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={cardClass}>
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={cardClass}>
+      {inner}
     </Link>
   );
 }

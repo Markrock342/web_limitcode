@@ -77,6 +77,11 @@ const paths: Record<IconName, React.ReactNode> = {
   heart: (
     <path d="M12 20s-7-4.3-9.3-8.4C1.2 8.9 2.6 5.5 6 5.5c2 0 3.2 1.2 4 2.4.8-1.2 2-2.4 4-2.4 3.4 0 4.8 3.4 3.3 6.1C19 15.7 12 20 12 20Z" />
   ),
+  home: (
+    <>
+      <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z" />
+    </>
+  ),
 };
 
 export function Icon({ name, className }: Props) {

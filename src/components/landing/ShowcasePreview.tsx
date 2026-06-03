@@ -17,7 +17,7 @@ export function ShowcasePreview() {
             </h2>
             <p className="mt-4 max-w-xl text-lg text-slate-600">
               เลือกแนวเว็บที่ใกล้เคียงกับธุรกิจของคุณ แล้วกดเข้าไปดูตัวอย่างจริงได้เลย
-              ทุกตัวอย่างเปิดดูได้บนเว็บของทีม LIMIT CODE STUDIO
+              รวมทั้งเดโมบนเว็บเราและผลงาน Live ที่ deploy จริงแล้ว
             </p>
           </Reveal>
           <Reveal delay={120}>

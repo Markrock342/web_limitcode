@@ -5,7 +5,7 @@ import { DEMOS } from "@/lib/demos";
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const demoPages = DEMOS.map((d) => ({
+  const demoPages = DEMOS.filter((d) => !d.liveUrl).map((d) => ({
     url: `${SITE_URL}/demo/${d.slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,

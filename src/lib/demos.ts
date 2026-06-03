@@ -1,6 +1,12 @@
 import type { IconName } from "./site";
 
-export type DemoCategory = "ร้านอาหาร" | "ขายของ" | "จองบริการ" | "ระบบหลังบ้าน" | "เว็บบริษัท";
+export type DemoCategory =
+  | "ร้านอาหาร"
+  | "ขายของ"
+  | "จองบริการ"
+  | "ระบบหลังบ้าน"
+  | "เว็บบริษัท"
+  | "อสังหาริมทรัพย์";
 
 export type Demo = {
   slug: string;
@@ -9,6 +15,8 @@ export type Demo = {
   icon: IconName;
   tagline: string;
   description: string;
+  /** ลิงก์เว็บจริงที่ deploy แล้ว (ถ้ามี การ์ดจะเปิดแท็บใหม่แทน /demo) */
+  liveUrl?: string;
   // real preview image (screenshot of the live demo)
   preview: string;
   // visual identity for the catalog card
@@ -88,6 +96,36 @@ export const DEMOS: Demo[] = [
     accentText: "text-amber-700",
     tags: ["องค์กร", "บริการ", "ติดต่อ"],
     features: ["Hero + ตัวเลขความน่าเชื่อถือ", "บริการ 4 ด้าน + ผลงาน", "ฟอร์มติดต่อทีมขาย"],
+  },
+  {
+    slug: "ban-suk-jai",
+    name: "Ban Suk Jai Residences",
+    category: "อสังหาริมทรัพย์",
+    icon: "home",
+    tagline: "เว็บโครงการที่พักอาศัย / หอพัก",
+    description:
+      "เว็บไซต์โครงการที่พักอาศัย โชว์ข้อมูลโครงการ ห้องว่าง สิ่งอำนวยความสะดวก และช่องทางติดต่อสอบถาม",
+    liveUrl: "https://test-cursor-one.vercel.app/",
+    preview: "/showcase/ban-suk-jai.jpg",
+    swatch: "from-teal-500 via-emerald-500 to-cyan-600",
+    accentText: "text-teal-700",
+    tags: ["ที่พักอาศัย", "ห้องว่าง", "ติดต่อสอบถาม"],
+    features: ["หน้าแรกโชว์จุดเด่นโครงการ", "รายละเอียดห้องและราคา", "ฟอร์มติดต่อ / สอบถาม"],
+  },
+  {
+    slug: "aurelia-residences",
+    name: "Aurelia Residences",
+    category: "อสังหาริมทรัพย์",
+    icon: "home",
+    tagline: "เว็บ Luxury Living / คอนโดพรีเมียม",
+    description:
+      "เว็บไซต์โทนหรูหรา สำหรับโครงการที่พักระดับพรีเมียม เน้นภาพลักษณ์ ยูนิต สิ่งอำนวยความสะดวก และนัดชมโครงการ",
+    liveUrl: "https://rental-luxury.vercel.app/",
+    preview: "/showcase/aurelia-residences.jpg",
+    swatch: "from-slate-900 via-amber-700 to-amber-500",
+    accentText: "text-amber-800",
+    tags: ["Luxury", "ยูนิต", "นัดชมโครงการ"],
+    features: ["Hero ภาพลักษณ์พรีเมียม", "แกลเลอรียูนิตและราคา", "ฟอร์มนัดชม / ติดต่อ"],
   },
 ];
 

@@ -70,23 +70,40 @@ export function DemoChrome({
           </div>
 
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {others.map((d) => (
-              <Link
-                key={d.slug}
-                href={`/demo/${d.slug}`}
-                className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3 transition-all hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-soft"
-              >
-                <span
-                  className={`inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${d.swatch} text-white`}
+            {others.map((d) => {
+              const href = d.liveUrl ?? `/demo/${d.slug}`;
+              const linkClass =
+                "group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3 transition-all hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-soft";
+              const content = (
+                <>
+                  <span
+                    className={`inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${d.swatch} text-white`}
+                  >
+                    <Icon name={d.icon} className="size-5" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate font-display text-sm font-bold text-ink">{d.name}</span>
+                    <span className="block truncate text-xs text-slate-500">{d.category}</span>
+                  </span>
+                </>
+              );
+
+              return d.liveUrl ? (
+                <a
+                  key={d.slug}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClass}
                 >
-                  <Icon name={d.icon} className="size-5" />
-                </span>
-                <span className="min-w-0">
-                  <span className="block truncate font-display text-sm font-bold text-ink">{d.name}</span>
-                  <span className="block truncate text-xs text-slate-500">{d.category}</span>
-                </span>
-              </Link>
-            ))}
+                  {content}
+                </a>
+              ) : (
+                <Link key={d.slug} href={href} className={linkClass}>
+                  {content}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="mt-10 flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-6 text-center sm:flex-row sm:justify-between sm:text-left">

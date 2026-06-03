@@ -21,7 +21,8 @@ export type IconName =
   | "arrow"
   | "shield"
   | "layers"
-  | "heart";
+  | "heart"
+  | "home";
 
 export type Service = {
   id: string;
