@@ -3,6 +3,7 @@ import puppeteer from "puppeteer";
 const shots = [
   { url: "https://test-cursor-one.vercel.app/", out: "public/showcase/ban-suk-jai.jpg" },
   { url: "https://rental-luxury.vercel.app/", out: "public/showcase/aurelia-residences.jpg" },
+  { url: "https://termgame-iota.vercel.app/", out: "public/showcase/termgame.jpg" },
 ];
 
 const browser = await puppeteer.launch({

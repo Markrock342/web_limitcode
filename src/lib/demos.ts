@@ -127,6 +127,21 @@ export const DEMOS: Demo[] = [
     tags: ["Luxury", "ยูนิต", "นัดชมโครงการ"],
     features: ["Hero ภาพลักษณ์พรีเมียม", "แกลเลอรียูนิตและราคา", "ฟอร์มนัดชม / ติดต่อ"],
   },
+  {
+    slug: "termgame",
+    name: "TermGame",
+    category: "ขายของ",
+    icon: "spark",
+    tagline: "ศูนย์รวมเกม ซื้อ · เช่า · เติมเกม",
+    description:
+      "เว็บไซต์ศูนย์รวมเกมออนไลน์ โชว์เกมยอดนิยมสำหรับซื้อและเช่า รีวิวลูกค้า สถิติความน่าเชื่อถือ และใส่ตะกร้าได้ทันที",
+    liveUrl: "https://termgame-iota.vercel.app/",
+    preview: "/showcase/termgame.jpg",
+    swatch: "from-violet-600 via-fuchsia-500 to-cyan-500",
+    accentText: "text-violet-700",
+    tags: ["ซื้อเกม", "เช่าเกม", "เติมเกม"],
+    features: ["แคตตาล็อกเกมซื้อ/เช่าแยกหมวด", "การ์ดสินค้าพร้อมราคาและรีวิว", "Hero + สถิติ + CTA สมัครสมาชิก"],
+  },
 ];
 
 export function getDemo(slug: string): Demo | undefined {
