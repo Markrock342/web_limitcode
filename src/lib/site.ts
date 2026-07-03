@@ -167,3 +167,28 @@ export const USE_CASES: { icon: IconName; title: string; desc: string }[] = [
     desc: "สร้างเวอร์ชันแรกเพื่อทดสอบไอเดียกับผู้ใช้จริง ก่อนลงทุนเต็มรูปแบบ",
   },
 ];
+
+export type Client = {
+  name: string;
+  logo: string;
+  url: string;
+  width: number;
+  height: number;
+};
+
+export const CLIENTS: Client[] = [
+  {
+    name: "สมบัติทัวร์",
+    logo: "/clients/sombattour.png",
+    url: "https://www.sombattour.com/",
+    width: 130,
+    height: 43,
+  },
+  {
+    name: "Marketimes Asia",
+    logo: "/clients/marketimes-asia.png",
+    url: "https://marketimesasia.com/",
+    width: 240,
+    height: 30,
+  },
+];

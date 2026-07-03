@@ -7,6 +7,7 @@ import { Process } from "@/components/landing/Process";
 import { UseCases } from "@/components/landing/UseCases";
 import { ShowcasePreview } from "@/components/landing/ShowcasePreview";
 import { TechStack } from "@/components/landing/TechStack";
+import { Clients } from "@/components/landing/Clients";
 import { Contact } from "@/components/landing/Contact";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
         <UseCases />
         <ShowcasePreview />
         <TechStack />
+        <Clients />
         <Contact />
       </main>
       <Footer />
