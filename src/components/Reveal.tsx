@@ -3,13 +3,23 @@
 import { useEffect, useRef, useState } from "react";
 
 type Props = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   delay?: number;
   as?: keyof React.JSX.IntrinsicElements;
+  /** ทิศทางการโผล่: up (ค่าเริ่มต้น) / left / right / scale / draw (เส้นวาดตัวเอง) */
+  variant?: "up" | "left" | "right" | "scale" | "draw";
 };
 
-export function Reveal({ children, className = "", delay = 0, as = "div" }: Props) {
+const VARIANT_CLASS: Record<NonNullable<Props["variant"]>, string> = {
+  up: "",
+  left: "reveal-left",
+  right: "reveal-right",
+  scale: "reveal-scale",
+  draw: "reveal-draw",
+};
+
+export function Reveal({ children, className = "", delay = 0, as = "div", variant = "up" }: Props) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
 
@@ -35,7 +45,7 @@ export function Reveal({ children, className = "", delay = 0, as = "div" }: Prop
   return (
     <Tag
       ref={ref}
-      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+      className={`reveal ${VARIANT_CLASS[variant]} ${visible ? "is-visible" : ""} ${className}`}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}

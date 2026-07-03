@@ -17,12 +17,16 @@ export function Process() {
         </Reveal>
 
         <div className="relative mt-14">
-          {/* connector line */}
-          <div className="absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-brand-200 via-violet-200 to-sky-200 lg:block" />
+          {/* connector line — วาดตัวเองจากซ้ายไปขวาเมื่อเลื่อนมาถึง */}
+          <Reveal
+            variant="draw"
+            delay={150}
+            className="absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-brand-200 via-violet-200 to-sky-200 lg:block"
+          />
           <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-5">
             {PROCESS.map((p, i) => (
-              <Reveal as="li" key={p.step} delay={i * 80} className="relative">
-                <div className="flex size-14 items-center justify-center rounded-2xl border border-slate-200 bg-white font-display text-lg font-bold text-brand-600 shadow-soft">
+              <Reveal as="li" key={p.step} delay={i * 110} className="group relative">
+                <div className="flex size-14 items-center justify-center rounded-2xl border border-slate-200 bg-white font-display text-lg font-bold text-brand-600 shadow-soft transition-all duration-300 ease-out-quart group-hover:-translate-y-1 group-hover:border-brand-200 group-hover:shadow-lift">
                   {p.step}
                 </div>
                 <h3 className="mt-4 font-display text-base font-bold text-ink">{p.title}</h3>

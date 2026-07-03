@@ -13,7 +13,7 @@ export function Contact() {
   return (
     <section id="contact" className="scroll-mt-20 py-20 sm:py-24">
       <Container>
-        <Reveal>
+        <Reveal variant="scale">
           <div className="relative overflow-hidden rounded-3xl border border-brand-500/40 bg-gradient-to-br from-brand-700 via-brand-600 to-ink p-8 text-white shadow-lift sm:p-12">
             <div className="pointer-events-none absolute inset-0 bg-dots opacity-10" />
             <div className="pointer-events-none absolute -right-16 -top-16 size-72 rounded-full bg-white/10 blur-2xl" />

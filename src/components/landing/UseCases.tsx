@@ -25,13 +25,15 @@ export function UseCases() {
               className={i === 0 ? "lg:row-span-2" : ""}
             >
               <article
-                className={`flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift ${
-                  i === 0 ? "lg:bg-gradient-to-br lg:from-brand-600 lg:to-ink lg:text-white" : ""
+                className={`group flex h-full flex-col justify-between rounded-2xl border p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift ${
+                  i === 0
+                    ? "border-brand-500/40 bg-gradient-to-br from-brand-600 to-ink text-white"
+                    : "border-slate-200 bg-white"
                 }`}
               >
                 <div>
                   <div
-                    className={`inline-flex size-11 items-center justify-center rounded-xl ${
+                    className={`inline-flex size-11 items-center justify-center rounded-xl transition-transform duration-300 ease-out-quart group-hover:scale-110 group-hover:-rotate-3 ${
                       i === 0 ? "bg-white/15 text-white" : "bg-brand-50 text-brand-600"
                     }`}
                   >

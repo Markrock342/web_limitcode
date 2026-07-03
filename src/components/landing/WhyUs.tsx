@@ -7,7 +7,7 @@ export function WhyUs() {
   return (
     <section id="why" className="scroll-mt-20 bg-gradient-to-b from-brand-50/60 to-white py-20 sm:py-24">
       <Container className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <Reveal className="lg:sticky lg:top-24">
+        <Reveal variant="left" className="lg:sticky lg:top-24">
           <SectionTag>ทำไมต้องเรา</SectionTag>
           <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
             ทำไมธุรกิจควรเริ่มกับเรา
@@ -35,9 +35,9 @@ export function WhyUs() {
 
         <div className="space-y-4">
           {WHY.map((w, i) => (
-            <Reveal key={w.title} delay={i * 70}>
-              <div className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-soft transition-all hover:border-brand-200 hover:shadow-lift">
-                <div className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+            <Reveal key={w.title} variant="right" delay={i * 70}>
+              <div className="group flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-soft transition-all hover:border-brand-200 hover:shadow-lift">
+                <div className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 transition-transform duration-300 ease-out-quart group-hover:scale-110 group-hover:-rotate-3">
                   <Icon name={w.icon} className="size-6" />
                 </div>
                 <div>

@@ -16,7 +16,7 @@
   - `/demo/booking` — ระบบจองบริการคลินิก/ความงาม (multi-step)
   - `/demo/dashboard` — ระบบหลังบ้าน Dashboard + กราฟ + ตารางออเดอร์
   - `/demo/corporate` — เว็บไซต์บริษัท B2B
-- Responsive รองรับมือถือเต็มรูปแบบ + animation แบบ scroll-reveal เบา ๆ
+- Responsive รองรับมือถือเต็มรูปแบบ + motion design ธีม "software house" (data beam วิ่งตาม grid, terminal จำลอง build/deploy, scroll-reveal, spotlight card, เส้น process วาดตัวเอง) เคารพ `prefers-reduced-motion` ทุกจุด
 
 ## เทคโนโลยี
 

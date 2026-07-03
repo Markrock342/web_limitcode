@@ -4,6 +4,7 @@ import { LINE_ID } from "@/lib/site";
 import { Container, LineButton, GhostButton, LineGlyph } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
+import { HeroTerminal } from "@/components/HeroTerminal";
 
 const HERO_SHOTS = [
   { src: "/showcase/dashboard.jpg", alt: "ตัวอย่างระบบหลังบ้าน LCS Business Dashboard", href: "/demo/dashboard", label: "ระบบหลังบ้าน" },
@@ -16,8 +17,15 @@ export function Hero() {
     <section className="relative overflow-hidden">
       {/* backdrop */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_at_top,black,transparent_72%)]" />
-      <div className="pointer-events-none absolute -top-24 -left-24 -z-10 size-[28rem] rounded-full bg-brand-300/30 blur-3xl" />
-      <div className="pointer-events-none absolute -top-10 right-0 -z-10 size-[24rem] rounded-full bg-sky-300/30 blur-3xl" />
+      {/* data beams วิ่งตามเส้น grid (48px) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <span className="beam-x top-[144px] [animation-delay:-4s]" />
+        <span className="beam-x top-[288px] [animation-delay:1.8s] [animation-duration:11s]" />
+        <span className="beam-y left-[336px] [animation-delay:-7s]" />
+        <span className="beam-y hidden lg:block left-[816px] [animation-delay:3s] [animation-duration:13s]" />
+      </div>
+      <div className="pointer-events-none absolute -top-24 -left-24 -z-10 size-[28rem] animate-aurora rounded-full bg-brand-300/30 blur-3xl" />
+      <div className="pointer-events-none absolute -top-10 right-0 -z-10 size-[24rem] animate-aurora rounded-full bg-sky-300/30 blur-3xl [animation-delay:-9s]" />
 
       <Container className="grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
         <div>
@@ -48,10 +56,10 @@ export function Hero() {
 
           <Reveal delay={240}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <LineButton>ปรึกษาฟรีผ่าน LINE OA</LineButton>
+              <LineButton className="btn-sheen-auto">ปรึกษาฟรีผ่าน LINE OA</LineButton>
               <GhostButton href="/#services">
                 ดูบริการของเรา
-                <Icon name="arrow" className="size-4" />
+                <Icon name="arrow" className="size-4 transition-transform duration-300 ease-out-quart group-hover:translate-x-1" />
               </GhostButton>
             </div>
           </Reveal>
@@ -103,39 +111,56 @@ function HeroVisual() {
         </div>
       </Link>
 
-      {/* secondary real screenshots */}
+      {/* secondary real screenshots — โผล่ตามจังหวะหลังภาพหลัก */}
       {rest.map((shot, i) => (
-        <Link
+        <Reveal
           key={shot.href}
-          href={shot.href}
-          className={`group absolute hidden overflow-hidden rounded-xl border-2 border-white bg-white shadow-lift transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-16px_rgba(11,60,130,0.3)] sm:block ${
-            i === 0 ? "-left-5 top-12 w-[42%]" : "-right-4 bottom-8 w-[44%]"
-          }`}
+          variant="scale"
+          delay={420 + i * 140}
+          className={`absolute hidden sm:block ${i === 0 ? "-left-5 top-12 w-[42%]" : "-right-4 bottom-8 w-[44%]"}`}
         >
-          <div className="relative aspect-[16/10]">
-            <Image
-              src={shot.src}
-              alt={shot.alt}
-              fill
-              sizes="220px"
-              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-            />
-          </div>
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/70 to-transparent px-2.5 pb-2 pt-8">
-            <p className="text-[11px] font-semibold text-white">{shot.label}</p>
-          </div>
-        </Link>
+          <Link
+            href={shot.href}
+            className="group block overflow-hidden rounded-xl border-2 border-white bg-white shadow-lift transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-16px_rgba(11,60,130,0.3)]"
+          >
+            <div className="relative aspect-[16/10]">
+              <Image
+                src={shot.src}
+                alt={shot.alt}
+                fill
+                sizes="220px"
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/70 to-transparent px-2.5 pb-2 pt-8">
+              <p className="text-[11px] font-semibold text-white">{shot.label}</p>
+            </div>
+          </Link>
+        </Reveal>
       ))}
 
       {/* floating badges */}
-      <div className="absolute -left-4 top-4 hidden animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift sm:block">
-        <p className="text-xs text-slate-500">ระบบจอง</p>
-        <p className="font-display text-sm font-bold text-emerald-600">+ Dashboard</p>
-      </div>
-      <div className="absolute -right-3 top-1/2 hidden -translate-y-1/2 animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift [animation-delay:1.5s] sm:block">
-        <p className="text-xs text-slate-500">เริ่มจาก</p>
-        <p className="font-display text-sm font-bold text-brand-600">MVP ก่อนได้</p>
-      </div>
+      <Reveal variant="scale" delay={700} className="absolute -left-4 top-4 hidden sm:block">
+        <div className="animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift">
+          <p className="text-xs text-slate-500">ระบบจอง</p>
+          <p className="font-display text-sm font-bold text-emerald-600">+ Dashboard</p>
+        </div>
+      </Reveal>
+      <Reveal variant="scale" delay={820} className="absolute -right-3 top-1/2 hidden -translate-y-1/2 sm:block">
+        <div className="animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift [animation-delay:1.5s]">
+          <p className="text-xs text-slate-500">เริ่มจาก</p>
+          <p className="font-display text-sm font-bold text-brand-600">MVP ก่อนได้</p>
+        </div>
+      </Reveal>
+
+      {/* terminal — ทีมนี้เขียนโค้ดจริง deploy จริง */}
+      <Reveal
+        variant="scale"
+        delay={560}
+        className="relative z-10 mt-4 sm:absolute sm:-bottom-7 sm:-left-6 sm:mt-0 sm:w-[248px]"
+      >
+        <HeroTerminal />
+      </Reveal>
     </div>
   );
 }

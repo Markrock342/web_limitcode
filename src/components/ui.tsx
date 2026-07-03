@@ -39,7 +39,7 @@ export function LineButton({
       href={LINE_URL}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group inline-flex items-center justify-center gap-2.5 rounded-full bg-[#06C755] px-6 py-3.5 text-base font-semibold text-white shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift focus:outline-none focus-visible:ring-4 focus-visible:ring-[#06C755]/30 ${className}`}
+      className={`btn-sheen group inline-flex items-center justify-center gap-2.5 rounded-full bg-[#06C755] px-6 py-3.5 text-base font-semibold text-white shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift active:scale-[0.97] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#06C755]/30 ${className}`}
     >
       <LineGlyph className="size-5 shrink-0" />
       <span>{children}</span>
@@ -64,7 +64,7 @@ export function GhostButton({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center gap-2 rounded-full border border-brand-200 bg-white px-6 py-3.5 text-base font-semibold text-brand-700 transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:bg-brand-50 ${className}`}
+      className={`group inline-flex items-center justify-center gap-2 rounded-full border border-brand-200 bg-white px-6 py-3.5 text-base font-semibold text-brand-700 transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:bg-brand-50 active:scale-[0.97] ${className}`}
     >
       {children}
     </Link>

@@ -8,9 +8,12 @@ export function TechStack() {
     <section className="relative scroll-mt-20 overflow-hidden bg-[#070d1f] py-20 text-white sm:py-24">
       {/* colorful backdrop */}
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.07]" />
-      <div className="pointer-events-none absolute -left-32 top-0 size-96 rounded-full bg-cyan-500/15 blur-3xl" />
-      <div className="pointer-events-none absolute -right-24 top-1/3 size-80 rounded-full bg-violet-500/15 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-1/3 size-72 rounded-full bg-emerald-500/10 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <span className="beam-x top-[192px] [animation-delay:-3s] [animation-duration:12s]" />
+      </div>
+      <div className="pointer-events-none absolute -left-32 top-0 size-96 animate-aurora rounded-full bg-cyan-500/15 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 top-1/3 size-80 animate-aurora rounded-full bg-violet-500/15 blur-3xl [animation-delay:-6s]" />
+      <div className="pointer-events-none absolute bottom-0 left-1/3 size-72 animate-aurora rounded-full bg-emerald-500/10 blur-3xl [animation-delay:-12s]" />
 
       <Container className="relative">
         <Reveal className="mx-auto max-w-2xl text-center">
@@ -26,8 +29,8 @@ export function TechStack() {
           </p>
         </Reveal>
 
-        {/* logo marquee */}
-        <Reveal className="mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+        {/* logo marquee — หยุดเมื่อ hover ให้กดอ่านได้ */}
+        <Reveal className="marquee-pause mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
           <div className="flex w-max animate-marquee gap-4">
             {[...TECH, ...TECH].map((t, i) => (
               <span

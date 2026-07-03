@@ -2,6 +2,7 @@ import { SERVICES } from "@/lib/site";
 import { Container, SectionTag } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
+import { SpotlightCard } from "@/components/SpotlightCard";
 
 export function Services() {
   return (
@@ -20,9 +21,12 @@ export function Services() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
             <Reveal key={s.id} delay={(i % 3) * 80}>
-              <article className="group h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-soft transition-all hover:-translate-y-1 hover:border-brand-200 hover:shadow-lift">
+              <SpotlightCard
+                as="article"
+                className="h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-soft transition-all hover:-translate-y-1 hover:border-brand-200 hover:shadow-lift"
+              >
                 <div
-                  className={`inline-flex size-12 items-center justify-center rounded-xl bg-gradient-to-br ${s.accent} text-white shadow-soft`}
+                  className={`inline-flex size-12 items-center justify-center rounded-xl bg-gradient-to-br ${s.accent} text-white shadow-soft transition-transform duration-300 ease-out-quart group-hover:scale-110 group-hover:-rotate-3`}
                 >
                   <Icon name={s.icon} className="size-6" />
                 </div>
@@ -36,7 +40,7 @@ export function Services() {
                     </li>
                   ))}
                 </ul>
-              </article>
+              </SpotlightCard>
             </Reveal>
           ))}
         </div>
