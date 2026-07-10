@@ -9,18 +9,18 @@ export function Services() {
     <section id="services" className="scroll-mt-20 py-20 sm:py-24">
       <Container>
         <Reveal className="mx-auto max-w-2xl text-center">
-          <SectionTag>บริการของเรา</SectionTag>
+          <SectionTag>ระบบที่เราทำ</SectionTag>
           <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            ครบทุกระบบที่ธุรกิจต้องใช้
+            โฟกัสระบบที่ธุรกิจบริการต้องใช้จริง
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            เลือกได้ตั้งแต่เว็บไซต์หน้าเดียว ไปจนถึงระบบหลังบ้านเฉพาะทาง เราช่วยดูแลให้ตั้งแต่ต้นจนจบ
+            ไม่รับทำทุกอย่าง — เราเชี่ยวชาญ Web App และหลังบ้านที่ช่วยให้ทีมทำงานเป็นระบบ
           </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {SERVICES.map((s, i) => (
-            <Reveal key={s.id} delay={(i % 3) * 80}>
+            <Reveal key={s.id} delay={(i % 2) * 80}>
               <SpotlightCard
                 as="article"
                 className="h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-soft transition-all hover:-translate-y-1 hover:border-brand-200 hover:shadow-lift"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LINE_ID, LINE_URL } from "./site";
+import { SYSTEM_DEMOS } from "./demos";
 
 /** เปลี่ยนเป็นโดเมนจริงเมื่อ deploy แล้ว */
 export const SITE_URL =
@@ -9,24 +10,28 @@ export const SITE_NAME = "LIMIT CODE STUDIO";
 export const SITE_NAME_SHORT = "LIMIT CODE";
 
 export const DEFAULT_DESCRIPTION =
-  "LIMIT CODE STUDIO รับทำเว็บไซต์ เว็บแอป แอปพลิเคชัน และระบบหลังบ้านสำหรับธุรกิจ SME คุยง่าย วางระบบเป็น เริ่มจาก MVP ได้ ปรึกษาฟรีผ่าน LINE OA";
+  "LIMIT CODE STUDIO — Software Studio พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ ระบบจองคิว CRM Job Order Dashboard AI ซักรีด Cowork คลินิก ฮอลล์ และคาร์แคร์ เปลี่ยนงานบน LINE/Excel ให้เป็นระบบที่ใช้ได้จริง";
 
 export const SEO_KEYWORDS = [
-  "รับทำเว็บไซต์",
-  "รับทำเว็บแอป",
-  "รับทำแอปพลิเคชัน",
+  "รับทำระบบจองออนไลน์",
   "รับทำระบบหลังบ้าน",
-  "รับทำเว็บขายของ",
-  "รับทำเว็บร้านอาหาร",
-  "ระบบจองออนไลน์",
-  "ระบบนัดหมาย",
-  "เว็บไซต์ธุรกิจ",
-  "พัฒนาเว็บไซต์",
-  "พัฒนาแอป",
-  "ทำเว็บ SME",
-  "รับทำ MVP",
-  "ฟรีแลนซ์พัฒนาเว็บ",
-  "รับทำเว็บ Next.js",
+  "รับทำ Web App",
+  "รับทำ Admin Dashboard",
+  "รับทำระบบ CRM",
+  "รับทำ Job Order",
+  "ระบบจองสนาม",
+  "ระบบนัดหมายออนไลน์",
+  "ระบบจองคลินิก",
+  "ระบบโรงแรม PMS",
+  "ระบบฟิตเนสสมาชิก",
+  "ระบบ AI สำหรับธุรกิจ",
+  "ระบบซักรีดออนไลน์",
+  "ระบบ coworking",
+  "ระบบจองฮอลล์",
+  "ระบบคาร์แคร์",
+  "Software Studio ไทย",
+  "พัฒนาเว็บแอป SME",
+  "รับทำระบบธุรกิจบริการ",
   "LIMIT CODE STUDIO",
   "LIMIT CODE",
   LINE_ID,
@@ -35,7 +40,7 @@ export const SEO_KEYWORDS = [
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — รับทำเว็บไซต์ แอป และระบบหลังบ้านสำหรับธุรกิจ`,
+    default: `${SITE_NAME} — พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
     template: `%s | ${SITE_NAME_SHORT}`,
   },
   description: DEFAULT_DESCRIPTION,
@@ -51,31 +56,35 @@ export const defaultMetadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
+      "max-video-preview": -1,
       "max-snippet": -1,
     },
   },
   alternates: {
     canonical: SITE_URL,
+    languages: {
+      "th-TH": SITE_URL,
+    },
   },
   openGraph: {
     type: "website",
     locale: "th_TH",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — รับทำเว็บไซต์ แอป และระบบหลังบ้าน`,
+    title: `${SITE_NAME} — Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
     description: DEFAULT_DESCRIPTION,
     images: [
       {
         url: "/brand/lcs-cover.png",
         width: 1200,
         height: 630,
-        alt: SITE_NAME,
+        alt: `${SITE_NAME} — Software Studio`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — รับทำเว็บไซต์ แอป และระบบหลังบ้าน`,
+    title: `${SITE_NAME} — Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
     description: DEFAULT_DESCRIPTION,
     images: ["/brand/lcs-cover.png"],
   },
@@ -101,25 +110,44 @@ export function pageMetadata({
   description,
   path,
   keywords,
+  noIndex = false,
 }: {
   title: string;
   description: string;
   path: string;
   keywords?: string[];
+  /** หน้าย่อยในเดโมบางหน้าอาจไม่ต้อง index ลึก — ค่าเริ่มต้นยัง index */
+  noIndex?: boolean;
 }): Metadata {
   const url = `${SITE_URL}${path}`;
   return {
     title,
     description,
     keywords: keywords ?? SEO_KEYWORDS,
+    robots: noIndex
+      ? { index: false, follow: true }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+          },
+        },
     alternates: { canonical: url },
     openGraph: {
       title,
       description,
       url,
+      siteName: SITE_NAME,
+      locale: "th_TH",
+      type: "website",
       images: [{ url: "/brand/lcs-cover.png", width: 1200, height: 630, alt: SITE_NAME }],
     },
     twitter: {
+      card: "summary_large_image",
       title,
       description,
       images: ["/brand/lcs-cover.png"],
@@ -132,6 +160,7 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: SITE_NAME,
+    alternateName: SITE_NAME_SHORT,
     description: DEFAULT_DESCRIPTION,
     url: SITE_URL,
     image: `${SITE_URL}/brand/lcs-logo.png`,
@@ -140,7 +169,7 @@ export function organizationJsonLd() {
       "@type": "Country",
       name: "Thailand",
     },
-    availableLanguage: ["Thai"],
+    availableLanguage: ["Thai", "th"],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
@@ -149,17 +178,22 @@ export function organizationJsonLd() {
     },
     sameAs: [LINE_URL],
     knowsAbout: [
-      "Web Development",
-      "Mobile App Development",
-      "E-commerce",
+      "Web App Development",
       "Booking System",
+      "CRM",
+      "Job Order System",
       "Business Dashboard",
+      "AI Integration",
+      "Hotel PMS",
+      "Clinic Appointment System",
+      "Fleet Maintenance Software",
       "Next.js",
       "React",
     ],
     offers: {
       "@type": "Offer",
-      description: "รับพัฒนาเว็บไซต์ เว็บแอป และระบบหลังบ้านสำหรับธุรกิจ",
+      description: "พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ",
+      url: `${SITE_URL}/#contact`,
     },
   };
 }
@@ -180,5 +214,28 @@ export function websiteJsonLd() {
         url: `${SITE_URL}/brand/lcs-logo.png`,
       },
     },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_URL}/showcase`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+/** ItemList ของระบบม็อกอัพ — ช่วยให้ Google เข้าใจพอร์ตโฟลิโอ */
+export function showcaseItemListJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "ตัวอย่างระบบม็อกอัพจาก LIMIT CODE STUDIO",
+    description: "ระบบ Web App และหลังบ้านที่กดลองใช้ได้จริง",
+    numberOfItems: SYSTEM_DEMOS.length,
+    itemListElement: SYSTEM_DEMOS.map((d, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: d.name,
+      description: d.description,
+      url: `${SITE_URL}/demo/${d.slug}`,
+    })),
   };
 }

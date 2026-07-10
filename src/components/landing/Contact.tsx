@@ -4,9 +4,9 @@ import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
 
 const HELP = [
-  "ส่งตัวอย่างเว็บที่คุณชอบมาให้ดู",
-  "บอกฟีเจอร์หรือระบบที่อยากได้",
-  "เล่าปัญหาธุรกิจที่อยากแก้",
+  "เล่าปัญหาที่ยังทำบน LINE / Excel / เอกสาร",
+  "ส่งตัวอย่างระบบหรือ workflow ที่อยากได้",
+  "บอกโมดูลที่จำเป็นก่อน (จอง / CRM / Dashboard / AI)",
 ];
 
 export function Contact() {
@@ -20,13 +20,13 @@ export function Contact() {
             <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
                 <h2 className="font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
-                  มีไอเดียหรืออยากเริ่มทำระบบ
+                  มีโจทย์ระบบที่อยากทำให้เป็นจริง
                   <br />
                   คุยกับเราได้เลย
                 </h2>
                 <p className="mt-4 max-w-lg text-lg text-white/85">
-                  ส่งตัวอย่างเว็บ ฟีเจอร์ที่อยากได้ หรือปัญหาธุรกิจที่อยากแก้
-                  มาให้ทีมช่วยประเมินเบื้องต้นได้ครับ
+                  ส่ง workflow ปัจจุบัน ปัญหาที่ทีมเจอ หรือตัวอย่างระบบที่อยากได้
+                  มาให้ทีมช่วยประเมิน scope และแนวทางเบื้องต้นได้ครับ
                 </p>
                 <ul className="mt-6 space-y-2.5">
                   {HELP.map((h) => (

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { DEMOS } from "@/lib/demos";
+import { DEMOS, SYSTEM_DEMOS } from "@/lib/demos";
 import { Container, SectionTag } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
@@ -11,13 +11,12 @@ export function ShowcasePreview() {
       <Container>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <Reveal>
-            <SectionTag>ผลงานตัวอย่าง</SectionTag>
+            <SectionTag>ตัวอย่างระบบ</SectionTag>
             <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-              เรามีหลายแนวให้เลือกดู
+              {SYSTEM_DEMOS.length} ระบบม็อกอัพ กดลองใช้ได้จริง
             </h2>
             <p className="mt-4 max-w-xl text-lg text-slate-600">
-              เลือกแนวเว็บที่ใกล้เคียงกับธุรกิจของคุณ แล้วกดเข้าไปดูตัวอย่างจริงได้เลย
-              รวมทั้งเดโมบนเว็บเราและผลงาน Live ที่ deploy จริงแล้ว
+              ชื่อแบรนด์เป็นม็อกอัพทั้งหมด — มีทั้งฝั่งลูกค้าและหลังบ้าน/CMS ให้คลิกเล่นได้ในเบราว์เซอร์
             </p>
           </Reveal>
           <Reveal delay={120}>
@@ -32,12 +31,21 @@ export function ShowcasePreview() {
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {DEMOS.map((d, i) => (
+          {SYSTEM_DEMOS.map((d, i) => (
             <Reveal key={d.slug} delay={(i % 3) * 80}>
               <DemoCard demo={d} />
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-10 text-center">
+          <p className="text-sm text-slate-500">
+            รวมเดโมเว็บและ Live อื่น ๆ อีก {DEMOS.length - SYSTEM_DEMOS.length} รายการในหน้า{" "}
+            <Link href="/showcase" className="font-semibold text-brand-700 hover:underline">
+              ตัวอย่างทั้งหมด
+            </Link>
+          </p>
+        </Reveal>
       </Container>
     </section>
   );

@@ -1,7 +1,7 @@
 {
   "name": "LIMIT CODE STUDIO",
   "short_name": "LIMIT CODE",
-  "description": "รับทำเว็บไซต์ เว็บแอป และระบบหลังบ้านสำหรับธุรกิจ",
+  "description": "Software Studio พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

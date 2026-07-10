@@ -6,10 +6,10 @@ import { LineButton } from "./ui";
 import { Logo } from "./Logo";
 
 const NAV = [
-  { href: "/#services", label: "บริการ" },
+  { href: "/#services", label: "ระบบที่ทำ" },
   { href: "/#why", label: "ทำไมต้องเรา" },
   { href: "/#process", label: "ขั้นตอน" },
-  { href: "/showcase", label: "ผลงานตัวอย่าง" },
+  { href: "/showcase", label: "ตัวอย่างระบบ" },
   { href: "/#contact", label: "ติดต่อ" },
 ];
 

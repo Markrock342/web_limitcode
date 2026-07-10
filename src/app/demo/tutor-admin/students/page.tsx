@@ -1,0 +1,12 @@
+import { BrightStudentsPage } from "@/components/demos/brightslot/pages/StudentsPage";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "BrightSlot Tutor — นักเรียน",
+  description: "จัดการรายชื่อนักเรียน",
+  path: "/demo/tutor-admin/students",
+});
+
+export default function Page() {
+  return <BrightStudentsPage />;
+}

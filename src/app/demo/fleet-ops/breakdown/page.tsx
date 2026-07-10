@@ -1,0 +1,12 @@
+import { BlueBreakdownPage } from "@/components/demos/blueroute/pages/BreakdownPage";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "BlueRoute Fleet — เสียกลางทาง",
+  description: "รายการงานเสียกลางทาง เปิด/ปิดงาน",
+  path: "/demo/fleet-ops/breakdown",
+});
+
+export default function Page() {
+  return <BlueBreakdownPage />;
+}

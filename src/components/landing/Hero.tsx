@@ -7,17 +7,15 @@ import { Icon } from "@/components/Icon";
 import { HeroTerminal } from "@/components/HeroTerminal";
 
 const HERO_SHOTS = [
-  { src: "/showcase/dashboard.jpg", alt: "ตัวอย่างระบบหลังบ้าน LCS Business Dashboard", href: "/demo/dashboard", label: "ระบบหลังบ้าน" },
-  { src: "/showcase/shop.jpg", alt: "ตัวอย่างเว็บขายของ SweetShop", href: "/demo/shop", label: "เว็บขายของ" },
-  { src: "/showcase/restaurant.jpg", alt: "ตัวอย่างเว็บร้านอาหาร BISTRO CAFÉ", href: "/demo/restaurant", label: "เว็บร้านอาหาร" },
+  { src: "/showcase/court-booking.jpg", alt: "ตัวอย่างระบบจองสนามแบด + หลังบ้าน", href: "/demo/court-booking", label: "ระบบจองสนาม" },
+  { src: "/showcase/fleet-ops.jpg", alt: "ตัวอย่าง Dashboard งานซ่อมบำรุง", href: "/demo/fleet-ops", label: "Fleet Ops" },
+  { src: "/showcase/dashboard.jpg", alt: "ตัวอย่าง Admin Dashboard", href: "/demo/dashboard", label: "Admin Dashboard" },
 ];
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
-      {/* backdrop */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_at_top,black,transparent_72%)]" />
-      {/* data beams วิ่งตามเส้น grid (48px) */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <span className="beam-x top-[144px] [animation-delay:-4s]" />
         <span className="beam-x top-[288px] [animation-delay:1.8s] [animation-duration:11s]" />
@@ -35,30 +33,31 @@ export function Hero() {
                 <span className="absolute inline-flex size-2 animate-ping rounded-full bg-brand-400 opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-brand-500" />
               </span>
-              ทีมฟรีแลนซ์สายพัฒนา · คุยง่าย วางระบบเป็น
+              Software Studio · Web App และระบบหลังบ้าน
             </span>
           </Reveal>
 
           <Reveal delay={80}>
-            <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]">
-              รับทำเว็บไซต์ แอป และ
+            <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
+              พัฒนา{" "}
+              <span className="text-gradient">Web App และระบบหลังบ้าน</span>
               <br className="hidden sm:block" />{" "}
-              <span className="text-gradient">ระบบหลังบ้าน</span> สำหรับธุรกิจ
+              สำหรับธุรกิจบริการ
             </h1>
           </Reveal>
 
           <Reveal delay={160}>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-              LIMIT CODE STUDIO ช่วยวางแผน ออกแบบ และพัฒนาระบบดิจิทัลให้ธุรกิจใช้งานได้จริง
-              ตั้งแต่เว็บไซต์ทั่วไป เว็บขายของ ระบบจอง ไปจนถึงระบบหลังบ้านเฉพาะทาง
+              LIMIT CODE STUDIO ไม่ใช่ทีมรับทำเว็บทั่วไป — เราเปลี่ยนงานที่ยังอยู่บน LINE, Excel
+              และเอกสารกระจัดกระจาย ให้เป็นระบบจอง CRM Dashboard และ AI ที่ทีมใช้ได้จริง
             </p>
           </Reveal>
 
           <Reveal delay={240}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <LineButton className="btn-sheen-auto">ปรึกษาฟรีผ่าน LINE OA</LineButton>
+              <LineButton className="btn-sheen-auto">ปรึกษาโจทย์ระบบฟรี</LineButton>
               <GhostButton href="/#services">
-                ดูบริการของเรา
+                ดูระบบที่เราทำ
                 <Icon name="arrow" className="size-4 transition-transform duration-300 ease-out-quart group-hover:translate-x-1" />
               </GhostButton>
             </div>
@@ -70,7 +69,7 @@ export function Hero() {
                 <LineGlyph className="size-5" />
               </span>
               <div className="leading-tight">
-                <p className="text-xs text-slate-500">ติดต่อหลักผ่าน LINE OA</p>
+                <p className="text-xs text-slate-500">คุยโจทย์ระบบผ่าน LINE OA</p>
                 <p className="font-display text-lg font-bold tracking-tight text-ink">{LINE_ID}</p>
               </div>
             </div>
@@ -90,7 +89,6 @@ function HeroVisual() {
 
   return (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-      {/* main — real dashboard screenshot */}
       <Link
         href={main.href}
         className="group relative block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lift transition-all hover:-translate-y-1 hover:shadow-[0_32px_64px_-24px_rgba(11,60,130,0.35)]"
@@ -106,12 +104,11 @@ function HeroVisual() {
           />
         </div>
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent px-4 pb-4 pt-16">
-          <p className="text-xs font-medium text-white/70">ผลงานตัวอย่างจริง · กดดูได้</p>
+          <p className="text-xs font-medium text-white/70">ตัวอย่างระบบจริง · กดดูได้</p>
           <p className="font-display text-sm font-bold text-white">{main.label}</p>
         </div>
       </Link>
 
-      {/* secondary real screenshots — โผล่ตามจังหวะหลังภาพหลัก */}
       {rest.map((shot, i) => (
         <Reveal
           key={shot.href}
@@ -139,21 +136,19 @@ function HeroVisual() {
         </Reveal>
       ))}
 
-      {/* floating badges */}
       <Reveal variant="scale" delay={700} className="absolute -left-4 top-4 hidden sm:block">
         <div className="animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift">
-          <p className="text-xs text-slate-500">ระบบจอง</p>
-          <p className="font-display text-sm font-bold text-emerald-600">+ Dashboard</p>
+          <p className="text-xs text-slate-500">จาก LINE + Excel</p>
+          <p className="font-display text-sm font-bold text-emerald-600">→ ระบบจริง</p>
         </div>
       </Reveal>
       <Reveal variant="scale" delay={820} className="absolute -right-3 top-1/2 hidden -translate-y-1/2 sm:block">
         <div className="animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift [animation-delay:1.5s]">
-          <p className="text-xs text-slate-500">เริ่มจาก</p>
-          <p className="font-display text-sm font-bold text-brand-600">MVP ก่อนได้</p>
+          <p className="text-xs text-slate-500">โฟกัส</p>
+          <p className="font-display text-sm font-bold text-brand-600">ธุรกิจบริการ</p>
         </div>
       </Reveal>
 
-      {/* terminal — ทีมนี้เขียนโค้ดจริง deploy จริง */}
       <Reveal
         variant="scale"
         delay={560}

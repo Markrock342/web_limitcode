@@ -16,10 +16,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <UseCases />
         <Services />
         <WhyUs />
         <Process />
-        <UseCases />
         <ShowcasePreview />
         <TechStack />
         <Clients />

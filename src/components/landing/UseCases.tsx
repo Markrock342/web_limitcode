@@ -8,12 +8,12 @@ export function UseCases() {
     <section className="scroll-mt-20 bg-gradient-to-b from-white to-brand-50/60 py-20 sm:py-24">
       <Container>
         <Reveal className="mx-auto max-w-2xl text-center">
-          <SectionTag>ตัวอย่างการใช้งาน</SectionTag>
+          <SectionTag>ปัญหาที่เราแก้</SectionTag>
           <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            ตัวอย่างระบบที่เราช่วยทำได้
+            ถ้าธุรกิจคุณยังทำงานแบบนี้ เราช่วยได้
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            ไม่ว่าจะธุรกิจแบบไหน เรามีแนวทางวางระบบให้เหมาะกับงานของคุณ
+            ไม่ขายคำว่า “รับทำเว็บ” — เราเริ่มจากสถานการณ์จริงที่ทีมเจอทุกวัน แล้วเปลี่ยนเป็นระบบ
           </p>
         </Reveal>
 
@@ -56,7 +56,7 @@ export function UseCases() {
                 </div>
                 {i === 0 && (
                   <p className="mt-6 text-sm font-medium text-white/90">
-                    ดูตัวอย่างจริงได้ในหน้า “ผลงานตัวอย่าง” ด้านล่าง ↓
+                    ดูตัวอย่างระบบที่เราออกแบบไว้ด้านล่าง ↓
                   </p>
                 )}
               </article>

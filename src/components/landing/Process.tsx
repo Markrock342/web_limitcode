@@ -9,10 +9,10 @@ export function Process() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <SectionTag>ขั้นตอนการทำงาน</SectionTag>
           <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            ทำงานเป็นขั้นตอน เห็นภาพทุกสเต็ป
+            จากโจทย์ธุรกิจถึงระบบที่ขึ้นใช้งานจริง
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            ตั้งแต่คุยโจทย์ไปจนถึงส่งมอบและดูแลต่อ คุณรู้ตลอดว่าตอนนี้อยู่ตรงไหน
+            ทุกโปรเจกต์ผ่านกระบวนการเดียวกัน — Requirement, Scope, พัฒนา, UAT, ส่งมอบ และดูแลต่อ
           </p>
         </Reveal>
 

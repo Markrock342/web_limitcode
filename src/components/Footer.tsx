@@ -31,19 +31,19 @@ export function Footer() {
             <div>
               <p className="font-semibold text-ink">บริการ</p>
               <ul className="mt-3 space-y-2 text-slate-600">
-                <li><Link href="/#services" className="hover:text-brand-700">เว็บไซต์บริษัท</Link></li>
-                <li><Link href="/#services" className="hover:text-brand-700">เว็บขายของ</Link></li>
-                <li><Link href="/#services" className="hover:text-brand-700">ระบบจอง</Link></li>
-                <li><Link href="/#services" className="hover:text-brand-700">ระบบหลังบ้าน</Link></li>
+                <li><Link href="/#services" className="hover:text-brand-700">ระบบจองและคิว</Link></li>
+                <li><Link href="/#services" className="hover:text-brand-700">CRM / Job Order</Link></li>
+                <li><Link href="/#services" className="hover:text-brand-700">Admin Dashboard</Link></li>
+                <li><Link href="/#services" className="hover:text-brand-700">ระบบ AI ธุรกิจ</Link></li>
               </ul>
             </div>
             <div>
               <p className="font-semibold text-ink">ผลงาน</p>
               <ul className="mt-3 space-y-2 text-slate-600">
                 <li><Link href="/showcase" className="hover:text-brand-700">รวมตัวอย่างทั้งหมด</Link></li>
-                <li><Link href="/demo/restaurant" className="hover:text-brand-700">เว็บร้านอาหาร</Link></li>
-                <li><Link href="/demo/shop" className="hover:text-brand-700">เว็บขายของ</Link></li>
-                <li><Link href="/demo/dashboard" className="hover:text-brand-700">ระบบหลังบ้าน</Link></li>
+                <li><Link href="/demo/court-booking" className="hover:text-brand-700">SmashLane จองสนาม</Link></li>
+                <li><Link href="/demo/field-crm" className="hover:text-brand-700">GuardNest CRM</Link></li>
+                <li><Link href="/demo/ai-cms" className="hover:text-brand-700">NovaOracle AI</Link></li>
               </ul>
             </div>
             <div>

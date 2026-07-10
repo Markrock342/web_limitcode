@@ -17,16 +17,237 @@ export type Demo = {
   description: string;
   /** ลิงก์เว็บจริงที่ deploy แล้ว (ถ้ามี การ์ดจะเปิดแท็บใหม่แทน /demo) */
   liveUrl?: string;
-  // real preview image (screenshot of the live demo)
   preview: string;
-  // visual identity for the catalog card
-  swatch: string; // gradient classes
+  swatch: string;
   accentText: string;
   tags: string[];
   features: string[];
 };
 
+/** ระบบธุรกิจม็อกอัพ (กดลองได้) — ชื่อสมมติทั้งหมด */
+export const SYSTEM_DEMOS: Demo[] = [
+  {
+    slug: "court-booking",
+    name: "SmashLane Arena",
+    category: "จองบริการ",
+    icon: "calendar",
+    tagline: "ระบบจองสนามแบด + หลังบ้านจัดคอร์ท",
+    description:
+      "ม็อกอัพใช้งานได้จริง: ลูกค้าเลือกช่วงเวลา ชำระเงินจำลอง แล้วแอดมินจัดเลขคอร์ทในตาราง มีคิวรอจัด Walk-in และล็อกรายเดือน",
+    preview: "/showcase/court-booking.jpg",
+    swatch: "from-[#3953A4] via-sky-500 to-[#EB8824]",
+    accentText: "text-[#3953A4]",
+    tags: ["จองคิว", "ตารางคอร์ท", "หลังบ้าน"],
+    features: [
+      "ฝั่งลูกค้า: เลือกวัน/ชั่วโมง ตะกร้า ชำระ PromptPay จำลอง",
+      "ฝั่งแอดมิน: คิวรอจัดคอร์ท + ตารางคอร์ทกดจัดได้",
+      "Walk-in / ล็อกรายเดือน / รีเซ็ตเดโม",
+    ],
+  },
+  {
+    slug: "fleet-ops",
+    name: "BlueRoute Fleet",
+    category: "ระบบหลังบ้าน",
+    icon: "dashboard",
+    tagline: "Dashboard งานซ่อมบำรุงรถ",
+    description:
+      "ม็อกอัพหลังบ้านบริษัทขนส่ง: งานประจำวัน งานค้างซ่อม เสียกลางทาง สรุปงานพร้อมอะไหล่ และค้นหารถ",
+    preview: "/showcase/fleet-ops.jpg",
+    swatch: "from-[#16234A] via-[#2E4A8A] to-[#C9A227]",
+    accentText: "text-[#16234A]",
+    tags: ["Job Order", "Dashboard", "ค้นหารถ"],
+    features: [
+      "ล็อกอินเดโม + Dashboard 3 การ์ดหลัก",
+      "เจาะรายการงานตามช่าง / สถานะ",
+      "สรุปงาน อะไหล่ ค่าใช้จ่าย + ค้นหาโปรไฟล์รถ",
+    ],
+  },
+  {
+    slug: "field-crm",
+    name: "GuardNest Field",
+    category: "ระบบหลังบ้าน",
+    icon: "layers",
+    tagline: "CRM / Job Order ทีมหน้างาน",
+    description:
+      "ม็อกอัพบริษัทบริการภาคสนาม: งานวันนี้ Quotation ปฏิทินทีม และ Dashboard — ติดตามสถานะงานถึงหน้างาน",
+    preview: "/showcase/field-crm.jpg",
+    swatch: "from-emerald-600 via-teal-500 to-cyan-600",
+    accentText: "text-emerald-700",
+    tags: ["CRM", "Quotation", "ทีมหน้างาน"],
+    features: ["สถานะงานครบวงจร", "ใบเสนอราคาอนุมัติได้", "ปฏิทินทีม + KPI"],
+  },
+  {
+    slug: "clinic-admin",
+    name: "MediSlot Clinic",
+    category: "จองบริการ",
+    icon: "heart",
+    tagline: "ระบบนัดหมายคลินิก + หลังบ้าน",
+    description:
+      "ม็อกอัพคลินิก: ผู้ป่วยจองคิวได้เอง แอดมินจัดการนัด ตารางหมอ และบันทึกผู้ป่วย",
+    preview: "/showcase/clinic-admin.jpg",
+    swatch: "from-cyan-500 via-teal-400 to-sky-600",
+    accentText: "text-teal-700",
+    tags: ["นัดหมาย", "ตารางหมอ", "CMS คนไข้"],
+    features: ["จองบริการ/วัน/เวลา", "เช็คมาแล้ว–ไม่มา", "รายชื่อผู้ป่วย + โน้ต"],
+  },
+  {
+    slug: "kitchen-board",
+    name: "TableFlow Bistro",
+    category: "ร้านอาหาร",
+    icon: "coffee",
+    tagline: "จองโต๊ะ + Kitchen Board + เมนู CMS",
+    description:
+      "ม็อกอัพร้านอาหาร: จองโต๊ะ กระดานครัวเลื่อนสถานะออเดอร์ และเปิด/ปิดเมนูพร้อมแก้ราคา",
+    preview: "/showcase/kitchen-board.jpg",
+    swatch: "from-amber-500 via-orange-400 to-rose-500",
+    accentText: "text-amber-700",
+    tags: ["จองโต๊ะ", "ครัว", "เมนู CMS"],
+    features: ["จองโต๊ะหน้าร้าน", "บอร์ดครัว ใหม่→กำลังทำ→พร้อม", "เมนู sold-out / แก้ราคา"],
+  },
+  {
+    slug: "hotel-pms",
+    name: "StayNest Hotel",
+    category: "ระบบหลังบ้าน",
+    icon: "home",
+    tagline: "PMS โรงแรม Front Desk + ห้องพัก",
+    description:
+      "ม็อกอัพโรงแรม: Front Desk check-in/out สถานะห้อง Housekeeping และรายการจอง",
+    preview: "/showcase/hotel-pms.jpg",
+    swatch: "from-slate-800 via-blue-900 to-amber-500",
+    accentText: "text-amber-800",
+    tags: ["Front Desk", "Rooms", "Housekeeping"],
+    features: ["เช็คอิน–เช็คเอาต์วันนี้", "กริดสถานะห้อง", "งานแม่บ้านติ๊กเสร็จ"],
+  },
+  {
+    slug: "gym-admin",
+    name: "IronPulse Gym",
+    category: "จองบริการ",
+    icon: "rocket",
+    tagline: "สมาชิก คลาส Check-in และแพ็กเกจ",
+    description:
+      "ม็อกอัพฟิตเนส: จัดการสมาชิก ตารางคลาส Check-in หน้าร้าน และแพ็กเกจ CMS",
+    preview: "/showcase/gym-admin.jpg",
+    swatch: "from-zinc-900 via-lime-500 to-orange-500",
+    accentText: "text-lime-700",
+    tags: ["สมาชิก", "คลาส", "Check-in"],
+    features: ["ต่ออายุสมาชิก", "จองที่นั่งคลาส", "แพ็กเกจยอดนิยม"],
+  },
+  {
+    slug: "ai-cms",
+    name: "NovaOracle AI",
+    category: "ระบบหลังบ้าน",
+    icon: "spark",
+    tagline: "Admin AI — Credits Personas CMS",
+    description:
+      "ม็อกอัพผลิตภัณฑ์ AI: จัดการผู้ใช้ Free/Pro เติมเครดิต Personas และบทความ CMS",
+    preview: "/showcase/ai-cms.jpg",
+    swatch: "from-violet-600 via-indigo-500 to-fuchsia-500",
+    accentText: "text-violet-700",
+    tags: ["Credits", "Persona", "CMS"],
+    features: ["เติมเครดิตผู้ใช้", "เปิด/ปิด Persona + แก้ prompt", "บทความ draft/publish"],
+  },
+  {
+    slug: "tutor-admin",
+    name: "BrightSlot Tutor",
+    category: "จองบริการ",
+    icon: "calendar",
+    tagline: "จองติวเตอร์ + หลังบ้านตารางสอน",
+    description:
+      "ม็อกอัพสถาบันกวดวิชา: ผู้ปกครองจองคิว แอดมินอนุมัติตาราง ดูโหลดติวเตอร์ และรายชื่อนักเรียน",
+    preview: "/showcase/tutor-admin.jpg",
+    swatch: "from-sky-500 via-blue-400 to-indigo-500",
+    accentText: "text-sky-700",
+    tags: ["จองคลาส", "ติวเตอร์", "นักเรียน"],
+    features: ["จองวิชา/ติวเตอร์/เวลา", "อนุมัติ–ยกเลิกคิว", "โหลดงานติวเตอร์"],
+  },
+  {
+    slug: "dispatch",
+    name: "QuickDrop Logistics",
+    category: "ระบบหลังบ้าน",
+    icon: "cart",
+    tagline: "Dispatch ออเดอร์ส่งของ + พนักงานส่ง",
+    description:
+      "ม็อกอัพโลจิสติกส์: เลื่อนสถานะออเดอร์ มอบหมายพนักงานส่ง โซนจัดส่ง และสรุปวัน",
+    preview: "/showcase/dispatch.jpg",
+    swatch: "from-indigo-600 via-blue-500 to-rose-400",
+    accentText: "text-indigo-700",
+    tags: ["Dispatch", "Courier", "โซน"],
+    features: ["เลื่อนสถานะออเดอร์", "ออนไลน์พนักงาน + มอบหมายงาน", "KPI สรุปวัน"],
+  },
+  {
+    slug: "laundry-ops",
+    name: "FreshFold Laundry",
+    category: "จองบริการ",
+    icon: "layers",
+    tagline: "เรียกรับผ้า · บอร์ดซัก · แพ็กเกจ CMS",
+    description:
+      "ม็อกอัพร้านซักรีด: ลูกค้าเรียกรับผ้า ทีมเลื่อนสถานะงาน แก้แพ็กเกจราคา และโน้ตลูกค้า",
+    preview: "/showcase/laundry-ops.jpg",
+    swatch: "from-[#2C5F4F] via-emerald-500 to-teal-400",
+    accentText: "text-[#2C5F4F]",
+    tags: ["เรียกรับผ้า", "บอร์ดงาน", "แพ็กเกจ"],
+    features: ["ฟอร์มเรียกรับผ้า", "สถานะรับแล้ว→กำลังซัก→พร้อมส่ง→ส่งแล้ว", "แพ็กเกจ CMS + โน้ตลูกค้า"],
+  },
+  {
+    slug: "cowork-desk",
+    name: "NestDesk Cowork",
+    category: "จองบริการ",
+    icon: "home",
+    tagline: "จอง Hot Desk · ห้องประชุม · Check-in",
+    description:
+      "ม็อกอัพ coworking: จองโต๊ะ/ห้องประชุม แคตตาล็อกพื้นที่ สมาชิก Check-in และภาพรวมวัน",
+    preview: "/showcase/cowork-desk.jpg",
+    swatch: "from-[#3D4F6F] via-slate-500 to-sky-400",
+    accentText: "text-[#3D4F6F]",
+    tags: ["Hot Desk", "Meeting", "Check-in"],
+    features: ["จองโต๊ะ/ห้องพร้อมรูป", "ต่ออายุสมาชิก + Check-in", "แอดมินรายการจองวันนี้"],
+  },
+  {
+    slug: "pet-clinic",
+    name: "PawCare Vet Clinic",
+    category: "จองบริการ",
+    icon: "heart",
+    tagline: "คลินิกสัตว์เลี้ยง · จองคิว + หลังบ้าน",
+    description:
+      "ม็อกอัพคลินิกสัตว์: เจ้าของจองคิวพร้อมชื่อสัตว์เลี้ยง แอดมินเช็คมาแล้ว/ไม่มา ตารางสัตวแพทย์ และ CMS ประวัติสัตว์",
+    preview: "/showcase/pet-clinic.jpg",
+    swatch: "from-[#5B4B8A] via-violet-400 to-fuchsia-300",
+    accentText: "text-[#5B4B8A]",
+    tags: ["จองคิว", "สัตวแพทย์", "CMS สัตว์เลี้ยง"],
+    features: ["จองบริการพร้อมชื่อสัตว์เลี้ยง", "เช็คมาแล้ว–ไม่มา", "ตารางสัตวแพทย์ + ประวัติสัตว์"],
+  },
+  {
+    slug: "venue-booking",
+    name: "VenueHive",
+    category: "จองบริการ",
+    icon: "calendar",
+    tagline: "จองห้องจัดเลี้ยง · อีเวนต์ + ใบเสนอราคา",
+    description:
+      "ม็อกอัพระบบจองฮอลล์: แกลเลอรีห้อง ความจุ/ราคา ขอจอง อนุมัติอีเวนต์ และใบเสนอราคา",
+    preview: "/showcase/venue-booking.jpg",
+    swatch: "from-[#6B3F3F] via-rose-400 to-amber-300",
+    accentText: "text-[#6B3F3F]",
+    tags: ["ฮอลล์", "อีเวนต์", "ใบเสนอราคา"],
+    features: ["แกลเลอรีฮอลล์ + ความจุ/ราคา", "ขอจองและอนุมัติอีเวนต์", "ใบเสนอราคาอนุมัติได้"],
+  },
+  {
+    slug: "auto-detail",
+    name: "ShineAuto Detail",
+    category: "จองบริการ",
+    icon: "rocket",
+    tagline: "จองคิวล้างรถ · เบย์ + สมาชิก",
+    description:
+      "ม็อกอัพคาร์แคร์: จองแพ็กเกจ+เบย์ บอร์ดตารางเบย์ เลื่อนสถานะงาน และสมาชิกสะสมแต้ม",
+    preview: "/showcase/auto-detail.jpg",
+    swatch: "from-[#1F3A5F] via-sky-500 to-slate-400",
+    accentText: "text-[#1F3A5F]",
+    tags: ["จองคิว", "เบย์", "สมาชิก"],
+    features: ["จองแพ็กเกจ + เบย์", "สถานะงาน รอคิว→กำลังทำ→เสร็จ", "สมาชิกสะสมแต้ม"],
+  },
+];
+
 export const DEMOS: Demo[] = [
+  ...SYSTEM_DEMOS,
   {
     slug: "restaurant",
     name: "BISTRO CAFÉ",

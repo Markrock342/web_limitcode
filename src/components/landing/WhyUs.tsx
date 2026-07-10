@@ -10,16 +10,16 @@ export function WhyUs() {
         <Reveal variant="left" className="lg:sticky lg:top-24">
           <SectionTag>ทำไมต้องเรา</SectionTag>
           <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            ทำไมธุรกิจควรเริ่มกับเรา
+            Software Studio ที่ทำงานเหมือนบริษัทจริง
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            เราไม่ได้แค่ทำเว็บสวย ๆ แล้วจบ แต่ช่วยคิดตั้งแต่ต้น วางระบบให้ใช้งานได้จริง
-            และพร้อมดูแลต่อเนื่องในระยะยาว
+            ไม่ใช่รับงานเว็บทั่วไปให้เยอะที่สุด — เราช่วยวาง workflow ล็อก scope
+            ส่งมอบระบบที่ใช้ได้จริง และดูแลต่อหลังขึ้นโปรดักชัน
           </p>
           <div className="mt-8 grid grid-cols-3 gap-4">
             {[
-              { k: "ทีมเล็ก", v: "คล่องตัว" },
-              { k: "คุยง่าย", v: "ทำงานไว" },
+              { k: "Scope ชัด", v: "ก่อนลงมือ" },
+              { k: "Demo รายสัปดาห์", v: "เห็นความคืบหน้า" },
               { k: "ดูแลต่อ", v: "หลังส่งมอบ" },
             ].map((x) => (
               <div key={x.k} className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-soft">
