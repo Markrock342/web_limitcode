@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { TECH, TECH_GROUPS, GROUP_STYLE, techIconUrl } from "@/lib/tech";
+import { TECH, TECH_GROUPS, GROUP_STYLE, techLogoSrc, type TechItem } from "@/lib/tech";
 import { Container } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 
@@ -39,14 +39,13 @@ export function TechStack() {
           </div>
         </Reveal>
 
-        {/* แบ่งโซนตามกลุ่ม */}
-        <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+        <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-9">
           {TECH_GROUPS.map((g, i) => {
             const style = GROUP_STYLE[g];
             const items = TECH.filter((t) => t.group === g);
             return (
-              <Reveal key={g} delay={i * 60}>
-                <div className="group relative h-full p-1 transition-opacity hover:opacity-100">
+              <Reveal key={g} delay={i * 50}>
+                <div className="group relative h-full p-1">
                   <div className={`mb-3 h-0.5 w-10 bg-gradient-to-r ${style.accent}`} />
                   <p className={`text-[10px] font-bold uppercase tracking-widest ${style.label}`}>
                     {style.title}
@@ -69,14 +68,14 @@ export function TechStack() {
   );
 }
 
-function TechLogo({ item, size }: { item: { icon: string; color: string; name: string }; size: number }) {
+function TechLogo({ item, size }: { item: TechItem; size: number }) {
   return (
     <Image
-      src={techIconUrl(item.icon, item.color)}
-      alt={`${item.name} logo`}
+      src={techLogoSrc(item)}
+      alt=""
       width={size}
       height={size}
-      className="shrink-0"
+      className="shrink-0 object-contain"
       unoptimized
     />
   );

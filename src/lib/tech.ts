@@ -5,15 +5,19 @@ export type TechGroup =
   | "Backend"
   | "Database"
   | "Hosting"
-  | "Integration";
+  | "Integration"
+  | "Tools"
+  | "AI";
 
 export type TechItem = {
   name: string;
   group: TechGroup;
-  /** simple-icons slug — https://simpleicons.org */
+  /** simple-icons slug — empty when using local */
   icon: string;
   /** brand hex without # */
   color: string;
+  /** Local SVG under /public/tech */
+  local?: string;
 };
 
 export const TECH: TechItem[] = [
@@ -50,15 +54,31 @@ export const TECH: TechItem[] = [
   { name: "Vercel", group: "Hosting", icon: "vercel", color: "FFFFFF" },
   { name: "Docker", group: "Hosting", icon: "docker", color: "2496ED" },
   { name: "Cloudflare", group: "Hosting", icon: "cloudflare", color: "F38020" },
-  { name: "AWS", group: "Hosting", icon: "amazonaws", color: "FF9900" },
+  { name: "AWS", group: "Hosting", icon: "", color: "FF9900", local: "/tech/aws.svg" },
   { name: "Railway", group: "Hosting", icon: "railway", color: "FFFFFF" },
   // Integration
   { name: "LINE OA", group: "Integration", icon: "line", color: "00C300" },
   { name: "Google Maps API", group: "Integration", icon: "googlemaps", color: "4285F4" },
-  { name: "OpenAI", group: "Integration", icon: "openai", color: "FFFFFF" },
   { name: "Stripe", group: "Integration", icon: "stripe", color: "635BFF" },
   { name: "Resend", group: "Integration", icon: "resend", color: "FFFFFF" },
   { name: "Sentry", group: "Integration", icon: "sentry", color: "362D59" },
+  // Tools
+  { name: "Cursor", group: "Tools", icon: "", color: "FFFFFF", local: "/tech/cursor.svg" },
+  { name: "VS Code", group: "Tools", icon: "", color: "007ACC", local: "/tech/vscode.svg" },
+  { name: "GitHub", group: "Tools", icon: "", color: "FFFFFF", local: "/tech/github.svg" },
+  { name: "Kiro", group: "Tools", icon: "", color: "9046FF", local: "/tech/kiro.svg" },
+  { name: "Antigravity", group: "Tools", icon: "", color: "FFE432", local: "/tech/antigravity.svg" },
+  { name: "Devin", group: "Tools", icon: "", color: "21C19A", local: "/tech/devin.svg" },
+  { name: "Codex", group: "Tools", icon: "", color: "FFFFFF", local: "/tech/codex.svg" },
+  // AI
+  { name: "OpenAI", group: "AI", icon: "", color: "FFFFFF", local: "/tech/openai.svg" },
+  { name: "GPT-5.6", group: "AI", icon: "", color: "10A37F", local: "/tech/gpt.svg" },
+  { name: "Opus 4.8", group: "AI", icon: "", color: "D97757", local: "/tech/opus.svg" },
+  { name: "Fable 5", group: "AI", icon: "", color: "A78BFA", local: "/tech/fable.svg" },
+  { name: "DeepSeek V4", group: "AI", icon: "", color: "4D6BFE", local: "/tech/deepseek.svg" },
+  { name: "Composer 2.5", group: "AI", icon: "", color: "FFFFFF", local: "/tech/composer.svg" },
+  { name: "Grok 4.5", group: "AI", icon: "", color: "FFFFFF", local: "/tech/grok.svg" },
+  { name: "Gemini 3.5 Pro", group: "AI", icon: "", color: "8E75B2", local: "/tech/gemini.svg" },
 ];
 
 export const TECH_GROUPS: TechGroup[] = [
@@ -69,6 +89,8 @@ export const TECH_GROUPS: TechGroup[] = [
   "Database",
   "Hosting",
   "Integration",
+  "Tools",
+  "AI",
 ];
 
 export const GROUP_STYLE: Record<
@@ -117,9 +139,26 @@ export const GROUP_STYLE: Record<
     glow: "bg-emerald-400/20",
     label: "text-emerald-300",
   },
+  Tools: {
+    title: "Tools",
+    accent: "from-fuchsia-400 to-pink-500",
+    glow: "bg-fuchsia-400/20",
+    label: "text-fuchsia-300",
+  },
+  AI: {
+    title: "AI",
+    accent: "from-teal-300 to-cyan-400",
+    glow: "bg-teal-400/20",
+    label: "text-teal-300",
+  },
 };
 
 /** Simple Icons CDN — brand SVG logos */
 export function techIconUrl(slug: string, color: string) {
   return `https://cdn.simpleicons.org/${slug}/${color}`;
+}
+
+export function techLogoSrc(item: TechItem) {
+  if (item.local) return item.local;
+  return techIconUrl(item.icon, item.color);
 }
