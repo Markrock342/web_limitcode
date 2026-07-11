@@ -22,7 +22,7 @@ export function Hero() {
         <div>
           <Reveal>
             <p className="text-sm font-medium text-brand-700">
-              Software Studio · Web App และระบบหลังบ้าน
+              ฟรีแลนซ์ Software Studio · Web App และระบบหลังบ้าน
             </p>
           </Reveal>
 
@@ -37,8 +37,8 @@ export function Hero() {
 
           <Reveal delay={160}>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-              LIMIT CODE STUDIO ไม่ใช่ทีมรับทำเว็บทั่วไป — เราเปลี่ยนงานที่ยังอยู่บน LINE, Excel
-              และเอกสารกระจัดกระจาย ให้เป็นระบบจอง CRM Dashboard และ AI ที่ทีมใช้ได้จริง
+              LIMIT CODE STUDIO เป็นฟรีแลนซ์ที่โฟกัสระบบ ไม่ใช่รับทำเว็บทั่วไป — เปลี่ยนงานที่ยังอยู่บน
+              LINE, Excel และเอกสารกระจัดกระจาย ให้เป็นระบบจอง CRM Dashboard และ AI ที่ใช้ได้จริง
             </p>
           </Reveal>
 

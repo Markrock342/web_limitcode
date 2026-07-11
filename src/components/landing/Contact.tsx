@@ -23,7 +23,7 @@ export function Contact() {
               </h2>
               <p className="mt-4 max-w-lg text-lg text-white/70">
                 ส่ง workflow ปัจจุบัน ปัญหาที่ทีมเจอ หรือตัวอย่างระบบที่อยากได้
-                มาให้ทีมช่วยประเมิน scope และแนวทางเบื้องต้นได้ครับ
+                มาคุยกับฟรีแลนซ์ได้เลย — ช่วยประเมิน scope และแนวทางเบื้องต้นให้ครับ
               </p>
               <ul className="mt-6 space-y-2.5">
                 {HELP.map((h) => (

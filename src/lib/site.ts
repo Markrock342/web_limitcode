@@ -5,7 +5,7 @@ export const LINE_URL = "https://line.me/R/ti/p/%40026iaomj";
 export const BRAND = {
   name: "LIMIT CODE STUDIO",
   short: "LIMIT CODE",
-  tagline: "ทีมพัฒนา Web App และระบบหลังบ้านเฉพาะสำหรับธุรกิจบริการ",
+  tagline: "ฟรีแลนซ์ Software Studio — พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ",
 };
 
 export type IconName =
@@ -86,8 +86,8 @@ export const WHY: { icon: IconName; title: string; desc: string }[] = [
   },
   {
     icon: "shield",
-    title: "ส่งมอบแบบบริษัท ไม่ใช่แค่ไฟล์โค้ด",
-    desc: "มี Demo รายสัปดาห์ UAT Handover และแพ็กเกจดูแลต่อหลังขึ้นระบบ",
+    title: "ส่งมอบเป็นระบบ ไม่ใช่แค่ไฟล์โค้ด",
+    desc: "ฟรีแลนซ์ที่ทำงานเป็นขั้นตอน — มี Demo รายสัปดาห์ UAT Handover และแพ็กเกจดูแลต่อหลังขึ้นระบบ",
   },
   {
     icon: "heart",

@@ -62,7 +62,7 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col gap-2 border-t border-slate-200 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} LIMIT CODE STUDIO</p>
-          <p>ออกแบบและพัฒนาโดยทีม LIMIT CODE STUDIO</p>
+          <p>ออกแบบและพัฒนาโดยฟรีแลนซ์ LIMIT CODE STUDIO</p>
         </div>
       </Container>
     </footer>

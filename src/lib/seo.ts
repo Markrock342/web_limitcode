@@ -10,7 +10,7 @@ export const SITE_NAME = "LIMIT CODE STUDIO";
 export const SITE_NAME_SHORT = "LIMIT CODE";
 
 export const DEFAULT_DESCRIPTION =
-  "LIMIT CODE STUDIO — Software Studio พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ ระบบจองคิว CRM Job Order Dashboard AI ซักรีด Cowork คลินิก ฮอลล์ และคาร์แคร์ เปลี่ยนงานบน LINE/Excel ให้เป็นระบบที่ใช้ได้จริง";
+  "LIMIT CODE STUDIO — ฟรีแลนซ์ Software Studio พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ ระบบจองคิว CRM Job Order Dashboard AI ซักรีด Cowork คลินิก ฮอลล์ และคาร์แคร์ เปลี่ยนงานบน LINE/Excel ให้เป็นระบบที่ใช้ได้จริง";
 
 export const SEO_KEYWORDS = [
   "รับทำระบบจองออนไลน์",
@@ -29,6 +29,8 @@ export const SEO_KEYWORDS = [
   "ระบบ coworking",
   "ระบบจองฮอลล์",
   "ระบบคาร์แคร์",
+  "ฟรีแลนซ์ทำระบบ",
+  "ฟรีแลนซ์ Software Studio",
   "Software Studio ไทย",
   "พัฒนาเว็บแอป SME",
   "รับทำระบบธุรกิจบริการ",
@@ -40,7 +42,7 @@ export const SEO_KEYWORDS = [
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
+    default: `${SITE_NAME} — ฟรีแลนซ์พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
     template: `%s | ${SITE_NAME_SHORT}`,
   },
   description: DEFAULT_DESCRIPTION,
@@ -71,20 +73,20 @@ export const defaultMetadata: Metadata = {
     locale: "th_TH",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
+    title: `${SITE_NAME} — ฟรีแลนซ์ Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
     description: DEFAULT_DESCRIPTION,
     images: [
       {
         url: "/brand/lcs-cover.png",
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} — Software Studio`,
+        alt: `${SITE_NAME} — ฟรีแลนซ์ Software Studio`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
+    title: `${SITE_NAME} — ฟรีแลนซ์ Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
     description: DEFAULT_DESCRIPTION,
     images: ["/brand/lcs-cover.png"],
   },
