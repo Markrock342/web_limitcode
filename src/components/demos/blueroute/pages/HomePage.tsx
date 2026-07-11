@@ -28,7 +28,7 @@ export function BlueHomePage() {
         ม็อกอัพหลายหน้า — งานประจำวัน งานค้างซ่อม เสียกลางทาง ค้นหารถ และสรุปงานพร้อมอะไหล่ ข้อมูลเก็บในเบราว์เซอร์
       </div>
 
-      {!state.loggedIn && (
+      {!state.session.loggedIn && (
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#E3E7F0] bg-white px-4 py-3">
           <p className="text-sm text-[#6B7693]">ยังไม่ได้เข้าสู่ระบบ — ลองล็อกอินเดโมได้</p>
           <Link
@@ -44,7 +44,7 @@ export function BlueHomePage() {
         <h1 className="font-display text-2xl font-bold text-[#16234A]">Dashboard งานซ่อมบำรุง</h1>
         <p className="mt-1 text-sm text-[#6B7693]">
           11 ก.ค. 2569 · BlueRoute Transport
-          {state.loggedIn ? " · ออนไลน์" : ""}
+          {state.session.loggedIn ? " · ออนไลน์" : ""}
         </p>
       </div>
 

@@ -6,7 +6,7 @@ import { BASE, DATES, fmtDay, useSmashLane } from "../store";
 export function SmashHomePage() {
   const { state } = useSmashLane();
   const date = DATES[state.dateIdx];
-  const day = state.bookings.filter((b) => b.date === date && b.paid);
+  const day = state.bookings.filter((b) => b.date === date && b.paid && b.status === "confirmed");
   const queue = day.filter((b) => b.court === null).length;
   const revenue = day.reduce((s, b) => s + b.price, 0);
 

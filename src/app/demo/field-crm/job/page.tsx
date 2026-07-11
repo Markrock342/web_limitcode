@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { GuardJobPage } from "@/components/demos/guardnest/pages/JobPage";
+import { GuardStaffOnly } from "@/components/demos/guardnest/StaffOnly";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -11,7 +12,7 @@ export const metadata = pageMetadata({
 export default function Page() {
   return (
     <Suspense fallback={<div className="p-6 text-sm text-slate-500">กำลังโหลดสรุปงาน…</div>}>
-      <GuardJobPage />
+      <GuardStaffOnly><GuardJobPage /></GuardStaffOnly>
     </Suspense>
   );
 }

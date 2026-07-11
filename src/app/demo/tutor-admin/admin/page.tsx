@@ -1,4 +1,5 @@
 import { BrightAdminPage } from "@/components/demos/brightslot/pages/AdminPage";
+import { BrightStaffOnly } from "@/components/demos/brightslot/StaffOnly";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <BrightAdminPage />;
+  return <BrightStaffOnly><BrightAdminPage /></BrightStaffOnly>;
 }

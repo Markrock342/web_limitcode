@@ -1,4 +1,5 @@
 import { StayGuestsPage } from "@/components/demos/staynest/pages/GuestsPage";
+import { StayStaffOnly } from "@/components/demos/staynest/StaffOnly";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <StayGuestsPage />;
+  return <StayStaffOnly><StayGuestsPage /></StayStaffOnly>;
 }

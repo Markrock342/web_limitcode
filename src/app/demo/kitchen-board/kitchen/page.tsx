@@ -1,4 +1,5 @@
 import { TableKitchenPage } from "@/components/demos/tableflow/pages/KitchenPage";
+import { TableStaffOnly } from "@/components/demos/tableflow/StaffOnly";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <TableKitchenPage />;
+  return <TableStaffOnly><TableKitchenPage /></TableStaffOnly>;
 }

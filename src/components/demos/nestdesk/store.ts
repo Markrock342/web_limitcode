@@ -1,6 +1,8 @@
 "use client";
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
+import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
+import { pick, thaiName } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const BASE = "/demo/cowork-desk";
@@ -41,9 +43,11 @@ export type NestMember = {
 };
 
 export type NestState = {
+  session: DemoSession;
   spaces: Space[];
   bookings: NestBooking[];
   members: NestMember[];
+  packages: { id: string; name: string; price: number; credits: string }[];
   bookSpaceId: string;
   bookDate: string;
   bookSlot: string | null;
@@ -56,6 +60,7 @@ export const BOOK_DATES = ["วันนี้", "พรุ่งนี้", "�
 export const SLOTS = ["09:00–12:00", "12:00–15:00", "15:00–18:00", "ทั้งวัน"];
 
 export const nestInitial: NestState = {
+  session: GUEST_SESSION,
   spaces: [
     {
       id: "hd-open",
@@ -105,45 +110,23 @@ export const nestInitial: NestState = {
       total: 2,
       blurb: "ห้องใหญ่ พร้อมโปรเจคเตอร์",
     },
+    { id: "focus-pod", name: "Focus Pod", type: "hotdesk", capacity: 1, price: 290, unit: "วัน", img: "/img/work-2.jpg", available: 5, total: 6, blurb: "มุมส่วนตัว สำหรับงานที่ต้องการสมาธิ" },
+    { id: "mt-creative", name: "Creative Room", type: "meeting", capacity: 6, price: 1100, unit: "ช่วง", img: "/img/work-3.jpg", available: 2, total: 2, blurb: "กระดานเขียนเต็มผนัง และชุดประชุม" },
   ],
-  bookings: [
-    {
-      id: "NB-101",
-      member: "คุณมิ้นท์",
-      spaceId: "hd-open",
-      spaceName: "Hot Desk โซนเปิด",
-      date: "วันนี้",
-      slot: "ทั้งวัน",
-      type: "hotdesk",
-      img: "/img/work-1.jpg",
-    },
-    {
-      id: "NB-102",
-      member: "คุณแบงค์",
-      spaceId: "mt-small",
-      spaceName: "ห้องประชุม A",
-      date: "วันนี้",
-      slot: "09:00–12:00",
-      type: "meeting",
-      img: "/img/work-3.jpg",
-    },
-    {
-      id: "NB-103",
-      member: "คุณออย",
-      spaceId: "hd-quiet",
-      spaceName: "Hot Desk โซนเงียบ",
-      date: "วันนี้",
-      slot: "12:00–15:00",
-      type: "hotdesk",
-      img: "/img/work-2.jpg",
-    },
-  ],
-  members: [
-    { id: "M-01", name: "คุณมิ้นท์", plan: "Day Pass", status: "active", expiry: "11/10/2569", checkedIn: true },
-    { id: "M-02", name: "คุณแบงค์", plan: "Monthly Desk", status: "active", expiry: "01/08/2569", checkedIn: false },
-    { id: "M-03", name: "คุณออย", plan: "Flex 10 วัน", status: "active", expiry: "20/09/2569", checkedIn: false },
-    { id: "M-04", name: "คุณน็อต", plan: "Monthly Desk", status: "expired", expiry: "01/06/2569", checkedIn: false },
-    { id: "M-05", name: "คุณมาร์ค", plan: "Day Pass", status: "active", expiry: "15/07/2569", checkedIn: false },
+  bookings: Array.from({ length: 20 }, (_, i) => {
+    const space = pick([
+      { id: "hd-open", name: "Hot Desk โซนเปิด", type: "hotdesk" as const, img: "/img/work-1.jpg" },
+      { id: "hd-quiet", name: "Hot Desk โซนเงียบ", type: "hotdesk" as const, img: "/img/work-2.jpg" },
+      { id: "mt-small", name: "ห้องประชุม A", type: "meeting" as const, img: "/img/work-3.jpg" },
+      { id: "mt-large", name: "ห้องประชุม B", type: "meeting" as const, img: "/img/office-hero.jpg" },
+    ], i);
+    return { id: `NB-${101 + i}`, member: thaiName(i + 7), spaceId: space.id, spaceName: space.name, date: pick(BOOK_DATES, i), slot: pick(SLOTS, i), type: space.type, img: space.img };
+  }),
+  members: Array.from({ length: 12 }, (_, i) => ({ id: `M-${String(i + 1).padStart(2, "0")}`, name: thaiName(i), plan: pick(["Day Pass", "Monthly Desk", "Flex 10 วัน"], i), status: i === 9 ? "expired" as const : "active" as const, expiry: `${10 + i}/0${(i % 3) + 7}/2569`, checkedIn: i % 4 === 0 })),
+  packages: [
+    { id: "day", name: "Day Pass", price: 350, credits: "ใช้ได้ 1 วัน" },
+    { id: "flex", name: "Flex 10", price: 2800, credits: "10 วัน / 60 วัน" },
+    { id: "monthly", name: "Monthly Desk", price: 4900, credits: "โต๊ะประจำ 1 เดือน" },
   ],
   bookSpaceId: "hd-open",
   bookDate: "วันนี้",
@@ -153,7 +136,7 @@ export const nestInitial: NestState = {
   query: "",
 };
 
-const store = createDemoStore("lcs-demo-nestdesk-v1", nestInitial);
+const store = createDemoStore("lcs-demo-nestdesk-v2", nestInitial);
 export const NestDeskProvider = store.Provider;
 export const useNestDesk = store.useStore;
 
@@ -169,8 +152,9 @@ export const nestBrand: DemoBrandMeta = {
 export const nestNav: DemoNavItem[] = [
   { href: BASE, label: "ภาพรวม", group: "ทั่วไป" },
   { href: `${BASE}/book`, label: "จองพื้นที่", group: "ทั่วไป" },
-  { href: `${BASE}/spaces`, label: "แคตตาล็อกพื้นที่", group: "ทั่วไป" },
-  { href: `${BASE}/members`, label: "สมาชิก", group: "สมาชิก" },
-  { href: `${BASE}/checkin`, label: "Check-in", group: "สมาชิก" },
-  { href: `${BASE}/admin`, label: "แอดมินวันนี้", group: "หลังบ้าน" },
+  { href: `${BASE}/account`, label: "บัญชีของฉัน", group: "ทั่วไป", access: "member" },
+  { href: `${BASE}/spaces`, label: "แคตตาล็อกพื้นที่", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/members`, label: "สมาชิก", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/checkin`, label: "Check-in", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/admin`, label: "แอดมินวันนี้", group: "หลังบ้าน", access: "staff" },
 ];

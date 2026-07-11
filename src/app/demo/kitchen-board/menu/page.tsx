@@ -1,4 +1,5 @@
 import { TableMenuPage } from "@/components/demos/tableflow/pages/MenuPage";
+import { TableStaffOnly } from "@/components/demos/tableflow/StaffOnly";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <TableMenuPage />;
+  return <TableStaffOnly><TableMenuPage /></TableStaffOnly>;
 }

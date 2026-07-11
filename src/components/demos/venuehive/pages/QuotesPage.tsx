@@ -13,6 +13,13 @@ export function VenueQuotesPage() {
     }));
   }
 
+  function approve(id: string) {
+    setState((s) => ({
+      ...s,
+      quotes: s.quotes.map((q) => (q.id === id ? { ...q, status: "อนุมัติแล้ว" } : q)),
+    }));
+  }
+
   return (
     <div className="space-y-5">
       <div className="relative overflow-hidden rounded-[1.5rem]">
@@ -45,13 +52,10 @@ export function VenueQuotesPage() {
                   {q.venue} · ฿{q.amount.toLocaleString()}
                 </p>
               </div>
-              <button
-                type="button"
-                onClick={() => toggle(q.id)}
-                className={`rounded-full px-3 py-1.5 text-xs font-semibold ring-1 ring-[#E8D5D5] transition hover:bg-[#F6EEEE] ${QUOTE_STYLE[q.status]}`}
-              >
-                {q.status} · กดเปลี่ยนสถานะ
-              </button>
+              <div className="flex gap-2">
+                <button type="button" onClick={() => toggle(q.id)} className={`rounded-full px-3 py-1.5 text-xs font-semibold ring-1 ring-[#E8D5D5] transition hover:bg-[#F6EEEE] ${QUOTE_STYLE[q.status]}`}>{q.status}</button>
+                {q.status !== "อนุมัติแล้ว" && <button type="button" onClick={() => approve(q.id)} className="rounded-full bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white">อนุมัติ</button>}
+              </div>
             </div>
           </div>
         ))}

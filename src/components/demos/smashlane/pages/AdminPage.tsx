@@ -1,14 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { RequireAuth } from "@/components/demos/_shell/RequireAuth";
 import { BASE, DATES, HOURS, fmtDay, useSmashLane } from "../store";
 
 export function SmashAdminPage() {
   const { state, setState } = useSmashLane();
   const date = DATES[state.dateIdx];
-  const queue = state.bookings.filter((b) => b.date === date && b.paid && b.court === null);
+  const queue = state.bookings.filter(
+    (b) => b.date === date && b.paid && b.status === "confirmed" && b.court === null,
+  );
 
   return (
+    <RequireAuth session={state.session} basePath={BASE} mode="staff">
     <div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
@@ -72,5 +76,6 @@ export function SmashAdminPage() {
         </div>
       )}
     </div>
+    </RequireAuth>
   );
 }

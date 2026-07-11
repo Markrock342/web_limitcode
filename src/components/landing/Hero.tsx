@@ -6,12 +6,6 @@ import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
 import { HeroTerminal } from "@/components/HeroTerminal";
 
-const HERO_SHOTS = [
-  { src: "/showcase/court-booking.jpg", alt: "ตัวอย่างระบบจองสนามแบด + หลังบ้าน", href: "/demo/court-booking", label: "ระบบจองสนาม" },
-  { src: "/showcase/fleet-ops.jpg", alt: "ตัวอย่าง Dashboard งานซ่อมบำรุง", href: "/demo/fleet-ops", label: "Fleet Ops" },
-  { src: "/showcase/dashboard.jpg", alt: "ตัวอย่าง Admin Dashboard", href: "/demo/dashboard", label: "Admin Dashboard" },
-];
-
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
@@ -20,25 +14,20 @@ export function Hero() {
         <span className="beam-x top-[144px] [animation-delay:-4s]" />
         <span className="beam-x top-[288px] [animation-delay:1.8s] [animation-duration:11s]" />
         <span className="beam-y left-[336px] [animation-delay:-7s]" />
-        <span className="beam-y hidden lg:block left-[816px] [animation-delay:3s] [animation-duration:13s]" />
       </div>
-      <div className="pointer-events-none absolute -top-24 -left-24 -z-10 size-[28rem] animate-aurora rounded-full bg-brand-300/30 blur-3xl" />
-      <div className="pointer-events-none absolute -top-10 right-0 -z-10 size-[24rem] animate-aurora rounded-full bg-sky-300/30 blur-3xl [animation-delay:-9s]" />
+      <div className="pointer-events-none absolute -top-24 -left-24 -z-10 size-[28rem] animate-aurora rounded-full bg-brand-300/25 blur-3xl" />
+      <div className="pointer-events-none absolute -top-10 right-0 -z-10 size-[24rem] animate-aurora rounded-full bg-sky-300/20 blur-3xl [animation-delay:-9s]" />
 
       <Container className="grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
         <div>
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/70 px-3.5 py-1.5 text-sm font-medium text-brand-700 shadow-soft backdrop-blur">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex size-2 animate-ping rounded-full bg-brand-400 opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-brand-500" />
-              </span>
+            <p className="text-sm font-medium text-brand-700">
               Software Studio · Web App และระบบหลังบ้าน
-            </span>
+            </p>
           </Reveal>
 
           <Reveal delay={80}>
-            <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
+            <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
               พัฒนา{" "}
               <span className="text-gradient">Web App และระบบหลังบ้าน</span>
               <br className="hidden sm:block" />{" "}
@@ -64,15 +53,13 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={320}>
-            <div className="mt-7 inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 shadow-soft backdrop-blur">
-              <span className="inline-flex size-9 items-center justify-center rounded-xl bg-[#06C755] text-white">
-                <LineGlyph className="size-5" />
+            <p className="mt-6 flex items-center gap-2 text-sm text-slate-500">
+              <span className="inline-flex size-6 items-center justify-center bg-[#06C755] text-white">
+                <LineGlyph className="size-3.5" />
               </span>
-              <div className="leading-tight">
-                <p className="text-xs text-slate-500">คุยโจทย์ระบบผ่าน LINE OA</p>
-                <p className="font-display text-lg font-bold tracking-tight text-ink">{LINE_ID}</p>
-              </div>
-            </div>
+              คุยโจทย์ระบบผ่าน LINE OA{" "}
+              <span className="font-display font-bold text-ink">{LINE_ID}</span>
+            </p>
           </Reveal>
         </div>
 
@@ -85,74 +72,31 @@ export function Hero() {
 }
 
 function HeroVisual() {
-  const [main, ...rest] = HERO_SHOTS;
-
   return (
-    <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-      <Link
-        href={main.href}
-        className="group relative block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lift transition-all hover:-translate-y-1 hover:shadow-[0_32px_64px_-24px_rgba(11,60,130,0.35)]"
-      >
-        <div className="relative aspect-[16/10] overflow-hidden">
+    <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
+      <Link href="/demo/field-crm" className="group relative block overflow-hidden bg-slate-100">
+        <div className="relative aspect-[16/10]">
           <Image
-            src={main.src}
-            alt={main.alt}
+            src="/showcase/field-crm.jpg"
+            alt="ตัวอย่างระบบ CRM / Job Order ทีมหน้างาน"
             fill
             sizes="(max-width:1024px) 100vw, 520px"
             className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
             priority
           />
         </div>
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent px-4 pb-4 pt-16">
-          <p className="text-xs font-medium text-white/70">ตัวอย่างระบบจริง · กดดูได้</p>
-          <p className="font-display text-sm font-bold text-white">{main.label}</p>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent px-5 pb-5 pt-20">
+          <p className="text-xs font-medium text-white/70">ตัวอย่างระบบ · กดดูได้</p>
+          <p className="mt-0.5 font-display text-base font-bold text-white">
+            GuardNest Field — CRM / Job Order
+          </p>
         </div>
       </Link>
 
-      {rest.map((shot, i) => (
-        <Reveal
-          key={shot.href}
-          variant="scale"
-          delay={420 + i * 140}
-          className={`absolute hidden sm:block ${i === 0 ? "-left-5 top-12 w-[42%]" : "-right-4 bottom-8 w-[44%]"}`}
-        >
-          <Link
-            href={shot.href}
-            className="group block overflow-hidden rounded-xl border-2 border-white bg-white shadow-lift transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-16px_rgba(11,60,130,0.3)]"
-          >
-            <div className="relative aspect-[16/10]">
-              <Image
-                src={shot.src}
-                alt={shot.alt}
-                fill
-                sizes="220px"
-                className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/70 to-transparent px-2.5 pb-2 pt-8">
-              <p className="text-[11px] font-semibold text-white">{shot.label}</p>
-            </div>
-          </Link>
-        </Reveal>
-      ))}
-
-      <Reveal variant="scale" delay={700} className="absolute -left-4 top-4 hidden sm:block">
-        <div className="animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift">
-          <p className="text-xs text-slate-500">จาก LINE + Excel</p>
-          <p className="font-display text-sm font-bold text-emerald-600">→ ระบบจริง</p>
-        </div>
-      </Reveal>
-      <Reveal variant="scale" delay={820} className="absolute -right-3 top-1/2 hidden -translate-y-1/2 sm:block">
-        <div className="animate-float-slow rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-lift [animation-delay:1.5s]">
-          <p className="text-xs text-slate-500">โฟกัส</p>
-          <p className="font-display text-sm font-bold text-brand-600">ธุรกิจบริการ</p>
-        </div>
-      </Reveal>
-
       <Reveal
         variant="scale"
-        delay={560}
-        className="relative z-10 mt-4 sm:absolute sm:-bottom-7 sm:-left-6 sm:mt-0 sm:w-[248px]"
+        delay={400}
+        className="relative z-10 mt-4 sm:absolute sm:-bottom-6 sm:-left-4 sm:mt-0 sm:w-[240px]"
       >
         <HeroTerminal />
       </Reveal>

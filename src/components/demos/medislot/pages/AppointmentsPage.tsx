@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { RequireAuth } from "@/components/demos/_shell/RequireAuth";
 import type { ApptStatus } from "../store";
-import { SERVICES, STATUS_STYLE, useMediSlot } from "../store";
+import { BASE, formatMediDate, SERVICES, STATUS_STYLE, useMediSlot } from "../store";
 
-const FILTERS: Array<ApptStatus | "ทั้งหมด"> = ["ทั้งหมด", "รอตรวจ", "มาแล้ว", "ไม่มา"];
+const FILTERS: Array<ApptStatus | "ทั้งหมด"> = ["ทั้งหมด", "รอ", "มาแล้ว", "ไม่มา", "ยกเลิก"];
 
 export function MediAppointmentsPage() {
   const { state, setState } = useMediSlot();
@@ -25,7 +26,8 @@ export function MediAppointmentsPage() {
   }
 
   return (
-    <div className="space-y-5">
+    <RequireAuth session={state.session} basePath={BASE} mode="staff">
+      <div className="space-y-5">
       <div className="relative overflow-hidden rounded-[1.5rem]">
         <div className="relative h-36 sm:h-44">
           <Image src="/img/spa-3.jpg" alt="" fill className="object-cover" sizes="900px" />
@@ -70,7 +72,7 @@ export function MediAppointmentsPage() {
                 <div>
                   <p className="font-display font-bold text-[#0F3F3F]">{a.patient}</p>
                   <p className="mt-0.5 text-xs text-slate-500">
-                    {a.service} · {a.date} {a.time}
+                    {a.service} · {formatMediDate(a.date)} {a.time}
                   </p>
                   <p className="text-xs text-slate-400">
                     {a.id} · {a.doctor}
@@ -94,12 +96,20 @@ export function MediAppointmentsPage() {
                   >
                     ไม่มา
                   </button>
+                  <button
+                    type="button"
+                    onClick={() => setStatus(a.id, "ยกเลิก")}
+                    className="rounded-full bg-slate-600 px-3 py-1.5 text-[11px] font-semibold text-white"
+                  >
+                    ยกเลิก
+                  </button>
                 </div>
               </div>
             </article>
           ))
         )}
       </div>
-    </div>
+      </div>
+    </RequireAuth>
   );
 }

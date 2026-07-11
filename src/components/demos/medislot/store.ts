@@ -1,15 +1,19 @@
 "use client";
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
+import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
+import { demoId, isoDateOffset, pick, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const BASE = "/demo/clinic-admin";
 
-export type ApptStatus = "รอตรวจ" | "มาแล้ว" | "ไม่มา";
+export type ApptStatus = "รอ" | "มาแล้ว" | "ไม่มา" | "ยกเลิก";
 
 export type Appointment = {
   id: string;
   patient: string;
+  patientId: string;
+  memberUsername?: string;
   service: string;
   date: string;
   time: string;
@@ -27,7 +31,19 @@ export type DoctorBlock = {
   active: boolean;
 };
 
+export type BookingDraft = {
+  id: string;
+  patient: string;
+  patientId: string;
+  memberUsername: string;
+  service: string;
+  date: string;
+  time: string;
+  doctor: string;
+};
+
 export type MediState = {
+  session: DemoSession;
   appointments: Appointment[];
   patients: Patient[];
   schedule: DoctorBlock[];
@@ -37,41 +53,74 @@ export type MediState = {
   name: string;
   phone: string;
   lastBookedId: string | null;
+  pendingBooking: BookingDraft | null;
   apptFilter: ApptStatus | "ทั้งหมด";
 };
 
 export const SERVICES = [
-  { id: "gp", name: "ตรวจทั่วไป", mins: 20, doctor: "พญ.มินตรา", img: "/img/spa-2.jpg", blurb: "ตรวจสุขภาพเบื้องต้น ปรึกษาอาการ" },
-  { id: "dental", name: "ทันตกรรม", mins: 40, doctor: "ทพ.กิตติ", img: "/img/spa-3.jpg", blurb: "ขูดหินปูน อุดฟัน ตรวจช่องปาก" },
-  { id: "physio", name: "กายภาพบำบัด", mins: 45, doctor: "กภ.อรุณ", img: "/img/spa-4.jpg", blurb: "บำบัดกล้ามเนื้อและข้อ" },
-  { id: "vaccine", name: "ฉีดวัคซีน", mins: 15, doctor: "พญ.มินตรา", img: "/img/spa-1.jpg", blurb: "วัคซีนตามฤดูกาลและแผนสุขภาพ" },
+  { id: "gp", name: "ตรวจสุขภาพทั่วไป", mins: 20, doctor: "พญ.มินตรา ศรีสุข", img: "/img/spa-2.jpg", blurb: "ตรวจสุขภาพเบื้องต้น ปรึกษาอาการ" },
+  { id: "dental", name: "ทันตกรรมครบวงจร", mins: 40, doctor: "ทพ.กิตติพงศ์ วัฒนะ", img: "/img/spa-3.jpg", blurb: "ขูดหินปูน อุดฟัน ตรวจช่องปาก" },
+  { id: "physio", name: "กายภาพบำบัด", mins: 45, doctor: "กภ.อรุณี รุ่งเรือง", img: "/img/spa-4.jpg", blurb: "บำบัดกล้ามเนื้อและข้อ" },
+  { id: "vaccine", name: "วัคซีนและเวชศาสตร์เดินทาง", mins: 15, doctor: "พญ.มินตรา ศรีสุข", img: "/img/spa-1.jpg", blurb: "วัคซีนตามฤดูกาลและแผนสุขภาพ" },
+  { id: "skin", name: "ผิวหนังและเลเซอร์", mins: 30, doctor: "พญ.พิมพ์ชนก ไพศาล", img: "/img/spa-2.jpg", blurb: "ปรึกษาผิวหนัง ผื่นแพ้ และการดูแลผิว" },
+  { id: "child", name: "ตรวจสุขภาพเด็ก", mins: 30, doctor: "พญ.วรินทร์ทิพย์ แสงทอง", img: "/img/spa-4.jpg", blurb: "ติดตามพัฒนาการและสุขภาพเด็ก" },
 ];
 
-export const DATE_CHIPS = ["วันนี้", "พรุ่งนี้", "พ. 16 ก.ค.", "พฤ. 17 ก.ค.", "ศ. 18 ก.ค."];
+export const DATE_CHIPS = [isoDateOffset(0), isoDateOffset(1), isoDateOffset(2), isoDateOffset(3), isoDateOffset(4)];
 export const SLOTS = ["09:00", "09:30", "10:00", "10:30", "11:00", "13:30", "14:00", "15:00", "16:00"];
 
 export const STATUS_STYLE: Record<ApptStatus, string> = {
-  รอตรวจ: "bg-cyan-100 text-cyan-800",
+  รอ: "bg-amber-100 text-amber-800",
   มาแล้ว: "bg-emerald-100 text-emerald-800",
   ไม่มา: "bg-rose-100 text-rose-700",
+  ยกเลิก: "bg-slate-200 text-slate-700",
 };
 
+export function formatMediDate(date: string) {
+  return new Date(`${date}T12:00:00`).toLocaleDateString("th-TH", { weekday: "short", day: "numeric", month: "short" });
+}
+
+const PATIENT_NAMES = [
+  "คุณชลธิชา วัฒนพงศ์", "คุณณัฐวุฒิ สายสมบัติ", "คุณพิมพ์ลภัส บุญญานันท์", "คุณอภิรดี รัตนมณี",
+  "คุณกิตติภพ จิรภัทร", "คุณณิชาภัทร สุขเกษม", "คุณธนกฤต พิพัฒน์กุล", "คุณวรัญญา ตั้งสกุล",
+  "คุณปกรณ์ชัย ศรีวิไล", "คุณพิชชาภา อุดมทรัพย์", "คุณธีรภัทร มหาสาร", "คุณกัญญารัตน์ ภู่วัฒนา",
+  "คุณศุภณัฐ นาคะวัฒน์", "คุณอริสรา รุ่งสว่าง", "คุณพีรณัฐ อัครเดช", "คุณภัทรวดี มงคลชัย",
+  "คุณนพดล เจริญผล", "คุณสุภัสสรา พรหมรักษ์", "คุณธัญชนก วงศ์วิจิตร", "คุณณรงค์ฤทธิ์ ศรีสมบูรณ์",
+];
+
+const SEED_PATIENTS: Patient[] = Array.from({ length: 20 }, (_, i) => ({
+  id: demoId("P", i + 1, 3),
+  name: PATIENT_NAMES[i] ?? thaiName(i),
+  phone: thaiPhone(i + 3),
+  note: pick(["แพ้เพนิซิลลิน", "ติดตามผล 3 เดือน", "", "แจ้งเตือนก่อนนัด 1 วัน", "มีโรคประจำตัว: ความดัน"], i),
+}));
+
+const SEED_APPOINTMENTS: Appointment[] = Array.from({ length: 24 }, (_, i) => {
+  const patient = SEED_PATIENTS[i % SEED_PATIENTS.length];
+  const service = pick(SERVICES, i);
+  return {
+    id: demoId("A", 101 + i, 3),
+    patient: patient.name,
+    patientId: patient.id,
+    memberUsername: i < 4 ? "member" : undefined,
+    service: service.name,
+    date: isoDateOffset(i % 5),
+    time: pick(SLOTS, i * 2),
+    doctor: service.doctor,
+    status: pick<ApptStatus>(["รอ", "มาแล้ว", "ไม่มา", "ยกเลิก"], i),
+  };
+});
+
 export const mediInitial: MediState = {
-  appointments: [
-    { id: "A-101", patient: "คุณนภา", service: "ตรวจทั่วไป", date: "วันนี้", time: "09:00", doctor: "พญ.มินตรา", status: "รอตรวจ" },
-    { id: "A-102", patient: "คุณธนพล", service: "ทันตกรรม", date: "วันนี้", time: "10:00", doctor: "ทพ.กิตติ", status: "มาแล้ว" },
-    { id: "A-103", patient: "คุณพิมพ์", service: "กายภาพบำบัด", date: "วันนี้", time: "11:00", doctor: "กภ.อรุณ", status: "รอตรวจ" },
-    { id: "A-104", patient: "คุณเอิร์ธ", service: "ฉีดวัคซีน", date: "พรุ่งนี้", time: "14:00", doctor: "พญ.มินตรา", status: "รอตรวจ" },
-  ],
-  patients: [
-    { id: "P-01", name: "คุณนภา", phone: "081-xxx-2201", note: "แพ้เพนิซิลลิน" },
-    { id: "P-02", name: "คุณธนพล", phone: "089-xxx-4412", note: "นัดติดตามฟันผุ" },
-    { id: "P-03", name: "คุณพิมพ์", phone: "062-xxx-7788", note: "" },
-  ],
+  session: GUEST_SESSION,
+  appointments: SEED_APPOINTMENTS,
+  patients: SEED_PATIENTS,
   schedule: [
-    { id: "D1", doctor: "พญ.มินตรา", specialty: "อายุรกรรม", blocks: ["08:00–12:00", "12:00–16:00"], active: true },
-    { id: "D2", doctor: "ทพ.กิตติ", specialty: "ทันตกรรม", blocks: ["08:00–12:00"], active: true },
-    { id: "D3", doctor: "กภ.อรุณ", specialty: "กายภาพบำบัด", blocks: ["08:00–12:00", "16:00–20:00"], active: true },
+    { id: "D1", doctor: "พญ.มินตรา ศรีสุข", specialty: "อายุรกรรม", blocks: ["08:00–12:00", "12:00–16:00"], active: true },
+    { id: "D2", doctor: "ทพ.กิตติพงศ์ วัฒนะ", specialty: "ทันตกรรม", blocks: ["08:00–12:00"], active: true },
+    { id: "D3", doctor: "กภ.อรุณี รุ่งเรือง", specialty: "กายภาพบำบัด", blocks: ["08:00–12:00", "16:00–20:00"], active: true },
+    { id: "D4", doctor: "พญ.พิมพ์ชนก ไพศาล", specialty: "ผิวหนัง", blocks: ["12:00–16:00"], active: true },
+    { id: "D5", doctor: "พญ.วรินทร์ทิพย์ แสงทอง", specialty: "กุมารเวชศาสตร์", blocks: ["08:00–12:00"], active: false },
   ],
   serviceId: "gp",
   dateChip: "วันนี้",
@@ -79,10 +128,11 @@ export const mediInitial: MediState = {
   name: "",
   phone: "",
   lastBookedId: null,
+  pendingBooking: null,
   apptFilter: "ทั้งหมด",
 };
 
-const store = createDemoStore("lcs-demo-medislot-v1", mediInitial);
+const store = createDemoStore("lcs-demo-medislot-v2", mediInitial);
 export const MediSlotProvider = store.Provider;
 export const useMediSlot = store.useStore;
 
@@ -96,10 +146,13 @@ export const mediBrand: DemoBrandMeta = {
 };
 
 export const mediNav: DemoNavItem[] = [
-  { href: BASE, label: "ภาพรวม", group: "ทั่วไป" },
-  { href: `${BASE}/book`, label: "จองคิว", group: "ผู้ป่วย" },
-  { href: `${BASE}/appointments`, label: "นัดหมาย", group: "หลังบ้าน" },
-  { href: `${BASE}/patients`, label: "ผู้ป่วย", group: "หลังบ้าน" },
-  { href: `${BASE}/schedule`, label: "ตารางหมอ", group: "หลังบ้าน" },
-  { href: `${BASE}/admin`, label: "แอดมิน", group: "หลังบ้าน" },
+  { href: BASE, label: "หน้าหลัก", group: "ลูกค้า" },
+  { href: `${BASE}/book`, label: "จองคิว", group: "ลูกค้า", access: "member" },
+  { href: `${BASE}/confirm`, label: "ยืนยันนัด", group: "ลูกค้า", access: "member" },
+  { href: `${BASE}/account`, label: "บัญชีของฉัน", group: "ลูกค้า", access: "member" },
+  { href: `${BASE}/appointments`, label: "นัดหมาย", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/patients`, label: "ผู้ป่วย", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/schedule`, label: "ตารางหมอ", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/admin`, label: "แอดมิน", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/login`, label: "เข้าสู่ระบบ", group: "เข้าสู่ระบบ", access: "guest" },
 ];

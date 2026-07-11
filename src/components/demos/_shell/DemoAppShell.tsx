@@ -3,26 +3,45 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, RotateCcw, X } from "lucide-react";
+import { LogOut, Menu, RotateCcw, User, X } from "lucide-react";
 import type { DemoBrandMeta, DemoNavItem } from "./types";
+import type { DemoSession } from "./demoAuth";
+import { GUEST_SESSION } from "./demoAuth";
+
+function filterNav(nav: DemoNavItem[], session: DemoSession): DemoNavItem[] {
+  return nav.filter((item) => {
+    const access = item.access ?? "all";
+    if (access === "all") return true;
+    if (access === "guest") return !session.loggedIn || session.role === "guest";
+    if (access === "staff") return session.loggedIn && session.role === "staff";
+    if (access === "member") return session.loggedIn && (session.role === "member" || session.role === "staff");
+    return true;
+  });
+}
 
 export function DemoAppShell({
   brand,
   nav,
   basePath,
   onReset,
+  session,
+  onLogout,
   children,
 }: {
   brand: DemoBrandMeta;
   nav: DemoNavItem[];
   basePath: string;
   onReset?: () => void;
+  session?: DemoSession;
+  onLogout?: () => void;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const sess = session ?? GUEST_SESSION;
+  const visible = filterNav(nav, sess);
 
-  const groups = nav.reduce<Record<string, DemoNavItem[]>>((acc, item) => {
+  const groups = visible.reduce<Record<string, DemoNavItem[]>>((acc, item) => {
     const g = item.group ?? "เมนู";
     (acc[g] ??= []).push(item);
     return acc;
@@ -80,6 +99,32 @@ export function DemoAppShell({
             </Link>
           </div>
           <div className="flex items-center gap-2">
+            {sess.loggedIn ? (
+              <div className="hidden items-center gap-2 sm:flex">
+                <User className="size-3.5 opacity-80" />
+                <span className="max-w-[120px] truncate text-xs font-medium">
+                  {sess.name}
+                  <span className="opacity-70"> · {sess.role}</span>
+                </span>
+                {onLogout && (
+                  <button
+                    type="button"
+                    onClick={onLogout}
+                    className="inline-flex items-center gap-1 rounded-full border border-white/25 px-2.5 py-1 text-[11px] font-semibold hover:bg-white/10"
+                  >
+                    <LogOut className="size-3" />
+                    ออก
+                  </button>
+                )}
+              </div>
+            ) : (
+              <Link
+                href={`${basePath}/login`}
+                className="rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold hover:bg-white/25"
+              >
+                เข้าสู่ระบบ
+              </Link>
+            )}
             <span className="rounded-full bg-white/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide">
               ม็อกอัพ
             </span>
@@ -114,6 +159,16 @@ export function DemoAppShell({
                 <X className="size-4" />
               </button>
             </div>
+            {sess.loggedIn && (
+              <div className="border-b border-slate-100 px-4 py-3 text-xs text-slate-600">
+                {sess.name} · {sess.role}
+                {onLogout && (
+                  <button type="button" onClick={onLogout} className="ml-2 font-semibold text-sky-600">
+                    ออกจากระบบ
+                  </button>
+                )}
+              </div>
+            )}
             <div className="flex-1 overflow-y-auto p-3">{NavLinks}</div>
           </div>
         </div>

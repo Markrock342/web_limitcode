@@ -1,6 +1,8 @@
 "use client";
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
+import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
+import { thaiName, thaiPhone } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const COURTS = 12;
@@ -18,10 +20,12 @@ export type Booking = {
   phone: string;
   court: number | null;
   paid: boolean;
+  status: "confirmed" | "cancelled";
   walkin?: boolean;
 };
 
 export type SmashState = {
+  session: DemoSession;
   bookings: Booking[];
   locked: string[];
   selectedHours: number[];
@@ -52,7 +56,6 @@ export function fmtDay(dateStr: string) {
 }
 
 function seedBookings(date: string): Booking[] {
-  const names = ["คุณมาร์ค", "คุณน็อต", "คุณแบงค์", "คุณออย", "คุณมิ้นท์", "คุณต้น"];
   const out: Booking[] = [];
   let n = 0;
   for (const hour of HOURS) {
@@ -67,10 +70,11 @@ function seedBookings(date: string): Booking[] {
         hour,
         price: tierFor(hour).price,
         tier: tierFor(hour).id,
-        name: names[(hour + i) % names.length],
-        phone: `08${(hour + i) % 10}-xxx-xx${i}${hour % 10}`,
+        name: thaiName(n),
+        phone: thaiPhone(n),
         court: assigned ? ((i * 3 + hour) % COURTS) + 1 : null,
         paid: true,
+        status: "confirmed",
       });
     }
   }
@@ -84,7 +88,8 @@ export function bookingCode(date: string) {
 const day0 = DATES[0];
 
 export const smashInitial: SmashState = {
-  bookings: seedBookings(day0),
+  session: GUEST_SESSION,
+  bookings: DATES.flatMap(seedBookings),
   locked: [`${day0}|3|18`, `${day0}|4|18`],
   selectedHours: [18],
   dateIdx: 0,
@@ -93,7 +98,7 @@ export const smashInitial: SmashState = {
   lastCode: null,
 };
 
-const store = createDemoStore("lcs-demo-smashlane-v1", smashInitial);
+const store = createDemoStore("lcs-demo-smashlane-v2", smashInitial);
 export const SmashLaneProvider = store.Provider;
 export const useSmashLane = store.useStore;
 
@@ -107,12 +112,12 @@ export const smashBrand: DemoBrandMeta = {
 };
 
 export const smashNav: DemoNavItem[] = [
-  { href: BASE, label: "ภาพรวม", group: "ทั่วไป" },
-  { href: `${BASE}/book`, label: "จองคอร์ท", group: "ลูกค้า" },
-  { href: `${BASE}/checkout`, label: "ชำระเงิน", group: "ลูกค้า" },
-  { href: `${BASE}/success`, label: "จองสำเร็จ", group: "ลูกค้า" },
-  { href: `${BASE}/admin`, label: "คิวจัดคอร์ท", group: "หลังบ้าน" },
-  { href: `${BASE}/admin/grid`, label: "ตารางคอร์ท", group: "หลังบ้าน" },
+  { href: BASE, label: "ภาพรวม", group: "ทั่วไป", access: "all" },
+  { href: `${BASE}/book`, label: "จองคอร์ท", group: "ลูกค้า", access: "all" },
+  { href: `${BASE}/account`, label: "บัญชีของฉัน", group: "ลูกค้า", access: "member" },
+  { href: `${BASE}/admin`, label: "คิวจัดคอร์ท", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/admin/grid`, label: "ตารางคอร์ท", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/login`, label: "เข้าสู่ระบบ", group: "บัญชี", access: "all" },
 ];
 
 export function ensureDateSeeded(state: SmashState, dateIdx: number): SmashState {

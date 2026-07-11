@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Lock } from "lucide-react";
+import { RequireAuth } from "@/components/demos/_shell/RequireAuth";
 import { BASE, COURTS, DATES, HOURS, bookingCode, fmtDay, tierFor, useSmashLane } from "../store";
 import Link from "next/link";
 
@@ -16,7 +17,7 @@ export function SmashGridPage() {
   );
 
   const dayBookings = useMemo(
-    () => state.bookings.filter((b) => b.date === date && b.paid),
+    () => state.bookings.filter((b) => b.date === date && b.paid && b.status === "confirmed"),
     [state.bookings, date],
   );
 
@@ -54,6 +55,7 @@ export function SmashGridPage() {
           phone: "-",
           court,
           paid: true,
+          status: "confirmed",
           walkin: true,
         },
       ],
@@ -71,6 +73,7 @@ export function SmashGridPage() {
   }
 
   return (
+    <RequireAuth session={state.session} basePath={BASE} mode="staff">
     <div className="space-y-4">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
@@ -219,5 +222,6 @@ export function SmashGridPage() {
         </div>
       )}
     </div>
+    </RequireAuth>
   );
 }

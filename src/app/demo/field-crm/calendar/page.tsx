@@ -1,4 +1,5 @@
 import { GuardCalendarPage } from "@/components/demos/guardnest/pages/CalendarPage";
+import { GuardStaffOnly } from "@/components/demos/guardnest/StaffOnly";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <GuardCalendarPage />;
+  return <GuardStaffOnly><GuardCalendarPage /></GuardStaffOnly>;
 }

@@ -16,7 +16,7 @@ import {
 export function SmashBookPage() {
   const { state, setState } = useSmashLane();
   const date = DATES[state.dateIdx];
-  const dayBookings = state.bookings.filter((b) => b.date === date && b.paid);
+  const dayBookings = state.bookings.filter((b) => b.date === date && b.paid && b.status === "confirmed");
 
   function capacityAt(hour: number) {
     const lockedN = state.locked.filter((k) => k.startsWith(`${date}|`) && k.endsWith(`|${hour}`)).length;

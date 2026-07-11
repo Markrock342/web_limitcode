@@ -1,11 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { Check } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { RequireAuth } from "@/components/demos/_shell/RequireAuth";
+import { demoId } from "@/components/demos/_shell/seed";
 import { SLOTS, SUBJECTS, TUTORS, useBrightSlot } from "../store";
 
 export function BrightBookPage() {
   const { state, setState } = useBrightSlot();
+  const router = useRouter();
   const tutorsForSubject = TUTORS.filter((t) => t.subject === state.subject);
   const selectedTutor = TUTORS.find((t) => t.id === state.tutorId) ?? tutorsForSubject[0];
 
@@ -19,30 +22,29 @@ export function BrightBookPage() {
     }));
   }
 
-  function confirmBooking() {
+  function continueToConfirm() {
     const tutor = TUTORS.find((t) => t.id === state.tutorId);
     if (!tutor) return;
     setState((prev) => ({
       ...prev,
-      bookings: [
-        {
-          id: `b${Date.now()}`,
-          student: "น้องใหม่ (ผู้ปกครอง)",
-          subject: prev.subject,
-          tutor: tutor.name,
-          slot: prev.slot,
-          status: "รออนุมัติ",
-        },
-        ...prev.bookings,
-      ],
-      confirmed: true,
+      pendingBooking: {
+        id: demoId("B", 100 + prev.bookings.length, 3),
+        student: prev.newStudent.trim() || prev.session.name,
+        subject: prev.subject,
+        tutor: tutor.name,
+        slot: prev.slot,
+        status: "รออนุมัติ",
+        memberUsername: prev.session.username,
+      },
     }));
+    router.push("/demo/tutor-admin/confirm");
   }
 
   return (
+    <RequireAuth session={state.session} basePath="/demo/tutor-admin" mode="member">
     <div className="space-y-6">
-      <div className="relative overflow-hidden rounded-[1.5rem]">
-        <div className="relative aspect-[21/8] min-h-[140px]">
+      <div className="relative overflow-hidden rounded-3xl">
+        <div className="relative aspect-21/8 min-h-[140px]">
           <Image
             src={selectedTutor?.img ?? "/img/work-1.jpg"}
             alt=""
@@ -51,7 +53,7 @@ export function BrightBookPage() {
             className="object-cover"
             sizes="900px"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#12283F] via-[#12283F]/50 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#12283F] via-[#12283F]/50 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
             <p className="text-xs font-semibold tracking-wide text-sky-100/80">จองคาบ · BrightSlot</p>
             <h1 className="mt-1 font-display text-2xl font-bold text-white sm:text-3xl">
@@ -129,32 +131,11 @@ export function BrightBookPage() {
             ))}
           </div>
 
-          {state.confirmed ? (
-            <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-center">
-              <Check className="mx-auto size-7 text-emerald-600" />
-              <p className="mt-2 font-display text-lg font-bold text-emerald-800">ส่งคำขอจองแล้ว</p>
-              <p className="mt-1 text-xs text-emerald-700">
-                {state.subject} · {selectedTutor?.name} · {state.slot}
-              </p>
-              <button
-                type="button"
-                onClick={() => setState((s) => ({ ...s, confirmed: false }))}
-                className="mt-3 text-xs font-semibold text-[#1B3A5C] underline"
-              >
-                จองอีกครั้ง
-              </button>
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={confirmBooking}
-              className="mt-6 w-full rounded-full bg-[#1B3A5C] py-3 text-sm font-bold text-white hover:bg-[#152E4A]"
-            >
-              ยืนยันการจอง
-            </button>
-          )}
+          <input value={state.newStudent} onChange={(event) => setState((prev) => ({ ...prev, newStudent: event.target.value }))} placeholder="ชื่อผู้เรียน (ถ้าว่างใช้ชื่อบัญชี)" className="mt-5 w-full rounded-xl border border-[#D8E2EC] bg-white px-3 py-2.5 text-sm outline-none focus:border-[#1B3A5C]" />
+          <button type="button" onClick={continueToConfirm} className="mt-3 w-full rounded-full bg-[#1B3A5C] py-3 text-sm font-bold text-white hover:bg-[#152E4A]">ไปหน้ายืนยันการจอง</button>
         </section>
       </div>
     </div>
+    </RequireAuth>
   );
 }

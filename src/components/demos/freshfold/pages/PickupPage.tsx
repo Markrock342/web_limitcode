@@ -27,6 +27,7 @@ export function FreshPickupPage() {
           status: "รับแล้ว",
           note: "",
           img: pkg.img,
+          memberUsername: s.session.loggedIn ? s.session.username : undefined,
         },
         ...s.orders,
       ],

@@ -15,14 +15,18 @@ export function GuardJobPage() {
     setState((s) => updateJobStatus(s, job.id));
   }
 
-  if (!id) {
+  if (!id || !job) {
     return (
-      <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center">
-        <h1 className="font-display text-xl font-bold text-emerald-800">สรุปงาน</h1>
-        <p className="mt-2 text-sm text-slate-600">เลือกงานจากรายการเพื่อดูรายละเอียด</p>
+      <div className="space-y-4">
+        <div>
+          <h1 className="text-lg font-semibold text-[#0b1f3a]">สรุปงาน</h1>
+          <p className="mt-0.5 text-sm text-slate-500">
+            {id ? "ไม่พบงานรหัสนี้ในชุดข้อมูลเดโม" : "เลือกงานจากรายการเพื่อดูรายละเอียด"}
+          </p>
+        </div>
         <Link
           href={`${BASE}/jobs`}
-          className="mt-5 inline-flex rounded-full bg-emerald-700 px-5 py-2.5 text-sm font-semibold text-white"
+          className="inline-flex bg-[#0f2744] px-4 py-2.5 text-sm font-semibold text-white"
         >
           ไปรายการงาน
         </Link>
@@ -30,36 +34,23 @@ export function GuardJobPage() {
     );
   }
 
-  if (!job) {
-    return (
-      <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center">
-        <h1 className="font-display text-xl font-bold text-emerald-800">ไม่พบงาน</h1>
-        <p className="mt-2 text-sm text-slate-600">รหัสงานนี้ไม่มีในชุดข้อมูลเดโม</p>
-        <Link
-          href={`${BASE}/jobs`}
-          className="mt-5 inline-flex rounded-full bg-emerald-700 px-5 py-2.5 text-sm font-semibold text-white"
-        >
-          กลับรายการงาน
-        </Link>
-      </div>
-    );
-  }
+  const customer = state.customers.find((c) => c.id === job.customerId);
 
   return (
-    <div className="mx-auto max-w-lg space-y-4">
+    <div className="mx-auto max-w-2xl space-y-5">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-medium text-emerald-700">{job.id}</p>
-          <h1 className="font-display text-xl font-bold text-emerald-900">{job.customer}</h1>
-          <p className="mt-0.5 text-sm text-slate-600">{job.type}</p>
+          <p className="text-xs font-medium text-sky-600">{job.id}</p>
+          <h1 className="mt-0.5 text-xl font-semibold text-[#0b1f3a]">{job.customer}</h1>
+          <p className="mt-0.5 text-sm text-slate-500">{job.type}</p>
         </div>
-        <Link href={`${BASE}/jobs`} className="text-xs font-semibold text-emerald-800">
+        <Link href={`${BASE}/jobs`} className="text-xs font-medium text-sky-600 hover:underline">
           ‹ รายการงาน
         </Link>
       </div>
 
-      <div className="flex items-center gap-2">
-        <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${STATUS_STYLE[job.status]}`}>
+      <div className="flex flex-wrap items-center gap-3">
+        <span className={`px-2.5 py-1 text-[11px] font-medium ${STATUS_STYLE[job.status]}`}>
           {job.status}
         </span>
         <span className="text-xs text-slate-500">
@@ -67,36 +58,32 @@ export function GuardJobPage() {
         </span>
       </div>
 
-      <dl className="space-y-2 rounded-2xl border border-slate-200 bg-white p-4 text-sm">
-        <div className="flex justify-between gap-4">
-          <dt className="text-slate-500">ที่อยู่</dt>
-          <dd className="text-right font-medium">{job.address}</dd>
-        </div>
-        <div className="flex justify-between gap-4">
-          <dt className="text-slate-500">ประเภทงาน</dt>
-          <dd className="text-right font-medium">{job.type}</dd>
-        </div>
-        <div className="flex justify-between gap-4">
-          <dt className="text-slate-500">ช่างที่รับผิดชอบ</dt>
-          <dd className="text-right font-medium">{job.tech}</dd>
-        </div>
-        <div className="flex justify-between gap-4">
-          <dt className="text-slate-500">หมายเหตุ</dt>
-          <dd className="text-right font-medium">{job.notes}</dd>
-        </div>
+      <dl className="divide-y divide-slate-100 border-y border-slate-100 bg-white text-sm">
+        {[
+          ["ที่อยู่", job.address],
+          ["ประเภทงาน", job.type],
+          ["ช่างที่รับผิดชอบ", job.tech],
+          ["หมายเหตุ", job.notes],
+          ["โทรลูกค้า", customer?.phone ?? "—"],
+        ].map(([label, value]) => (
+          <div key={label} className="flex justify-between gap-6 px-4 py-3">
+            <dt className="shrink-0 text-slate-400">{label}</dt>
+            <dd className="text-right font-medium text-slate-800">{value}</dd>
+          </div>
+        ))}
       </dl>
 
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
           onClick={cycleStatus}
-          className="rounded-full bg-emerald-700 px-5 py-2.5 text-sm font-semibold text-white"
+          className="bg-[#0f2744] px-4 py-2.5 text-sm font-semibold text-white"
         >
-          สถานะ: {job.status} · กดเพื่อเลื่อนสถานะ
+          เลื่อนสถานะ · ตอนนี้: {job.status}
         </button>
         <Link
           href={`${BASE}/customers`}
-          className="rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-emerald-800"
+          className="border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
         >
           ดูลูกค้า
         </Link>

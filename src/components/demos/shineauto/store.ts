@@ -1,6 +1,8 @@
 "use client";
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
+import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
+import { pick, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const BASE = "/demo/auto-detail";
@@ -52,6 +54,7 @@ export type Member = {
 };
 
 export type ShineState = {
+  session: DemoSession;
   packages: Package[];
   bays: Bay[];
   jobs: Job[];
@@ -78,6 +81,7 @@ export const STATUS_STYLE: Record<JobStatus, string> = {
 };
 
 export const shineInitial: ShineState = {
+  session: GUEST_SESSION,
   packages: [
     {
       id: "express",
@@ -111,85 +115,23 @@ export const shineInitial: ShineState = {
       blurb: "ทำความสะอาดภายในลึก พรมเบาะ",
       img: "/img/prod-4.jpg",
     },
+    { id: "wash-wax", name: "Wash & Wax", mins: 75, price: 890, blurb: "ล้างเคลือบเงา สำหรับการดูแลรายเดือน", img: "/img/prod-5.jpg" },
+    { id: "suv-reset", name: "SUV Reset", mins: 150, price: 2390, blurb: "ฟื้นฟูภายในและภายนอกรถ SUV", img: "/img/prod-6.jpg" },
   ],
   bays: [
     { id: "bay-1", name: "Bay 1 · Express", slots: ["09:00", "10:00", "11:00", "14:00"], busy: true, img: "/img/work-1.jpg" },
     { id: "bay-2", name: "Bay 2 · Detail", slots: ["09:00", "13:00", "15:00", "17:00"], busy: true, img: "/img/work-2.jpg" },
     { id: "bay-3", name: "Bay 3 · Ceramic", slots: ["10:00", "14:00"], busy: false, img: "/img/work-3.jpg" },
     { id: "bay-4", name: "Bay 4 · Interior", slots: ["11:00", "13:00", "16:00"], busy: false, img: "/img/shop-hero.jpg" },
+    { id: "bay-5", name: "Bay 5 · Wax", slots: ["09:00", "12:00", "15:00"], busy: true, img: "/img/work-1.jpg" },
+    { id: "bay-6", name: "Bay 6 · SUV", slots: ["10:00", "13:00", "16:00"], busy: false, img: "/img/work-2.jpg" },
   ],
-  jobs: [
-    {
-      id: "J-101",
-      code: "SA-2401",
-      customer: "คุณมาร์ค",
-      car: "Honda Civic",
-      plate: "1กก-1234",
-      packageId: "premium",
-      packageName: "Premium Detail",
-      bayId: "bay-2",
-      bayName: "Bay 2 · Detail",
-      date: "วันนี้",
-      time: "09:00",
-      status: "กำลังทำ",
-      img: "/img/prod-2.jpg",
-      note: "มีรอยขีดข่วนฝั่งขวา",
-    },
-    {
-      id: "J-102",
-      code: "SA-2402",
-      customer: "คุณนภา",
-      car: "Toyota Yaris",
-      plate: "2ขข-5678",
-      packageId: "express",
-      packageName: "Express Wash",
-      bayId: "bay-1",
-      bayName: "Bay 1 · Express",
-      date: "วันนี้",
-      time: "10:00",
-      status: "รอคิว",
-      img: "/img/prod-1.jpg",
-      note: "",
-    },
-    {
-      id: "J-103",
-      code: "SA-2403",
-      customer: "คุณธนพล",
-      car: "Mazda CX-5",
-      plate: "3คง-9012",
-      packageId: "ceramic",
-      packageName: "Ceramic Coat",
-      bayId: "bay-3",
-      bayName: "Bay 3 · Ceramic",
-      date: "วันนี้",
-      time: "14:00",
-      status: "รอคิว",
-      img: "/img/prod-3.jpg",
-      note: "จองล่วงหน้า เคลือบเต็มคัน",
-    },
-    {
-      id: "J-104",
-      code: "SA-2399",
-      customer: "คุณพิมพ์",
-      car: "BMW 320d",
-      plate: "4จจ-3456",
-      packageId: "interior",
-      packageName: "Interior Deep",
-      bayId: "bay-4",
-      bayName: "Bay 4 · Interior",
-      date: "เมื่อวาน",
-      time: "15:00",
-      status: "เสร็จ",
-      img: "/img/prod-4.jpg",
-      note: "เสร็จเรียบร้อย",
-    },
-  ],
-  members: [
-    { id: "M-01", name: "คุณมาร์ค", phone: "081-xxx-1100", points: 2400, tier: "Gold", visits: 12, img: "/img/prod-5.jpg" },
-    { id: "M-02", name: "คุณนภา", phone: "089-xxx-2201", points: 890, tier: "Silver", visits: 5, img: "/img/prod-6.jpg" },
-    { id: "M-03", name: "คุณธนพล", phone: "062-xxx-4412", points: 4200, tier: "Platinum", visits: 18, img: "/img/work-1.jpg" },
-    { id: "M-04", name: "คุณพิมพ์", phone: "086-xxx-7788", points: 320, tier: "Member", visits: 2, img: "/img/work-2.jpg" },
-  ],
+  jobs: Array.from({ length: 20 }, (_, i) => {
+    const pkg = pick([{ id: "express", name: "Express Wash", img: "/img/prod-1.jpg" }, { id: "premium", name: "Premium Detail", img: "/img/prod-2.jpg" }, { id: "ceramic", name: "Ceramic Coat", img: "/img/prod-3.jpg" }, { id: "interior", name: "Interior Deep", img: "/img/prod-4.jpg" }], i);
+    const bay = pick([{ id: "bay-1", name: "Bay 1 · Express" }, { id: "bay-2", name: "Bay 2 · Detail" }, { id: "bay-3", name: "Bay 3 · Ceramic" }, { id: "bay-4", name: "Bay 4 · Interior" }], i);
+    return { id: `J-${101 + i}`, code: `SA-${2401 + i}`, customer: thaiName(i), car: pick(["Honda Civic", "Toyota Yaris", "Mazda CX-5", "BMW 320d", "BYD Atto 3"], i), plate: `${i + 1}กก-${String(1234 + i * 31).slice(-4)}`, packageId: pkg.id, packageName: pkg.name, bayId: bay.id, bayName: bay.name, date: i < 14 ? "วันนี้" : "พรุ่งนี้", time: pick(SLOTS, i), status: pick<JobStatus>(["รอคิว", "กำลังทำ", "เสร็จ"], i), img: pkg.img, note: i % 4 === 0 ? "ตรวจรอยขีดข่วนก่อนเริ่มงาน" : "" };
+  }),
+  members: Array.from({ length: 10 }, (_, i) => ({ id: `M-${String(i + 1).padStart(2, "0")}`, name: thaiName(i), phone: thaiPhone(i), points: 250 + i * 430, tier: pick(["Member", "Silver", "Gold", "Platinum"], i), visits: 1 + i * 2, img: pick(["/img/prod-5.jpg", "/img/prod-6.jpg", "/img/work-1.jpg"], i) })),
   packageId: "premium",
   bayId: "bay-2",
   dateChip: "วันนี้",
@@ -202,7 +144,7 @@ export const shineInitial: ShineState = {
   jobFilter: "ทั้งหมด",
 };
 
-const store = createDemoStore("lcs-demo-shineauto-v1", shineInitial);
+const store = createDemoStore("lcs-demo-shineauto-v2", shineInitial);
 export const ShineAutoProvider = store.Provider;
 export const useShineAuto = store.useStore;
 
@@ -218,9 +160,10 @@ export const shineBrand: DemoBrandMeta = {
 export const shineNav: DemoNavItem[] = [
   { href: BASE, label: "ภาพรวม", group: "ทั่วไป" },
   { href: `${BASE}/book`, label: "จองคิว", group: "ลูกค้า" },
-  { href: `${BASE}/bays`, label: "ตารางเบย์", group: "หลังบ้าน" },
-  { href: `${BASE}/jobs`, label: "งานวันนี้", group: "หลังบ้าน" },
-  { href: `${BASE}/members`, label: "สมาชิก", group: "หลังบ้าน" },
+  { href: `${BASE}/account`, label: "บัญชีของฉัน", group: "ลูกค้า", access: "member" },
+  { href: `${BASE}/bays`, label: "ตารางเบย์", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/jobs`, label: "งานวันนี้", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/members`, label: "สมาชิก", group: "หลังบ้าน", access: "staff" },
 ];
 
 export function nextJobStatus(s: JobStatus): JobStatus {

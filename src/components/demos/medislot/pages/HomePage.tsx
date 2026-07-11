@@ -6,8 +6,8 @@ import { BASE, SERVICES, useMediSlot } from "../store";
 
 export function MediHomePage() {
   const { state, setState } = useMediSlot();
-  const today = state.appointments.filter((a) => a.date === "วันนี้");
-  const waiting = today.filter((a) => a.status === "รอตรวจ").length;
+  const today = state.appointments.filter((a) => a.date === new Date().toISOString().slice(0, 10));
+  const waiting = today.filter((a) => a.status === "รอ").length;
   const arrived = today.filter((a) => a.status === "มาแล้ว").length;
 
   return (
@@ -47,7 +47,7 @@ export function MediHomePage() {
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
             {[
               { k: "นัดวันนี้", v: String(today.length) },
-              { k: "รอตรวจ", v: String(waiting) },
+              { k: "รอเข้ารับบริการ", v: String(waiting) },
               { k: "มาแล้ว", v: String(arrived) },
             ].map((x) => (
               <div key={x.k} className="rounded-2xl border border-white/20 bg-white/10 p-3 backdrop-blur sm:p-4">

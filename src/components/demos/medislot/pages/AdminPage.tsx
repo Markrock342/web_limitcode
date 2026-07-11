@@ -1,17 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import { RequireAuth } from "@/components/demos/_shell/RequireAuth";
 import { BASE, useMediSlot } from "../store";
 
 export function MediAdminPage() {
   const { state } = useMediSlot();
-  const today = state.appointments.filter((a) => a.date === "วันนี้");
-  const waiting = today.filter((a) => a.status === "รอตรวจ").length;
+  const today = state.appointments.filter((a) => a.date === new Date().toISOString().slice(0, 10));
+  const waiting = today.filter((a) => a.status === "รอ").length;
   const noShow = state.appointments.filter((a) => a.status === "ไม่มา").length;
   const activeDocs = state.schedule.filter((d) => d.active);
 
   return (
-    <div className="space-y-5">
+    <RequireAuth session={state.session} basePath={BASE} mode="staff">
+      <div className="space-y-5">
       <div>
         <h1 className="font-display text-2xl font-bold text-teal-800">แอดมินภาพรวม</h1>
         <p className="mt-1 text-sm text-slate-600">สรุปสถานะคลินิกและทางลัดหลังบ้าน</p>
@@ -20,7 +22,7 @@ export function MediAdminPage() {
       <div className="grid gap-3 sm:grid-cols-3">
         {[
           { k: "นัดวันนี้", v: String(today.length), href: `${BASE}/appointments` },
-          { k: "รอตรวจ", v: String(waiting), href: `${BASE}/appointments` },
+          { k: "รอเข้ารับบริการ", v: String(waiting), href: `${BASE}/appointments` },
           { k: "ไม่มา (ทั้งหมด)", v: String(noShow), href: `${BASE}/appointments` },
         ].map((x) => (
           <Link
@@ -59,6 +61,7 @@ export function MediAdminPage() {
           <p className="mt-1 text-sm text-white/80">ฝั่งผู้ป่วย</p>
         </Link>
       </div>
-    </div>
+      </div>
+    </RequireAuth>
   );
 }

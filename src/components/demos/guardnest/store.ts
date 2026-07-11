@@ -1,6 +1,8 @@
 "use client";
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
+import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
+import { demoId, pick, thaiAddress, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const BASE = "/demo/field-crm";
@@ -39,6 +41,7 @@ export type Customer = {
 };
 
 export type GuardNestState = {
+  session: DemoSession;
   jobs: Job[];
   quotes: Quote[];
   customers: Customer[];
@@ -49,16 +52,16 @@ export const DAYS = ["จ.", "อ.", "พ.", "พฤ.", "ศ."] as const;
 export const JOB_STATUS_ORDER: JobStatus[] = ["รอเสนอราคา", "นัดหมาย", "กำลังทำ", "เสร็จแล้ว"];
 
 export const STATUS_STYLE: Record<JobStatus, string> = {
-  รอเสนอราคา: "bg-amber-100 text-amber-800",
-  นัดหมาย: "bg-sky-100 text-sky-800",
-  กำลังทำ: "bg-teal-100 text-teal-800",
-  เสร็จแล้ว: "bg-emerald-100 text-emerald-800",
+  รอเสนอราคา: "bg-amber-50 text-amber-700",
+  นัดหมาย: "bg-sky-50 text-sky-700",
+  กำลังทำ: "bg-indigo-50 text-indigo-700",
+  เสร็จแล้ว: "bg-emerald-50 text-emerald-700",
 };
 
 export const QUOTE_STYLE: Record<QuoteStatus, string> = {
-  ร่าง: "bg-slate-100 text-slate-700",
-  รออนุมัติ: "bg-amber-100 text-amber-800",
-  อนุมัติแล้ว: "bg-emerald-100 text-emerald-800",
+  ร่าง: "bg-slate-100 text-slate-600",
+  รออนุมัติ: "bg-amber-50 text-amber-700",
+  อนุมัติแล้ว: "bg-emerald-50 text-emerald-700",
 };
 
 const SEED_CUSTOMERS: Customer[] = [
@@ -189,13 +192,60 @@ const SEED_QUOTES: Quote[] = [
   },
 ];
 
+const EXTRA_CUSTOMERS: Customer[] = Array.from({ length: 7 }, (_, index) => {
+  const n = index + 6;
+  return {
+    id: `c${n}`,
+    name: thaiName(n),
+    address: thaiAddress(n),
+    phone: thaiPhone(n),
+    notes: [pick(["ลูกค้าประจำ", "นัดตรวจติดตามรอบถัดไป", "ติดต่อช่วงบ่าย", "ขอใบเสร็จหลังจบงาน"], n)],
+  };
+});
+
+const ALL_CUSTOMERS = [...SEED_CUSTOMERS, ...EXTRA_CUSTOMERS];
+const SERVICE_TYPES = ["กำจัดปลวก", "พ่นแมลง", "กำจัดมดและแมลงสาบ", "ตรวจพื้นที่ก่อนบริการ", "วางเหยื่อปลวก"] as const;
+const TECHS = ["ช่างก้อง", "ช่างบอย", "ช่างนิด", "ช่างวิน"] as const;
+
+const EXTRA_JOBS: Job[] = Array.from({ length: 15 }, (_, index) => {
+  const n = index + 6;
+  const customer = pick(ALL_CUSTOMERS, n);
+  const status = pick<JobStatus>(["รอเสนอราคา", "นัดหมาย", "กำลังทำ", "เสร็จแล้ว"], n);
+  return {
+    id: demoId("J", 2400 + n),
+    customerId: customer.id,
+    customer: customer.name,
+    address: customer.address,
+    type: pick(SERVICE_TYPES, n),
+    tech: pick(TECHS, n),
+    notes: pick(["นัดยืนยันก่อนเข้าหน้างาน", "ลูกค้าขอให้โทรล่วงหน้า", "ตรวจจุดเสี่ยงเพิ่ม", "ติดตามผลภายใน 7 วัน"], n),
+    status,
+    time: pick(["08:30", "09:30", "11:00", "13:30", "15:00", "16:30"], n),
+    day: pick(DAYS, n),
+  };
+});
+
+const EXTRA_QUOTES: Quote[] = Array.from({ length: 7 }, (_, index) => {
+  const n = index + 4;
+  const customer = pick(ALL_CUSTOMERS, n + 2);
+  return {
+    id: demoId("Q", 880 + n, 3),
+    customerId: customer.id,
+    customer: customer.name,
+    amount: 2800 + n * 650,
+    status: pick<QuoteStatus>(["ร่าง", "รออนุมัติ", "อนุมัติแล้ว"], n),
+    service: pick(SERVICE_TYPES, n),
+  };
+});
+
 export const guardInitial: GuardNestState = {
-  jobs: SEED_JOBS,
-  quotes: SEED_QUOTES,
-  customers: SEED_CUSTOMERS,
+  session: GUEST_SESSION,
+  jobs: [...SEED_JOBS, ...EXTRA_JOBS],
+  quotes: [...SEED_QUOTES, ...EXTRA_QUOTES],
+  customers: ALL_CUSTOMERS,
 };
 
-const store = createDemoStore("lcs-demo-guardnest-v1", guardInitial);
+const store = createDemoStore("lcs-demo-guardnest-v2", guardInitial);
 export const GuardNestProvider = store.Provider;
 export const useGuardNest = store.useStore;
 
@@ -203,18 +253,21 @@ export const guardBrand: DemoBrandMeta = {
   slug: "field-crm",
   name: "GuardNest Field",
   subtitle: "CRM / Job Order ทีมหน้างาน",
-  accent: "bg-emerald-700",
-  accentBg: "bg-emerald-50",
-  accentText: "text-emerald-800",
+  accent: "bg-[#0b1f3a]",
+  accentBg: "bg-[#0f2744]",
+  accentText: "text-white",
 };
 
 export const guardNav: DemoNavItem[] = [
-  { href: BASE, label: "Dashboard", group: "ทั่วไป" },
-  { href: `${BASE}/jobs`, label: "งานทั้งหมด", group: "งาน" },
-  { href: `${BASE}/job`, label: "สรุปงาน", group: "งาน" },
-  { href: `${BASE}/quotes`, label: "ใบเสนอราคา", group: "งาน" },
-  { href: `${BASE}/calendar`, label: "ปฏิทินทีม", group: "งาน" },
-  { href: `${BASE}/customers`, label: "ลูกค้า", group: "ลูกค้า" },
+  { href: BASE, label: "Dashboard", access: "all" },
+  { href: `${BASE}/jobs`, label: "งานทั้งหมด", access: "staff" },
+  { href: `${BASE}/new-job`, label: "สร้างงาน", access: "staff" },
+  { href: `${BASE}/job`, label: "สรุปงาน", access: "staff" },
+  { href: `${BASE}/quotes`, label: "ใบเสนอราคา", access: "staff" },
+  { href: `${BASE}/calendar`, label: "ปฏิทินทีม", access: "staff" },
+  { href: `${BASE}/customers`, label: "ลูกค้า", access: "staff" },
+  { href: `${BASE}/account`, label: "บัญชีของฉัน", access: "member" },
+  { href: `${BASE}/login`, label: "เข้าสู่ระบบ", access: "guest" },
 ];
 
 export function nextJobStatus(s: JobStatus): JobStatus {
@@ -253,6 +306,13 @@ export function addCustomerNote(state: GuardNestState, customerId: string, note:
     customers: state.customers.map((c) =>
       c.id === customerId ? { ...c, notes: [trimmed, ...c.notes] } : c,
     ),
+  };
+}
+
+export function addJob(state: GuardNestState, job: Omit<Job, "id">): GuardNestState {
+  return {
+    ...state,
+    jobs: [{ ...job, id: demoId("J", 2400 + state.jobs.length + 1) }, ...state.jobs],
   };
 }
 

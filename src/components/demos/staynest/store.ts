@@ -1,6 +1,8 @@
 "use client";
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
+import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
+import { demoId, isoDateOffset, pick, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const BASE = "/demo/hotel-pms";
@@ -16,6 +18,7 @@ export type HkTask = { id: string; room: string; task: string; done: boolean };
 export type Guest = { id: string; name: string; phone: string; visits: number; note: string };
 
 export type StayNestState = {
+  session: DemoSession;
   stays: Stay[];
   rooms: Room[];
   bookings: Booking[];
@@ -40,6 +43,7 @@ export const PAY_STYLE: Record<PayStatus, string> = {
 };
 
 export const stayInitial: StayNestState = {
+  session: GUEST_SESSION,
   stays: [
     { id: "IN-1", guest: "คุณแอนนา", room: "302", type: "มาถึง" },
     { id: "IN-2", guest: "คุณบอส", room: "405", type: "มาถึง" },
@@ -55,13 +59,29 @@ export const stayInitial: StayNestState = {
     { id: "r6", number: "305", type: "Suite", status: "ซ่อมบำรุง" },
     { id: "r7", number: "405", type: "Deluxe", status: "ว่าง" },
     { id: "r8", number: "410", type: "Standard", status: "มีแขก" },
+    ...Array.from({ length: 12 }, (_, i) => ({
+      id: `r${i + 9}`,
+      number: `${5 + Math.floor(i / 4)}${String((i % 4) + 1).padStart(2, "0")}`,
+      type: pick(["Standard", "Deluxe", "Suite"] as const, i),
+      status: pick(ROOM_CYCLE, i + 1),
+    })),
   ],
   bookings: [
+    { id: "B-900", guest: "สมาชิกเดโม", roomType: "Deluxe", nights: 2, pay: "ชำระแล้ว", checkIn: isoDateOffset(7), checkOut: isoDateOffset(9) },
     { id: "B-901", guest: "คุณแอนนา", roomType: "Suite", nights: 2, pay: "ชำระแล้ว", checkIn: "วันนี้", checkOut: "พ. 13 ก.ค." },
     { id: "B-902", guest: "คุณบอส", roomType: "Deluxe", nights: 3, pay: "มัดจำ", checkIn: "วันนี้", checkOut: "พฤ. 14 ก.ค." },
     { id: "B-903", guest: "คุณมายด์", roomType: "Standard", nights: 1, pay: "ค้างชำระ", checkIn: "พรุ่งนี้", checkOut: "อ. 12 ก.ค." },
     { id: "B-904", guest: "คุณเจมส์", roomType: "Deluxe", nights: 4, pay: "ชำระแล้ว", checkIn: "9 ก.ค.", checkOut: "วันนี้" },
     { id: "B-905", guest: "คุณลิน", roomType: "Deluxe", nights: 2, pay: "ชำระแล้ว", checkIn: "10 ก.ค.", checkOut: "วันนี้" },
+    ...Array.from({ length: 10 }, (_, i) => ({
+      id: demoId("B", 906 + i, 3),
+      guest: thaiName(i + 6),
+      roomType: pick(["Standard", "Deluxe", "Suite"] as const, i),
+      nights: (i % 4) + 1,
+      pay: pick(["ชำระแล้ว", "มัดจำ", "ค้างชำระ"] as const, i),
+      checkIn: isoDateOffset(i - 3),
+      checkOut: isoDateOffset(i + (i % 4) + 1),
+    })),
   ],
   hk: [
     { id: "H1", room: "118", task: "ทำความสะอาดหลังเช็คเอาท์", done: false },
@@ -75,11 +95,18 @@ export const stayInitial: StayNestState = {
     { id: "G-03", name: "คุณเจมส์", phone: "062-xxx-7788", visits: 5, note: "สมาชิก Loyalty Gold" },
     { id: "G-04", name: "คุณลิน", phone: "086-xxx-3344", visits: 2, note: "แพ้อาหารทะเล" },
     { id: "G-05", name: "คุณมายด์", phone: "092-xxx-5566", visits: 1, note: "" },
+    ...Array.from({ length: 5 }, (_, i) => ({
+      id: demoId("G", i + 6, 2),
+      name: thaiName(i + 10),
+      phone: thaiPhone(i + 10),
+      visits: (i % 4) + 1,
+      note: i % 2 ? "ชอบห้องเงียบ" : "",
+    })),
   ],
   toast: null,
 };
 
-const store = createDemoStore("lcs-demo-staynest-v1", stayInitial);
+const store = createDemoStore("lcs-demo-staynest-v2", stayInitial);
 export const StayNestProvider = store.Provider;
 export const useStayNest = store.useStore;
 
@@ -93,10 +120,13 @@ export const stayBrand: DemoBrandMeta = {
 };
 
 export const stayNav: DemoNavItem[] = [
-  { href: BASE, label: "บอร์ดวันนี้", group: "ทั่วไป" },
-  { href: `${BASE}/front-desk`, label: "Front Desk", group: "ปฏิบัติการ" },
-  { href: `${BASE}/rooms`, label: "ห้องพัก", group: "ปฏิบัติการ" },
-  { href: `${BASE}/bookings`, label: "การจอง", group: "ปฏิบัติการ" },
-  { href: `${BASE}/housekeeping`, label: "แม่บ้าน", group: "ปฏิบัติการ" },
-  { href: `${BASE}/guests`, label: "แขก", group: "ข้อมูล" },
+  { href: BASE, label: "บอร์ดวันนี้", group: "ทั่วไป", access: "all" },
+  { href: `${BASE}/book`, label: "จองห้องพัก", group: "ผู้เข้าพัก", access: "all" },
+  { href: `${BASE}/account`, label: "การจองของฉัน", group: "ผู้เข้าพัก", access: "member" },
+  { href: `${BASE}/login`, label: "เข้าสู่ระบบ", group: "บัญชี", access: "guest" },
+  { href: `${BASE}/front-desk`, label: "Front Desk", group: "พนักงาน", access: "staff" },
+  { href: `${BASE}/rooms`, label: "ห้องพัก", group: "พนักงาน", access: "staff" },
+  { href: `${BASE}/bookings`, label: "การจอง", group: "พนักงาน", access: "staff" },
+  { href: `${BASE}/housekeeping`, label: "แม่บ้าน", group: "พนักงาน", access: "staff" },
+  { href: `${BASE}/guests`, label: "แขก", group: "พนักงาน", access: "staff" },
 ];

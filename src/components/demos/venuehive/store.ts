@@ -1,6 +1,8 @@
 "use client";
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
+import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
+import { pick, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const BASE = "/demo/venue-booking";
@@ -41,6 +43,7 @@ export type Quote = {
 };
 
 export type VenueState = {
+  session: DemoSession;
   venues: Venue[];
   events: BookingRequest[];
   quotes: Quote[];
@@ -69,6 +72,7 @@ export const QUOTE_STYLE: Record<QuoteStatus, string> = {
 };
 
 export const venueInitial: VenueState = {
+  session: GUEST_SESSION,
   venues: [
     {
       id: "hall-a",
@@ -124,71 +128,22 @@ export const venueInitial: VenueState = {
       img: "/img/food-5.jpg",
       tags: ["ดินเนอร์", "ไพรเวท", "เชฟ"],
     },
+    { id: "hall-g", name: "Riverside Deck", capacity: 90, price: 24000, blurb: "ดาดฟ้าริมน้ำ สำหรับงานเย็น", img: "/img/food-1.jpg", tags: ["ริมแม่น้ำ", "ค็อกเทล", "เย็น"] },
+    { id: "hall-h", name: "The Workshop", capacity: 35, price: 12000, blurb: "ห้องเวิร์กช็อป แสงธรรมชาติ", img: "/img/work-1.jpg", tags: ["เทรนนิ่ง", "เวิร์กช็อป", "ทีม"] },
   ],
-  events: [
-    {
-      id: "EV-101",
-      venueId: "hall-a",
-      venueName: "Grand Ballroom A",
-      client: "คุณมาร์ค · งานแต่ง",
-      phone: "081-xxx-1100",
-      date: "ส. 19 ก.ค.",
-      guests: 220,
-      note: "ต้องการเวที + ไฟ",
-      status: "รออนุมัติ",
-      img: "/img/resto-hero.jpg",
-    },
-    {
-      id: "EV-102",
-      venueId: "hall-c",
-      venueName: "Sky Lounge",
-      client: "บริษัท Nova Soft",
-      phone: "02-xxx-4412",
-      date: "อา. 13 ก.ค.",
-      guests: 70,
-      note: "เปิดตัวผลิตภัณฑ์",
-      status: "อนุมัติแล้ว",
-      img: "/img/food-3.jpg",
-    },
-    {
-      id: "EV-103",
-      venueId: "hall-d",
-      venueName: "Studio Hall",
-      client: "คุณพิมพ์ · เวิร์กช็อป",
-      phone: "062-xxx-7788",
-      date: "ส. 12 ก.ค.",
-      guests: 45,
-      note: "",
-      status: "รออนุมัติ",
-      img: "/img/office-hero.jpg",
-    },
-  ],
-  quotes: [
-    {
-      id: "Q-501",
-      client: "คุณมาร์ค · งานแต่ง",
-      venue: "Grand Ballroom A",
-      amount: 52000,
-      status: "รออนุมัติ",
-      img: "/img/resto-hero.jpg",
-    },
-    {
-      id: "Q-502",
-      client: "บริษัท Nova Soft",
-      venue: "Sky Lounge + แพ็กค็อกเทล",
-      amount: 31000,
-      status: "อนุมัติแล้ว",
-      img: "/img/food-3.jpg",
-    },
-    {
-      id: "Q-503",
-      client: "คุณเอิร์ธ · ป๊อปอัพ",
-      venue: "Market Court",
-      amount: 28000,
-      status: "ร่าง",
-      img: "/img/shop-hero.jpg",
-    },
-  ],
+  events: Array.from({ length: 12 }, (_, i) => {
+    const venue = pick([
+      { id: "hall-a", name: "Grand Ballroom A", price: 45000, img: "/img/resto-hero.jpg" },
+      { id: "hall-b", name: "Garden Pavilion", price: 28000, img: "/img/food-1.jpg" },
+      { id: "hall-c", name: "Sky Lounge", price: 22000, img: "/img/food-3.jpg" },
+      { id: "hall-d", name: "Studio Hall", price: 15000, img: "/img/office-hero.jpg" },
+    ], i);
+    return { id: `EV-${101 + i}`, venueId: venue.id, venueName: venue.name, client: thaiName(i), phone: thaiPhone(i), date: pick(DATE_CHIPS, i), guests: 30 + i * 15, note: i % 3 ? "แพ็กเกจอาหารและเครื่องเสียง" : "ต้องการเวที + ไฟ", status: pick<EventStatus>(["รออนุมัติ", "อนุมัติแล้ว", "ปฏิเสธ"], i), img: venue.img };
+  }),
+  quotes: Array.from({ length: 10 }, (_, i) => {
+    const venue = pick([{ name: "Grand Ballroom A", price: 45000, img: "/img/resto-hero.jpg" }, { name: "Garden Pavilion", price: 28000, img: "/img/food-1.jpg" }, { name: "Sky Lounge", price: 22000, img: "/img/food-3.jpg" }], i);
+    return { id: `Q-${501 + i}`, client: thaiName(i + 12), venue: venue.name, amount: venue.price + i * 2500, status: pick<QuoteStatus>(["ร่าง", "รออนุมัติ", "อนุมัติแล้ว"], i), img: venue.img };
+  }),
   venueId: "hall-a",
   dateChip: "ส. 19 ก.ค.",
   guests: 80,
@@ -199,7 +154,7 @@ export const venueInitial: VenueState = {
   eventFilter: "ทั้งหมด",
 };
 
-const store = createDemoStore("lcs-demo-venuehive-v1", venueInitial);
+const store = createDemoStore("lcs-demo-venuehive-v2", venueInitial);
 export const VenueHiveProvider = store.Provider;
 export const useVenueHive = store.useStore;
 
@@ -216,9 +171,10 @@ export const venueNav: DemoNavItem[] = [
   { href: BASE, label: "ภาพรวม", group: "ทั่วไป" },
   { href: `${BASE}/venues`, label: "ห้องจัดเลี้ยง", group: "ลูกค้า" },
   { href: `${BASE}/book`, label: "ขอจอง", group: "ลูกค้า" },
-  { href: `${BASE}/events`, label: "อีเวนต์", group: "หลังบ้าน" },
-  { href: `${BASE}/quotes`, label: "ใบเสนอราคา", group: "หลังบ้าน" },
-  { href: `${BASE}/admin`, label: "แอดมิน", group: "หลังบ้าน" },
+  { href: `${BASE}/account`, label: "บัญชีของฉัน", group: "ลูกค้า", access: "member" },
+  { href: `${BASE}/events`, label: "อีเวนต์", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/quotes`, label: "ใบเสนอราคา", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/admin`, label: "แอดมิน", group: "หลังบ้าน", access: "staff" },
 ];
 
 export function cycleQuoteStatus(s: QuoteStatus): QuoteStatus {

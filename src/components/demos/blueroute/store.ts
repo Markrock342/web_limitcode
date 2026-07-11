@@ -1,6 +1,8 @@
 "use client";
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
+import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
+import { demoId, pick, thaiName } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const BASE = "/demo/fleet-ops";
@@ -40,10 +42,13 @@ export type Vehicle = {
   company: string;
 };
 
+export type Part = { id: string; name: string; sku: string; stock: number; reorderAt: number; unit: string };
+
 export type BlueRouteState = {
-  loggedIn: boolean;
+  session: DemoSession;
   jobs: Job[];
   vehicles: Vehicle[];
+  parts: Part[];
 };
 
 export const TECHS = ["ช่างสมชาย", "ช่างวิชัย", "ช่างประยุทธ์", "ช่างอนุชา", "ไม่ระบุช่าง"] as const;
@@ -215,6 +220,24 @@ const SEED_JOBS: Job[] = [
   },
 ];
 
+const GENERATED_JOBS: Job[] = Array.from({ length: 16 }, (_, i) => ({
+  id: String(i + 10),
+  jobNum: `R-${120560 + i}`,
+  tech: pick(TECHS.slice(0, 4), i),
+  vehicle: String(600 + ((i * 37) % 300)),
+  plate: `${20 + i}-${String(1200 + i * 71).slice(-4)}`,
+  brand: pick(["Scania", "Hino", "Volvo", "Mercedes"] as const, i),
+  model: pick(["K360", "RM380", "B11R", "O500"] as const, i),
+  mile: 240000 + i * 18350,
+  desc: pick(["ตรวจเช็กระยะตามรอบ", "เปลี่ยนถ่ายน้ำมันเครื่อง", "แก้ระบบเบรก", "ตรวจระบบไฟ", "ซ่อมแอร์ห้องโดยสาร"], i),
+  report: "บันทึกข้อมูลจากศูนย์ซ่อมเดโม",
+  status: i % 3 === 0 ? "กำลังซ่อม" : "ปิดงานแล้ว",
+  subtype: i % 6 === 0 ? "เสียกลางทาง" : "ปกติ",
+  opened: `11/07/2569 ${String(7 + (i % 10)).padStart(2, "0")}:${String((i * 7) % 60).padStart(2, "0")}`,
+  parts: [],
+  costs: [],
+}));
+
 const SEED_VEHICLES: Vehicle[] = [
   {
     id: "v1",
@@ -268,13 +291,32 @@ const SEED_VEHICLES: Vehicle[] = [
   },
 ];
 
+const GENERATED_VEHICLES: Vehicle[] = Array.from({ length: 7 }, (_, i) => ({
+  id: `v${i + 6}`,
+  name: String(600 + i * 37),
+  plate: `${20 + i}-${String(1200 + i * 71).slice(-4)}`,
+  chassis: `DEMO${String(i + 6).padStart(3, "0")}FLEET`,
+  brand: pick(["Scania", "Hino", "Volvo", "Mercedes"] as const, i),
+  model: pick(["K360", "RM380", "B11R", "O500"] as const, i),
+  route: pick(["กทม.–นครราชสีมา", "กทม.–ระยอง", "กทม.–เชียงราย", "กทม.–สุราษฎร์ธานี"], i),
+  company: "BlueRoute Transport",
+}));
+
 export const blueInitial: BlueRouteState = {
-  loggedIn: false,
-  jobs: SEED_JOBS,
-  vehicles: SEED_VEHICLES,
+  session: GUEST_SESSION,
+  jobs: [...SEED_JOBS, ...GENERATED_JOBS],
+  vehicles: [...SEED_VEHICLES, ...GENERATED_VEHICLES],
+  parts: Array.from({ length: 16 }, (_, i) => ({
+    id: demoId("P", i + 1, 3),
+    name: pick(["ผ้าเบรกหน้า", "น้ำมันเครื่อง 15W-40", "กรองน้ำมันเครื่อง", "แบตเตอรี่ 200Ah", "ยาง 295/80R22.5", "เซ็นเซอร์อุณหภูมิ"], i),
+    sku: `BR-${String(100 + i)}`,
+    stock: 2 + ((i * 5) % 28),
+    reorderAt: 6,
+    unit: pick(["ชุด", "แกลลอน", "ชิ้น", "เส้น"] as const, i),
+  })),
 };
 
-const store = createDemoStore("lcs-demo-blueroute-v1", blueInitial);
+const store = createDemoStore("lcs-demo-blueroute-v2", blueInitial);
 export const BlueRouteProvider = store.Provider;
 export const useBlueRoute = store.useStore;
 
@@ -288,12 +330,14 @@ export const blueBrand: DemoBrandMeta = {
 };
 
 export const blueNav: DemoNavItem[] = [
-  { href: BASE, label: "Dashboard", group: "ทั่วไป" },
-  { href: `${BASE}/login`, label: "เข้าสู่ระบบ", group: "ทั่วไป" },
-  { href: `${BASE}/jobs`, label: "รายการงาน", group: "งาน" },
-  { href: `${BASE}/job`, label: "สรุปงาน", group: "งาน" },
-  { href: `${BASE}/breakdown`, label: "เสียกลางทาง", group: "งาน" },
-  { href: `${BASE}/vehicles`, label: "ค้นหารถ", group: "รถ" },
+  { href: BASE, label: "Dashboard", group: "ทั่วไป", access: "all" },
+  { href: `${BASE}/login`, label: "เข้าสู่ระบบ", group: "บัญชี", access: "guest" },
+  { href: `${BASE}/account`, label: "บัญชีของฉัน", group: "บัญชี", access: "member" },
+  { href: `${BASE}/jobs`, label: "รายการงาน", group: "งานซ่อม", access: "staff" },
+  { href: `${BASE}/job`, label: "สรุปงาน", group: "งานซ่อม", access: "staff" },
+  { href: `${BASE}/breakdown`, label: "เสียกลางทาง", group: "งานซ่อม", access: "staff" },
+  { href: `${BASE}/vehicles`, label: "ค้นหารถ", group: "รถ", access: "staff" },
+  { href: `${BASE}/parts`, label: "คลังอะไหล่", group: "รถ", access: "staff" },
 ];
 
 export function jobsForDay(jobs: Job[], tech?: string | null) {

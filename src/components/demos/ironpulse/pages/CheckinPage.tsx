@@ -1,6 +1,7 @@
 "use client";
 
 import { CheckCircle2, Search } from "lucide-react";
+import { demoId, isoDateOffset } from "@/components/demos/_shell/seed";
 import { useIronPulse } from "../store";
 
 export function IronCheckinPage() {
@@ -8,10 +9,16 @@ export function IronCheckinPage() {
   const filtered = state.members.filter((m) => m.name.includes(state.query.trim()) || state.query.trim() === "");
 
   function checkIn(id: string) {
-    setState((s) => ({
-      ...s,
-      members: s.members.map((m) => (m.id === id ? { ...m, checkedIn: true } : m)),
-    }));
+    setState((s) => {
+      const member = s.members.find((m) => m.id === id);
+      return {
+        ...s,
+        members: s.members.map((m) => (m.id === id ? { ...m, checkedIn: true } : m)),
+        checkins: member
+          ? [{ id: demoId("CI", s.checkins.length + 1), memberId: member.id, member: member.name, at: `${isoDateOffset(0)} 10:30` }, ...s.checkins]
+          : s.checkins,
+      };
+    });
   }
 
   return (

@@ -1,11 +1,13 @@
 "use client";
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
+import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
+import { demoId, pick, thaiAddress, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const BASE = "/demo/laundry-ops";
 
-export type OrderStatus = "รับแล้ว" | "กำลังซัก" | "พร้อมส่ง" | "ส่งแล้ว";
+export type OrderStatus = "รับแล้ว" | "กำลังซัก" | "กำลังรีด" | "พร้อมส่ง" | "ส่งแล้ว";
 
 export type LaundryPackage = {
   id: string;
@@ -27,6 +29,7 @@ export type LaundryOrder = {
   status: OrderStatus;
   note: string;
   img: string;
+  memberUsername?: string;
 };
 
 export type LaundryCustomer = {
@@ -38,6 +41,7 @@ export type LaundryCustomer = {
 };
 
 export type FreshState = {
+  session: DemoSession;
   packages: LaundryPackage[];
   orders: LaundryOrder[];
   customers: LaundryCustomer[];
@@ -50,11 +54,12 @@ export type FreshState = {
   editPriceId: string | null;
 };
 
-export const STATUS_FLOW: OrderStatus[] = ["รับแล้ว", "กำลังซัก", "พร้อมส่ง", "ส่งแล้ว"];
+export const STATUS_FLOW: OrderStatus[] = ["รับแล้ว", "กำลังซัก", "กำลังรีด", "พร้อมส่ง", "ส่งแล้ว"];
 
 export const STATUS_STYLE: Record<OrderStatus, string> = {
   รับแล้ว: "bg-sky-100 text-sky-800",
   กำลังซัก: "bg-amber-100 text-amber-800",
+  กำลังรีด: "bg-violet-100 text-violet-800",
   พร้อมส่ง: "bg-emerald-100 text-emerald-800",
   ส่งแล้ว: "bg-slate-100 text-slate-600",
 };
@@ -62,6 +67,7 @@ export const STATUS_STYLE: Record<OrderStatus, string> = {
 export const PICKUP_DATES = ["วันนี้", "พรุ่งนี้", "จ. 14 ก.ค.", "อ. 15 ก.ค.", "พ. 16 ก.ค."];
 
 export const freshInitial: FreshState = {
+  session: GUEST_SESSION,
   packages: [
     {
       id: "wash-fold",
@@ -99,59 +105,21 @@ export const freshInitial: FreshState = {
       img: "/img/shop-hero.jpg",
       active: true,
     },
+    { id: "curtain", name: "ผ้าม่านและผ้าห่ม", blurb: "ดูแลผ้าชิ้นใหญ่ พร้อมอบแห้ง", price: 480, unit: "ชุด", img: "/img/food-3.jpg", active: true },
+    { id: "sneaker", name: "สปารองเท้า", blurb: "ทำความสะอาดรองเท้าผ้าใบ", price: 320, unit: "คู่", img: "/img/drink-1.jpg", active: true },
   ],
-  orders: [
-    {
-      id: "LF-101",
-      customer: "คุณมายด์",
-      address: "คอนโดโนวา ชั้น 12",
-      packageId: "wash-fold",
-      packageName: "ซักพับมาตรฐาน",
-      pickupDate: "วันนี้",
-      status: "รับแล้ว",
-      note: "มีผ้าขาวแยกถุง",
-      img: "/img/food-1.jpg",
-    },
-    {
-      id: "LF-102",
-      customer: "คุณต้น",
-      address: "บ้านสุขใจ ซอย 5",
-      packageId: "express",
-      packageName: "ด่วนพิเศษ 24 ชม.",
-      pickupDate: "วันนี้",
-      status: "กำลังซัก",
-      note: "",
-      img: "/img/food-3.jpg",
-    },
-    {
-      id: "LF-103",
-      customer: "คุณพลอย",
-      address: "ออฟฟิศเพลินจิต",
-      packageId: "dryclean",
-      packageName: "ซักแห้งสูท",
-      pickupDate: "เมื่อวาน",
-      status: "พร้อมส่ง",
-      note: "สูทสีกรม",
-      img: "/img/drink-1.jpg",
-    },
-    {
-      id: "LF-104",
-      customer: "คุณเอิร์ธ",
-      address: "ลาดพร้าว 101",
-      packageId: "bedding",
-      packageName: "ชุดเครื่องนอน",
-      pickupDate: "เมื่อวาน",
-      status: "ส่งแล้ว",
-      note: "",
-      img: "/img/shop-hero.jpg",
-    },
-  ],
-  customers: [
-    { id: "C-01", name: "คุณมายด์", phone: "081-xxx-2201", address: "คอนโดโนวา ชั้น 12", note: "ชอบน้ำยาอ่อนโยน" },
-    { id: "C-02", name: "คุณต้น", phone: "089-xxx-4412", address: "บ้านสุขใจ ซอย 5", note: "" },
-    { id: "C-03", name: "คุณพลอย", phone: "062-xxx-7788", address: "ออฟฟิศเพลินจิต", note: "สูทประจำสัปดาห์" },
-    { id: "C-04", name: "คุณเอิร์ธ", phone: "095-xxx-3310", address: "ลาดพร้าว 101", note: "เครื่องนอนทุก 2 สัปดาห์" },
-  ],
+  orders: Array.from({ length: 24 }, (_, i) => {
+    const pkg = pick([
+      { id: "wash-fold", name: "ซักพับมาตรฐาน", img: "/img/food-1.jpg" },
+      { id: "express", name: "ด่วนพิเศษ 24 ชม.", img: "/img/food-3.jpg" },
+      { id: "dryclean", name: "ซักแห้งสูท", img: "/img/drink-1.jpg" },
+      { id: "bedding", name: "ชุดเครื่องนอน", img: "/img/shop-hero.jpg" },
+      { id: "curtain", name: "ผ้าม่านและผ้าห่ม", img: "/img/food-3.jpg" },
+      { id: "sneaker", name: "สปารองเท้า", img: "/img/drink-1.jpg" },
+    ], i);
+    return { id: demoId("LF", 101 + i, 3), customer: thaiName(i), address: thaiAddress(i), packageId: pkg.id, packageName: pkg.name, pickupDate: pick(PICKUP_DATES, i), status: pick(STATUS_FLOW, i), note: i % 3 === 0 ? "แยกผ้าขาว" : "", img: pkg.img, memberUsername: i < 3 ? "member" : undefined };
+  }),
+  customers: Array.from({ length: 14 }, (_, i) => ({ id: demoId("C", i + 1, 2), name: thaiName(i), phone: thaiPhone(i), address: thaiAddress(i), note: i % 4 === 0 ? "แจ้งก่อนถึง 15 นาที" : "" })),
   orderFilter: "ทั้งหมด",
   formName: "",
   formAddress: "",
@@ -161,7 +129,7 @@ export const freshInitial: FreshState = {
   editPriceId: null,
 };
 
-const store = createDemoStore("lcs-demo-freshfold-v1", freshInitial);
+const store = createDemoStore("lcs-demo-freshfold-v2", freshInitial);
 export const FreshFoldProvider = store.Provider;
 export const useFreshFold = store.useStore;
 
@@ -175,12 +143,14 @@ export const freshBrand: DemoBrandMeta = {
 };
 
 export const freshNav: DemoNavItem[] = [
-  { href: BASE, label: "ภาพรวม", group: "ทั่วไป" },
+  { href: BASE, label: "หน้าหลัก", group: "ลูกค้า" },
   { href: `${BASE}/pickup`, label: "เรียกรับผ้า", group: "ลูกค้า" },
-  { href: `${BASE}/orders`, label: "บอร์ดงาน", group: "หลังบ้าน" },
-  { href: `${BASE}/order`, label: "รายละเอียดงาน", group: "หลังบ้าน" },
-  { href: `${BASE}/pricing`, label: "แพ็กเกจ CMS", group: "หลังบ้าน" },
-  { href: `${BASE}/customers`, label: "ลูกค้า", group: "ลูกค้า" },
+  { href: `${BASE}/account`, label: "รายการของฉัน", group: "ลูกค้า", access: "member" },
+  { href: `${BASE}/orders`, label: "บอร์ดงาน", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/order`, label: "รายละเอียดงาน", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/pricing`, label: "แพ็กเกจ CMS", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/customers`, label: "ลูกค้า", group: "หลังบ้าน", access: "staff" },
+  { href: `${BASE}/login`, label: "เข้าสู่ระบบ", group: "เข้าสู่ระบบ", access: "guest" },
 ];
 
 export function nextStatus(status: OrderStatus): OrderStatus | null {

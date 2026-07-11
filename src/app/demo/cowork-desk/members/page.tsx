@@ -1,4 +1,5 @@
 import { NestMembersPage } from "@/components/demos/nestdesk/pages/MembersPage";
+import { NestStaffOnly } from "@/components/demos/nestdesk/pages/AuthPages";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <NestMembersPage />;
+  return <NestStaffOnly><NestMembersPage /></NestStaffOnly>;
 }

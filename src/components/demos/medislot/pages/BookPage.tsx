@@ -1,43 +1,38 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { BASE, DATE_CHIPS, SERVICES, SLOTS, useMediSlot } from "../store";
+import { useRouter } from "next/navigation";
+import { RequireAuth } from "@/components/demos/_shell/RequireAuth";
+import { demoId } from "@/components/demos/_shell/seed";
+import { BASE, DATE_CHIPS, formatMediDate, SERVICES, SLOTS, useMediSlot } from "../store";
 
 export function MediBookPage() {
   const { state, setState } = useMediSlot();
+  const router = useRouter();
   const service = SERVICES.find((s) => s.id === state.serviceId) ?? SERVICES[0];
 
-  function confirmBooking() {
+  function continueToConfirm() {
     if (!state.slot || !state.name.trim()) return;
-    const id = `A-${200 + state.appointments.length}`;
     const patientName = state.name.trim();
     setState((s) => ({
       ...s,
-      appointments: [
-        {
-          id,
-          patient: patientName,
-          service: service.name,
-          date: s.dateChip,
-          time: s.slot!,
-          doctor: service.doctor,
-          status: "รอตรวจ",
-        },
-        ...s.appointments,
-      ],
-      patients: s.patients.some((p) => p.name === patientName)
-        ? s.patients
-        : [...s.patients, { id: `P-${10 + s.patients.length}`, name: patientName, phone: s.phone || "-", note: "" }],
-      lastBookedId: id,
-      slot: null,
-      name: "",
-      phone: "",
+      pendingBooking: {
+        id: demoId("A", 101 + s.appointments.length, 3),
+        patient: patientName,
+        patientId: s.patients.find((p) => p.name === patientName)?.id ?? demoId("P", s.patients.length + 1, 3),
+        memberUsername: s.session.username,
+        service: service.name,
+        date: s.dateChip,
+        time: s.slot!,
+        doctor: service.doctor,
+      },
     }));
+    router.push(`${BASE}/confirm`);
   }
 
   return (
-    <div className="space-y-6">
+    <RequireAuth session={state.session} basePath={BASE} mode="member">
+      <div className="space-y-6">
       <div className="relative overflow-hidden rounded-[1.5rem]">
         <div className="relative aspect-[21/8] min-h-[140px] sm:aspect-[3/1]">
           <Image src={service.img} alt={service.name} fill priority className="object-cover" sizes="900px" />
@@ -93,7 +88,7 @@ export function MediBookPage() {
                   state.dateChip === d ? "bg-[#0F6B6B] text-white" : "bg-[#F4FAF9] text-[#0F6B6B]"
                 }`}
               >
-                {d}
+                {formatMediDate(d)}
               </button>
             ))}
           </div>
@@ -132,28 +127,21 @@ export function MediBookPage() {
             <div className="rounded-xl bg-white p-3 text-xs text-slate-600">
               <p className="font-semibold text-[#0F6B6B]">สรุป</p>
               <p className="mt-1">
-                {service.name} · {state.dateChip} · {state.slot ?? "ยังไม่เลือกเวลา"}
+                {service.name} · {formatMediDate(state.dateChip)} · {state.slot ?? "ยังไม่เลือกเวลา"}
               </p>
             </div>
             <button
               type="button"
-              onClick={confirmBooking}
+              onClick={continueToConfirm}
               disabled={!state.slot || !state.name.trim()}
               className="w-full rounded-full bg-[#0F6B6B] py-3 text-sm font-semibold text-white disabled:opacity-40"
             >
-              ยืนยันจองคิว
+              ไปหน้ายืนยันการจอง
             </button>
-            {state.lastBookedId && (
-              <p className="text-center text-sm font-medium text-emerald-700">
-                จองสำเร็จ {state.lastBookedId} —{" "}
-                <Link href={`${BASE}/appointments`} className="underline">
-                  ดูรายการนัด
-                </Link>
-              </p>
-            )}
           </div>
         </section>
       </div>
-    </div>
+      </div>
+    </RequireAuth>
   );
 }

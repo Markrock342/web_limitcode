@@ -1,4 +1,5 @@
 import { IronPackagesPage } from "@/components/demos/ironpulse/pages/PackagesPage";
+import { IronStaffOnly } from "@/components/demos/ironpulse/StaffOnly";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <IronPackagesPage />;
+  return <IronStaffOnly><IronPackagesPage /></IronStaffOnly>;
 }

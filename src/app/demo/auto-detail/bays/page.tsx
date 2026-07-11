@@ -1,4 +1,5 @@
 import { ShineBaysPage } from "@/components/demos/shineauto/pages/BaysPage";
+import { ShineStaffOnly } from "@/components/demos/shineauto/pages/AuthPages";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <ShineBaysPage />;
+  return <ShineStaffOnly><ShineBaysPage /></ShineStaffOnly>;
 }

@@ -1,4 +1,5 @@
 import { GuardQuotesPage } from "@/components/demos/guardnest/pages/QuotesPage";
+import { GuardStaffOnly } from "@/components/demos/guardnest/StaffOnly";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <GuardQuotesPage />;
+  return <GuardStaffOnly><GuardQuotesPage /></GuardStaffOnly>;
 }

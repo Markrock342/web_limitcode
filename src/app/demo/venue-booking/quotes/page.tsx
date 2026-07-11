@@ -1,4 +1,5 @@
 import { VenueQuotesPage } from "@/components/demos/venuehive/pages/QuotesPage";
+import { VenueStaffOnly } from "@/components/demos/venuehive/pages/AuthPages";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <VenueQuotesPage />;
+  return <VenueStaffOnly><VenueQuotesPage /></VenueStaffOnly>;
 }

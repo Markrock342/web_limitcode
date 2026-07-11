@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useMediSlot } from "../store";
+import { RequireAuth } from "@/components/demos/_shell/RequireAuth";
+import { BASE, useMediSlot } from "../store";
 
 export function MediPatientsPage() {
   const { state, setState } = useMediSlot();
@@ -17,7 +18,8 @@ export function MediPatientsPage() {
   }
 
   return (
-    <div className="space-y-5">
+    <RequireAuth session={state.session} basePath={BASE} mode="staff">
+      <div className="space-y-5">
       <div>
         <h1 className="font-display text-2xl font-bold text-teal-800">ผู้ป่วย (CMS)</h1>
         <p className="mt-1 text-sm text-slate-600">บันทึกโน้ตแพ้ยา / ติดตามการรักษา</p>
@@ -51,6 +53,7 @@ export function MediPatientsPage() {
           </div>
         ))}
       </div>
-    </div>
+      </div>
+    </RequireAuth>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { Plus } from "lucide-react";
+import { demoId, isoDateOffset } from "@/components/demos/_shell/seed";
 import { useNovaOracle } from "../store";
 
 export function NovaContentPage() {
@@ -11,7 +12,7 @@ export function NovaContentPage() {
     if (!title) return;
     setState((s) => ({
       ...s,
-      articles: [{ id: `a${Date.now()}`, title, status: "draft" }, ...s.articles],
+      articles: [{ id: demoId("A", s.articles.length + 1), title, status: "draft", updatedAt: isoDateOffset(0) }, ...s.articles],
       newTitle: "",
     }));
   }

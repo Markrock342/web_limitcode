@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useMediSlot } from "../store";
+import { RequireAuth } from "@/components/demos/_shell/RequireAuth";
+import { BASE, useMediSlot } from "../store";
 
 const EXTRA_BLOCKS = ["08:00–12:00", "12:00–16:00", "16:00–20:00"];
 const DOCTOR_IMG = ["/img/spa-2.jpg", "/img/spa-3.jpg", "/img/spa-4.jpg"];
@@ -31,7 +32,8 @@ export function MediSchedulePage() {
   }
 
   return (
-    <div className="space-y-5">
+    <RequireAuth session={state.session} basePath={BASE} mode="staff">
+      <div className="space-y-5">
       <div className="relative overflow-hidden rounded-[1.5rem]">
         <div className="relative h-36 sm:h-40">
           <Image src="/img/spa-4.jpg" alt="" fill className="object-cover" sizes="900px" />
@@ -90,6 +92,7 @@ export function MediSchedulePage() {
           </div>
         ))}
       </div>
-    </div>
+      </div>
+    </RequireAuth>
   );
 }

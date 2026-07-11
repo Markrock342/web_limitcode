@@ -1,15 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BASE, DATE_CHIPS, SLOTS, useShineAuto } from "../store";
 
 export function ShineBookPage() {
   const { state, setState } = useShineAuto();
+  const router = useRouter();
   const pkg = state.packages.find((p) => p.id === state.packageId) ?? state.packages[0];
   const bay = state.bays.find((b) => b.id === state.bayId) ?? state.bays[0];
 
   function confirmBooking() {
+    if (!state.session.loggedIn) {
+      router.push(`${BASE}/login`);
+      return;
+    }
     if (!state.slot || !state.customer.trim() || !state.car.trim()) return;
     const id = `J-${200 + state.jobs.length}`;
     const code = `SA-${2400 + state.jobs.length}`;
@@ -58,6 +63,7 @@ export function ShineBookPage() {
       plate: "",
       phone: "",
     }));
+    router.push(`${BASE}/confirm`);
   }
 
   return (
@@ -206,14 +212,6 @@ export function ShineBookPage() {
             >
               ยืนยันจองคิว
             </button>
-            {state.lastBookedId && (
-              <p className="text-center text-sm font-medium text-emerald-700">
-                จองสำเร็จ {state.lastBookedId} —{" "}
-                <Link href={`${BASE}/jobs`} className="underline">
-                  ดูงาน
-                </Link>
-              </p>
-            )}
           </div>
         </section>
       </div>

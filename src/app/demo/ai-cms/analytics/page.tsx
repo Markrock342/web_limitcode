@@ -1,4 +1,5 @@
 import { NovaAnalyticsPage } from "@/components/demos/novaoracle/pages/AnalyticsPage";
+import { NovaStaffOnly } from "@/components/demos/novaoracle/StaffOnly";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <NovaAnalyticsPage />;
+  return <NovaStaffOnly><NovaAnalyticsPage /></NovaStaffOnly>;
 }

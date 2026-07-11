@@ -1,4 +1,5 @@
 import { GuardJobsPage } from "@/components/demos/guardnest/pages/JobsPage";
+import { GuardStaffOnly } from "@/components/demos/guardnest/StaffOnly";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -8,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function Page() {
-  return <GuardJobsPage />;
+  return <GuardStaffOnly><GuardJobsPage /></GuardStaffOnly>;
 }

@@ -10,6 +10,7 @@ export function SmashCheckoutPage() {
   const { state, setState } = useSmashLane();
   const date = DATES[state.dateIdx];
   const total = state.selectedHours.reduce((s, h) => s + tierFor(h).price, 0);
+  const bookingName = state.session.role === "member" ? state.session.name : state.name;
 
   if (state.selectedHours.length === 0) {
     return (
@@ -31,10 +32,11 @@ export function SmashCheckoutPage() {
       hour,
       price: tierFor(hour).price,
       tier: tierFor(hour).id,
-      name: state.name,
+      name: bookingName,
       phone: state.phone,
       court: null as number | null,
       paid: true,
+      status: "confirmed" as const,
     }));
     setState((s) => ({
       ...s,
@@ -71,8 +73,9 @@ export function SmashCheckoutPage() {
         <label className="block text-sm">
           <span className="font-medium">ชื่อผู้จอง</span>
           <input
-            value={state.name}
+            value={state.session.role === "member" ? state.session.name : state.name}
             onChange={(e) => setState((s) => ({ ...s, name: e.target.value }))}
+            disabled={state.session.role === "member"}
             className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 outline-none focus:border-[#3953A4]"
           />
         </label>
@@ -93,7 +96,7 @@ export function SmashCheckoutPage() {
       <button
         type="button"
         onClick={pay}
-        disabled={!state.name.trim() || !state.phone.trim()}
+        disabled={!bookingName.trim() || !state.phone.trim()}
         className="w-full rounded-full bg-[#EB8824] py-3 text-sm font-semibold text-white disabled:opacity-40"
       >
         ชำระเงินแล้ว (เดโม)

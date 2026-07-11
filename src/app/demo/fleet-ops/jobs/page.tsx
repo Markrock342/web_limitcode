@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { BlueJobsPage } from "@/components/demos/blueroute/pages/JobsPage";
+import { BlueStaffOnly } from "@/components/demos/blueroute/StaffOnly";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -11,7 +12,7 @@ export const metadata = pageMetadata({
 export default function Page() {
   return (
     <Suspense fallback={<div className="p-6 text-sm text-slate-500">กำลังโหลดรายการงาน…</div>}>
-      <BlueJobsPage />
+      <BlueStaffOnly><BlueJobsPage /></BlueStaffOnly>
     </Suspense>
   );
 }

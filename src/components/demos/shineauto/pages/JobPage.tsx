@@ -19,6 +19,16 @@ export function ShineJobPage() {
     }));
   }
 
+  function assignBay(bayId: string) {
+    if (!job) return;
+    const bay = state.bays.find((item) => item.id === bayId);
+    if (!bay) return;
+    setState((s) => ({
+      ...s,
+      jobs: s.jobs.map((item) => (item.id === job.id ? { ...item, bayId: bay.id, bayName: bay.name } : item)),
+    }));
+  }
+
   if (!id) {
     return (
       <div className="rounded-2xl border border-[#D5DEEA] bg-white p-8 text-center">
@@ -99,6 +109,13 @@ export function ShineJobPage() {
           <p className="mt-1">{job.note}</p>
         </div>
       )}
+
+      <label className="block rounded-xl border border-[#D5DEEA] bg-white p-3 text-sm">
+        <span className="text-xs font-semibold text-[#1F3A5F]">มอบหมายเบย์</span>
+        <select value={job.bayId} onChange={(event) => assignBay(event.target.value)} className="mt-2 w-full rounded-lg border border-[#D5DEEA] bg-white px-3 py-2 text-sm text-[#142840]">
+          {state.bays.map((bay) => <option key={bay.id} value={bay.id}>{bay.name}</option>)}
+        </select>
+      </label>
 
       <div className="flex flex-wrap gap-2">
         {(["รอคิว", "กำลังทำ", "เสร็จ"] as JobStatus[]).map((s) => (

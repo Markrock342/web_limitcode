@@ -5,9 +5,9 @@ import { Icon } from "@/components/Icon";
 
 export function UseCases() {
   return (
-    <section className="scroll-mt-20 bg-gradient-to-b from-white to-brand-50/60 py-20 sm:py-24">
+    <section className="scroll-mt-20 border-y border-slate-100 py-20 sm:py-24">
       <Container>
-        <Reveal className="mx-auto max-w-2xl text-center">
+        <Reveal className="max-w-2xl">
           <SectionTag>ปัญหาที่เราแก้</SectionTag>
           <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
             ถ้าธุรกิจคุณยังทำงานแบบนี้ เราช่วยได้
@@ -17,52 +17,28 @@ export function UseCases() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 divide-y divide-slate-200 border-y border-slate-200">
           {USE_CASES.map((u, i) => (
-            <Reveal
-              key={u.title}
-              delay={(i % 3) * 80}
-              className={i === 0 ? "lg:row-span-2" : ""}
-            >
-              <article
-                className={`group flex h-full flex-col justify-between rounded-2xl border p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift ${
-                  i === 0
-                    ? "border-brand-500/40 bg-gradient-to-br from-brand-600 to-ink text-white"
-                    : "border-slate-200 bg-white"
-                }`}
-              >
-                <div>
-                  <div
-                    className={`inline-flex size-11 items-center justify-center rounded-xl transition-transform duration-300 ease-out-quart group-hover:scale-110 group-hover:-rotate-3 ${
-                      i === 0 ? "bg-white/15 text-white" : "bg-brand-50 text-brand-600"
-                    }`}
-                  >
-                    <Icon name={u.icon} className="size-6" />
+            <Reveal as="li" key={u.title} delay={(i % 3) * 60}>
+              <div className="grid gap-4 py-8 sm:grid-cols-[3rem_1fr] sm:gap-6">
+                <span className="font-display text-sm font-bold text-brand-500">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="min-w-0">
+                  <div className="flex items-start gap-3">
+                    <Icon name={u.icon} className="mt-0.5 size-5 shrink-0 text-brand-600" />
+                    <div>
+                      <h3 className="font-display text-lg font-bold text-ink">{u.title}</h3>
+                      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+                        {u.desc}
+                      </p>
+                    </div>
                   </div>
-                  <h3
-                    className={`mt-5 font-display text-lg font-bold ${
-                      i === 0 ? "text-white" : "text-ink"
-                    }`}
-                  >
-                    {u.title}
-                  </h3>
-                  <p
-                    className={`mt-2 text-sm leading-relaxed ${
-                      i === 0 ? "text-white/85" : "text-slate-600"
-                    }`}
-                  >
-                    {u.desc}
-                  </p>
                 </div>
-                {i === 0 && (
-                  <p className="mt-6 text-sm font-medium text-white/90">
-                    ดูตัวอย่างระบบที่เราออกแบบไว้ด้านล่าง ↓
-                  </p>
-                )}
-              </article>
+              </div>
             </Reveal>
           ))}
-        </div>
+        </ul>
       </Container>
     </section>
   );

@@ -1,14 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BASE, DATE_CHIPS, useVenueHive } from "../store";
 
 export function VenueBookPage() {
   const { state, setState } = useVenueHive();
+  const router = useRouter();
   const venue = state.venues.find((v) => v.id === state.venueId) ?? state.venues[0];
 
   function confirmBooking() {
+    if (!state.session.loggedIn) {
+      router.push(`${BASE}/login`);
+      return;
+    }
     if (!state.client.trim() || state.guests < 1) return;
     const id = `EV-${200 + state.events.length}`;
     const client = state.client.trim();
@@ -45,6 +50,7 @@ export function VenueBookPage() {
       phone: "",
       note: "",
     }));
+    router.push(`${BASE}/confirm`);
   }
 
   return (
@@ -165,14 +171,6 @@ export function VenueBookPage() {
             >
               ส่งคำขอจอง
             </button>
-            {state.lastBookedId && (
-              <p className="text-center text-sm font-medium text-emerald-700">
-                ส่งคำขอแล้ว {state.lastBookedId} —{" "}
-                <Link href={`${BASE}/events`} className="underline">
-                  ดูอีเวนต์
-                </Link>
-              </p>
-            )}
           </div>
         </section>
       </div>

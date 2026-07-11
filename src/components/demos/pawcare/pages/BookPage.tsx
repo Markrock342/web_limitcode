@@ -1,59 +1,30 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { RequireAuth } from "@/components/demos/_shell/RequireAuth";
+import { demoId } from "@/components/demos/_shell/seed";
 import { BASE, DATE_CHIPS, SERVICES, SLOTS, usePawCare } from "../store";
 
 export function PawBookPage() {
   const { state, setState } = usePawCare();
+  const router = useRouter();
   const service = SERVICES.find((s) => s.id === state.serviceId) ?? SERVICES[0];
 
   function confirmBooking() {
     if (!state.slot || !state.owner.trim() || !state.pet.trim()) return;
-    const id = `V-${200 + state.appointments.length}`;
+    const id = demoId("V", 101 + state.appointments.length, 3);
     const owner = state.owner.trim();
     const pet = state.pet.trim();
     setState((s) => ({
       ...s,
-      appointments: [
-        {
-          id,
-          owner,
-          pet,
-          species: "สัตว์เลี้ยง",
-          service: service.name,
-          date: s.dateChip,
-          time: s.slot!,
-          vet: service.vet,
-          status: "รอตรวจ",
-        },
-        ...s.appointments,
-      ],
-      patients: s.patients.some((p) => p.pet === pet && p.owner === owner)
-        ? s.patients
-        : [
-            ...s.patients,
-            {
-              id: `PET-${10 + s.patients.length}`,
-              pet,
-              species: "สัตว์เลี้ยง",
-              breed: "-",
-              owner,
-              phone: s.phone || "-",
-              note: "",
-              img: service.img,
-            },
-          ],
-      lastBookedId: id,
-      slot: null,
-      owner: "",
-      pet: "",
-      phone: "",
+      pendingBooking: { id, owner, pet, species: "สัตว์เลี้ยง", service: service.name, date: s.dateChip, time: s.slot!, vet: service.vet, phone: s.phone || "-" },
     }));
+    router.push(`${BASE}/confirm`);
   }
 
   return (
-    <div className="space-y-6">
+    <RequireAuth session={state.session} basePath={BASE} mode="member"><div className="space-y-6">
       <div className="relative overflow-hidden rounded-[1.5rem]">
         <div className="relative aspect-[21/8] min-h-[140px] sm:aspect-[3/1]">
           <Image src={service.img} alt={service.name} fill priority className="object-cover" sizes="900px" />
@@ -166,17 +137,9 @@ export function PawBookPage() {
             >
               ยืนยันจองคิว
             </button>
-            {state.lastBookedId && (
-              <p className="text-center text-sm font-medium text-emerald-700">
-                จองสำเร็จ {state.lastBookedId} —{" "}
-                <Link href={`${BASE}/appointments`} className="underline">
-                  ดูรายการนัด
-                </Link>
-              </p>
-            )}
           </div>
         </section>
       </div>
-    </div>
+    </div></RequireAuth>
   );
 }

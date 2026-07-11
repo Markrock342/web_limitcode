@@ -1,14 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BASE, BOOK_DATES, SLOTS, useNestDesk } from "../store";
 
 export function NestBookPage() {
   const { state, setState } = useNestDesk();
+  const router = useRouter();
   const space = state.spaces.find((s) => s.id === state.bookSpaceId) ?? state.spaces[0];
 
   function confirmBooking() {
+    if (!state.session.loggedIn) {
+      router.push(`${BASE}/login`);
+      return;
+    }
     if (!state.bookSlot || !state.bookName.trim()) return;
     const id = `NB-${200 + state.bookings.length}`;
     const memberName = state.bookName.trim();
@@ -47,6 +52,7 @@ export function NestBookPage() {
       bookSlot: null,
       bookName: "",
     }));
+    router.push(`${BASE}/confirm`);
   }
 
   return (
@@ -150,14 +156,6 @@ export function NestBookPage() {
             >
               ยืนยันจอง
             </button>
-            {state.lastBookedId && (
-              <p className="text-center text-sm font-medium text-emerald-700">
-                จองสำเร็จ {state.lastBookedId} —{" "}
-                <Link href={`${BASE}/admin`} className="underline">
-                  ดูแอดมินวันนี้
-                </Link>
-              </p>
-            )}
           </div>
         </section>
       </div>
