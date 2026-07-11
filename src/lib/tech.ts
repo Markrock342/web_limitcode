@@ -1,4 +1,5 @@
 export type TechGroup =
+  | "Languages"
   | "Frontend"
   | "Mobile"
   | "Backend"
@@ -16,21 +17,52 @@ export type TechItem = {
 };
 
 export const TECH: TechItem[] = [
+  // Languages
+  { name: "TypeScript", group: "Languages", icon: "typescript", color: "3178C6" },
+  { name: "JavaScript", group: "Languages", icon: "javascript", color: "F7DF1E" },
+  { name: "Python", group: "Languages", icon: "python", color: "3776AB" },
+  { name: "Dart", group: "Languages", icon: "dart", color: "0175C2" },
+  { name: "SQL", group: "Languages", icon: "postgresql", color: "4169E1" },
+  { name: "Go", group: "Languages", icon: "go", color: "00ADD8" },
+  // Frontend
   { name: "React", group: "Frontend", icon: "react", color: "61DAFB" },
   { name: "Next.js", group: "Frontend", icon: "nextdotjs", color: "FFFFFF" },
+  { name: "Tailwind CSS", group: "Frontend", icon: "tailwindcss", color: "06B6D4" },
+  { name: "Vite", group: "Frontend", icon: "vite", color: "646CFF" },
+  // Mobile
   { name: "React Native", group: "Mobile", icon: "react", color: "61DAFB" },
   { name: "Expo", group: "Mobile", icon: "expo", color: "FFFFFF" },
+  { name: "Flutter", group: "Mobile", icon: "flutter", color: "02569B" },
+  { name: "Capacitor", group: "Mobile", icon: "capacitor", color: "119EFF" },
+  // Backend
   { name: "Node.js", group: "Backend", icon: "nodedotjs", color: "339933" },
+  { name: "NestJS", group: "Backend", icon: "nestjs", color: "E0234E" },
+  { name: "Prisma", group: "Backend", icon: "prisma", color: "FFFFFF" },
   { name: "Firebase", group: "Backend", icon: "firebase", color: "FFCA28" },
   { name: "Cloud Functions", group: "Backend", icon: "googlecloud", color: "4285F4" },
-  { name: "Firestore", group: "Database", icon: "firebase", color: "FFCA28" },
+  // Database
+  { name: "Supabase", group: "Database", icon: "supabase", color: "3FCF8E" },
   { name: "PostgreSQL", group: "Database", icon: "postgresql", color: "4169E1" },
+  { name: "Firestore", group: "Database", icon: "firebase", color: "FFCA28" },
+  { name: "Redis", group: "Database", icon: "redis", color: "FF4438" },
+  { name: "MongoDB", group: "Database", icon: "mongodb", color: "47A248" },
+  // Hosting
   { name: "Vercel", group: "Hosting", icon: "vercel", color: "FFFFFF" },
-  { name: "Google Maps API", group: "Integration", icon: "googlemaps", color: "4285F4" },
+  { name: "Docker", group: "Hosting", icon: "docker", color: "2496ED" },
+  { name: "Cloudflare", group: "Hosting", icon: "cloudflare", color: "F38020" },
+  { name: "AWS", group: "Hosting", icon: "amazonaws", color: "FF9900" },
+  { name: "Railway", group: "Hosting", icon: "railway", color: "FFFFFF" },
+  // Integration
   { name: "LINE OA", group: "Integration", icon: "line", color: "00C300" },
+  { name: "Google Maps API", group: "Integration", icon: "googlemaps", color: "4285F4" },
+  { name: "OpenAI", group: "Integration", icon: "openai", color: "FFFFFF" },
+  { name: "Stripe", group: "Integration", icon: "stripe", color: "635BFF" },
+  { name: "Resend", group: "Integration", icon: "resend", color: "FFFFFF" },
+  { name: "Sentry", group: "Integration", icon: "sentry", color: "362D59" },
 ];
 
 export const TECH_GROUPS: TechGroup[] = [
+  "Languages",
   "Frontend",
   "Mobile",
   "Backend",
@@ -41,14 +73,50 @@ export const TECH_GROUPS: TechGroup[] = [
 
 export const GROUP_STYLE: Record<
   TechGroup,
-  { accent: string; glow: string; label: string }
+  { title: string; accent: string; glow: string; label: string }
 > = {
-  Frontend: { accent: "from-cyan-400 to-sky-500", glow: "bg-cyan-400/20", label: "text-cyan-300" },
-  Mobile: { accent: "from-violet-400 to-purple-500", glow: "bg-violet-400/20", label: "text-violet-300" },
-  Backend: { accent: "from-amber-400 to-orange-500", glow: "bg-amber-400/20", label: "text-amber-300" },
-  Database: { accent: "from-blue-400 to-indigo-500", glow: "bg-blue-400/20", label: "text-blue-300" },
-  Hosting: { accent: "from-slate-200 to-white", glow: "bg-white/10", label: "text-slate-200" },
-  Integration: { accent: "from-emerald-400 to-green-500", glow: "bg-emerald-400/20", label: "text-emerald-300" },
+  Languages: {
+    title: "ภาษา",
+    accent: "from-rose-400 to-pink-500",
+    glow: "bg-rose-400/20",
+    label: "text-rose-300",
+  },
+  Frontend: {
+    title: "Frontend",
+    accent: "from-cyan-400 to-sky-500",
+    glow: "bg-cyan-400/20",
+    label: "text-cyan-300",
+  },
+  Mobile: {
+    title: "Mobile",
+    accent: "from-violet-400 to-purple-500",
+    glow: "bg-violet-400/20",
+    label: "text-violet-300",
+  },
+  Backend: {
+    title: "Backend",
+    accent: "from-amber-400 to-orange-500",
+    glow: "bg-amber-400/20",
+    label: "text-amber-300",
+  },
+  Database: {
+    title: "Database",
+    accent: "from-blue-400 to-indigo-500",
+    glow: "bg-blue-400/20",
+    label: "text-blue-300",
+  },
+  Hosting: {
+    title: "Hosting",
+    accent: "from-slate-200 to-white",
+    glow: "bg-white/10",
+    label: "text-slate-200",
+  },
+  Integration: {
+    title: "Integration",
+    accent: "from-emerald-400 to-green-500",
+    glow: "bg-emerald-400/20",
+    label: "text-emerald-300",
+  },
 };
 
 /** Simple Icons CDN — brand SVG logos */
