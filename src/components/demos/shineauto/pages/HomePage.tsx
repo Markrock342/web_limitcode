@@ -14,7 +14,7 @@ export function ShineHomePage() {
     <div className="space-y-8">
       <section className="relative overflow-hidden rounded-[1.75rem] bg-[#1F3A5F] text-white shadow-lg">
         <div className="absolute inset-0">
-          <Image src="/img/shop-hero.jpg" alt="" fill priority className="object-cover opacity-40" sizes="(max-width:1024px) 100vw, 900px" />
+          <Image src="/img/cars/porsche.jpg" alt="" fill priority className="object-cover opacity-40" sizes="(max-width:1024px) 100vw, 900px" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#142840] via-[#1F3A5F]/90 to-[#1F3A5F]/40" />
         </div>
         <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:p-10">
@@ -99,7 +99,7 @@ export function ShineHomePage() {
 
       <section className="grid overflow-hidden rounded-[1.5rem] border border-[#D5DEEA] bg-[#E8EEF5] sm:grid-cols-[0.85fr_1.15fr]">
         <div className="relative min-h-[180px] sm:min-h-full">
-          <Image src="/img/work-2.jpg" alt="เบย์ล้างรถ" fill className="object-cover" sizes="400px" />
+          <Image src="/img/cars/polish.jpg" alt="เบย์ล้างรถ" fill className="object-cover" sizes="400px" />
         </div>
         <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
           <h2 className="font-display text-xl font-bold text-[#142840]">บอร์ดเบย์ + สมาชิก</h2>

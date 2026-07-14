@@ -21,14 +21,14 @@ export function PawAppointmentsPage() {
   }
 
   function imgFor(service: string) {
-    return SERVICES.find((s) => s.name === service)?.img ?? "/img/spa-1.jpg";
+    return SERVICES.find((s) => s.name === service)?.img ?? "/img/pets/vet-1.jpg";
   }
 
   return (
     <div className="space-y-5">
       <div className="relative overflow-hidden rounded-[1.5rem]">
         <div className="relative h-36 sm:h-44">
-          <Image src="/img/spa-3.jpg" alt="" fill className="object-cover" sizes="900px" />
+          <Image src="/img/pets/dog-2.jpg" alt="" fill className="object-cover" sizes="900px" />
           <div className="absolute inset-0 bg-[#3D3260]/70" />
           <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
             <h1 className="font-display text-2xl font-bold text-white">รายการนัดหมาย</h1>

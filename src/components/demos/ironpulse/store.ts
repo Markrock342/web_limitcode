@@ -2,7 +2,7 @@
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
 import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
-import { demoId, isoDateOffset, pick, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
+import { demoId, fmtThNumericDate, isoDateOffset, pick, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const BASE = "/demo/gym-admin";
@@ -64,7 +64,7 @@ const members: Member[] = Array.from({ length: 24 }, (_, index) => {
     name: thaiName(n + 10),
     phone: thaiPhone(n + 10),
     plan: pick(MEMBER_PLANS, n),
-    expiry: new Date(`${isoDateOffset(status === "active" ? 20 + n : -n)}T12:00:00`).toLocaleDateString("th-TH"),
+    expiry: fmtThNumericDate(isoDateOffset(status === "active" ? 20 + n : -n)),
     status,
     checkedIn: n % 5 === 0,
   };

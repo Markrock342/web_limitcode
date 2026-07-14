@@ -75,7 +75,7 @@ export const freshInitial: FreshState = {
       blurb: "ซักอบพับครบ · ส่งคืนภายใน 48 ชม.",
       price: 89,
       unit: "กก.",
-      img: "/img/food-1.jpg",
+      img: "/img/laundry/shirt.jpg",
       active: true,
     },
     {
@@ -84,7 +84,7 @@ export const freshInitial: FreshState = {
       blurb: "รับเช้า ส่งเย็นวันถัดไป",
       price: 149,
       unit: "กก.",
-      img: "/img/food-3.jpg",
+      img: "/img/laundry/machines.jpg",
       active: true,
     },
     {
@@ -93,7 +93,7 @@ export const freshInitial: FreshState = {
       blurb: "สูท เสื้อเชิ้ต ชุดทางการ",
       price: 220,
       unit: "ชิ้น",
-      img: "/img/drink-1.jpg",
+      img: "/img/laundry/suit.jpg",
       active: true,
     },
     {
@@ -102,20 +102,20 @@ export const freshInitial: FreshState = {
       blurb: "ผ้าปู ที่นอน ปลอกหมอน",
       price: 350,
       unit: "ชุด",
-      img: "/img/shop-hero.jpg",
+      img: "/img/laundry/bedding.jpg",
       active: true,
     },
-    { id: "curtain", name: "ผ้าม่านและผ้าห่ม", blurb: "ดูแลผ้าชิ้นใหญ่ พร้อมอบแห้ง", price: 480, unit: "ชุด", img: "/img/food-3.jpg", active: true },
-    { id: "sneaker", name: "สปารองเท้า", blurb: "ทำความสะอาดรองเท้าผ้าใบ", price: 320, unit: "คู่", img: "/img/drink-1.jpg", active: true },
+    { id: "curtain", name: "ผ้าม่านและผ้าห่ม", blurb: "ดูแลผ้าชิ้นใหญ่ พร้อมอบแห้ง", price: 480, unit: "ชุด", img: "/img/laundry/towels.jpg", active: true },
+    { id: "sneaker", name: "สปารองเท้า", blurb: "ทำความสะอาดรองเท้าผ้าใบ", price: 320, unit: "คู่", img: "/img/laundry/sneaker.jpg", active: true },
   ],
   orders: Array.from({ length: 24 }, (_, i) => {
     const pkg = pick([
-      { id: "wash-fold", name: "ซักพับมาตรฐาน", img: "/img/food-1.jpg" },
-      { id: "express", name: "ด่วนพิเศษ 24 ชม.", img: "/img/food-3.jpg" },
-      { id: "dryclean", name: "ซักแห้งสูท", img: "/img/drink-1.jpg" },
-      { id: "bedding", name: "ชุดเครื่องนอน", img: "/img/shop-hero.jpg" },
-      { id: "curtain", name: "ผ้าม่านและผ้าห่ม", img: "/img/food-3.jpg" },
-      { id: "sneaker", name: "สปารองเท้า", img: "/img/drink-1.jpg" },
+      { id: "wash-fold", name: "ซักพับมาตรฐาน", img: "/img/laundry/shirt.jpg" },
+      { id: "express", name: "ด่วนพิเศษ 24 ชม.", img: "/img/laundry/machines.jpg" },
+      { id: "dryclean", name: "ซักแห้งสูท", img: "/img/laundry/suit.jpg" },
+      { id: "bedding", name: "ชุดเครื่องนอน", img: "/img/laundry/bedding.jpg" },
+      { id: "curtain", name: "ผ้าม่านและผ้าห่ม", img: "/img/laundry/towels.jpg" },
+      { id: "sneaker", name: "สปารองเท้า", img: "/img/laundry/sneaker.jpg" },
     ], i);
     return { id: demoId("LF", 101 + i, 3), customer: thaiName(i), address: thaiAddress(i), packageId: pkg.id, packageName: pkg.name, pickupDate: pick(PICKUP_DATES, i), status: pick(STATUS_FLOW, i), note: i % 3 === 0 ? "แยกผ้าขาว" : "", img: pkg.img, memberUsername: i < 3 ? "member" : undefined };
   }),
@@ -129,7 +129,7 @@ export const freshInitial: FreshState = {
   editPriceId: null,
 };
 
-const store = createDemoStore("lcs-demo-freshfold-v2", freshInitial);
+const store = createDemoStore("lcs-demo-freshfold-v3", freshInitial);
 export const FreshFoldProvider = store.Provider;
 export const useFreshFold = store.useStore;
 

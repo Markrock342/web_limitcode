@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useBrightSlot } from "../store";
 
-const AVATARS = ["/img/work-1.jpg", "/img/work-2.jpg", "/img/work-3.jpg", "/img/office-hero.jpg"];
+const AVATARS = ["/img/education/tutor-f1.jpg", "/img/education/tutor-m1.jpg", "/img/education/tutor-f2.jpg", "/img/education/tutor-m2.jpg"];
 
 export function BrightStudentsPage() {
   const { state, setState } = useBrightSlot();
@@ -22,7 +22,7 @@ export function BrightStudentsPage() {
     <div className="space-y-5">
       <div className="relative overflow-hidden rounded-[1.5rem]">
         <div className="relative h-36 sm:h-40">
-          <Image src="/img/work-2.jpg" alt="" fill className="object-cover" sizes="900px" />
+          <Image src="/img/education/class-2.jpg" alt="" fill className="object-cover" sizes="900px" />
           <div className="absolute inset-0 bg-[#12283F]/72" />
           <div className="absolute inset-0 flex flex-col justify-end p-5">
             <h1 className="font-display text-2xl font-bold text-white">นักเรียน</h1>

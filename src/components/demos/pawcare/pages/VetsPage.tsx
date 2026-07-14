@@ -33,7 +33,7 @@ export function PawVetsPage() {
     <div className="space-y-5">
       <div className="relative overflow-hidden rounded-[1.5rem]">
         <div className="relative h-36 sm:h-40">
-          <Image src="/img/spa-2.jpg" alt="" fill className="object-cover" sizes="900px" />
+          <Image src="/img/pets/vet-2.jpg" alt="" fill className="object-cover" sizes="900px" />
           <div className="absolute inset-0 bg-[#3D3260]/70" />
           <div className="absolute inset-0 flex flex-col justify-end p-5">
             <h1 className="font-display text-2xl font-bold text-white">ตารางสัตวแพทย์</h1>

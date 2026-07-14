@@ -66,7 +66,7 @@ export const SERVICES = [
     mins: 30,
     vet: "สพ.ญ.มินตรา",
     price: 650,
-    img: "/img/spa-1.jpg",
+    img: "/img/pets/vet-1.jpg",
     blurb: "ตรวจร่างกาย ชั่งน้ำหนัก ปรึกษาอาการ",
   },
   {
@@ -75,7 +75,7 @@ export const SERVICES = [
     mins: 20,
     vet: "สพ.ญ.มินตรา",
     price: 450,
-    img: "/img/spa-2.jpg",
+    img: "/img/pets/vet-2.jpg",
     blurb: "วัคซีนตามอายุและแผนสุขภาพ",
   },
   {
@@ -84,7 +84,7 @@ export const SERVICES = [
     mins: 45,
     vet: "สพ.กิตติ",
     price: 1800,
-    img: "/img/spa-3.jpg",
+    img: "/img/pets/dog-2.jpg",
     blurb: "ขูดหินปูน ตรวจช่องปากสัตว์เลี้ยง",
   },
   {
@@ -93,7 +93,7 @@ export const SERVICES = [
     mins: 60,
     vet: "ทีมกรูมมิ่ง",
     price: 890,
-    img: "/img/spa-4.jpg",
+    img: "/img/pets/dog-1.jpg",
     blurb: "อาบน้ำ ตัดขน ตัดเล็บ เป่าแห้ง",
   },
 ];
@@ -178,7 +178,7 @@ export const pawInitial: PawState = {
       owner: "คุณนภา",
       phone: "081-xxx-2201",
       note: "แพ้อาหารทะเล",
-      img: "/img/spa-1.jpg",
+      img: "/img/pets/dog-1.jpg",
     },
     {
       id: "PET-02",
@@ -188,7 +188,7 @@ export const pawInitial: PawState = {
       owner: "คุณธนพล",
       phone: "089-xxx-4412",
       note: "นัดติดตามวัคซีน",
-      img: "/img/spa-2.jpg",
+      img: "/img/pets/cat-1.jpg",
     },
     {
       id: "PET-03",
@@ -198,7 +198,7 @@ export const pawInitial: PawState = {
       owner: "คุณพิมพ์",
       phone: "062-xxx-7788",
       note: "",
-      img: "/img/spa-3.jpg",
+      img: "/img/pets/dog-2.jpg",
     },
     ...Array.from({ length: 9 }, (_, i) => ({
       id: demoId("PET", i + 4, 2),
@@ -208,7 +208,10 @@ export const pawInitial: PawState = {
       owner: thaiName(i + 4),
       phone: thaiPhone(i + 4),
       note: i % 3 === 0 ? "แจ้งเตือนวัคซีนประจำปี" : "",
-      img: pick(SERVICES, i).img,
+      img:
+        i % 3 === 0
+          ? pick(["/img/pets/cat-1.jpg", "/img/pets/cat-2.jpg"], i)
+          : pick(["/img/pets/dog-1.jpg", "/img/pets/dog-2.jpg", "/img/pets/walk.jpg", "/img/pets/vet-2.jpg"], i),
     })),
   ],
   schedule: [
@@ -216,17 +219,17 @@ export const pawInitial: PawState = {
       id: "VT1",
       vet: "สพ.ญ.มินตรา",
       specialty: "อายุรกรรมสัตว์เล็ก",
-      img: "/img/spa-2.jpg",
+      img: "/img/pets/vet-1.jpg",
       blocks: ["08:00–12:00", "12:00–16:00"],
       active: true,
     },
-    { id: "VT4", vet: "สพ.ญ.ธารา", specialty: "ศัลยกรรมสัตว์เล็ก", img: "/img/spa-1.jpg", blocks: ["12:00–16:00", "16:00–20:00"], active: true },
-    { id: "VT5", vet: "สพ.ญ.ลลิตา", specialty: "ผิวหนังและภูมิแพ้", img: "/img/spa-4.jpg", blocks: ["08:00–12:00"], active: true },
+    { id: "VT4", vet: "สพ.ญ.ธารา", specialty: "ศัลยกรรมสัตว์เล็ก", img: "/img/pets/vet-2.jpg", blocks: ["12:00–16:00", "16:00–20:00"], active: true },
+    { id: "VT5", vet: "สพ.ญ.ลลิตา", specialty: "ผิวหนังและภูมิแพ้", img: "/img/pets/cat-2.jpg", blocks: ["08:00–12:00"], active: true },
     {
       id: "VT2",
       vet: "สพ.กิตติ",
       specialty: "ทันตกรรมสัตว์",
-      img: "/img/spa-3.jpg",
+      img: "/img/pets/dog-2.jpg",
       blocks: ["08:00–12:00"],
       active: true,
     },
@@ -234,7 +237,7 @@ export const pawInitial: PawState = {
       id: "VT3",
       vet: "ทีมกรูมมิ่ง",
       specialty: "อาบน้ำตัดขน",
-      img: "/img/spa-4.jpg",
+      img: "/img/pets/dog-1.jpg",
       blocks: ["08:00–12:00", "16:00–20:00"],
       active: true,
     },
@@ -250,7 +253,7 @@ export const pawInitial: PawState = {
   apptFilter: "ทั้งหมด",
 };
 
-const store = createDemoStore("lcs-demo-pawcare-v2", pawInitial);
+const store = createDemoStore("lcs-demo-pawcare-v3", pawInitial);
 export const PawCareProvider = store.Provider;
 export const usePawCare = store.useStore;
 

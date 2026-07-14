@@ -5,7 +5,7 @@ import { RequireAuth } from "@/components/demos/_shell/RequireAuth";
 import { BASE, useMediSlot } from "../store";
 
 const EXTRA_BLOCKS = ["08:00–12:00", "12:00–16:00", "16:00–20:00"];
-const DOCTOR_IMG = ["/img/spa-2.jpg", "/img/spa-3.jpg", "/img/spa-4.jpg"];
+const DOCTOR_IMG = ["/img/medical/doctor-1.jpg", "/img/medical/steth.jpg", "/img/medical/physio.jpg"];
 
 export function MediSchedulePage() {
   const { state, setState } = useMediSlot();
@@ -36,7 +36,7 @@ export function MediSchedulePage() {
       <div className="space-y-5">
       <div className="relative overflow-hidden rounded-[1.5rem]">
         <div className="relative h-36 sm:h-40">
-          <Image src="/img/spa-4.jpg" alt="" fill className="object-cover" sizes="900px" />
+          <Image src="/img/medical/hospital.jpg" alt="" fill className="object-cover" sizes="900px" />
           <div className="absolute inset-0 bg-[#0A4F4F]/70" />
           <div className="absolute inset-0 flex flex-col justify-end p-5">
             <h1 className="font-display text-2xl font-bold text-white">ตารางแพทย์</h1>

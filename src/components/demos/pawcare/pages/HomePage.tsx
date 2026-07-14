@@ -14,7 +14,7 @@ export function PawHomePage() {
     <div className="space-y-8">
       <section className="relative overflow-hidden rounded-[1.75rem] bg-[#5B4B8A] text-white shadow-lg">
         <div className="absolute inset-0">
-          <Image src="/img/spa-1.jpg" alt="" fill priority className="object-cover opacity-35" sizes="(max-width:1024px) 100vw, 900px" />
+          <Image src="/img/pets/dog-cat.jpg" alt="" fill priority className="object-cover opacity-35" sizes="(max-width:1024px) 100vw, 900px" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#3D3260] via-[#5B4B8A]/90 to-[#5B4B8A]/40" />
         </div>
         <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:p-10">
@@ -99,7 +99,7 @@ export function PawHomePage() {
 
       <section className="grid overflow-hidden rounded-[1.5rem] border border-[#E4DDF0] bg-[#F0ECF7] sm:grid-cols-[0.85fr_1.15fr]">
         <div className="relative min-h-[180px] sm:min-h-full">
-          <Image src="/img/spa-2.jpg" alt="บรรยากาศคลินิก" fill className="object-cover" sizes="400px" />
+          <Image src="/img/pets/vet-1.jpg" alt="บรรยากาศคลินิก" fill className="object-cover" sizes="400px" />
         </div>
         <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
           <h2 className="font-display text-xl font-bold text-[#3D3260]">หลังบ้านที่ทีมใช้จริง</h2>

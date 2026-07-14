@@ -15,7 +15,7 @@ export function PawAdminPage() {
     <div className="space-y-5">
       <div className="relative overflow-hidden rounded-[1.5rem]">
         <div className="relative h-36 sm:h-40">
-          <Image src="/img/spa-1.jpg" alt="" fill className="object-cover" sizes="900px" />
+          <Image src="/img/pets/walk.jpg" alt="" fill className="object-cover" sizes="900px" />
           <div className="absolute inset-0 bg-[#3D3260]/75" />
           <div className="absolute inset-0 flex flex-col justify-end p-5">
             <h1 className="font-display text-2xl font-bold text-white">แอดมินภาพรวม</h1>
@@ -44,7 +44,7 @@ export function PawAdminPage() {
       <section className="overflow-hidden rounded-2xl border border-[#E4DDF0] bg-white">
         <div className="grid sm:grid-cols-[140px_1fr]">
           <div className="relative min-h-[120px]">
-            <Image src="/img/spa-3.jpg" alt="" fill className="object-cover" sizes="140px" />
+            <Image src="/img/pets/vet-1.jpg" alt="" fill className="object-cover" sizes="140px" />
           </div>
           <div className="p-4">
             <p className="text-sm font-semibold text-[#3D3260]">สัตวแพทย์ที่เปิดรับวันนี้</p>

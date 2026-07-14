@@ -13,7 +13,7 @@ export function BrightHomePage() {
     <div className="space-y-8">
       <section className="relative overflow-hidden rounded-[1.75rem] bg-[#1B3A5C] text-white shadow-lg">
         <div className="absolute inset-0">
-          <Image src="/img/work-1.jpg" alt="" fill priority className="object-cover opacity-40" sizes="900px" />
+          <Image src="/img/education/class-1.jpg" alt="" fill priority className="object-cover opacity-40" sizes="900px" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#12283F] via-[#1B3A5C]/88 to-[#1B3A5C]/35" />
         </div>
         <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:p-10">
@@ -99,7 +99,7 @@ export function BrightHomePage() {
 
       <section className="grid overflow-hidden rounded-[1.5rem] border border-[#D8E2EC] bg-[#F7F9FC] md:grid-cols-2">
         <div className="relative min-h-[200px]">
-          <Image src="/img/work-2.jpg" alt="ห้องเรียน" fill className="object-cover" sizes="450px" />
+          <Image src="/img/education/study.jpg" alt="ห้องเรียน" fill className="object-cover" sizes="450px" />
         </div>
         <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
           <h2 className="font-display text-xl font-bold text-[#1B3A5C]">หลังบ้านสถาบัน</h2>

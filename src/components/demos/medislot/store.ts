@@ -2,7 +2,7 @@
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
 import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
-import { demoId, isoDateOffset, pick, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
+import { demoId, fmtThDate, isoDateOffset, pick, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const BASE = "/demo/clinic-admin";
@@ -58,12 +58,12 @@ export type MediState = {
 };
 
 export const SERVICES = [
-  { id: "gp", name: "ตรวจสุขภาพทั่วไป", mins: 20, doctor: "พญ.มินตรา ศรีสุข", img: "/img/spa-2.jpg", blurb: "ตรวจสุขภาพเบื้องต้น ปรึกษาอาการ" },
-  { id: "dental", name: "ทันตกรรมครบวงจร", mins: 40, doctor: "ทพ.กิตติพงศ์ วัฒนะ", img: "/img/spa-3.jpg", blurb: "ขูดหินปูน อุดฟัน ตรวจช่องปาก" },
-  { id: "physio", name: "กายภาพบำบัด", mins: 45, doctor: "กภ.อรุณี รุ่งเรือง", img: "/img/spa-4.jpg", blurb: "บำบัดกล้ามเนื้อและข้อ" },
-  { id: "vaccine", name: "วัคซีนและเวชศาสตร์เดินทาง", mins: 15, doctor: "พญ.มินตรา ศรีสุข", img: "/img/spa-1.jpg", blurb: "วัคซีนตามฤดูกาลและแผนสุขภาพ" },
-  { id: "skin", name: "ผิวหนังและเลเซอร์", mins: 30, doctor: "พญ.พิมพ์ชนก ไพศาล", img: "/img/spa-2.jpg", blurb: "ปรึกษาผิวหนัง ผื่นแพ้ และการดูแลผิว" },
-  { id: "child", name: "ตรวจสุขภาพเด็ก", mins: 30, doctor: "พญ.วรินทร์ทิพย์ แสงทอง", img: "/img/spa-4.jpg", blurb: "ติดตามพัฒนาการและสุขภาพเด็ก" },
+  { id: "gp", name: "ตรวจสุขภาพทั่วไป", mins: 20, doctor: "พญ.มินตรา ศรีสุข", img: "/img/medical/doctor-1.jpg", blurb: "ตรวจสุขภาพเบื้องต้น ปรึกษาอาการ" },
+  { id: "dental", name: "ทันตกรรมครบวงจร", mins: 40, doctor: "ทพ.กิตติพงศ์ วัฒนะ", img: "/img/medical/dental.jpg", blurb: "ขูดหินปูน อุดฟัน ตรวจช่องปาก" },
+  { id: "physio", name: "กายภาพบำบัด", mins: 45, doctor: "กภ.อรุณี รุ่งเรือง", img: "/img/medical/physio.jpg", blurb: "บำบัดกล้ามเนื้อและข้อ" },
+  { id: "vaccine", name: "วัคซีนและเวชศาสตร์เดินทาง", mins: 15, doctor: "พญ.มินตรา ศรีสุข", img: "/img/medical/steth.jpg", blurb: "วัคซีนตามฤดูกาลและแผนสุขภาพ" },
+  { id: "skin", name: "ผิวหนังและเลเซอร์", mins: 30, doctor: "พญ.พิมพ์ชนก ไพศาล", img: "/img/medical/hospital.jpg", blurb: "ปรึกษาผิวหนัง ผื่นแพ้ และการดูแลผิว" },
+  { id: "child", name: "ตรวจสุขภาพเด็ก", mins: 30, doctor: "พญ.วรินทร์ทิพย์ แสงทอง", img: "/img/medical/doctor-1.jpg", blurb: "ติดตามพัฒนาการและสุขภาพเด็ก" },
 ];
 
 export const DATE_CHIPS = [isoDateOffset(0), isoDateOffset(1), isoDateOffset(2), isoDateOffset(3), isoDateOffset(4)];
@@ -77,7 +77,7 @@ export const STATUS_STYLE: Record<ApptStatus, string> = {
 };
 
 export function formatMediDate(date: string) {
-  return new Date(`${date}T12:00:00`).toLocaleDateString("th-TH", { weekday: "short", day: "numeric", month: "short" });
+  return fmtThDate(date);
 }
 
 const PATIENT_NAMES = [

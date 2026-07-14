@@ -11,7 +11,7 @@ export function NestSpacesPage() {
     <div className="space-y-5">
       <div className="relative overflow-hidden rounded-[1.5rem]">
         <div className="relative h-36 sm:h-44">
-          <Image src="/img/work-1.jpg" alt="" fill className="object-cover" sizes="900px" />
+          <Image src="/img/cowork/office-1.jpg" alt="" fill className="object-cover" sizes="900px" />
           <div className="absolute inset-0 bg-[#2A364C]/70" />
           <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
             <h1 className="font-display text-2xl font-bold text-white">แคตตาล็อกพื้นที่</h1>

@@ -14,7 +14,7 @@ export function VenueHomePage() {
     <div className="space-y-8">
       <section className="relative overflow-hidden rounded-[1.75rem] bg-[#6B3F3F] text-white shadow-lg">
         <div className="absolute inset-0">
-          <Image src="/img/resto-hero.jpg" alt="" fill priority className="object-cover opacity-40" sizes="(max-width:1024px) 100vw, 900px" />
+          <Image src="/img/venue/ballroom.jpg" alt="" fill priority className="object-cover opacity-40" sizes="(max-width:1024px) 100vw, 900px" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#4A2A2A] via-[#6B3F3F]/88 to-[#6B3F3F]/35" />
         </div>
         <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:p-10">
@@ -99,7 +99,7 @@ export function VenueHomePage() {
 
       <section className="grid overflow-hidden rounded-[1.5rem] border border-[#E8D5D5] bg-[#F6EEEE] sm:grid-cols-[0.85fr_1.15fr]">
         <div className="relative min-h-[180px] sm:min-h-full">
-          <Image src="/img/food-2.jpg" alt="บรรยากาศงาน" fill className="object-cover" sizes="400px" />
+          <Image src="/img/venue/dinner.jpg" alt="บรรยากาศงาน" fill className="object-cover" sizes="400px" />
         </div>
         <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
           <h2 className="font-display text-xl font-bold text-[#4A2A2A]">หลังบ้านอีเวนต์</h2>

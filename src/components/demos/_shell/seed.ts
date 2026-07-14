@@ -67,12 +67,19 @@ export function isoDateOffset(days: number) {
   return d.toISOString().slice(0, 10);
 }
 
+// Deterministic Thai date formatting — Intl/toLocaleDateString output differs
+// between Node (SSR) and browsers, which breaks hydration.
+const TH_WEEKDAYS = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
+const TH_MONTHS = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
+
 export function fmtThDate(dateStr: string) {
-  return new Date(dateStr + "T12:00:00").toLocaleDateString("th-TH", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-  });
+  const d = new Date(dateStr + "T12:00:00");
+  return `${TH_WEEKDAYS[d.getDay()]} ${d.getDate()} ${TH_MONTHS[d.getMonth()]}`;
+}
+
+export function fmtThNumericDate(dateStr: string) {
+  const d = new Date(dateStr + "T12:00:00");
+  return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear() + 543}`;
 }
 
 export function demoId(prefix: string, n: number, pad = 4) {

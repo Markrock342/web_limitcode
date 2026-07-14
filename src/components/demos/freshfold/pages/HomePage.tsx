@@ -16,7 +16,7 @@ export function FreshHomePage() {
       <section className="relative overflow-hidden rounded-[1.75rem] bg-[#2C5F4F] text-white shadow-lg">
         <div className="absolute inset-0">
           <Image
-            src="/img/shop-hero.jpg"
+            src="/img/laundry/machines.jpg"
             alt=""
             fill
             priority
@@ -109,7 +109,7 @@ export function FreshHomePage() {
 
       <section className="grid overflow-hidden rounded-[1.5rem] border border-[#C8DED6] bg-[#F4FAF7] sm:grid-cols-[0.85fr_1.15fr]">
         <div className="relative min-h-[180px] sm:min-h-full">
-          <Image src="/img/office-hero.jpg" alt="หลังบ้าน FreshFold" fill className="object-cover" sizes="400px" />
+          <Image src="/img/laundry/towels.jpg" alt="หลังบ้าน FreshFold" fill className="object-cover" sizes="400px" />
         </div>
         <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
           <h2 className="font-display text-xl font-bold text-[#1A3D34]">หลังบ้านที่ทีมซักใช้จริง</h2>

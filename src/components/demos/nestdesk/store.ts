@@ -69,7 +69,7 @@ export const nestInitial: NestState = {
       capacity: 1,
       price: 350,
       unit: "วัน",
-      img: "/img/work-1.jpg",
+      img: "/img/work-2.jpg",
       available: 8,
       total: 12,
       blurb: "โต๊ะร่วม พลังงานสูง ใกล้กาแฟ",
@@ -81,7 +81,7 @@ export const nestInitial: NestState = {
       capacity: 1,
       price: 420,
       unit: "วัน",
-      img: "/img/work-2.jpg",
+      img: "/img/work-1.jpg",
       available: 4,
       total: 8,
       blurb: "โฟกัสงานลึก ไม่มีเสียงคุย",
@@ -93,7 +93,7 @@ export const nestInitial: NestState = {
       capacity: 4,
       price: 800,
       unit: "ช่วง",
-      img: "/img/work-3.jpg",
+      img: "/img/cowork/office-2.jpg",
       available: 2,
       total: 3,
       blurb: "จอ TV + ไวท์บอร์ด · 4 ที่นั่ง",
@@ -105,20 +105,20 @@ export const nestInitial: NestState = {
       capacity: 10,
       price: 1500,
       unit: "ช่วง",
-      img: "/img/office-hero.jpg",
+      img: "/img/cowork/team.jpg",
       available: 1,
       total: 2,
       blurb: "ห้องใหญ่ พร้อมโปรเจคเตอร์",
     },
-    { id: "focus-pod", name: "Focus Pod", type: "hotdesk", capacity: 1, price: 290, unit: "วัน", img: "/img/work-2.jpg", available: 5, total: 6, blurb: "มุมส่วนตัว สำหรับงานที่ต้องการสมาธิ" },
-    { id: "mt-creative", name: "Creative Room", type: "meeting", capacity: 6, price: 1100, unit: "ช่วง", img: "/img/work-3.jpg", available: 2, total: 2, blurb: "กระดานเขียนเต็มผนัง และชุดประชุม" },
+    { id: "focus-pod", name: "Focus Pod", type: "hotdesk", capacity: 1, price: 290, unit: "วัน", img: "/img/work-3.jpg", available: 5, total: 6, blurb: "มุมส่วนตัว สำหรับงานที่ต้องการสมาธิ" },
+    { id: "mt-creative", name: "Creative Room", type: "meeting", capacity: 6, price: 1100, unit: "ช่วง", img: "/img/cowork/meeting.jpg", available: 2, total: 2, blurb: "กระดานเขียนเต็มผนัง และชุดประชุม" },
   ],
   bookings: Array.from({ length: 20 }, (_, i) => {
     const space = pick([
-      { id: "hd-open", name: "Hot Desk โซนเปิด", type: "hotdesk" as const, img: "/img/work-1.jpg" },
-      { id: "hd-quiet", name: "Hot Desk โซนเงียบ", type: "hotdesk" as const, img: "/img/work-2.jpg" },
-      { id: "mt-small", name: "ห้องประชุม A", type: "meeting" as const, img: "/img/work-3.jpg" },
-      { id: "mt-large", name: "ห้องประชุม B", type: "meeting" as const, img: "/img/office-hero.jpg" },
+      { id: "hd-open", name: "Hot Desk โซนเปิด", type: "hotdesk" as const, img: "/img/work-2.jpg" },
+      { id: "hd-quiet", name: "Hot Desk โซนเงียบ", type: "hotdesk" as const, img: "/img/work-1.jpg" },
+      { id: "mt-small", name: "ห้องประชุม A", type: "meeting" as const, img: "/img/cowork/office-2.jpg" },
+      { id: "mt-large", name: "ห้องประชุม B", type: "meeting" as const, img: "/img/cowork/team.jpg" },
     ], i);
     return { id: `NB-${101 + i}`, member: thaiName(i + 7), spaceId: space.id, spaceName: space.name, date: pick(BOOK_DATES, i), slot: pick(SLOTS, i), type: space.type, img: space.img };
   }),
@@ -136,7 +136,7 @@ export const nestInitial: NestState = {
   query: "",
 };
 
-const store = createDemoStore("lcs-demo-nestdesk-v2", nestInitial);
+const store = createDemoStore("lcs-demo-nestdesk-v3", nestInitial);
 export const NestDeskProvider = store.Provider;
 export const useNestDesk = store.useStore;
 

@@ -46,7 +46,7 @@ export function BrightBookPage() {
       <div className="relative overflow-hidden rounded-3xl">
         <div className="relative aspect-21/8 min-h-[140px]">
           <Image
-            src={selectedTutor?.img ?? "/img/work-1.jpg"}
+            src={selectedTutor?.img ?? "/img/education/tutor-f1.jpg"}
             alt=""
             fill
             priority

@@ -89,7 +89,7 @@ export const shineInitial: ShineState = {
       mins: 45,
       price: 490,
       blurb: "ล้างภายนอก + ดูดฝุ่นเบื้องต้น",
-      img: "/img/prod-1.jpg",
+      img: "/img/cars/polish.jpg",
     },
     {
       id: "premium",
@@ -97,7 +97,7 @@ export const shineInitial: ShineState = {
       mins: 120,
       price: 1890,
       blurb: "ล้างขัดเคลือบ ภายในลึก",
-      img: "/img/prod-2.jpg",
+      img: "/img/cars/porsche.jpg",
     },
     {
       id: "ceramic",
@@ -105,7 +105,7 @@ export const shineInitial: ShineState = {
       mins: 180,
       price: 4500,
       blurb: "เคลือบเซรามิก ปกป้องสีรถ",
-      img: "/img/prod-3.jpg",
+      img: "/img/cars/classic.jpg",
     },
     {
       id: "interior",
@@ -113,25 +113,25 @@ export const shineInitial: ShineState = {
       mins: 90,
       price: 1290,
       blurb: "ทำความสะอาดภายในลึก พรมเบาะ",
-      img: "/img/prod-4.jpg",
+      img: "/img/cars/interior.jpg",
     },
-    { id: "wash-wax", name: "Wash & Wax", mins: 75, price: 890, blurb: "ล้างเคลือบเงา สำหรับการดูแลรายเดือน", img: "/img/prod-5.jpg" },
-    { id: "suv-reset", name: "SUV Reset", mins: 150, price: 2390, blurb: "ฟื้นฟูภายในและภายนอกรถ SUV", img: "/img/prod-6.jpg" },
+    { id: "wash-wax", name: "Wash & Wax", mins: 75, price: 890, blurb: "ล้างเคลือบเงา สำหรับการดูแลรายเดือน", img: "/img/cars/mustang.jpg" },
+    { id: "suv-reset", name: "SUV Reset", mins: 150, price: 2390, blurb: "ฟื้นฟูภายในและภายนอกรถ SUV", img: "/img/cars/car-red.jpg" },
   ],
   bays: [
-    { id: "bay-1", name: "Bay 1 · Express", slots: ["09:00", "10:00", "11:00", "14:00"], busy: true, img: "/img/work-1.jpg" },
-    { id: "bay-2", name: "Bay 2 · Detail", slots: ["09:00", "13:00", "15:00", "17:00"], busy: true, img: "/img/work-2.jpg" },
-    { id: "bay-3", name: "Bay 3 · Ceramic", slots: ["10:00", "14:00"], busy: false, img: "/img/work-3.jpg" },
-    { id: "bay-4", name: "Bay 4 · Interior", slots: ["11:00", "13:00", "16:00"], busy: false, img: "/img/shop-hero.jpg" },
-    { id: "bay-5", name: "Bay 5 · Wax", slots: ["09:00", "12:00", "15:00"], busy: true, img: "/img/work-1.jpg" },
-    { id: "bay-6", name: "Bay 6 · SUV", slots: ["10:00", "13:00", "16:00"], busy: false, img: "/img/work-2.jpg" },
+    { id: "bay-1", name: "Bay 1 · Express", slots: ["09:00", "10:00", "11:00", "14:00"], busy: true, img: "/img/cars/polish.jpg" },
+    { id: "bay-2", name: "Bay 2 · Detail", slots: ["09:00", "13:00", "15:00", "17:00"], busy: true, img: "/img/cars/porsche.jpg" },
+    { id: "bay-3", name: "Bay 3 · Ceramic", slots: ["10:00", "14:00"], busy: false, img: "/img/cars/classic.jpg" },
+    { id: "bay-4", name: "Bay 4 · Interior", slots: ["11:00", "13:00", "16:00"], busy: false, img: "/img/cars/interior.jpg" },
+    { id: "bay-5", name: "Bay 5 · Wax", slots: ["09:00", "12:00", "15:00"], busy: true, img: "/img/cars/mustang.jpg" },
+    { id: "bay-6", name: "Bay 6 · SUV", slots: ["10:00", "13:00", "16:00"], busy: false, img: "/img/cars/car-red.jpg" },
   ],
   jobs: Array.from({ length: 20 }, (_, i) => {
-    const pkg = pick([{ id: "express", name: "Express Wash", img: "/img/prod-1.jpg" }, { id: "premium", name: "Premium Detail", img: "/img/prod-2.jpg" }, { id: "ceramic", name: "Ceramic Coat", img: "/img/prod-3.jpg" }, { id: "interior", name: "Interior Deep", img: "/img/prod-4.jpg" }], i);
+    const pkg = pick([{ id: "express", name: "Express Wash", img: "/img/cars/polish.jpg" }, { id: "premium", name: "Premium Detail", img: "/img/cars/porsche.jpg" }, { id: "ceramic", name: "Ceramic Coat", img: "/img/cars/classic.jpg" }, { id: "interior", name: "Interior Deep", img: "/img/cars/interior.jpg" }], i);
     const bay = pick([{ id: "bay-1", name: "Bay 1 · Express" }, { id: "bay-2", name: "Bay 2 · Detail" }, { id: "bay-3", name: "Bay 3 · Ceramic" }, { id: "bay-4", name: "Bay 4 · Interior" }], i);
     return { id: `J-${101 + i}`, code: `SA-${2401 + i}`, customer: thaiName(i), car: pick(["Honda Civic", "Toyota Yaris", "Mazda CX-5", "BMW 320d", "BYD Atto 3"], i), plate: `${i + 1}กก-${String(1234 + i * 31).slice(-4)}`, packageId: pkg.id, packageName: pkg.name, bayId: bay.id, bayName: bay.name, date: i < 14 ? "วันนี้" : "พรุ่งนี้", time: pick(SLOTS, i), status: pick<JobStatus>(["รอคิว", "กำลังทำ", "เสร็จ"], i), img: pkg.img, note: i % 4 === 0 ? "ตรวจรอยขีดข่วนก่อนเริ่มงาน" : "" };
   }),
-  members: Array.from({ length: 10 }, (_, i) => ({ id: `M-${String(i + 1).padStart(2, "0")}`, name: thaiName(i), phone: thaiPhone(i), points: 250 + i * 430, tier: pick(["Member", "Silver", "Gold", "Platinum"], i), visits: 1 + i * 2, img: pick(["/img/prod-5.jpg", "/img/prod-6.jpg", "/img/work-1.jpg"], i) })),
+  members: Array.from({ length: 10 }, (_, i) => ({ id: `M-${String(i + 1).padStart(2, "0")}`, name: thaiName(i), phone: thaiPhone(i), points: 250 + i * 430, tier: pick(["Member", "Silver", "Gold", "Platinum"], i), visits: 1 + i * 2, img: pick(["/img/cars/cabin.jpg", "/img/cars/cockpit.jpg", "/img/cars/interior.jpg"], i) })),
   packageId: "premium",
   bayId: "bay-2",
   dateChip: "วันนี้",
@@ -144,7 +144,7 @@ export const shineInitial: ShineState = {
   jobFilter: "ทั้งหมด",
 };
 
-const store = createDemoStore("lcs-demo-shineauto-v2", shineInitial);
+const store = createDemoStore("lcs-demo-shineauto-v3", shineInitial);
 export const ShineAutoProvider = store.Provider;
 export const useShineAuto = store.useStore;
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useStayNest } from "../store";
+import { newHkId, useStayNest } from "../store";
 
 export function StayFrontDeskPage() {
   const { state, setState } = useStayNest();
@@ -19,7 +19,7 @@ export function StayFrontDeskPage() {
   function checkOut(id: string) {
     const stay = state.stays.find((s) => s.id === id);
     if (!stay) return;
-    const hkId = `H-${Date.now()}`;
+    const hkId = newHkId();
     setState((s) => ({
       ...s,
       stays: s.stays.filter((x) => x.id !== id),

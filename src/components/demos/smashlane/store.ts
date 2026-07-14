@@ -2,7 +2,7 @@
 
 import { createDemoStore } from "@/components/demos/_shell/createDemoStore";
 import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoAuth";
-import { thaiName, thaiPhone } from "@/components/demos/_shell/seed";
+import { fmtThDate, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
 export const COURTS = 12;
@@ -48,11 +48,7 @@ export function tierFor(hour: number) {
 }
 
 export function fmtDay(dateStr: string) {
-  return new Date(dateStr + "T12:00:00").toLocaleDateString("th-TH", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-  });
+  return fmtThDate(dateStr);
 }
 
 function seedBookings(date: string): Booking[] {

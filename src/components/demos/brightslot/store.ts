@@ -39,14 +39,14 @@ export type BrightState = {
 export const SUBJECTS = ["คณิตศาสตร์", "ภาษาอังกฤษ", "วิทยาศาสตร์", "ภาษาไทย"];
 
 export const TUTORS: Tutor[] = [
-  { id: "t1", name: "ครูเอิร์ธ", subject: "คณิตศาสตร์", load: 70, img: "/img/work-1.jpg", bio: "ติวเข้ม ม.ต้น–ม.ปลาย" },
-  { id: "t2", name: "ครูมายด์", subject: "ภาษาอังกฤษ", load: 45, img: "/img/work-2.jpg", bio: "Speaking + Grammar" },
-  { id: "t3", name: "ครูพีช", subject: "วิทยาศาสตร์", load: 85, img: "/img/work-3.jpg", bio: "ฟิสิกส์–เคมี ปูพื้นฐาน" },
-  { id: "t4", name: "ครูแนน", subject: "ภาษาไทย", load: 30, img: "/img/office-hero.jpg", bio: "วรรณกรรม + ข้อสอบเข้า" },
-  { id: "t5", name: "ครูฟ้า", subject: "คณิตศาสตร์", load: 55, img: "/img/work-2.jpg", bio: "โจทย์ประยุกต์และสอบเข้า" },
-  { id: "t6", name: "ครูนนท์", subject: "ภาษาอังกฤษ", load: 62, img: "/img/work-3.jpg", bio: "Writing + IELTS foundation" },
-  { id: "t7", name: "ครูลูกแก้ว", subject: "วิทยาศาสตร์", load: 48, img: "/img/work-1.jpg", bio: "ชีววิทยาและเคมี" },
-  { id: "t8", name: "ครูไอซ์", subject: "ภาษาไทย", load: 76, img: "/img/office-hero.jpg", bio: "อ่านจับใจความและ TGAT" },
+  { id: "t1", name: "ครูเอิร์ธ", subject: "คณิตศาสตร์", load: 70, img: "/img/education/tutor-f1.jpg", bio: "ติวเข้ม ม.ต้น–ม.ปลาย" },
+  { id: "t2", name: "ครูมายด์", subject: "ภาษาอังกฤษ", load: 45, img: "/img/education/tutor-m1.jpg", bio: "Speaking + Grammar" },
+  { id: "t3", name: "ครูพีช", subject: "วิทยาศาสตร์", load: 85, img: "/img/education/tutor-f2.jpg", bio: "ฟิสิกส์–เคมี ปูพื้นฐาน" },
+  { id: "t4", name: "ครูแนน", subject: "ภาษาไทย", load: 30, img: "/img/education/tutor-m2.jpg", bio: "วรรณกรรม + ข้อสอบเข้า" },
+  { id: "t5", name: "ครูฟ้า", subject: "คณิตศาสตร์", load: 55, img: "/img/education/tutor-m1.jpg", bio: "โจทย์ประยุกต์และสอบเข้า" },
+  { id: "t6", name: "ครูนนท์", subject: "ภาษาอังกฤษ", load: 62, img: "/img/education/tutor-f2.jpg", bio: "Writing + IELTS foundation" },
+  { id: "t7", name: "ครูลูกแก้ว", subject: "วิทยาศาสตร์", load: 48, img: "/img/education/tutor-m2.jpg", bio: "ชีววิทยาและเคมี" },
+  { id: "t8", name: "ครูไอซ์", subject: "ภาษาไทย", load: 76, img: "/img/education/tutor-f1.jpg", bio: "อ่านจับใจความและ TGAT" },
 ];
 
 export const SLOTS = ["จ 16:00", "อ 17:00", "พ 16:00", "พฤ 18:00", "ศ 17:00", "ส 10:00"];

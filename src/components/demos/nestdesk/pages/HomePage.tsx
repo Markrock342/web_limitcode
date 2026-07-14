@@ -16,7 +16,7 @@ export function NestHomePage() {
       <section className="relative overflow-hidden rounded-[1.75rem] bg-[#3D4F6F] text-white shadow-lg">
         <div className="absolute inset-0">
           <Image
-            src="/img/office-hero.jpg"
+            src="/img/cowork/office-1.jpg"
             alt=""
             fill
             priority
@@ -113,7 +113,7 @@ export function NestHomePage() {
 
       <section className="grid overflow-hidden rounded-[1.5rem] border border-[#D5DCE8] bg-[#F5F7FA] sm:grid-cols-[0.85fr_1.15fr]">
         <div className="relative min-h-[180px] sm:min-h-full">
-          <Image src="/img/work-2.jpg" alt="บรรยากาศ NestDesk" fill className="object-cover" sizes="400px" />
+          <Image src="/img/cowork/meeting.jpg" alt="บรรยากาศ NestDesk" fill className="object-cover" sizes="400px" />
         </div>
         <div className="flex flex-col justify-center gap-4 p-6 sm:p-8">
           <h2 className="font-display text-xl font-bold text-[#2A364C]">สมาชิกและหลังบ้าน</h2>

@@ -25,7 +25,63 @@ export type StayNestState = {
   hk: HkTask[];
   guests: Guest[];
   toast: string | null;
+  formRoomType: string | null;
 };
+
+export type RoomTypeInfo = {
+  key: string;
+  name: string;
+  desc: string;
+  rate: number;
+  size: string;
+  img: string;
+  perks: string[];
+};
+
+export const ROOM_TYPES: RoomTypeInfo[] = [
+  {
+    key: "Standard",
+    name: "Standard",
+    desc: "ห้องอบอุ่นขนาดกำลังดี เตียงควีนพร้อมมุมโซฟา",
+    rate: 1800,
+    size: "28 ตร.ม.",
+    img: "/img/hotel/room-standard.jpg",
+    perks: ["เตียงควีน", "วิวสวน", "อาหารเช้า 2 ที่"],
+  },
+  {
+    key: "Deluxe",
+    name: "Deluxe",
+    desc: "เปิดประตูสู่สวนส่วนตัว โทนไม้อบอุ่นทั้งห้อง",
+    rate: 2600,
+    size: "36 ตร.ม.",
+    img: "/img/hotel/room-deluxe.jpg",
+    perks: ["เตียงคิง", "ระเบียงสวน", "เสื้อคลุม + มินิบาร์"],
+  },
+  {
+    key: "Suite",
+    name: "Executive Suite",
+    desc: "สวีทชั้นบนสุด แยกส่วนนั่งเล่น กระจกรับวิวเต็มผนัง",
+    rate: 3900,
+    size: "54 ตร.ม.",
+    img: "/img/hotel/room-suite.jpg",
+    perks: ["ห้องนั่งเล่นแยก", "อ่างอาบน้ำวิว", "เลานจ์เช็คอิน"],
+  },
+  {
+    key: "Villa",
+    name: "Pool Villa",
+    desc: "วิลล่าริมสระพร้อมเดย์เบด ความเป็นส่วนตัวเต็มหลัง",
+    rate: 5500,
+    size: "82 ตร.ม.",
+    img: "/img/hotel/villa.jpg",
+    perks: ["สระส่วนตัว", "เดย์เบดริมน้ำ", "รถกอล์ฟรับส่ง"],
+  },
+];
+
+export const FACILITIES = [
+  { img: "/img/hotel/pool.jpg", name: "สระอินฟินิตี้", desc: "เปิด 07:00–21:00 พร้อมพูลบาร์" },
+  { img: "/img/hotel/breakfast.jpg", name: "ห้องอาหารเช้า", desc: "บุฟเฟ่ต์ 06:30–10:30 ทุกวัน" },
+  { img: "/img/hotel/lobby.jpg", name: "ล็อบบี้ & เลานจ์", desc: "เช็คอิน 24 ชม. เครื่องดื่มต้อนรับ" },
+];
 
 export const ROOM_CYCLE: RoomStatus[] = ["ว่าง", "มีแขก", "สกปรก", "ซ่อมบำรุง"];
 
@@ -59,6 +115,8 @@ export const stayInitial: StayNestState = {
     { id: "r6", number: "305", type: "Suite", status: "ซ่อมบำรุง" },
     { id: "r7", number: "405", type: "Deluxe", status: "ว่าง" },
     { id: "r8", number: "410", type: "Standard", status: "มีแขก" },
+    { id: "v1", number: "V01", type: "Pool Villa", status: "มีแขก" },
+    { id: "v2", number: "V02", type: "Pool Villa", status: "ว่าง" },
     ...Array.from({ length: 12 }, (_, i) => ({
       id: `r${i + 9}`,
       number: `${5 + Math.floor(i / 4)}${String((i % 4) + 1).padStart(2, "0")}`,
@@ -104,16 +162,25 @@ export const stayInitial: StayNestState = {
     })),
   ],
   toast: null,
+  formRoomType: null,
 };
 
-const store = createDemoStore("lcs-demo-staynest-v2", stayInitial);
+export function newBookingId() {
+  return `B-${Date.now().toString().slice(-5)}`;
+}
+
+export function newHkId() {
+  return `H-${Date.now()}`;
+}
+
+const store = createDemoStore("lcs-demo-staynest-v3", stayInitial);
 export const StayNestProvider = store.Provider;
 export const useStayNest = store.useStore;
 
 export const stayBrand: DemoBrandMeta = {
   slug: "hotel-pms",
-  name: "StayNest Hotel",
-  subtitle: "PMS Front Desk + ห้องพัก",
+  name: "StayNest Hotel & Resort",
+  subtitle: "จองตรง + PMS Front Desk",
   accent: "bg-slate-900",
   accentBg: "bg-amber-50",
   accentText: "text-amber-900",
