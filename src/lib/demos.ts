@@ -28,20 +28,20 @@ export type Demo = {
 export const SYSTEM_DEMOS: Demo[] = [
   {
     slug: "erp",
-    name: "LCS ERP Sales Desk",
+    name: "LCS Enterprise ERP",
     category: "ระบบหลังบ้าน",
     icon: "dashboard",
     tagline: "ERP สำหรับธุรกิจนำเข้า–จัดจำหน่าย B2B",
     description:
-      "ตัวอย่าง ERP Sales Desk ที่จัด Pipeline, Forecast, งานติดตาม และจุดส่งต่อ Sales Order / Shipment / Invoice ไว้ในหน้าทำงานเดียว",
-    preview: "/showcase/dashboard.jpg",
+      "เดโม ERP ตัวเต็มสำหรับธุรกิจนำเข้าและจัดจำหน่าย B2B ครบตั้งแต่ CRM, Sourcing, Sales, Purchasing, Import, Landed Cost, Inventory, Finance จนถึง Customer Portal",
+    preview: "/showcase/erp.jpg",
     swatch: "from-[#071a34] via-[#334155] to-[#94a3b8]",
     accentText: "text-[#0f2744]",
-    tags: ["ERP", "CRM", "B2B Sales"],
+    tags: ["ERP", "Import", "B2B CRM"],
     features: [
-      "Sales Desk แบบ ledger แทน KPI cards หลากสี",
-      "Pipeline และ forecast ที่เรียงตามสิ่งที่ต้องตัดสินใจ",
-      "เชื่อมมุมมอง Sales, Shipment และ Invoice",
+      "เข้าสู่ระบบเดโมและเลือก Role ผู้ใช้งานได้",
+      "เอกสาร CRM → Quotation → SO → PO → Shipment เชื่อมกันทั้งสาย",
+      "Landed Cost, คลังสินค้า, Credit Control และรายงานกำไร",
     ],
   },
   {
