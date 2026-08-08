@@ -21,11 +21,10 @@ export function Topbar({
 
   return (
     <header className="sticky top-0 z-40 flex h-14 items-center gap-3 border-b border-slate-200 bg-white/95 px-4 backdrop-blur">
-      <button onClick={onMenu} className="btn-ghost !p-2 lg:hidden">
+      <button type="button" aria-label="เปิดเมนูหลัก" onClick={onMenu} className="btn-ghost shrink-0 !p-2 lg:hidden">
         <Menu size={18} />
       </button>
 
-      {/* global search → command palette */}
       <button
         onClick={onOpenPalette}
         className="hidden w-72 items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-left text-[13px] text-slate-400 transition-colors hover:border-brand-300 sm:flex"
@@ -36,12 +35,14 @@ export function Topbar({
           ⌘K
         </kbd>
       </button>
-      <button onClick={onOpenPalette} className="btn-ghost !p-2 sm:hidden">
+      <button type="button" aria-label="ค้นหา" onClick={onOpenPalette} className="btn-ghost shrink-0 !p-2 sm:hidden">
         <Search size={17} />
       </button>
 
-      <div className="ml-auto flex items-center gap-2">
-        <DemoBadge />
+      <div className="ml-auto flex min-w-0 items-center gap-1.5 sm:gap-2">
+        <div className="hidden md:block">
+          <DemoBadge />
+        </div>
 
         {/* branch */}
         <select
@@ -69,7 +70,7 @@ export function Topbar({
 
         {/* currency */}
         <select
-          className="input w-auto !py-1.5 font-display text-xs"
+          className="input hidden w-[4.5rem] shrink-0 !py-1.5 font-display text-xs sm:block"
           value={erp.currency}
           onChange={(e) => erp.setCurrency(e.target.value as Currency)}
           title="สกุลเงินแสดงผล"
@@ -80,7 +81,7 @@ export function Topbar({
         </select>
 
         {/* notifications */}
-        <button onClick={() => setNotifOpen(true)} className="btn-ghost relative !p-2">
+        <button type="button" aria-label={`เปิดการแจ้งเตือน${unread > 0 ? ` (${unread} รายการยังไม่อ่าน)` : ""}`} onClick={() => setNotifOpen(true)} className="btn-ghost relative shrink-0 !p-2">
           <Bell size={17} />
           {unread > 0 ? (
             <span className="absolute -right-0.5 -top-0.5 grid size-4 place-items-center rounded-full bg-red-500 font-display text-[9px] font-bold text-white">
@@ -90,7 +91,7 @@ export function Topbar({
         </button>
 
         {/* user */}
-        <Link href="/demo/erp/login" className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-slate-100">
+        <Link href="/demo/erp/login" aria-label="ออกจากระบบหรือเปลี่ยนผู้ใช้" className="flex shrink-0 items-center gap-2 rounded-lg px-1.5 py-1.5 hover:bg-slate-100 sm:px-2">
           <span className="grid size-8 place-items-center rounded-full bg-[#0E1A34] font-display text-xs font-bold text-white">
             MK
           </span>

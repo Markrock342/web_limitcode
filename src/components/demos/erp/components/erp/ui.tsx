@@ -2,8 +2,35 @@
 
 import Link from "next/link";
 import { X, ArrowRight, TrendingDown, TrendingUp } from "lucide-react";
-import type { ReactNode } from "react";
+import { useEffect, useId, useSyncExternalStore, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { useErp } from "@/components/demos/erp/lib/store";
+
+const subscribeToClient = () => () => undefined;
+
+function OverlayPortal({ children }: { children: ReactNode }) {
+  const isClient = useSyncExternalStore(subscribeToClient, () => true, () => false);
+  if (!isClient) return null;
+  return createPortal(children, document.querySelector(".erp-demo") ?? document.body);
+}
+
+function useOverlay(open: boolean, onClose: () => void) {
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, onClose]);
+}
 
 /* ---------- Page header ---------- */
 
@@ -150,24 +177,33 @@ export function Drawer({
   children: ReactNode;
   wide?: boolean;
 }) {
+  const titleId = useId();
+  useOverlay(open, onClose);
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-[70]">
-      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]" onClick={onClose} />
-      <div
-        className={`absolute inset-y-0 right-0 flex w-full flex-col bg-white shadow-xl ${
-          wide ? "max-w-2xl" : "max-w-md"
-        }`}
-      >
-        <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
-          <h3 className="text-sm font-bold text-slate-800">{title}</h3>
-          <button onClick={onClose} className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100">
-            <X size={17} />
-          </button>
+    <OverlayPortal>
+      <div className="fixed inset-0 z-[100]" role="dialog" aria-modal="true" aria-labelledby={titleId}>
+        <button
+          type="button"
+          aria-label="ปิดหน้าต่าง"
+          className="absolute inset-0 cursor-default bg-slate-900/40 backdrop-blur-[2px]"
+          onClick={onClose}
+        />
+        <div
+          className={`absolute inset-y-0 right-0 flex w-[calc(100%-1rem)] flex-col bg-white shadow-2xl sm:w-full ${
+            wide ? "max-w-2xl" : "max-w-md"
+          }`}
+        >
+          <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+            <h3 id={titleId} className="text-sm font-bold text-slate-800">{title}</h3>
+            <button type="button" aria-label="ปิด" onClick={onClose} className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100">
+              <X size={17} />
+            </button>
+          </div>
+          <div className="thin-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain p-4 sm:p-5">{children}</div>
         </div>
-        <div className="thin-scroll flex-1 overflow-y-auto p-5">{children}</div>
       </div>
-    </div>
+    </OverlayPortal>
   );
 }
 
@@ -186,24 +222,33 @@ export function Modal({
   children: ReactNode;
   wide?: boolean;
 }) {
+  const titleId = useId();
+  useOverlay(open, onClose);
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]" onClick={onClose} />
-      <div
-        className={`relative max-h-[88vh] w-full overflow-y-auto rounded-2xl bg-white shadow-xl ${
-          wide ? "max-w-3xl" : "max-w-lg"
-        }`}
-      >
-        <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
-          <h3 className="text-sm font-bold text-slate-800">{title}</h3>
-          <button onClick={onClose} className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100">
-            <X size={17} />
-          </button>
+    <OverlayPortal>
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4" role="dialog" aria-modal="true" aria-labelledby={titleId}>
+        <button
+          type="button"
+          aria-label="ปิดหน้าต่าง"
+          className="absolute inset-0 cursor-default bg-slate-900/40 backdrop-blur-[2px]"
+          onClick={onClose}
+        />
+        <div
+          className={`relative flex max-h-[calc(100dvh-1.5rem)] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-2xl sm:max-h-[88vh] ${
+            wide ? "max-w-3xl" : "max-w-lg"
+          }`}
+        >
+          <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+            <h3 id={titleId} className="text-sm font-bold text-slate-800">{title}</h3>
+            <button type="button" aria-label="ปิด" onClick={onClose} className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100">
+              <X size={17} />
+            </button>
+          </div>
+          <div className="thin-scroll min-h-0 overflow-y-auto p-4 sm:p-5">{children}</div>
         </div>
-        <div className="p-5">{children}</div>
       </div>
-    </div>
+    </OverlayPortal>
   );
 }
 
@@ -272,25 +317,28 @@ export function DocFlow({ nodes }: { nodes: DocFlowNode[] }) {
 export function ToastViewport() {
   const { toasts, dismissToast } = useErp();
   return (
-    <div className="pointer-events-none fixed bottom-5 right-5 z-[90] flex w-80 flex-col gap-2">
-      {toasts.map((t) => (
-        <div
-          key={t.id}
-          className={`pointer-events-auto flex items-start gap-2 rounded-xl border px-4 py-3 text-[13px] font-medium shadow-xl ${
-            t.type === "success"
-              ? "border-emerald-200 bg-white text-emerald-700"
-              : t.type === "warning"
-                ? "border-amber-200 bg-white text-amber-700"
-                : "border-brand-200 bg-white text-brand-700"
-          }`}
-        >
-          <span className="flex-1">{t.msg}</span>
-          <button onClick={() => dismissToast(t.id)} className="text-slate-300 hover:text-slate-500">
-            <X size={14} />
-          </button>
-        </div>
-      ))}
-    </div>
+    <OverlayPortal>
+      <div aria-live="polite" aria-atomic="false" className="pointer-events-none fixed inset-x-3 bottom-3 z-[120] flex flex-col-reverse gap-2 sm:inset-x-auto sm:bottom-5 sm:right-5 sm:w-80">
+        {toasts.map((t) => (
+          <div
+            key={t.id}
+            role="status"
+            className={`pointer-events-auto flex items-start gap-3 rounded-xl border px-4 py-3 text-[13px] font-medium leading-5 shadow-xl ${
+              t.type === "success"
+                ? "border-emerald-200 bg-white text-emerald-700"
+                : t.type === "warning"
+                  ? "border-amber-200 bg-white text-amber-700"
+                  : "border-brand-200 bg-white text-brand-700"
+            }`}
+          >
+            <span className="flex-1">{t.msg}</span>
+            <button type="button" aria-label="ปิดการแจ้งเตือน" onClick={() => dismissToast(t.id)} className="mt-0.5 shrink-0 rounded p-0.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600">
+              <X size={14} />
+            </button>
+          </div>
+        ))}
+      </div>
+    </OverlayPortal>
   );
 }
 

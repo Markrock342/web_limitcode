@@ -132,7 +132,7 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <section aria-label="ตัวเลขสำคัญ" className="grid grid-cols-2 border-b border-slate-300 xl:grid-cols-4">
+      <section aria-label="ตัวเลขสำคัญ" className="grid grid-cols-1 border-b border-slate-300 min-[360px]:grid-cols-2 xl:grid-cols-4">
         {[
           { label: "Pipeline ที่เปิดอยู่", value: m(pipelineValue), detail: `${openOpportunities.length} โอกาสการขาย` },
           { label: "Weighted forecast", value: m(weightedForecast), detail: "คำนวณตามความน่าจะเป็น" },
@@ -141,7 +141,7 @@ export default function DashboardPage() {
         ].map((metric, index) => (
           <div
             key={metric.label}
-            className={`px-3 py-4 sm:px-5 sm:py-5 ${index % 2 === 1 ? "border-l border-slate-200" : ""} ${index > 1 ? "border-t border-slate-200 xl:border-t-0" : ""} ${index > 0 ? "xl:border-l xl:border-slate-200" : ""}`}
+            className={`px-3 py-4 sm:px-5 sm:py-5 ${index % 2 === 1 ? "min-[360px]:border-l min-[360px]:border-slate-200" : ""} ${index > 0 ? "border-t border-slate-200" : ""} ${index === 1 ? "min-[360px]:border-t-0" : ""} ${index > 1 ? "xl:border-t-0" : ""} ${index > 0 ? "xl:border-l xl:border-slate-200" : ""}`}
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-400">{metric.label}</p>
             <p className="num mt-2 text-[25px] font-semibold leading-none tracking-[-0.02em] text-slate-950">{metric.value}</p>
