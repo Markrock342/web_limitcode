@@ -27,6 +27,24 @@ export type Demo = {
 /** ระบบธุรกิจม็อกอัพ (กดลองได้) — ชื่อสมมติทั้งหมด */
 export const SYSTEM_DEMOS: Demo[] = [
   {
+    slug: "erp",
+    name: "LCS ERP Sales Desk",
+    category: "ระบบหลังบ้าน",
+    icon: "dashboard",
+    tagline: "ERP สำหรับธุรกิจนำเข้า–จัดจำหน่าย B2B",
+    description:
+      "ตัวอย่าง ERP Sales Desk ที่จัด Pipeline, Forecast, งานติดตาม และจุดส่งต่อ Sales Order / Shipment / Invoice ไว้ในหน้าทำงานเดียว",
+    preview: "/showcase/dashboard.jpg",
+    swatch: "from-[#071a34] via-[#334155] to-[#94a3b8]",
+    accentText: "text-[#0f2744]",
+    tags: ["ERP", "CRM", "B2B Sales"],
+    features: [
+      "Sales Desk แบบ ledger แทน KPI cards หลากสี",
+      "Pipeline และ forecast ที่เรียงตามสิ่งที่ต้องตัดสินใจ",
+      "เชื่อมมุมมอง Sales, Shipment และ Invoice",
+    ],
+  },
+  {
     slug: "court-booking",
     name: "SmashLane Arena",
     category: "จองบริการ",
