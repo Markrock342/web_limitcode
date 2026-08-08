@@ -2,125 +2,144 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Boxes, Ship, Warehouse, Users, LineChart, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check, FileText, Languages, PackageCheck, ReceiptText } from "lucide-react";
+import { useErp } from "@/components/demos/erp/lib/store";
+import { erpText, type UiLanguage } from "@/components/demos/erp/lib/i18n";
 
-const ROLES = [
-  "Owner / CEO",
-  "General Manager",
-  "Sales Manager",
-  "Purchasing Manager",
-  "Import Officer",
-  "Warehouse Manager",
-  "Accounting",
+const CAPABILITIES = [
+  { icon: FileText, en: "Quotation to invoice", th: "ใบเสนอราคาถึงใบกำกับภาษี" },
+  { icon: PackageCheck, en: "Purchasing and inventory", th: "จัดซื้อและสินค้าคงคลัง" },
+  { icon: ReceiptText, en: "Receipts and accounting", th: "ใบเสร็จรับเงินและงานบัญชี" },
 ];
 
 export default function LoginPage() {
   const router = useRouter();
-  const [role, setRole] = useState(ROLES[0]);
+  const erp = useErp();
+  const [username, setUsername] = useState("admin");
+  const [password, setPassword] = useState("admin");
+  const [error, setError] = useState("");
+  const language = erp.language;
+  const t = (en: string, th: string) => erpText(language, en, th);
+
+  const chooseLanguage = (next: UiLanguage) => {
+    erp.setLanguage(next);
+    setError("");
+  };
+
+  const login = () => {
+    if (username.trim() !== "admin" || password !== "admin") {
+      setError(t("Use admin / admin for this demo.", "เดโมนี้ใช้ชื่อผู้ใช้และรหัสผ่าน admin / admin"));
+      return;
+    }
+    router.push("/demo/erp/dashboard?tour=1");
+  };
 
   return (
-    <div className="flex min-h-screen">
-      {/* left — brand */}
-      <div className="relative hidden flex-1 flex-col justify-between overflow-hidden bg-[#0A1428] p-10 text-white lg:flex">
-        <div className="pointer-events-none absolute -right-32 -top-32 size-96 rounded-full bg-brand-500/20 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 -left-24 size-80 rounded-full bg-sky-400/10 blur-3xl" />
-
-        <div className="relative">
-          <div className="flex items-center gap-3">
-            <span className="grid size-11 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-sky-400 font-display text-sm font-bold">
-              LCS
-            </span>
-            <div>
-              <p className="font-display text-lg font-bold tracking-wide">LCS Enterprise ERP</p>
-              <p className="text-[11px] tracking-widest text-brand-300">
-                IMPORT • DISTRIBUTION • PROCUREMENT • B2B
-              </p>
+    <main className="min-h-screen bg-[#eef0ec] px-4 py-6 text-[#202420] sm:px-8 lg:grid lg:grid-cols-[minmax(360px,0.86fr)_minmax(520px,1.14fr)] lg:gap-6 lg:p-6">
+      <section className="mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-[560px] flex-col justify-between bg-[#18231f] p-7 text-[#edf2ec] sm:p-10 lg:mx-0 lg:max-w-none lg:p-12">
+        <div>
+          <div className="flex items-center justify-between gap-5 border-b border-[#415047] pb-6">
+            <div className="flex items-center gap-3">
+              <span className="grid size-10 place-items-center bg-[#edf2ec] text-[12px] font-bold tracking-[-0.04em] text-[#18231f]">LCS</span>
+              <div>
+                <p className="text-sm font-semibold tracking-[0.01em]">LCS Enterprise</p>
+                <p className="mt-0.5 text-[10px] uppercase tracking-[0.16em] text-[#aab8ae]">Business operations system</p>
+              </div>
             </div>
+            <Languages size={18} className="text-[#aab8ae]" />
           </div>
 
-          <h1 className="mt-14 max-w-md text-3xl font-bold leading-snug">
-            ระบบบริหารธุรกิจนำเข้าและจัดจำหน่าย แบบครบวงจร
+          <p className="mt-12 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#aab8ae]">ERP / Distribution / B2B</p>
+          <h1 className="mt-4 max-w-lg text-[clamp(2rem,4vw,3.65rem)] font-semibold leading-[1.04] tracking-[-0.045em]">
+            {t("One place for every business document.", "เอกสารธุรกิจทุกขั้นตอน อยู่ในระบบเดียว")}
           </h1>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-300">
-            ตั้งแต่ Sourcing จีน–ไทย, RFQ เปรียบเทียบซัพพลายเออร์, Import Control Tower,
-            Landed Cost, คลังสินค้า, Credit Control ไปจนถึงกำไรต่อลูกค้าและต่อ SKU
+          <p className="mt-6 max-w-md text-sm leading-7 text-[#c1cbc3]">
+            {t(
+              "A working ERP demo for sales, purchasing, import, inventory and finance teams.",
+              "เดโม ERP สำหรับทีมขาย จัดซื้อ นำเข้า คลังสินค้า และการเงิน พร้อมข้อมูลทดลองที่เชื่อมโยงกัน",
+            )}
           </p>
 
-          <div className="mt-10 grid max-w-md grid-cols-2 gap-3 text-[13px]">
-            {[
-              { icon: Users, label: "B2B CRM + Pipeline" },
-              { icon: Ship, label: "Import Control Tower" },
-              { icon: Boxes, label: "Landed Cost อัตโนมัติ" },
-              { icon: Warehouse, label: "คลังสินค้า + จองสต็อก" },
-              { icon: ShieldCheck, label: "Credit Control" },
-              { icon: LineChart, label: "Profitability Reports" },
-            ].map((f) => (
-              <div key={f.label} className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 px-3.5 py-3">
-                <f.icon size={16} className="text-brand-300" />
-                {f.label}
+          <div className="mt-12 border-t border-[#415047]">
+            {CAPABILITIES.map((item) => (
+              <div key={item.en} className="flex items-center gap-4 border-b border-[#415047] py-4 text-sm">
+                <item.icon size={17} className="text-[#aab8ae]" />
+                <span className="flex-1">{erpText(language, item.en, item.th)}</span>
+                <Check size={14} className="text-[#93b69e]" />
               </div>
             ))}
           </div>
         </div>
 
-        <p className="relative text-[11px] text-slate-400">
-          ERP Demo by LIMIT CODE STUDIO • www.limitcode.shop • Mark 084-265-2544 • LINE OA @026iaomj
-        </p>
-      </div>
+        <p className="mt-14 text-[10px] leading-5 text-[#87968b]">LIMIT CODE STUDIO · Interactive business system demo</p>
+      </section>
 
-      {/* right — login */}
-      <div className="flex w-full flex-col items-center justify-center bg-[#F4F6FA] p-6 lg:max-w-[480px]">
-        <div className="card w-full max-w-sm p-8">
-          <div className="mb-6 flex items-center gap-3 lg:hidden">
-            <span className="grid size-10 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-sky-400 font-display text-xs font-bold text-white">
-              LCS
-            </span>
+      <section className="mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-[720px] items-center justify-center py-12 lg:mx-0 lg:max-w-none lg:py-0">
+        <div className="w-full max-w-[420px]">
+          <div className="mb-10 flex items-center justify-between gap-4">
             <div>
-              <p className="font-display text-base font-bold text-slate-800">LCS Enterprise ERP</p>
-              <p className="text-[11px] text-slate-400">Import • Distribution • B2B</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#7c847c]">Demo access</p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-[-0.025em]">{t("Sign in", "เข้าสู่ระบบ")}</h2>
+            </div>
+            <div className="inline-flex border border-[#c6cbc4] bg-[#f7f8f5] p-1" aria-label={t("Language", "ภาษา")}>
+              {(["th", "en"] as const).map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => chooseLanguage(option)}
+                  className={`min-w-14 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.08em] transition-colors ${
+                    language === option ? "bg-[#202b26] text-[#f5f7f3]" : "text-[#687068] hover:text-[#202420]"
+                  }`}
+                >
+                  {option}
+                </button>
+              ))}
             </div>
           </div>
 
-          <h2 className="text-lg font-bold text-slate-800">เข้าสู่ระบบ</h2>
-          <p className="mt-1 text-[13px] text-slate-500">
-            Demo Mode — เลือก Role เพื่อทดลองมุมมองผู้ใช้แต่ละแบบ
-          </p>
+          <form
+            className="border-y border-[#c6cbc4] py-8"
+            onSubmit={(event) => {
+              event.preventDefault();
+              login();
+            }}
+          >
+            <label className="block">
+              <span className="text-[12px] font-semibold text-[#4c544d]">{t("Username", "ชื่อผู้ใช้")}</span>
+              <input
+                autoComplete="username"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                className="mt-2 h-11 w-full border border-[#b9c0b8] bg-[#f7f8f5] px-3.5 text-sm outline-none transition-colors focus:border-[#253d32] focus:ring-2 focus:ring-[#253d32]/10"
+              />
+            </label>
+            <label className="mt-5 block">
+              <span className="text-[12px] font-semibold text-[#4c544d]">{t("Password", "รหัสผ่าน")}</span>
+              <input
+                autoComplete="current-password"
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                className="mt-2 h-11 w-full border border-[#b9c0b8] bg-[#f7f8f5] px-3.5 text-sm outline-none transition-colors focus:border-[#253d32] focus:ring-2 focus:ring-[#253d32]/10"
+              />
+            </label>
 
-          <div className="mt-6 space-y-4">
-            <div>
-              <label className="label">อีเมล</label>
-              <input className="input" defaultValue="demo@lcs-erp.example" readOnly />
-            </div>
-            <div>
-              <label className="label">รหัสผ่าน</label>
-              <input className="input" type="password" defaultValue="demo1234" readOnly />
-            </div>
-            <div>
-              <label className="label">Role (Demo)</label>
-              <select className="input" value={role} onChange={(e) => setRole(e.target.value)}>
-                {ROLES.map((r) => (
-                  <option key={r}>{r}</option>
-                ))}
-              </select>
-            </div>
-            <button
-              onClick={() => router.push("/demo/erp/dashboard?tour=1")}
-              className="btn-primary w-full !py-2.5"
-            >
-              เริ่มดู Demo
+            {error ? <p role="alert" className="mt-4 bg-[#f2dfd9] px-3 py-2.5 text-xs text-[#7e2f24]">{error}</p> : null}
+
+            <button type="submit" className="mt-7 flex h-11 w-full items-center justify-between bg-[#202b26] px-4 text-sm font-semibold text-[#f5f7f3] transition-colors hover:bg-[#314139]">
+              <span>{t("Open demo workspace", "เปิดพื้นที่ทำงานเดโม")}</span>
+              <ArrowRight size={16} />
             </button>
-            <button onClick={() => router.push("/demo/erp/portal")} className="btn-outline w-full !py-2.5">
-              เข้าสู่ B2B Customer Portal (มุมมองลูกค้า)
+          </form>
+
+          <div className="mt-5 flex items-start justify-between gap-6 text-[11px] leading-5 text-[#727a72]">
+            <p>{t("Demo credentials", "บัญชีสำหรับทดลอง")}<br /><strong className="font-semibold text-[#303630]">admin / admin</strong></p>
+            <button onClick={() => router.push("/demo/erp/portal")} className="text-right font-semibold text-[#303630] underline decoration-[#9ba29a] underline-offset-4 hover:decoration-[#303630]">
+              {t("Customer portal", "พอร์ทัลสำหรับลูกค้า")}
             </button>
           </div>
-
-          <p className="mt-6 text-center text-[11px] leading-relaxed text-slate-400">
-            ERP Demo by LIMIT CODE STUDIO
-            <br />
-            www.limitcode.shop • LINE OA @026iaomj
-          </p>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

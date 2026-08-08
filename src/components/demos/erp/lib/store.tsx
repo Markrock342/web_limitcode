@@ -10,6 +10,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -45,6 +46,7 @@ import {
 } from "@/components/demos/erp/data/docs";
 import { APPROVALS, NOTIFICATIONS, OPPORTUNITIES } from "@/components/demos/erp/data/ops";
 import { docGrand, TODAY } from "@/components/demos/erp/lib/format";
+import type { UiLanguage } from "@/components/demos/erp/lib/i18n";
 
 const clone = <T,>(v: T): T => JSON.parse(JSON.stringify(v));
 
@@ -72,6 +74,7 @@ interface ErpState {
   currency: Currency;
   branch: string;
   warehouse: string;
+  language: UiLanguage;
   toasts: Toast[];
 }
 
@@ -81,6 +84,7 @@ interface ErpActions {
   setCurrency: (c: Currency) => void;
   setBranch: (b: string) => void;
   setWarehouse: (w: string) => void;
+  setLanguage: (language: UiLanguage) => void;
   resetDemo: () => void;
   markNotificationsRead: () => void;
 
@@ -101,7 +105,7 @@ interface ErpActions {
   outstandingAR: (customerId: string) => number;
 }
 
-const seed = (): Omit<ErpState, "currency" | "branch" | "warehouse" | "toasts"> => ({
+const seed = (): Omit<ErpState, "currency" | "branch" | "warehouse" | "language" | "toasts"> => ({
   customers: clone(CUSTOMERS),
   products: clone(PRODUCTS),
   opportunities: clone(OPPORTUNITIES),
@@ -127,8 +131,16 @@ export function ErpProvider({ children }: { children: ReactNode }) {
     currency: "THB",
     branch: "สำนักงานใหญ่ (กรุงเทพฯ)",
     warehouse: "Bangkok WH",
+    language: "th",
     toasts: [],
   }));
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem("lcs-erp-language");
+    if (saved === "en" || saved === "th") {
+      queueMicrotask(() => setState((current) => ({ ...current, language: saved })));
+    }
+  }, []);
 
   const toast = useCallback((msg: string, type: Toast["type"] = "success") => {
     const id = toastSeq++;
@@ -158,6 +170,10 @@ export function ErpProvider({ children }: { children: ReactNode }) {
       setCurrency: (currency) => setState((s) => ({ ...s, currency })),
       setBranch: (branch) => setState((s) => ({ ...s, branch })),
       setWarehouse: (warehouse) => setState((s) => ({ ...s, warehouse })),
+      setLanguage: (language) => {
+        window.localStorage.setItem("lcs-erp-language", language);
+        setState((s) => ({ ...s, language }));
+      },
 
       resetDemo: () => {
         setState((s) => ({ ...s, ...seed() }));

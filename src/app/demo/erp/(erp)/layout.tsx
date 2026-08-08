@@ -37,7 +37,7 @@ export default function ErpLayout({ children }: { children: React.ReactNode }) {
             <Sidebar onNavigate={() => setMobileNav(false)} />
             <button
               onClick={() => setMobileNav(false)}
-              className="mt-4 grid size-9 place-items-center self-start rounded-r-xl bg-[#0E1A34] text-white"
+              className="mt-4 grid size-9 place-items-center self-start border border-l-0 border-[#d9ddd7] bg-[#f7f8f5] text-[#303832]"
             >
               <X size={16} />
             </button>

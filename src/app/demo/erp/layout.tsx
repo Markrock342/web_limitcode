@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function ErpDemoLayout({ children }: { children: React.ReactNode }) {
   return (
     <ErpProvider>
-      <div className="erp-demo min-h-screen bg-[#F4F6FA] text-slate-800 antialiased">
+      <div className="erp-demo min-h-screen bg-[#eef0ec] text-[#303832] antialiased">
         {children}
       </div>
     </ErpProvider>
