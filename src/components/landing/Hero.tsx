@@ -26,7 +26,7 @@ export function Hero() {
         <div>
           <Reveal>
             <p className="text-sm font-medium text-brand-700">
-              ทีม 3 คน รับทำเว็บไซต์ ระบบ และงานที่คุยมาได้
+              ฟรีแลนซ์ทีม 3 คน ไม่ใช่บริษัท รับทำเว็บไซต์ ระบบ และงานที่คุยมาได้
             </p>
           </Reveal>
 
@@ -42,7 +42,7 @@ export function Hero() {
 
           <Reveal delay={160}>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-              เว็บไซต์ก็ทำ ระบบก็ทำ — LIMIT CODE STUDIO เป็นทีม 3 คน
+              เว็บไซต์ก็ทำ ระบบก็ทำ — LIMIT CODE STUDIO เป็นทีมฟรีแลนซ์ 3 คน ไม่ใช่บริษัท
               รับงานตั้งแต่หน้าเว็บบริษัทยันหลังบ้านที่ทีมใช้จริง งานที่ยังอยู่บน LINE กับ Excel ก็คุยมาได้
             </p>
           </Reveal>
