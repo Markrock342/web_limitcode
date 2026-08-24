@@ -72,13 +72,13 @@ export const TECH: TechItem[] = [
   { name: "Codex", group: "Tools", icon: "", color: "FFFFFF", local: "/tech/codex.svg" },
   // AI
   { name: "OpenAI", group: "AI", icon: "", color: "FFFFFF", local: "/tech/openai.svg" },
-  { name: "GPT-5.6", group: "AI", icon: "", color: "10A37F", local: "/tech/gpt.svg" },
-  { name: "Opus 4.8", group: "AI", icon: "", color: "D97757", local: "/tech/opus.svg" },
+  { name: "GPT-5.6 Sol", group: "AI", icon: "", color: "10A37F", local: "/tech/gpt.svg" },
+  { name: "Opus 5", group: "AI", icon: "", color: "D97757", local: "/tech/opus.svg" },
   { name: "Fable 5", group: "AI", icon: "", color: "A78BFA", local: "/tech/fable.svg" },
-  { name: "DeepSeek V4", group: "AI", icon: "", color: "4D6BFE", local: "/tech/deepseek.svg" },
+  { name: "DeepSeek V4 Pro", group: "AI", icon: "", color: "4D6BFE", local: "/tech/deepseek.svg" },
   { name: "Composer 2.5", group: "AI", icon: "", color: "FFFFFF", local: "/tech/composer.svg" },
-  { name: "Grok 4.5", group: "AI", icon: "", color: "FFFFFF", local: "/tech/grok.svg" },
-  { name: "Gemini 3.5 Pro", group: "AI", icon: "", color: "8E75B2", local: "/tech/gemini.svg" },
+  { name: "Grok 4.6", group: "AI", icon: "", color: "FFFFFF", local: "/tech/grok.svg" },
+  { name: "Gemini 3.7 Flash", group: "AI", icon: "", color: "8E75B2", local: "/tech/gemini.svg" },
 ];
 
 export const TECH_GROUPS: TechGroup[] = [

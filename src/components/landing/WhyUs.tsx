@@ -10,11 +10,11 @@ export function WhyUs() {
         <Reveal variant="left" className="lg:sticky lg:top-24">
           <SectionTag>ทำไมต้องเรา</SectionTag>
           <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            ฟรีแลนซ์ที่ทำงานเป็นระบบ ไม่ใช่รับทำเว็บทั่วไป
+            ทีมเล็กที่รับงานได้ครบ เว็บไซต์ ระบบ และของที่ใช้อยู่ทุกวัน
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            คุยตรง ล็อก scope ได้ และส่งมอบระบบที่ใช้จริง — ช่วยวาง workflow
-            พัฒนา Web App / หลังบ้าน และดูแลต่อหลังขึ้นโปรดักชัน
+            คุยตรง ล็อก scope ได้ และส่งของที่ใช้จริง — ทั้งหน้าเว็บที่ลูกค้าเห็น
+            และหลังบ้านที่ทีมใช้ ดูแลต่อได้หลังขึ้นโปรดักชัน
           </p>
           <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm">
             {[

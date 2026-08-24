@@ -8,7 +8,7 @@ import { HeroTerminal } from "@/components/HeroTerminal";
 import { Typewriter } from "@/components/Typewriter";
 import { DataFlowFrame } from "@/components/DataFlowFrame";
 
-const HERO_PHRASES = ["ระบบจอง", "CRM / Job Order", "Admin Dashboard", "AI Workflow"];
+const HERO_PHRASES = ["เว็บไซต์", "ระบบจอง", "CRM / Job Order", "Admin Dashboard"];
 
 export function Hero() {
   return (
@@ -26,7 +26,7 @@ export function Hero() {
         <div>
           <Reveal>
             <p className="text-sm font-medium text-brand-700">
-              ฟรีแลนซ์ Software Studio · requirement → build → deploy
+              ทีม 3 คน รับทำเว็บไซต์ ระบบ และงานที่คุยมาได้
             </p>
           </Reveal>
 
@@ -36,14 +36,14 @@ export function Hero() {
               <span className="mt-1 block min-h-[1.15em] text-brand-600 sm:mt-0 sm:inline-block sm:min-w-[18ch]">
                 <Typewriter phrases={HERO_PHRASES} />
               </span>
-              <span className="block">สำหรับธุรกิจบริการ</span>
+              <span className="block">ที่ธุรกิจใช้ได้จริง</span>
             </h1>
           </Reveal>
 
           <Reveal delay={160}>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-              LIMIT CODE STUDIO โฟกัสระบบ ไม่ใช่รับทำเว็บทั่วไป — เปลี่ยนงานบน LINE, Excel
-              และเอกสารกระจัดกระจาย ให้เป็น Web App ที่ทีมใช้ได้จริง
+              เว็บไซต์ก็ทำ ระบบก็ทำ — LIMIT CODE STUDIO เป็นทีม 3 คน
+              รับงานตั้งแต่หน้าเว็บบริษัทยันหลังบ้านที่ทีมใช้จริง งานที่ยังอยู่บน LINE กับ Excel ก็คุยมาได้
             </p>
           </Reveal>
 
@@ -60,9 +60,9 @@ export function Hero() {
 
           <Reveal delay={280}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <LineButton className="btn-sheen-auto">ปรึกษาโจทย์ระบบฟรี</LineButton>
+              <LineButton className="btn-sheen-auto">ปรึกษาโจทย์ฟรี</LineButton>
               <GhostButton href="/#services">
-                ดูระบบที่เราทำ
+                ดูงานที่เราทำ
                 <Icon name="arrow" className="size-4 transition-transform duration-300 ease-out-quart group-hover:translate-x-1" />
               </GhostButton>
             </div>
@@ -73,7 +73,7 @@ export function Hero() {
               <span className="inline-flex size-6 items-center justify-center bg-[#06C755] text-white">
                 <LineGlyph className="size-3.5" />
               </span>
-              คุยโจทย์ระบบผ่าน LINE OA{" "}
+              ทักโจทย์มาได้ที่ LINE OA{" "}
               <span className="font-display font-bold text-ink">{LINE_ID}</span>
             </p>
           </Reveal>

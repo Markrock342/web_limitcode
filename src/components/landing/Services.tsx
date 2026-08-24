@@ -8,12 +8,13 @@ export function Services() {
     <section id="services" className="scroll-mt-20 py-20 sm:py-24">
       <Container>
         <Reveal className="max-w-2xl">
-          <SectionTag>ระบบที่เราทำ</SectionTag>
+          <SectionTag>งานที่เราทำ</SectionTag>
           <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            โฟกัสระบบที่ธุรกิจบริการต้องใช้จริง
+            เว็บไซต์ก็รับ ระบบก็รับ คุยโจทย์มาได้เลย
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            ไม่รับทำทุกอย่าง — เราเชี่ยวชาญ Web App และหลังบ้านที่ช่วยให้ทีมทำงานเป็นระบบ
+            รับทำหน้าเว็บบริษัท ระบบจอง CRM Dashboard และงานที่ยังทำบน LINE กับ Excel
+            ทีม 3 คน คุยตรง ล็อก scope แล้วลงมือ
           </p>
         </Reveal>
 

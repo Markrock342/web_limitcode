@@ -1,6 +1,7 @@
 import type { IconName } from "./site";
 
 export type DemoCategory =
+  | "ลูกค้าของเรา"
   | "ร้านอาหาร"
   | "ขายของ"
   | "จองบริการ"
@@ -264,7 +265,86 @@ export const SYSTEM_DEMOS: Demo[] = [
   },
 ];
 
+export const CLIENT_WORK: Demo[] = [
+  {
+    slug: "nursego",
+    name: "NurseGo",
+    category: "ลูกค้าของเรา",
+    icon: "heart",
+    tagline: "แพลตฟอร์มหางานพยาบาล",
+    description:
+      "เว็บและแอปสำหรับพยาบาลหางาน พาร์ทไทม์ และองค์กรที่ต้องการบุคลากรทางการแพทย์ — โปรเจกต์จริงที่ออนไลน์แล้ว",
+    liveUrl: "https://www.nursego.co/",
+    preview: "/showcase/nursego.jpg",
+    swatch: "from-sky-400 via-cyan-400 to-amber-300",
+    accentText: "text-sky-600",
+    tags: ["Healthcare", "Live", "Web + App"],
+    features: ["หางานพยาบาล", "งานพาร์ทไทม์", "สำหรับองค์กร"],
+  },
+  {
+    slug: "kindgo",
+    name: "KindGo",
+    category: "ลูกค้าของเรา",
+    icon: "layers",
+    tagline: "บริการในชีวิตประจำวัน จองได้ที่เดียว",
+    description:
+      "แพลตฟอร์มรวมบริการบ้าน ซ่อม ทำความสะอาด ดูแล และเดินทาง เชื่อมลูกค้ากับผู้ให้บริการที่ตรวจแล้ว",
+    liveUrl: "https://kindgo.app/",
+    preview: "/showcase/kindgo.jpg",
+    swatch: "from-orange-400 via-amber-400 to-yellow-300",
+    accentText: "text-orange-600",
+    tags: ["Marketplace", "Booking", "Live"],
+    features: ["เลือกบริการ + พิกัด", "จองวันเวลา", "ติดตามงานและชำระเงิน"],
+  },
+  {
+    slug: "horasard",
+    name: "Horasard",
+    category: "ลูกค้าของเรา",
+    icon: "spark",
+    tagline: "ดูดวงด้วย AI จากพื้นดวงจริง",
+    description:
+      "เว็บโหราศาสตร์คำนวณลัคนาและดาวพื้นดวงจากวันเกิด แล้วสนทนา AI ตามหมวด พร้อมแพ็กเกจ Free / Pro",
+    liveUrl: "https://horasard.com/",
+    preview: "/showcase/horasard.jpg",
+    swatch: "from-stone-900 via-amber-700 to-amber-400",
+    accentText: "text-amber-700",
+    tags: ["AI Chat", "Membership", "Live"],
+    features: ["คำนวณพื้นดวง", "สนทนาตามหมวด", "เครดิตและแพ็กเกจ Pro"],
+  },
+  {
+    slug: "sombattour",
+    name: "สมบัติทัวร์",
+    category: "ลูกค้าของเรา",
+    icon: "globe",
+    tagline: "ระบบดิจิทัลภาคขนส่ง",
+    description:
+      "โปรเจกต์ในภาคธุรกิจขนส่งสำหรับ สมบัติทัวร์ — เว็บองค์กรและงานระบบที่ธุรกิจใช้จริง",
+    liveUrl: "https://www.sombattour.com/",
+    preview: "/showcase/sombattour.jpg",
+    swatch: "from-blue-500 via-sky-400 to-orange-400",
+    accentText: "text-blue-700",
+    tags: ["Transportation", "Live"],
+    features: ["เว็บองค์กร", "ช่องทางจองตั๋ว", "งานระบบภายใน"],
+  },
+  {
+    slug: "marketimes-asia",
+    name: "Marketimes Asia",
+    category: "ลูกค้าของเรา",
+    icon: "globe",
+    tagline: "แพลตฟอร์มสื่อและคอนเทนต์",
+    description:
+      "เว็บไซต์สื่อและคอนเทนต์ออนไลน์สำหรับ Marketimes Asia โชว์ข่าว บทความ และแบรนด์สำนักข่าว",
+    liveUrl: "https://marketimesasia.com/",
+    preview: "/showcase/marketimes-asia.jpg",
+    swatch: "from-rose-500 via-red-500 to-slate-800",
+    accentText: "text-rose-700",
+    tags: ["Publishing", "CMS", "Live"],
+    features: ["หน้าสื่อออนไลน์", "หมวดคอนเทนต์", "แบรนด์สำนักข่าว"],
+  },
+];
+
 export const DEMOS: Demo[] = [
+  ...CLIENT_WORK,
   ...SYSTEM_DEMOS,
   {
     slug: "restaurant",

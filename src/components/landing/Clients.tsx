@@ -12,14 +12,14 @@ export function Clients() {
         </Reveal>
 
         <Reveal className="mt-10">
-          <ul className="flex flex-wrap items-center justify-center gap-10 sm:gap-14">
+          <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-8 sm:gap-x-14 sm:gap-y-10">
             {CLIENTS.map((client) => (
               <li key={client.name}>
                 <a
                   href={client.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center"
+                  className="client-link inline-flex items-center justify-center"
                   aria-label={client.name}
                 >
                   <Image
@@ -27,7 +27,7 @@ export function Clients() {
                     alt={client.name}
                     width={client.width}
                     height={client.height}
-                    className="h-8 w-auto max-w-[180px] object-contain opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0 sm:h-10 sm:max-w-[220px]"
+                    className="client-logo h-9 w-auto max-w-[160px] object-contain sm:h-11 sm:max-w-[220px]"
                   />
                 </a>
               </li>

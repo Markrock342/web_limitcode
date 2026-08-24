@@ -4,7 +4,9 @@ export const LINE_URL = "https://line.me/R/ti/p/%40026iaomj";
 
 export const CONTACT = {
   person: "Mark Kitti",
-  personThai: "คุณมาร์ค",
+  personThai: "คุณ Mark",
+  role: "Project Manager",
+  teamSize: 3,
   phoneDisplay: "084-265-2544",
   phoneHref: "tel:+66842652544",
   facebookHref: "https://www.facebook.com/mark.kitti.950719",
@@ -17,7 +19,7 @@ export const CONTACT = {
 export const BRAND = {
   name: "LIMIT CODE STUDIO",
   short: "LIMIT CODE",
-  tagline: "ฟรีแลนซ์ Software Studio — พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ",
+  tagline: "ทีม 3 คน รับทำเว็บไซต์ ระบบจอง CRM และงานที่ธุรกิจใช้อยู่จริง",
 };
 
 export type IconName =
@@ -98,7 +100,7 @@ export const WHY: { icon: IconName; title: string; desc: string }[] = [
   },
   {
     icon: "shield",
-    title: "ส่งมอบเป็นระบบ ไม่ใช่แค่ไฟล์โค้ด",
+    title: "ส่งมอบของที่ใช้ได้ ไม่ใช่แค่ไฟล์โค้ด",
     desc: "ฟรีแลนซ์ที่ทำงานเป็นขั้นตอน — มี Demo รายสัปดาห์ UAT Handover และแพ็กเกจดูแลต่อหลังขึ้นระบบ",
   },
   {
@@ -174,6 +176,27 @@ export type Client = {
 };
 
 export const CLIENTS: Client[] = [
+  {
+    name: "NurseGo",
+    logo: "/clients/nursego.png",
+    url: "https://www.nursego.co/",
+    width: 260,
+    height: 88,
+  },
+  {
+    name: "KindGo",
+    logo: "/clients/kindgo.png",
+    url: "https://kindgo.app/",
+    width: 800,
+    height: 188,
+  },
+  {
+    name: "Horasard",
+    logo: "/clients/horasard.png",
+    url: "https://horasard.com/",
+    width: 720,
+    height: 175,
+  },
   {
     name: "สมบัติทัวร์",
     logo: "/clients/sombattour.png",

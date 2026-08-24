@@ -6,6 +6,7 @@ import { DemoCard } from "./DemoCard";
 
 const FILTERS: ("ทั้งหมด" | DemoCategory)[] = [
   "ทั้งหมด",
+  "ลูกค้าของเรา",
   "อสังหาริมทรัพย์",
   "เว็บบริษัท",
   "ขายของ",

@@ -9,6 +9,7 @@ const NAV = [
   { href: "/#services", label: "ระบบที่ทำ" },
   { href: "/#why", label: "ทำไมต้องเรา" },
   { href: "/#process", label: "ขั้นตอน" },
+  { href: "/#clients", label: "ลูกค้าของเรา" },
   { href: "/showcase", label: "ตัวอย่างระบบ" },
   { href: "/company-profile", label: "Company Profile" },
   { href: "/contact", label: "ติดต่อเรา" },
@@ -65,7 +66,7 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-1 lg:flex">
           {NAV.map((item) => (
             <Link
               key={item.href}
@@ -77,7 +78,7 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <LineButton className="px-5 py-2.5 text-sm">ทัก LINE OA</LineButton>
         </div>
 
@@ -86,7 +87,7 @@ export function Navbar() {
           aria-label="เมนู"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex size-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 md:hidden"
+          className="inline-flex size-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 lg:hidden"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="size-5">
             {open ? (
@@ -99,7 +100,7 @@ export function Navbar() {
       </nav>
 
       {open && (
-        <div className="border-t border-slate-200/70 bg-white md:hidden">
+        <div className="border-t border-slate-200/70 bg-white lg:hidden">
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 px-5 py-4 sm:px-6">
             {NAV.map((item) => (
               <Link

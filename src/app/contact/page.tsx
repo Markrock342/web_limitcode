@@ -8,18 +8,18 @@ import {
   PhoneGlyph,
 } from "@/components/ui";
 import { JsonLd } from "@/components/JsonLd";
-import { Typewriter } from "@/components/Typewriter";
 import { CONTACT, LINE_ID, LINE_URL } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "ติดต่อเรา — Mark Kitti คุณมาร์ค",
+  title: "ติดต่อเรา — คุณ Mark Project Manager",
   description: `ติดต่อ LIMIT CODE STUDIO ผ่าน ${CONTACT.personThai} (${CONTACT.person}) โทร ${CONTACT.phoneDisplay} Facebook Page หรือ LINE OA ${LINE_ID}`,
   path: "/contact",
   keywords: [
     "ติดต่อ LIMIT CODE STUDIO",
     "Mark Kitti",
-    "คุณมาร์ค",
+    "คุณ Mark",
+    "Project Manager",
     "โทร 084-265-2544",
     "LINE OA @026iaomj",
     "เพจทางการ LIMIT CODE STUDIO",
@@ -33,7 +33,7 @@ function contactJsonLd() {
     "@type": "Person",
     name: CONTACT.person,
     alternateName: CONTACT.personThai,
-    jobTitle: "Founder",
+    jobTitle: CONTACT.role,
     worksFor: {
       "@type": "Organization",
       name: "LIMIT CODE STUDIO",
@@ -43,8 +43,6 @@ function contactJsonLd() {
     sameAs: [CONTACT.facebookHref, CONTACT.pageFacebookHref, LINE_URL],
   };
 }
-
-const PROMPTS = ["คุยโจทย์ระบบได้เลย", "ล็อก scope ก่อนเขียนโค้ด", "ทัก LINE OA ได้ทันที"];
 
 export default function ContactPage() {
   return (
@@ -61,11 +59,11 @@ export default function ContactPage() {
                 contact.console()
               </p>
               <h1 className="mt-4 max-w-xl font-display text-4xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl">
-                <Typewriter phrases={PROMPTS} className="text-brand-700" />
+                คุยกับ {CONTACT.personThai} ตำแหน่ง {CONTACT.role} ได้เลย
               </h1>
               <p className="mt-4 max-w-xl text-lg text-slate-600">
-                {CONTACT.person} ({CONTACT.personThai}) — ฟรีแลนซ์ Software Studio
-                ส่งโจทย์ระบบ ปัญหาที่ทีมเจอ หรือตัวอย่างที่อยากได้มาได้เลย ปรึกษาฟรี
+                {CONTACT.person} · {CONTACT.role} ของทีม {CONTACT.teamSize} คน
+                เว็บไซต์ก็ทำ ระบบก็ทำ ส่งโจทย์มาคุยได้เลย ปรึกษาฟรี
               </p>
               <ol className="mt-6 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500">
                 {["01 Requirement", "02 Scope", "03 Build", "04 Deploy"].map((step) => (

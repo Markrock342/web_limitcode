@@ -41,6 +41,7 @@ export function Footer() {
               <p className="font-semibold text-ink">ผลงาน</p>
               <ul className="mt-3 space-y-2 text-slate-600">
                 <li><Link href="/showcase" className="hover:text-brand-700">รวมตัวอย่างทั้งหมด</Link></li>
+                <li><Link href="/#clients" className="hover:text-brand-700">ลูกค้าของเรา</Link></li>
                 <li><Link href="/demo/court-booking" className="hover:text-brand-700">SmashLane จองสนาม</Link></li>
                 <li><Link href="/demo/field-crm" className="hover:text-brand-700">GuardNest CRM</Link></li>
                 <li><Link href="/demo/ai-cms" className="hover:text-brand-700">NovaOracle AI</Link></li>

@@ -145,6 +145,13 @@ export const CP_PROJECTS: CpProject[] = [
     desc: "แพลตฟอร์มสำหรับงานพยาบาลและบุคลากรทางการแพทย์",
   },
   {
+    name: "Horasard",
+    url: "https://horasard.com/",
+    category: "AI Astrology / Consumer Web App",
+    label: "AI Chat / Credit / Membership",
+    desc: "เว็บดูดวงด้วย AI คำนวณพื้นดวงจากวันเกิด แล้วสนทนาตามหมวด พร้อมแพ็กเกจ Free / Pro",
+  },
+  {
     name: "Marketimes Asia",
     url: "https://marketimesasia.com/",
     category: "Digital Media / Publishing Platform",
@@ -213,7 +220,7 @@ export const CP_TECH = {
     { name: "Database", items: ["PostgreSQL", "Supabase", "Firebase", "MongoDB", "Redis"] },
     { name: "Infrastructure", items: ["Vercel", "Cloudflare", "AWS", "Docker"] },
     { name: "Integrations", items: ["LINE OA", "Google Maps", "Payment APIs", "External APIs"] },
-    { name: "AI", items: ["OpenAI", "Gemini", "Claude / Anthropic"] },
+    { name: "AI", items: ["OpenAI GPT-5.6 Sol", "Claude Opus 5", "Gemini 3.7", "Grok 4.6"] },
   ],
 };
 

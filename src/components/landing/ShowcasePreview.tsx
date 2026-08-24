@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { DEMOS, SYSTEM_DEMOS } from "@/lib/demos";
+import { CLIENT_WORK, DEMOS, SYSTEM_DEMOS } from "@/lib/demos";
 import { Container, SectionTag } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
 
-const FEATURED = SYSTEM_DEMOS.slice(0, 6);
+const FEATURED = [...CLIENT_WORK.slice(0, 3), ...SYSTEM_DEMOS.slice(0, 3)];
 
 export function ShowcasePreview() {
   return (
@@ -15,10 +15,10 @@ export function ShowcasePreview() {
           <Reveal>
             <SectionTag>ตัวอย่างระบบ</SectionTag>
             <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-              {SYSTEM_DEMOS.length} ระบบม็อกอัพ กดลองใช้ได้จริง
+              งานลูกค้าจริง และระบบม็อกอัพที่กดลองได้
             </h2>
             <p className="mt-4 max-w-xl text-lg text-slate-600">
-              ชื่อแบรนด์เป็นม็อกอัพทั้งหมด — มีทั้งฝั่งลูกค้าและหลังบ้านให้คลิกเล่นได้
+              มีทั้งเว็บลูกค้าที่ออนไลน์แล้ว และเดโมม็อกอัพให้คลิกเล่นทั้งฝั่งลูกค้าและหลังบ้าน
             </p>
           </Reveal>
           <Reveal delay={100}>

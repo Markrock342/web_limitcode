@@ -8,7 +8,7 @@ import { SYSTEM_DEMOS } from "@/lib/demos";
 
 export const metadata = pageMetadata({
   title: "ตัวอย่างระบบ — Web App และระบบหลังบ้าน",
-  description: `ดูตัวอย่างระบบม็อกอัพ ${SYSTEM_DEMOS.length} ธุรกิจจาก LIMIT CODE STUDIO ที่กดลองใช้ได้จริง พร้อมผลงาน Live ที่ deploy แล้ว`,
+  description: `ดูงานลูกค้าจริงอย่าง NurseGo KindGo Horasard และตัวอย่างระบบม็อกอัพ ${SYSTEM_DEMOS.length} ธุรกิจจาก LIMIT CODE STUDIO ที่กดลองใช้ได้จริง`,
   path: "/showcase",
   keywords: [
     "ตัวอย่างระบบจอง",
@@ -33,11 +33,11 @@ export default function ShowcasePage() {
               ตัวอย่างระบบ · Live Demo
             </span>
             <h1 className="mt-5 max-w-2xl font-display text-4xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl">
-              ระบบม็อกอัพ + เดโมเว็บ กดลองได้
+              ลูกค้าของเรา และระบบม็อกอัพที่กดลองได้
             </h1>
             <p className="mt-4 max-w-2xl text-lg text-slate-600">
-              แบรนด์ในเดโมเป็นชื่อสมมติทั้งหมด — มีแอดมิน/CMS พร้อมรูปและหลายหน้า เช่น จองสนาม คลินิก ซักรีด Cowork ฮอลล์ คาร์แคร์
-              การ์ดที่มีป้าย Live คือเว็บจริงที่ deploy แล้ว
+              กรองหมวดลูกค้าของเราเพื่อดูเว็บที่ออนไลน์แล้ว เช่น NurseGo KindGo และ Horasard
+              ส่วนเดโมม็อกอัพมีแอดมิน/CMS ให้คลิกเล่น การ์ดป้าย Live คือเว็บจริง
             </p>
             <div className="mt-7">
               <LineButton>มีโจทย์ระบบ ทักมาคุยได้เลย</LineButton>

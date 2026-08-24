@@ -6,12 +6,12 @@ import { Icon } from "@/components/Icon";
 import { Typewriter } from "@/components/Typewriter";
 
 const HELP = [
-  "เล่าปัญหาที่ยังทำบน LINE / Excel / เอกสาร",
-  "ส่งตัวอย่างระบบหรือ workflow ที่อยากได้",
-  "บอกโมดูลที่จำเป็นก่อน (จอง / CRM / Dashboard / AI)",
+  "อยากได้เว็บไซต์บริษัท หน้าแลนดิ้ง หรือเว็บที่ลูกค้าเข้ามาใช้",
+  "อยากได้ระบบจอง CRM Dashboard หรือหลังบ้านทีม",
+  "งานยังอยู่บน LINE / Excel แล้วอยากให้เป็นของใช้จริง",
 ];
 
-const PROMPTS = ["ส่งโจทย์ระบบมาได้เลย", "ล็อก scope ก่อนลงมือ", "ทัก LINE OA ได้ทันที"];
+const PROMPTS = ["ส่งโจทย์มาได้เลย", "เว็บก็ทำ ระบบก็ทำ", "ทัก LINE OA ได้ทันที"];
 
 export function Contact() {
   return (
@@ -24,8 +24,8 @@ export function Contact() {
               <Typewriter phrases={PROMPTS} className="text-white" />
             </h2>
             <p className="mt-4 max-w-lg text-lg text-white/70">
-              ส่ง workflow ปัจจุบัน ปัญหาที่ทีมเจอ หรือตัวอย่างระบบที่อยากได้
-              มาคุยกับฟรีแลนซ์ได้เลย — ช่วยประเมิน scope และแนวทางเบื้องต้นให้ครับ
+              เว็บไซต์ก็รับ ระบบก็รับ — ส่งตัวอย่างที่อยากได้ หรือเล่างานที่ทำอยู่ตอนนี้มาได้เลย
+              ทีม 3 คน ช่วยประเมินแนวทางเบื้องต้นให้ครับ
             </p>
             <ul className="mt-6 space-y-2.5">
               {HELP.map((h) => (
