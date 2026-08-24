@@ -78,3 +78,23 @@ export function LineGlyph({ className = "" }: { className?: string }) {
     </svg>
   );
 }
+
+export function PhoneGlyph({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M7.2 3.8h3.1l1.3 3.2-1.9 1.2a12.4 12.4 0 0 0 6.1 6.1l1.2-1.9 3.2 1.3v3.1c0 .7-.5 1.4-1.2 1.5-7.2 1.2-13.4-5-12.2-12.2.1-.7.8-1.3 1.4-1.3Z"
+      />
+    </svg>
+  );
+}
+
+export function FacebookGlyph({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M14.2 22v-8.2h2.8l.4-3.2h-3.2V8.6c0-.9.3-1.6 1.6-1.6H17.5V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H8v3.2h2.8V22h3.4Z" />
+    </svg>
+  );
+}

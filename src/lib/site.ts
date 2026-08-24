@@ -2,6 +2,15 @@ export const LINE_ID = "@026iaomj";
 // LINE OA add-friend link (the @ must be URL-encoded)
 export const LINE_URL = "https://line.me/R/ti/p/%40026iaomj";
 
+export const CONTACT = {
+  person: "Mark Kitti",
+  personThai: "คุณมาร์ค",
+  phoneDisplay: "084-265-2544",
+  phoneHref: "tel:+66842652544",
+  facebookHref: "https://www.facebook.com/mark.kitti.950719",
+  facebookLabel: "facebook.com/mark.kitti.950719",
+} as const;
+
 export const BRAND = {
   name: "LIMIT CODE STUDIO",
   short: "LIMIT CODE",

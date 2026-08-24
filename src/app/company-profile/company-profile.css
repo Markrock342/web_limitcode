@@ -1,0 +1,83 @@
+/* ============================================================
+   Company Profile — A4 formal document (screen preview + print)
+   โทนเอกสารทางการ: พื้นขาว ตัวอักษรเข้ม ตกแต่งน้อย
+   ============================================================ */
+
+.cp-root {
+  background: #e9edf2;
+  min-height: 100vh;
+}
+
+.cp-sheet {
+  position: relative;
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #ffffff;
+  color: #1f2937;
+  overflow: hidden;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+/* จอ: แสดงเป็นแผ่นกระดาษเรียงต่อกัน */
+@media screen {
+  .cp-pages {
+    padding: 96px 16px 64px;
+    overflow-x: auto;
+  }
+  .cp-sheet {
+    margin-bottom: 24px;
+    border: 1px solid #d8dee7;
+    box-shadow: 0 10px 30px -18px rgba(15, 23, 42, 0.25);
+  }
+}
+
+/* พิมพ์ / Save as PDF */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+  }
+
+  .cp-toolbar,
+  .cp-hint {
+    display: none !important;
+  }
+
+  .cp-pages {
+    padding: 0;
+    overflow: visible;
+  }
+
+  .cp-sheet {
+    width: 210mm;
+    height: 297mm;
+    min-height: 0;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .cp-sheet:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .cp-avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

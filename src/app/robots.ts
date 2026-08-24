@@ -6,12 +6,12 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/showcase", "/demo/"],
+        allow: ["/", "/showcase", "/contact", "/company-profile", "/demo/"],
         disallow: ["/api/", "/_next/", "/private/"],
       },
       {
         userAgent: "Googlebot",
-        allow: ["/", "/showcase", "/demo/"],
+        allow: ["/", "/showcase", "/contact", "/company-profile", "/demo/"],
         disallow: ["/api/"],
       },
     ],

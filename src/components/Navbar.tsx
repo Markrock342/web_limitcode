@@ -10,7 +10,8 @@ const NAV = [
   { href: "/#why", label: "ทำไมต้องเรา" },
   { href: "/#process", label: "ขั้นตอน" },
   { href: "/showcase", label: "ตัวอย่างระบบ" },
-  { href: "/#contact", label: "ติดต่อ" },
+  { href: "/company-profile", label: "Company Profile" },
+  { href: "/contact", label: "ติดต่อเรา" },
 ];
 
 export function Navbar() {

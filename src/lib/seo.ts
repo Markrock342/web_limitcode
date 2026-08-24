@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LINE_ID, LINE_URL } from "./site";
+import { CONTACT, LINE_ID, LINE_URL } from "./site";
 import { SYSTEM_DEMOS } from "./demos";
 
 /** เปลี่ยนเป็นโดเมนจริงเมื่อ deploy แล้ว */
@@ -172,13 +172,23 @@ export function organizationJsonLd() {
       name: "Thailand",
     },
     availableLanguage: ["Thai", "th"],
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "customer service",
-      availableLanguage: "Thai",
-      url: LINE_URL,
-    },
-    sameAs: [LINE_URL],
+    telephone: CONTACT.phoneHref.replace("tel:", ""),
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        availableLanguage: "Thai",
+        telephone: CONTACT.phoneHref.replace("tel:", ""),
+        name: CONTACT.personThai,
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        availableLanguage: "Thai",
+        url: LINE_URL,
+      },
+    ],
+    sameAs: [LINE_URL, CONTACT.facebookHref],
     knowsAbout: [
       "Web App Development",
       "Booking System",
@@ -195,7 +205,7 @@ export function organizationJsonLd() {
     offers: {
       "@type": "Offer",
       description: "พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ",
-      url: `${SITE_URL}/#contact`,
+      url: `${SITE_URL}/contact`,
     },
   };
 }

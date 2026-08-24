@@ -1,5 +1,6 @@
-import { LINE_ID } from "@/lib/site";
-import { Container, LineButton, LineGlyph } from "@/components/ui";
+import Link from "next/link";
+import { CONTACT, LINE_ID } from "@/lib/site";
+import { Container, FacebookGlyph, LineButton, LineGlyph, PhoneGlyph } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
 
@@ -47,6 +48,24 @@ export function Contact() {
               </div>
               <p className="mt-3 text-sm text-white/55">ปรึกษาฟรี · ตอบไว · เป็นกันเอง</p>
               <LineButton className="mt-5 w-full sm:w-auto">ทัก LINE OA: {LINE_ID}</LineButton>
+              <div className="mt-5 space-y-2.5 text-sm">
+                <a href={CONTACT.phoneHref} className="flex items-center gap-2.5 text-white/80 hover:text-white">
+                  <PhoneGlyph className="size-4 shrink-0 text-brand-300" />
+                  โทร{CONTACT.personThai} {CONTACT.phoneDisplay}
+                </a>
+                <a
+                  href={CONTACT.facebookHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 text-white/80 hover:text-white"
+                >
+                  <FacebookGlyph className="size-4 shrink-0 text-brand-300" />
+                  Facebook {CONTACT.person}
+                </a>
+                <Link href="/contact" className="inline-flex text-brand-200 hover:text-white">
+                  ดูช่องทางติดต่อทั้งหมด →
+                </Link>
+              </div>
             </div>
           </div>
         </Reveal>

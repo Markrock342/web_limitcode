@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BRAND, LINE_ID, LINE_URL } from "@/lib/site";
+import { BRAND, CONTACT, LINE_ID, LINE_URL } from "@/lib/site";
 import { Container, LineGlyph } from "./ui";
 import { Logo } from "./Logo";
 
@@ -49,7 +49,22 @@ export function Footer() {
             <div>
               <p className="font-semibold text-ink">ติดต่อ</p>
               <ul className="mt-3 space-y-2 text-slate-600">
-                <li><Link href="/#contact" className="hover:text-brand-700">ปรึกษาโปรเจกต์</Link></li>
+                <li><Link href="/contact" className="hover:text-brand-700">ติดต่อเรา</Link></li>
+                <li>
+                  <a href={CONTACT.phoneHref} className="hover:text-brand-700">
+                    โทร{CONTACT.personThai} {CONTACT.phoneDisplay}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={CONTACT.facebookHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-brand-700"
+                  >
+                    Facebook {CONTACT.person}
+                  </a>
+                </li>
                 <li>
                   <a href={LINE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-brand-700">
                     LINE OA {LINE_ID}
