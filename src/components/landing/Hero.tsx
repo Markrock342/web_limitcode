@@ -5,6 +5,10 @@ import { Container, LineButton, GhostButton, LineGlyph } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
 import { HeroTerminal } from "@/components/HeroTerminal";
+import { Typewriter } from "@/components/Typewriter";
+import { DataFlowFrame } from "@/components/DataFlowFrame";
+
+const HERO_PHRASES = ["ระบบจอง", "CRM / Job Order", "Admin Dashboard", "AI Workflow"];
 
 export function Hero() {
   return (
@@ -22,27 +26,39 @@ export function Hero() {
         <div>
           <Reveal>
             <p className="text-sm font-medium text-brand-700">
-              ฟรีแลนซ์ Software Studio · Web App และระบบหลังบ้าน
+              ฟรีแลนซ์ Software Studio · requirement → build → deploy
             </p>
           </Reveal>
 
           <Reveal delay={80}>
             <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
               พัฒนา{" "}
-              <span className="text-gradient">Web App และระบบหลังบ้าน</span>
-              <br className="hidden sm:block" />{" "}
-              สำหรับธุรกิจบริการ
+              <span className="mt-1 block min-h-[1.15em] text-brand-600 sm:mt-0 sm:inline-block sm:min-w-[18ch]">
+                <Typewriter phrases={HERO_PHRASES} />
+              </span>
+              <span className="block">สำหรับธุรกิจบริการ</span>
             </h1>
           </Reveal>
 
           <Reveal delay={160}>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-              LIMIT CODE STUDIO เป็นฟรีแลนซ์ที่โฟกัสระบบ ไม่ใช่รับทำเว็บทั่วไป — เปลี่ยนงานที่ยังอยู่บน
-              LINE, Excel และเอกสารกระจัดกระจาย ให้เป็นระบบจอง CRM Dashboard และ AI ที่ใช้ได้จริง
+              LIMIT CODE STUDIO โฟกัสระบบ ไม่ใช่รับทำเว็บทั่วไป — เปลี่ยนงานบน LINE, Excel
+              และเอกสารกระจัดกระจาย ให้เป็น Web App ที่ทีมใช้ได้จริง
             </p>
           </Reveal>
 
           <Reveal delay={240}>
+            <ol className="mt-6 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500">
+              {["01 Input", "02 Build", "03 Test", "04 Deploy"].map((step) => (
+                <li key={step} className="flex items-center gap-2">
+                  <span className="size-1.5 rounded-full bg-brand-500" />
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+
+          <Reveal delay={280}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <LineButton className="btn-sheen-auto">ปรึกษาโจทย์ระบบฟรี</LineButton>
               <GhostButton href="/#services">
@@ -52,7 +68,7 @@ export function Hero() {
             </div>
           </Reveal>
 
-          <Reveal delay={320}>
+          <Reveal delay={360}>
             <p className="mt-6 flex items-center gap-2 text-sm text-slate-500">
               <span className="inline-flex size-6 items-center justify-center bg-[#06C755] text-white">
                 <LineGlyph className="size-3.5" />
@@ -73,33 +89,35 @@ export function Hero() {
 
 function HeroVisual() {
   return (
-    <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-      <Link href="/demo/field-crm" className="group relative block overflow-hidden bg-slate-100">
-        <div className="relative aspect-[16/10]">
-          <Image
-            src="/showcase/field-crm.jpg"
-            alt="ตัวอย่างระบบ CRM / Job Order ทีมหน้างาน"
-            fill
-            sizes="(max-width:1024px) 100vw, 520px"
-            className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
-            priority
-          />
-        </div>
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent px-5 pb-5 pt-20">
-          <p className="text-xs font-medium text-white/70">ตัวอย่างระบบ · กดดูได้</p>
-          <p className="mt-0.5 font-display text-base font-bold text-white">
-            GuardNest Field — CRM / Job Order
-          </p>
-        </div>
-      </Link>
+    <DataFlowFrame>
+      <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
+        <Link href="/demo/field-crm" className="group relative block overflow-hidden bg-slate-100">
+          <div className="relative aspect-[16/10]">
+            <Image
+              src="/showcase/field-crm.jpg"
+              alt="ตัวอย่างระบบ CRM / Job Order ทีมหน้างาน"
+              fill
+              sizes="(max-width:1024px) 100vw, 520px"
+              className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+              priority
+            />
+          </div>
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent px-5 pb-5 pt-20">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/70">live system · กดดูได้</p>
+            <p className="mt-0.5 font-display text-base font-bold text-white">
+              GuardNest Field — CRM / Job Order
+            </p>
+          </div>
+        </Link>
 
-      <Reveal
-        variant="scale"
-        delay={400}
-        className="relative z-10 mt-4 sm:absolute sm:-bottom-6 sm:-left-4 sm:mt-0 sm:w-[240px]"
-      >
-        <HeroTerminal />
-      </Reveal>
-    </div>
+        <Reveal
+          variant="scale"
+          delay={400}
+          className="relative z-30 mt-4 sm:absolute sm:-bottom-6 sm:-left-4 sm:mt-0 sm:w-[252px]"
+        >
+          <HeroTerminal />
+        </Reveal>
+      </div>
+    </DataFlowFrame>
   );
 }

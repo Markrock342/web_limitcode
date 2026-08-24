@@ -516,7 +516,8 @@ export default function CompanyProfilePage() {
                       ["ผู้ติดต่อ", `${CP_CONTACT.person} (${CP_CONTACT.personThai}) • โทร ${CP_CONTACT.phoneDisplay}`],
                       ["LINE Official Account", CP_CONTACT.lineId],
                       ["Website", CP_CONTACT.websiteDisplay],
-                      ["Facebook", CP_CONTACT.facebookLabel],
+                      ["Facebook ส่วนตัว", CP_CONTACT.facebookLabel],
+                      ["Facebook Page", CP_CONTACT.pageFacebookLabel],
                     ].map(([label, value]) => (
                       <tr key={label}>
                         <td className={td + " w-[38%] bg-slate-50 font-bold text-slate-600"}>{label}</td>

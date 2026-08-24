@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 type Sequence = { cmd: string; out: { text: string; tone: "ok" | "info" }[] };
+type Phase = "typing" | "output" | "hold" | "deleting";
 
 const SEQUENCES: Sequence[] = [
   {
@@ -28,42 +29,65 @@ const SEQUENCES: Sequence[] = [
   },
 ];
 
-const TYPE_MS = 62;
-const LINE_MS = 340;
-const HOLD_MS = 2600;
+const TYPE_MS = 58;
+const DELETE_MS = 26;
+const LINE_MS = 280;
+const HOLD_MS = 1500;
 
 export function HeroTerminal({ className = "" }: { className?: string }) {
   const [seqIdx, setSeqIdx] = useState(0);
   const [typed, setTyped] = useState(0);
   const [shownOut, setShownOut] = useState(0);
+  const [phase, setPhase] = useState<Phase>("typing");
   const [reduced, setReduced] = useState(false);
 
   const seq = SEQUENCES[seqIdx];
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setReduced(true);
-      setTyped(SEQUENCES[0].cmd.length);
-      setShownOut(SEQUENCES[0].out.length);
-    }
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => {
+      setReduced(mq.matches);
+      if (mq.matches) {
+        setTyped(SEQUENCES[0].cmd.length);
+        setShownOut(SEQUENCES[0].out.length);
+        setPhase("hold");
+      }
+    };
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
   }, []);
 
   useEffect(() => {
     if (reduced) return;
     let t: ReturnType<typeof setTimeout>;
-    if (typed < seq.cmd.length) {
-      t = setTimeout(() => setTyped((n) => n + 1), TYPE_MS);
-    } else if (shownOut < seq.out.length) {
-      t = setTimeout(() => setShownOut((n) => n + 1), LINE_MS);
+    if (phase === "typing") {
+      if (typed < seq.cmd.length) {
+        t = setTimeout(() => setTyped((n) => n + 1), TYPE_MS);
+      } else {
+        t = setTimeout(() => setPhase("output"), 160);
+      }
+    } else if (phase === "output") {
+      if (shownOut < seq.out.length) {
+        t = setTimeout(() => setShownOut((n) => n + 1), LINE_MS);
+      } else {
+        t = setTimeout(() => setPhase("hold"), HOLD_MS);
+      }
+    } else if (phase === "hold") {
+      t = setTimeout(() => {
+        setShownOut(0);
+        setPhase("deleting");
+      }, 420);
+    } else if (typed > 0) {
+      t = setTimeout(() => setTyped((n) => n - 1), DELETE_MS);
     } else {
       t = setTimeout(() => {
-        setTyped(0);
-        setShownOut(0);
         setSeqIdx((i) => (i + 1) % SEQUENCES.length);
-      }, HOLD_MS);
+        setPhase("typing");
+      }, DELETE_MS);
     }
     return () => clearTimeout(t);
-  }, [reduced, typed, shownOut, seq]);
+  }, [reduced, typed, shownOut, phase, seq]);
 
   return (
     <div
@@ -75,6 +99,7 @@ export function HeroTerminal({ className = "" }: { className?: string }) {
         <span className="size-2 rounded-full bg-[#febc2e]" />
         <span className="size-2 rounded-full bg-[#28c840]" />
         <span className="ml-2 font-mono text-[10px] tracking-wide text-white/40">limitcode — zsh</span>
+        <span className="ml-auto font-mono text-[10px] text-emerald-400/80">deploy live</span>
       </div>
       <div className="px-3.5 py-3 font-mono text-[11px] leading-5">
         <p className="whitespace-nowrap">

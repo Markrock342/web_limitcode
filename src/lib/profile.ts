@@ -17,8 +17,8 @@ export const CP_CONTACT = {
   websiteHref: "https://www.limitcode.shop/",
   facebookHref: CONTACT.facebookHref,
   facebookLabel: CONTACT.facebookLabel,
-  pageFacebookHref: "https://www.facebook.com/profile.php?id=61590787370304",
-  pageFacebookLabel: "LIMIT CODE STUDIO Facebook Page",
+  pageFacebookHref: CONTACT.pageFacebookHref,
+  pageFacebookLabel: CONTACT.pageFacebookName,
 };
 
 export const CP_COVER = {

@@ -9,6 +9,9 @@ export const CONTACT = {
   phoneHref: "tel:+66842652544",
   facebookHref: "https://www.facebook.com/mark.kitti.950719",
   facebookLabel: "facebook.com/mark.kitti.950719",
+  pageFacebookHref: "https://www.facebook.com/profile.php?id=61590787370304",
+  pageFacebookLabel: "LIMIT CODE STUDIO",
+  pageFacebookName: "เพจทางการ LIMIT CODE STUDIO",
 } as const;
 
 export const BRAND = {

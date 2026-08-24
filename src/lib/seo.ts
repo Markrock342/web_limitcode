@@ -188,7 +188,7 @@ export function organizationJsonLd() {
         url: LINE_URL,
       },
     ],
-    sameAs: [LINE_URL, CONTACT.facebookHref],
+    sameAs: [LINE_URL, CONTACT.facebookHref, CONTACT.pageFacebookHref],
     knowsAbout: [
       "Web App Development",
       "Booking System",

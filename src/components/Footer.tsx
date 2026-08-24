@@ -57,6 +57,16 @@ export function Footer() {
                 </li>
                 <li>
                   <a
+                    href={CONTACT.pageFacebookHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-brand-700"
+                  >
+                    {CONTACT.pageFacebookName}
+                  </a>
+                </li>
+                <li>
+                  <a
                     href={CONTACT.facebookHref}
                     target="_blank"
                     rel="noopener noreferrer"
