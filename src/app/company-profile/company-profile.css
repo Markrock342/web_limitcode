@@ -33,6 +33,17 @@
   }
 }
 
+/* มือถือ: ย่อแผ่น A4 ให้พอดีความกว้าง ไม่ต้องเลื่อนข้าง */
+@media screen and (max-width: 860px) {
+  .cp-pages {
+    overflow-x: hidden;
+    padding-inline: 12px;
+  }
+  .cp-sheet {
+    zoom: min(1, calc((100vw - 24px) / 210mm));
+  }
+}
+
 /* พิมพ์ / Save as PDF */
 @media print {
   @page {
