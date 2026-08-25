@@ -27,8 +27,8 @@ export function Hero() {
         <div>
           <Reveal>
             <div className="flex items-center gap-3">
-              <Logo className="size-11 sm:size-12" />
-              <BrandWordmark className="text-xl sm:text-2xl" />
+              <Logo className="size-11 shrink-0 sm:size-12" />
+              <BrandWordmark className="text-[clamp(1.05rem,4.4vw,1.5rem)] sm:text-2xl" />
             </div>
           </Reveal>
 
@@ -77,12 +77,14 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={360}>
-            <p className="mt-6 flex items-center gap-2 text-sm text-slate-500">
-              <span className="inline-flex size-6 items-center justify-center bg-[#06C755] text-white">
+            <p className="mt-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
+              <span className="inline-flex size-6 shrink-0 items-center justify-center bg-[#06C755] text-white">
                 <LineGlyph className="size-3.5" />
               </span>
-              ทักโจทย์มาได้ที่ LINE OA{" "}
-              <span className="font-display font-bold text-ink">{LINE_ID}</span>
+              <span className="whitespace-nowrap">
+                ทักโจทย์มาได้ที่ LINE OA{" "}
+                <span className="font-display font-bold text-ink">{LINE_ID}</span>
+              </span>
             </p>
           </Reveal>
         </div>
