@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BRAND, CONTACT, LINE_ID, LINE_URL } from "@/lib/site";
 import { Container, LineGlyph } from "./ui";
-import { Logo } from "./Logo";
+import { BrandWordmark, Logo } from "./Logo";
 
 export function Footer() {
   return (
@@ -11,9 +11,7 @@ export function Footer() {
           <div className="max-w-md">
             <div className="flex items-center gap-2.5">
               <Logo className="size-9" />
-              <span className="font-display text-lg font-bold tracking-tight text-ink">
-                LIMIT<span className="text-brand-600"> CODE</span> STUDIO
-              </span>
+              <BrandWordmark />
             </div>
             <p className="mt-4 text-sm leading-relaxed text-slate-600">{BRAND.tagline}</p>
             <a

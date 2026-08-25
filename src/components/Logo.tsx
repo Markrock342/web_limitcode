@@ -17,3 +17,11 @@ export function Logo({ className = "" }: { className?: string }) {
     </span>
   );
 }
+
+export function BrandWordmark({ className = "text-lg" }: { className?: string }) {
+  return (
+    <span className={`font-display font-bold tracking-tight text-ink ${className}`}>
+      LIMIT<span className="text-brand-600"> CODE</span> STUDIO
+    </span>
+  );
+}

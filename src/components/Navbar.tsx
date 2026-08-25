@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { LineButton } from "./ui";
-import { Logo } from "./Logo";
+import { BrandWordmark, Logo } from "./Logo";
 
 const NAV = [
   { href: "/#services", label: "ระบบที่ทำ" },
@@ -61,9 +61,7 @@ export function Navbar() {
       <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
           <Logo className="size-9" />
-          <span className="font-display text-lg font-bold tracking-tight text-ink">
-            LIMIT<span className="text-brand-600"> CODE</span>
-          </span>
+          <BrandWordmark className="text-[15px] sm:text-lg" />
         </Link>
 
         <div className="hidden items-center gap-1 lg:flex">

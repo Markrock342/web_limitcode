@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LINE_ID } from "@/lib/site";
+import { BrandWordmark, Logo } from "@/components/Logo";
 import { Container, LineButton, GhostButton, LineGlyph } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
@@ -25,7 +26,14 @@ export function Hero() {
       <Container className="grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
         <div>
           <Reveal>
-            <p className="text-sm font-medium text-brand-700">
+            <div className="flex items-center gap-3">
+              <Logo className="size-11 sm:size-12" />
+              <BrandWordmark className="text-xl sm:text-2xl" />
+            </div>
+          </Reveal>
+
+          <Reveal delay={40}>
+            <p className="mt-5 text-sm font-medium text-brand-700">
               ฟรีแลนซ์ทีม 3 คน ไม่ใช่บริษัท รับทำเว็บไซต์ ระบบ และงานที่คุยมาได้
             </p>
           </Reveal>
