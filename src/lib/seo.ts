@@ -10,7 +10,7 @@ export const SITE_NAME = "LIMIT CODE STUDIO";
 export const SITE_NAME_SHORT = "LIMIT CODE";
 
 export const DEFAULT_DESCRIPTION =
-  "LIMIT CODE STUDIO ทีม 3 คน รับทำเว็บไซต์ ระบบจอง CRM Dashboard และงานที่ธุรกิจใช้จริง เปลี่ยนงานบน LINE/Excel ให้เป็นเว็บและระบบที่ทีมใช้ได้ทุกวัน";
+  "LIMIT CODE STUDIO is a three-person freelance team — websites, booking, CRM, dashboards, and the tools a business actually uses. If the work still lives on LINE and Excel, bring it.";
 
 export const SEO_KEYWORDS = [
   "รับทำระบบจองออนไลน์",
@@ -42,7 +42,7 @@ export const SEO_KEYWORDS = [
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — ฟรีแลนซ์พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
+    default: `${SITE_NAME} — freelance Web Apps and back-office systems for service businesses`,
     template: `%s | ${SITE_NAME_SHORT}`,
   },
   description: DEFAULT_DESCRIPTION,
@@ -65,28 +65,31 @@ export const defaultMetadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
     languages: {
+      "en": SITE_URL,
       "th-TH": SITE_URL,
+      "zh-CN": SITE_URL,
     },
   },
   openGraph: {
     type: "website",
-    locale: "th_TH",
+    locale: "en_US",
+    alternateLocale: ["th_TH", "zh_CN"],
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — ฟรีแลนซ์ Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
+    title: `${SITE_NAME} — freelance Web Apps and back-office systems`,
     description: DEFAULT_DESCRIPTION,
     images: [
       {
         url: "/brand/lcs-cover.png",
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} — ฟรีแลนซ์ Software Studio`,
+        alt: `${SITE_NAME} — freelance software studio`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — ฟรีแลนซ์ Web App และระบบหลังบ้านสำหรับธุรกิจบริการ`,
+    title: `${SITE_NAME} — freelance Web Apps and back-office systems`,
     description: DEFAULT_DESCRIPTION,
     images: ["/brand/lcs-cover.png"],
   },
@@ -144,7 +147,7 @@ export function pageMetadata({
       description,
       url,
       siteName: SITE_NAME,
-      locale: "th_TH",
+      locale: "en_US",
       type: "website",
       images: [{ url: "/brand/lcs-cover.png", width: 1200, height: 630, alt: SITE_NAME }],
     },
@@ -171,20 +174,20 @@ export function organizationJsonLd() {
       "@type": "Country",
       name: "Thailand",
     },
-    availableLanguage: ["Thai", "th"],
+    availableLanguage: ["English", "Thai", "Chinese", "en", "th", "zh"],
     telephone: CONTACT.phoneHref.replace("tel:", ""),
     contactPoint: [
       {
         "@type": "ContactPoint",
         contactType: "customer service",
-        availableLanguage: "Thai",
+        availableLanguage: ["English", "Thai", "Chinese"],
         telephone: CONTACT.phoneHref.replace("tel:", ""),
         name: CONTACT.personThai,
       },
       {
         "@type": "ContactPoint",
         contactType: "customer service",
-        availableLanguage: "Thai",
+        availableLanguage: ["English", "Thai", "Chinese"],
         url: LINE_URL,
       },
     ],
@@ -217,7 +220,7 @@ export function websiteJsonLd() {
     name: SITE_NAME,
     url: SITE_URL,
     description: DEFAULT_DESCRIPTION,
-    inLanguage: "th-TH",
+    inLanguage: "en",
     publisher: {
       "@type": "Organization",
       name: SITE_NAME,

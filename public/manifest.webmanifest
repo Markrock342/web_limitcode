@@ -1,12 +1,12 @@
 {
   "name": "LIMIT CODE STUDIO",
   "short_name": "LIMIT CODE",
-  "description": "ฟรีแลนซ์ Software Studio พัฒนา Web App และระบบหลังบ้านสำหรับธุรกิจบริการ",
+  "description": "Three-person freelance team. Websites, booking, CRM, and back-office systems a business actually uses.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0b61d6",
-  "lang": "th",
+  "lang": "en",
   "icons": [
     {
       "src": "/icon-192.png",
