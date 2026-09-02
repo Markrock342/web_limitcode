@@ -82,7 +82,7 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="whitespace-nowrap rounded-full px-2 py-2 text-[13px] font-medium text-slate-600 transition-colors hover:bg-brand-50 hover:text-brand-700 2xl:px-3 2xl:text-sm"
+                className="relative whitespace-nowrap px-2 py-2 text-[13px] font-medium text-slate-600 transition-colors after:absolute after:inset-x-2 after:bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-brand-500 after:transition-transform after:duration-300 after:ease-out-quart hover:text-brand-700 hover:after:scale-x-100 2xl:px-3 2xl:text-sm"
               >
                 {item.label}
               </Link>

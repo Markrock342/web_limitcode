@@ -37,9 +37,9 @@ export function ShowcaseGrid() {
               type="button"
               onClick={() => setActive(f)}
               aria-pressed={isActive}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
+              className={`px-3.5 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors ${
                 isActive
-                  ? "bg-brand-600 text-white shadow-soft"
+                  ? "bg-brand-600 text-white"
                   : "border border-slate-200 bg-white text-slate-600 hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700"
               }`}
             >
@@ -49,7 +49,7 @@ export function ShowcaseGrid() {
         })}
       </div>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((d) => (
           <DemoCard key={d.slug} demo={d} />
         ))}

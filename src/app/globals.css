@@ -299,6 +299,20 @@ body {
   }
 }
 
+.sheet-wash {
+  background-image:
+    linear-gradient(to right, rgba(20, 121, 239, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 121, 239, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.spec-row {
+  transition: background-color 0.28s var(--ease-out-quart);
+}
+.spec-row:hover {
+  background-color: rgba(234, 244, 255, 0.7);
+}
+
 ::selection {
   background: rgba(20, 121, 239, 0.22);
 }

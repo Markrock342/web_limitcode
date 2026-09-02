@@ -17,9 +17,10 @@ export function Footer() {
         : "三人独立接案团队，不是公司。网站、预约、CRM，以及生意真正在用的那摊。";
 
   return (
-    <footer className="mt-auto border-t border-slate-200 bg-slate-50">
-      <Container className="py-12">
-        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+    <footer className="mt-auto border-t border-slate-200 bg-[#f7f9fc]">
+      <div className="h-px bg-linear-to-r from-brand-600 via-brand-400 to-sky-400" />
+      <Container className="py-14">
+        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-md">
             <div className="flex items-center gap-2.5">
               <Logo className="size-9" />
@@ -30,7 +31,7 @@ export function Footer() {
               href={LINE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#06C755] px-4 py-2 text-sm font-semibold text-white"
+              className="mt-5 inline-flex items-center gap-2 bg-[#06C755] px-4 py-2 text-sm font-semibold text-white transition hover:brightness-110"
             >
               <LineGlyph className="size-4" />
               LINE OA: {LINE_ID}
@@ -39,7 +40,9 @@ export function Footer() {
 
           <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-3">
             <div>
-              <p className="font-semibold text-ink">{t.footer.services}</p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink">
+                {t.footer.services}
+              </p>
               <ul className="mt-3 space-y-2 text-slate-600">
                 <li><Link href="/#services" className="hover:text-brand-700">{t.footer.booking}</Link></li>
                 <li><Link href="/#services" className="hover:text-brand-700">{t.footer.crm}</Link></li>
@@ -48,7 +51,9 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="font-semibold text-ink">{t.footer.work}</p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink">
+                {t.footer.work}
+              </p>
               <ul className="mt-3 space-y-2 text-slate-600">
                 <li><Link href="/showcase" className="hover:text-brand-700">{t.footer.allWork}</Link></li>
                 <li><Link href="/#clients" className="hover:text-brand-700">{t.footer.clients}</Link></li>
@@ -58,7 +63,9 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="font-semibold text-ink">{t.footer.contact}</p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink">
+                {t.footer.contact}
+              </p>
               <ul className="mt-3 space-y-2 text-slate-600">
                 <li><Link href="/contact" className="hover:text-brand-700">{t.footer.contactUs}</Link></li>
                 <li>
@@ -96,7 +103,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-slate-200 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-slate-200 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} LIMIT CODE STUDIO</p>
           <div className="flex flex-wrap items-center gap-3">
             <p>{t.footer.madeBy}</p>

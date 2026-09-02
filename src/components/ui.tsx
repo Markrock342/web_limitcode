@@ -18,10 +18,28 @@ export function Container({
 
 export function SectionTag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-3.5 py-1.5 text-sm font-medium text-brand-700">
-      <span className="size-1.5 rounded-full bg-brand-500" />
+    <span className="inline-flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-700">
+      <span aria-hidden className="h-px w-7 bg-brand-500" />
       {children}
     </span>
+  );
+}
+
+export function CropFrame({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`relative ${className}`}>
+      <span aria-hidden className="pointer-events-none absolute -left-px -top-px z-2 size-2.5 border-l-[1.5px] border-t-[1.5px] border-brand-500" />
+      <span aria-hidden className="pointer-events-none absolute -right-px -top-px z-2 size-2.5 border-r-[1.5px] border-t-[1.5px] border-brand-500" />
+      <span aria-hidden className="pointer-events-none absolute -bottom-px -left-px z-2 size-2.5 border-b-[1.5px] border-l-[1.5px] border-brand-500" />
+      <span aria-hidden className="pointer-events-none absolute -bottom-px -right-px z-2 size-2.5 border-b-[1.5px] border-r-[1.5px] border-brand-500" />
+      {children}
+    </div>
   );
 }
 

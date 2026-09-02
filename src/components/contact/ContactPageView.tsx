@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   Container,
   FacebookGlyph,
@@ -18,17 +17,18 @@ export function ContactPageView() {
   return (
     <main>
       <section className="relative overflow-hidden border-b border-slate-200 bg-white">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]" />
-        <span aria-hidden className="beam-x top-[120px] [animation-delay:-2s]" />
+        <div className="pointer-events-none absolute inset-0 -z-10 sheet-wash mask-[radial-gradient(ellipse_at_top,black,transparent_72%)]" />
+        <span aria-hidden className="beam-x top-30 [animation-delay:-2s]" />
         <Container className="grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-700">
+            <p className="inline-flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-700">
+              <span aria-hidden className="h-px w-7 bg-brand-500" />
               {t.contact.pageKicker}
             </p>
-            <h1 className="mt-4 max-w-xl font-display text-4xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl">
+            <h1 className="mt-4 max-w-xl font-display text-[clamp(2rem,1.4rem+2.4vw,3rem)] font-extrabold leading-tight tracking-tight text-ink">
               {fill(t.contact.pageH1, { name: CONTACT.personThai, role: CONTACT.role })}
             </h1>
-            <p className="mt-4 max-w-xl text-lg text-slate-600">
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
               {fill(t.contact.pageLead, {
                 person: CONTACT.person,
                 role: CONTACT.role,
@@ -38,29 +38,38 @@ export function ContactPageView() {
             <ol className="mt-6 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500">
               {["01 Requirement", "02 Scope", "03 Build", "04 Deploy"].map((step) => (
                 <li key={step} className="flex items-center gap-2">
-                  <span className="size-1.5 rounded-full bg-brand-500" />
+                  <span className="size-1.5 bg-brand-500" />
                   {step}
                 </li>
               ))}
             </ol>
           </div>
 
-          <div className="relative overflow-hidden rounded-[28px] bg-[#0b1f3a] p-7 text-white shadow-lift sm:p-8">
+          <div className="relative overflow-hidden border border-slate-200 bg-[#0b1f3a] text-white shadow-lift">
             <span className="scan-line pointer-events-none absolute inset-x-0 top-0 h-16" />
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">{t.contact.primary}</p>
-            <div className="mt-4 flex items-center gap-3">
-              <span className="inline-flex size-12 items-center justify-center bg-[#06C755]">
-                <LineGlyph className="size-6" />
+            <div className="flex items-center gap-2 border-b border-white/10 px-5 py-2.5">
+              <span className="size-2 rounded-full bg-[#ff5f57]" />
+              <span className="size-2 rounded-full bg-[#febc2e]" />
+              <span className="size-2 rounded-full bg-[#28c840]" />
+              <span className="ml-2 font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">
+                {t.contact.primary}
               </span>
-              <div>
-                <p className="text-sm text-white/55">LINE Official Account</p>
-                <p className="font-display text-3xl font-bold tracking-tight">{LINE_ID}</p>
-              </div>
             </div>
-            <p className="mt-4 text-sm text-white/70">{t.contact.primaryHint}</p>
-            <LineButton className="mt-6 w-full">
-              {t.contact.lineCta} {LINE_ID}
-            </LineButton>
+            <div className="p-7 sm:p-8">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex size-12 items-center justify-center bg-[#06C755]">
+                  <LineGlyph className="size-6" />
+                </span>
+                <div>
+                  <p className="text-sm text-white/55">LINE Official Account</p>
+                  <p className="font-display text-3xl font-bold tracking-tight">{LINE_ID}</p>
+                </div>
+              </div>
+              <p className="mt-4 text-sm text-white/70">{t.contact.primaryHint}</p>
+              <LineButton className="mt-6 w-full">
+                {t.contact.lineCta} {LINE_ID}
+              </LineButton>
+            </div>
           </div>
         </Container>
       </section>
@@ -70,7 +79,7 @@ export function ContactPageView() {
           <div className="grid gap-4 lg:grid-cols-3">
             <a
               href={CONTACT.phoneHref}
-              className="group relative overflow-hidden rounded-3xl bg-[#0b1f3a] px-6 py-7 text-white shadow-soft transition-transform duration-300 ease-out-quart hover:-translate-y-0.5"
+              className="group relative overflow-hidden border border-slate-800 bg-[#0b1f3a] px-6 py-7 text-white transition-colors hover:border-brand-400"
             >
               <span className="status-run" />
               <PhoneGlyph className="size-6 text-brand-200" />
@@ -87,13 +96,15 @@ export function ContactPageView() {
               href={CONTACT.pageFacebookHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 transition-colors hover:border-brand-200 hover:bg-brand-50/40"
+              className="group relative overflow-hidden border border-slate-200 bg-white p-6 transition-colors hover:border-brand-300 hover:bg-brand-50/40"
             >
               <span className="status-run" />
               <span className="inline-flex size-12 items-center justify-center bg-[#1877F2] text-white">
                 <FacebookGlyph className="size-6" />
               </span>
-              <p className="mt-5 text-sm font-medium text-slate-500">Facebook Page</p>
+              <p className="mt-5 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-slate-500">
+                Facebook Page
+              </p>
               <p className="mt-1 font-display text-xl font-bold text-ink">{CONTACT.pageFacebookLabel}</p>
               <p className="mt-2 text-sm text-brand-700">{CONTACT.pageFacebookName}</p>
             </a>
@@ -102,11 +113,11 @@ export function ContactPageView() {
               href={CONTACT.facebookHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex min-h-[180px] flex-col justify-between overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 p-6 hover:border-brand-200"
+              className="group relative flex min-h-45 flex-col justify-between overflow-hidden border border-slate-200 bg-[#f7f9fc] p-6 hover:border-brand-300"
             >
               <span className="status-run" />
               <div className="flex items-center gap-3">
-                <span className="inline-flex size-10 items-center justify-center rounded-full bg-[#1877F2] text-white">
+                <span className="inline-flex size-10 items-center justify-center bg-[#1877F2] text-white">
                   <FacebookGlyph className="size-5" />
                 </span>
                 <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-500">
