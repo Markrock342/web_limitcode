@@ -34,7 +34,11 @@ export function Clients() {
                         alt={client.name}
                         width={client.width}
                         height={client.height}
-                        className="client-logo h-9 w-auto max-w-[160px] object-contain sm:h-11 sm:max-w-[220px]"
+                        className={
+                          client.height > client.width
+                            ? "client-logo h-20 w-auto max-w-[120px] object-contain sm:h-24 sm:max-w-[140px]"
+                            : "client-logo h-9 w-auto max-w-[160px] object-contain sm:h-11 sm:max-w-[220px]"
+                        }
                       />
                     </a>
                   </li>

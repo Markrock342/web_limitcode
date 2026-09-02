@@ -312,6 +312,21 @@ export const CLIENT_WORK: Demo[] = [
     features: ["คำนวณพื้นดวง", "สนทนาตามหมวด", "เครดิตและแพ็กเกจ Pro"],
   },
   {
+    slug: "sirikanchana",
+    name: "Sirikanchana",
+    category: "ลูกค้าของเรา",
+    icon: "calendar",
+    tagline: "จองคอร์ทแบดมินตันออนไลน์",
+    description:
+      "ระบบจองสนามแบดศิริกาญจนา 25 คอร์ท จองตามช่วงเวลา หลายคอร์ท ชำระ PromptPay — เว็บจริงที่ออนไลน์แล้ว",
+    liveUrl: "https://sirikanchana.com/",
+    preview: "/showcase/sirikanchana.jpg",
+    swatch: "from-[#3953A4] via-orange-500 to-orange-400",
+    accentText: "text-[#3953A4]",
+    tags: ["Booking", "Live", "Sports"],
+    features: ["จองหลายช่วง หลายคอร์ท", "ชำระ PromptPay", "สมาชิก LINE"],
+  },
+  {
     slug: "sombattour",
     name: "สมบัติทัวร์",
     category: "ลูกค้าของเรา",

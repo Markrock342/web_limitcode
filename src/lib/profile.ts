@@ -152,6 +152,13 @@ export const CP_PROJECTS: CpProject[] = [
     desc: "เว็บดูดวงด้วย AI คำนวณพื้นดวงจากวันเกิด แล้วสนทนาตามหมวด พร้อมแพ็กเกจ Free / Pro",
   },
   {
+    name: "Sirikanchana",
+    url: "https://sirikanchana.com/",
+    category: "Sports Booking / Badminton Court",
+    label: "Court Booking / PromptPay",
+    desc: "ระบบจองคอร์ทแบดมินตันออนไลน์ของสนามแบดศิริกาญจนา จองตามช่วงเวลา ชำระ PromptPay",
+  },
+  {
     name: "Marketimes Asia",
     url: "https://marketimesasia.com/",
     category: "Digital Media / Publishing Platform",

@@ -208,6 +208,13 @@ export const CLIENTS: Client[] = [
     height: 175,
   },
   {
+    name: "Sirikanchana",
+    logo: "/clients/sirikanchana.png",
+    url: "https://sirikanchana.com/",
+    width: 562,
+    height: 720,
+  },
+  {
     name: "สมบัติทัวร์",
     logo: "/clients/sombattour.png",
     url: "https://www.sombattour.com/",

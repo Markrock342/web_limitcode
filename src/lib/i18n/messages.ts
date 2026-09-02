@@ -184,7 +184,7 @@ export const th = {
     pageKicker: "ตัวอย่างระบบ · Live Demo",
     pageTitle: "ลูกค้าของเรา และเดโมที่กดลองได้",
     pageBody:
-      "เลือกหมวดลูกค้าของเรา จะเห็นเว็บที่ออนไลน์แล้ว เช่น NurseGo KindGo และ Horasard เดโมม็อกมีแอดมิน/CMS ให้คลิกเล่น การ์ดป้าย Live คือเว็บจริง",
+      "เลือกหมวดลูกค้าของเรา จะเห็นเว็บที่ออนไลน์แล้ว เช่น NurseGo KindGo Horasard และ Sirikanchana เดโมม็อกมีแอดมิน/CMS ให้คลิกเล่น การ์ดป้าย Live คือเว็บจริง",
     pageCta: "มีงานระบบ ทักมาคุยได้เลย",
     openLive: "เปิดเว็บจริง",
     openDemo: "เปิดดูตัวอย่าง",
@@ -482,7 +482,7 @@ export const en: Messages = {
     pageKicker: "Sample systems · Live Demo",
     pageTitle: "Our clients, and mockups you can click",
     pageBody:
-      "Filter Our clients to see live sites such as NurseGo, KindGo and Horasard. Mockup demos include admin/CMS you can click. A Live badge means the real site.",
+      "Filter Our clients to see live sites such as NurseGo, KindGo, Horasard and Sirikanchana. Mockup demos include admin/CMS you can click. A Live badge means the real site.",
     pageCta: "Got a system brief? Talk to us",
     openLive: "Open live site",
     openDemo: "Open the demo",
@@ -779,7 +779,7 @@ export const zh: Messages = {
     pageKicker: "系统例子 · Live Demo",
     pageTitle: "我们的客户，加上能点的模型",
     pageBody:
-      "筛「我们的客户」看已上线的站，比如 NurseGo、KindGo、Horasard。模型演示带后台/CMS，可以点着玩。标了 Live 的是真站。",
+      "筛「我们的客户」看已上线的站，比如 NurseGo、KindGo、Horasard、Sirikanchana。模型演示带后台/CMS，可以点着玩。标了 Live 的是真站。",
     pageCta: "有系统题目，拿来聊",
     openLive: "打开真站",
     openDemo: "打开演示",

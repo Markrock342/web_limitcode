@@ -92,6 +92,8 @@ const en = {
       KindGo: "A daily-life services platform matching customers with providers across categories",
       NurseGo: "A platform for nursing and healthcare staff work",
       Horasard: "AI astrology from a birth chart, then chat by topic, with Free / Pro plans",
+      Sirikanchana:
+        "Online badminton court booking for Sirikanchana — pick a slot, book several courts, pay with PromptPay",
       "Marketimes Asia": "Online media and content site for Marketimes Asia",
       สมบัติทัวร์: "A transport-sector project for Sombat Tour",
       "LIMIT CODE DEMO SYSTEMS":
@@ -212,6 +214,7 @@ const zh = {
       KindGo: "日常生活服务平台，把客人和多品类服务方接上",
       NurseGo: "护理和医疗人员接活的平台",
       Horasard: "按生日算盘的 AI 占星，按主题聊，带 Free / Pro 套餐",
+      Sirikanchana: "Sirikanchana 羽毛球馆线上订场：按时段订、可多片场、PromptPay 付款",
       "Marketimes Asia": "Marketimes Asia 的线上媒体和内容站",
       สมบัติทัวร์: "给 สมบัติทัวร์ 做的运输方向项目",
       "LIMIT CODE DEMO SYSTEMS": "能点进去的系统例子，开工前就能看见怎么转",
