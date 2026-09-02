@@ -28,7 +28,7 @@ export const th = {
     madeBy: "ทำโดยฟรีแลนซ์ LIMIT CODE STUDIO",
   },
   hero: {
-    eyebrow: "ฟรีแลนซ์ทีม 3 คน ไม่ใช่บริษัท เว็บไซต์ก็ทำ ระบบก็ทำ คุยมาได้",
+    eyebrow: "ทีมฟรีแลนซ์ 3 คน ไม่ใช่บริษัท เว็บก็รับ ระบบก็รับ",
     lead: "รับทำ",
     phrases: ["เว็บไซต์", "ระบบจอง", "CRM / Job Order", "Admin Dashboard"],
     trail: "ให้ธุรกิจใช้ได้จริง",
@@ -326,7 +326,7 @@ export const en: Messages = {
     madeBy: "Designed and built by freelance team LIMIT CODE STUDIO",
   },
   hero: {
-    eyebrow: "Three-person freelance team, not a company. Websites, systems, and the work you already do.",
+    eyebrow: "Three-person freelance team, not a company. We take websites and we take systems.",
     lead: "Build",
     phrases: ["websites", "booking systems", "CRM / Job Order", "Admin Dashboards"],
     trail: "the business can actually use",
@@ -623,7 +623,7 @@ export const zh: Messages = {
     madeBy: "由自由职业团队 LIMIT CODE STUDIO 设计开发",
   },
   hero: {
-    eyebrow: "三人独立接案团队，不是公司。网站、系统、手头上的活，都可以谈。",
+    eyebrow: "三人独立接案团队，不是公司。网站也接，系统也接。",
     lead: "做真正拿来用的",
     phrases: ["网站", "预约系统", "CRM / Job Order", "Admin Dashboard"],
     trail: "",
