@@ -10,7 +10,7 @@ export const SITE_NAME = "LIMIT CODE STUDIO";
 export const SITE_NAME_SHORT = "LIMIT CODE";
 
 export const DEFAULT_DESCRIPTION =
-  "LIMIT CODE STUDIO ทีม 3 คน รับทำเว็บไซต์ ระบบจอง CRM Dashboard และงานที่ธุรกิจใช้อยู่จริง เปลี่ยนงานบน LINE/Excel ให้เป็นเว็บและระบบที่ทีมใช้ได้ทุกวัน";
+  "LIMIT CODE STUDIO ทีม 3 คน รับทำเว็บไซต์ ระบบจอง CRM Dashboard และงานที่ธุรกิจใช้จริง เปลี่ยนงานบน LINE/Excel ให้เป็นเว็บและระบบที่ทีมใช้ได้ทุกวัน";
 
 export const SEO_KEYWORDS = [
   "รับทำระบบจองออนไลน์",

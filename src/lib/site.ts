@@ -19,7 +19,7 @@ export const CONTACT = {
 export const BRAND = {
   name: "LIMIT CODE STUDIO",
   short: "LIMIT CODE",
-  tagline: "ฟรีแลนซ์ทีม 3 คน ไม่ใช่บริษัท รับทำเว็บไซต์ ระบบจอง CRM และงานที่ธุรกิจใช้อยู่จริง",
+  tagline: "ฟรีแลนซ์ทีม 3 คน ไม่ใช่บริษัท รับทำเว็บไซต์ ระบบจอง CRM และงานที่ธุรกิจใช้จริง",
 };
 
 export type IconName =
