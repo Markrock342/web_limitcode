@@ -67,6 +67,10 @@ export function Contact() {
                     <EmailGlyph className="size-4 shrink-0 text-brand-300" />
                     {CONTACT.email}
                   </a>
+                  <a href={CONTACT.salesEmailHref} className="flex min-h-11 items-center gap-2.5 text-white/80 hover:text-white">
+                    <EmailGlyph className="size-4 shrink-0 text-brand-300" />
+                    {CONTACT.salesEmail}
+                  </a>
                   <a
                     href={CONTACT.pageFacebookHref}
                     target="_blank"

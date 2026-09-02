@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "ติดต่อเรา — คุณ Mark Project Manager",
-  description: `ติดต่อ LIMIT CODE STUDIO ผ่าน ${CONTACT.personThai} (${CONTACT.person}) โทร ${CONTACT.phoneDisplay} อีเมล ${CONTACT.email} Facebook Page หรือ LINE OA ${LINE_ID}`,
+  description: `ติดต่อ LIMIT CODE STUDIO ผ่าน ${CONTACT.personThai} (${CONTACT.person}) โทร ${CONTACT.phoneDisplay} อีเมล ${CONTACT.email} ${CONTACT.salesEmail} Facebook Page หรือ LINE OA ${LINE_ID}`,
   path: "/contact",
   keywords: [
     "ติดต่อ LIMIT CODE STUDIO",
@@ -16,6 +16,7 @@ export const metadata = pageMetadata({
     "Project Manager",
     "โทร 084-265-2544",
     "limitcodestudio@gmail.com",
+    "salelimitcode@gmail.com",
     "LINE OA @026iaomj",
     "เพจทางการ LIMIT CODE STUDIO",
     "ฟรีแลนซ์ทำระบบ",

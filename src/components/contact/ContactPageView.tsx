@@ -93,17 +93,24 @@ export function ContactPageView() {
               </p>
             </a>
 
-            <a
-              href={CONTACT.emailHref}
-              className="group relative overflow-hidden border border-brand-700 bg-brand-800 px-6 py-7 text-white transition-colors hover:border-brand-400"
-            >
+            <div className="group relative overflow-hidden border border-brand-700 bg-brand-800 px-6 py-7 text-white">
               <span className="status-run" />
               <EmailGlyph className="size-6 text-brand-200" />
               <p className="mt-8 text-sm font-medium text-white/55">{t.contact.email}</p>
-              <p className="mt-1 break-all font-display text-lg font-bold tracking-tight sm:text-xl">
+              <a
+                href={CONTACT.emailHref}
+                className="mt-1 block break-all font-display text-lg font-bold tracking-tight hover:underline sm:text-xl"
+              >
                 {CONTACT.email}
-              </p>
-            </a>
+              </a>
+              <p className="mt-4 text-sm font-medium text-white/55">{t.contact.salesEmail}</p>
+              <a
+                href={CONTACT.salesEmailHref}
+                className="mt-1 block break-all font-display text-lg font-bold tracking-tight hover:underline sm:text-xl"
+              >
+                {CONTACT.salesEmail}
+              </a>
+            </div>
 
             <a
               href={CONTACT.pageFacebookHref}

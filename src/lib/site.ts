@@ -11,6 +11,8 @@ export const CONTACT = {
   phoneHref: "tel:+66842652544",
   email: "limitcodestudio@gmail.com",
   emailHref: "mailto:limitcodestudio@gmail.com",
+  salesEmail: "salelimitcode@gmail.com",
+  salesEmailHref: "mailto:salelimitcode@gmail.com",
   facebookHref: "https://www.facebook.com/mark.kitti.950719",
   facebookLabel: "facebook.com/mark.kitti.950719",
   pageFacebookHref: "https://www.facebook.com/profile.php?id=61590787370304",

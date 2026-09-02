@@ -174,6 +174,7 @@ export function CompanyProfileDoc() {
                       {CP_CONTACT.person} ({CP_CONTACT.personThai}) • {CP_CONTACT.phoneDisplay}
                     </p>
                     <p className="mt-1 text-[11px] font-medium text-slate-600">{CP_CONTACT.email}</p>
+                    <p className="mt-0.5 text-[11px] font-medium text-slate-600">{CP_CONTACT.salesEmail}</p>
                   </td>
                   <td className={td + " w-1/3"}>
                     <p className="mb-0.5 text-[9px] font-bold uppercase tracking-wider text-slate-400">LINE OA</p>
@@ -509,6 +510,7 @@ export function CompanyProfileDoc() {
                     {[
                       [t.cp.person, `${CP_CONTACT.person} (${CP_CONTACT.personThai}) • ${t.cp.call} ${CP_CONTACT.phoneDisplay}`],
                       [t.cp.email, CP_CONTACT.email],
+                      [t.cp.salesEmail, CP_CONTACT.salesEmail],
                       ["LINE Official Account", CP_CONTACT.lineId],
                       ["Website", CP_CONTACT.websiteDisplay],
                       [t.cp.facebookPersonal, CP_CONTACT.facebookLabel],
