@@ -74,6 +74,11 @@ export function Footer() {
                   </a>
                 </li>
                 <li>
+                  <a href={CONTACT.emailHref} className="hover:text-brand-700">
+                    {CONTACT.email}
+                  </a>
+                </li>
+                <li>
                   <a
                     href={CONTACT.pageFacebookHref}
                     target="_blank"

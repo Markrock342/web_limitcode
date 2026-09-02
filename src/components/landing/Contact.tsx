@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { CONTACT, LINE_ID } from "@/lib/site";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { Container, FacebookGlyph, LineButton, LineGlyph, PhoneGlyph } from "@/components/ui";
+import { Container, FacebookGlyph, LineButton, LineGlyph, PhoneGlyph, EmailGlyph } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
 import { Typewriter } from "@/components/Typewriter";
@@ -62,6 +62,10 @@ export function Contact() {
                   <a href={CONTACT.phoneHref} className="flex min-h-11 items-center gap-2.5 text-white/80 hover:text-white">
                     <PhoneGlyph className="size-4 shrink-0 text-brand-300" />
                     {t.contact.call} {CONTACT.personThai} {CONTACT.phoneDisplay}
+                  </a>
+                  <a href={CONTACT.emailHref} className="flex min-h-11 items-center gap-2.5 text-white/80 hover:text-white">
+                    <EmailGlyph className="size-4 shrink-0 text-brand-300" />
+                    {CONTACT.email}
                   </a>
                   <a
                     href={CONTACT.pageFacebookHref}

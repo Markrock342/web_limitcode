@@ -2,6 +2,7 @@
 
 import {
   Container,
+  EmailGlyph,
   FacebookGlyph,
   LineButton,
   LineGlyph,
@@ -76,7 +77,7 @@ export function ContactPageView() {
 
       <section className="py-14 sm:py-16">
         <Container>
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <a
               href={CONTACT.phoneHref}
               className="group relative overflow-hidden border border-slate-800 bg-[#0b1f3a] px-6 py-7 text-white transition-colors hover:border-brand-400"
@@ -86,9 +87,21 @@ export function ContactPageView() {
               <p className="mt-8 text-sm font-medium text-white/55">
                 {t.contact.call} {CONTACT.personThai}
               </p>
-              <p className="mt-1 font-display text-3xl font-bold tracking-tight">{CONTACT.phoneDisplay}</p>
+              <p className="mt-1 font-display text-2xl font-bold tracking-tight">{CONTACT.phoneDisplay}</p>
               <p className="mt-3 text-sm text-white/70">
                 {t.contact.tapToCall} {CONTACT.person}
+              </p>
+            </a>
+
+            <a
+              href={CONTACT.emailHref}
+              className="group relative overflow-hidden border border-brand-700 bg-brand-800 px-6 py-7 text-white transition-colors hover:border-brand-400"
+            >
+              <span className="status-run" />
+              <EmailGlyph className="size-6 text-brand-200" />
+              <p className="mt-8 text-sm font-medium text-white/55">{t.contact.email}</p>
+              <p className="mt-1 break-all font-display text-lg font-bold tracking-tight sm:text-xl">
+                {CONTACT.email}
               </p>
             </a>
 

@@ -176,11 +176,13 @@ export function organizationJsonLd() {
     },
     availableLanguage: ["English", "Thai", "Chinese", "en", "th", "zh"],
     telephone: CONTACT.phoneHref.replace("tel:", ""),
+    email: CONTACT.email,
     contactPoint: [
       {
         "@type": "ContactPoint",
         contactType: "customer service",
         availableLanguage: ["English", "Thai", "Chinese"],
+        email: CONTACT.email,
         telephone: CONTACT.phoneHref.replace("tel:", ""),
         name: CONTACT.personThai,
       },

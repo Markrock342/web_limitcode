@@ -109,6 +109,15 @@ export function PhoneGlyph({ className = "" }: { className?: string }) {
   );
 }
 
+export function EmailGlyph({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+      <rect x="3.2" y="5.2" width="17.6" height="13.6" rx="1.6" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="m4.2 7.2 7.8 6.2 7.8-6.2" />
+    </svg>
+  );
+}
+
 export function FacebookGlyph({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">

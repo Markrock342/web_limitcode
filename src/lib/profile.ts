@@ -11,6 +11,7 @@ export const CP_CONTACT = {
   personThai: CONTACT.personThai,
   phoneDisplay: CONTACT.phoneDisplay,
   phoneHref: CONTACT.phoneHref,
+  email: CONTACT.email,
   lineId: LINE_ID,
   lineUrl: LINE_URL,
   websiteDisplay: "www.limitcode.shop",
