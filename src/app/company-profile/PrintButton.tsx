@@ -1,6 +1,12 @@
 "use client";
 
-export function PrintButton() {
+export function PrintButton({
+  shortLabel = "บันทึก PDF",
+  label = "พิมพ์ / บันทึกเป็น PDF",
+}: {
+  shortLabel?: string;
+  label?: string;
+}) {
   return (
     <button
       type="button"
@@ -11,8 +17,8 @@ export function PrintButton() {
         <path d="M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" strokeLinecap="round" />
         <path d="M7 8V4h10v4M7 14h10v6H7z" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
-      <span className="sm:hidden">บันทึก PDF</span>
-      <span className="hidden sm:inline">พิมพ์ / บันทึกเป็น PDF</span>
+      <span className="sm:hidden">{shortLabel}</span>
+      <span className="hidden sm:inline">{label}</span>
     </button>
   );
 }

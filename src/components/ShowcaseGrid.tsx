@@ -2,10 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { DEMOS, type DemoCategory } from "@/lib/demos";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { DemoCard } from "./DemoCard";
 
-const FILTERS: ("ทั้งหมด" | DemoCategory)[] = [
-  "ทั้งหมด",
+const FILTER_KEYS: ("all" | DemoCategory)[] = [
+  "all",
   "ลูกค้าของเรา",
   "อสังหาริมทรัพย์",
   "เว็บบริษัท",
@@ -16,18 +17,20 @@ const FILTERS: ("ทั้งหมด" | DemoCategory)[] = [
 ];
 
 export function ShowcaseGrid() {
-  const [active, setActive] = useState<(typeof FILTERS)[number]>("ทั้งหมด");
+  const { t } = useLocale();
+  const [active, setActive] = useState<(typeof FILTER_KEYS)[number]>("all");
 
   const list = useMemo(
-    () => (active === "ทั้งหมด" ? DEMOS : DEMOS.filter((d) => d.category === active)),
-    [active]
+    () => (active === "all" ? DEMOS : DEMOS.filter((d) => d.category === active)),
+    [active],
   );
 
   return (
     <div>
       <div className="flex flex-wrap gap-2">
-        {FILTERS.map((f) => {
+        {FILTER_KEYS.map((f) => {
           const isActive = active === f;
+          const label = f === "all" ? t.showcase.all : t.showcase.categories[f];
           return (
             <button
               key={f}
@@ -40,7 +43,7 @@ export function ShowcaseGrid() {
                   : "border border-slate-200 bg-white text-slate-600 hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700"
               }`}
             >
-              {f}
+              {label}
             </button>
           );
         })}

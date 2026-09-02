@@ -1,14 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import { CLIENTS } from "@/lib/site";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Container, SectionTag } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 
 export function Clients() {
+  const { t } = useLocale();
+
   return (
     <section id="clients" className="scroll-mt-20 border-t border-slate-100 py-16 sm:py-20">
       <Container>
         <Reveal className="text-center">
-          <SectionTag>ลูกค้าของเรา</SectionTag>
+          <SectionTag>{t.clients.tag}</SectionTag>
         </Reveal>
 
         <Reveal className="mt-10">

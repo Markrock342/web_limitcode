@@ -1,33 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
-type Sequence = { cmd: string; out: { text: string; tone: "ok" | "info" }[] };
 type Phase = "typing" | "output" | "hold" | "deleting";
-
-const SEQUENCES: Sequence[] = [
-  {
-    cmd: "npm run build",
-    out: [
-      { text: "✓ build สำเร็จใน 12s · 0 error", tone: "ok" },
-      { text: "▲ พร้อมขึ้น production", tone: "info" },
-    ],
-  },
-  {
-    cmd: "git push origin main",
-    out: [
-      { text: "✓ ทดสอบผ่าน 48/48", tone: "ok" },
-      { text: "● deploy อัตโนมัติสำเร็จ", tone: "info" },
-    ],
-  },
-  {
-    cmd: "npx prisma migrate deploy",
-    out: [
-      { text: "✓ ฐานข้อมูลพร้อมใช้งาน", tone: "ok" },
-      { text: "● ระบบหลังบ้านออนไลน์", tone: "info" },
-    ],
-  },
-];
 
 const TYPE_MS = 58;
 const DELETE_MS = 26;
@@ -35,59 +11,72 @@ const LINE_MS = 280;
 const HOLD_MS = 1500;
 
 export function HeroTerminal({ className = "" }: { className?: string }) {
+  const { t, locale } = useLocale();
+  const sequences = t.terminal.sequences;
   const [seqIdx, setSeqIdx] = useState(0);
   const [typed, setTyped] = useState(0);
   const [shownOut, setShownOut] = useState(0);
   const [phase, setPhase] = useState<Phase>("typing");
   const [reduced, setReduced] = useState(false);
 
-  const seq = SEQUENCES[seqIdx];
+  const seq = sequences[seqIdx] ?? sequences[0];
+  const out = [
+    { text: seq.ok, tone: "ok" as const },
+    { text: seq.info, tone: "info" as const },
+  ];
+
+  useEffect(() => {
+    setSeqIdx(0);
+    setTyped(0);
+    setShownOut(0);
+    setPhase("typing");
+  }, [locale]);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => {
       setReduced(mq.matches);
       if (mq.matches) {
-        setTyped(SEQUENCES[0].cmd.length);
-        setShownOut(SEQUENCES[0].out.length);
+        setTyped(sequences[0].cmd.length);
+        setShownOut(2);
         setPhase("hold");
       }
     };
     sync();
     mq.addEventListener("change", sync);
     return () => mq.removeEventListener("change", sync);
-  }, []);
+  }, [locale, sequences]);
 
   useEffect(() => {
     if (reduced) return;
-    let t: ReturnType<typeof setTimeout>;
+    let timer: ReturnType<typeof setTimeout>;
     if (phase === "typing") {
       if (typed < seq.cmd.length) {
-        t = setTimeout(() => setTyped((n) => n + 1), TYPE_MS);
+        timer = setTimeout(() => setTyped((n) => n + 1), TYPE_MS);
       } else {
-        t = setTimeout(() => setPhase("output"), 160);
+        timer = setTimeout(() => setPhase("output"), 160);
       }
     } else if (phase === "output") {
-      if (shownOut < seq.out.length) {
-        t = setTimeout(() => setShownOut((n) => n + 1), LINE_MS);
+      if (shownOut < out.length) {
+        timer = setTimeout(() => setShownOut((n) => n + 1), LINE_MS);
       } else {
-        t = setTimeout(() => setPhase("hold"), HOLD_MS);
+        timer = setTimeout(() => setPhase("hold"), HOLD_MS);
       }
     } else if (phase === "hold") {
-      t = setTimeout(() => {
+      timer = setTimeout(() => {
         setShownOut(0);
         setPhase("deleting");
       }, 420);
     } else if (typed > 0) {
-      t = setTimeout(() => setTyped((n) => n - 1), DELETE_MS);
+      timer = setTimeout(() => setTyped((n) => n - 1), DELETE_MS);
     } else {
-      t = setTimeout(() => {
-        setSeqIdx((i) => (i + 1) % SEQUENCES.length);
+      timer = setTimeout(() => {
+        setSeqIdx((i) => (i + 1) % sequences.length);
         setPhase("typing");
       }, DELETE_MS);
     }
-    return () => clearTimeout(t);
-  }, [reduced, typed, shownOut, phase, seq]);
+    return () => clearTimeout(timer);
+  }, [reduced, typed, shownOut, phase, seq.cmd, out.length, sequences.length]);
 
   return (
     <div
@@ -99,7 +88,7 @@ export function HeroTerminal({ className = "" }: { className?: string }) {
         <span className="size-2 rounded-full bg-[#febc2e]" />
         <span className="size-2 rounded-full bg-[#28c840]" />
         <span className="ml-2 font-mono text-[10px] tracking-wide text-white/40">limitcode — zsh</span>
-        <span className="ml-auto font-mono text-[10px] text-emerald-400/80">deploy live</span>
+        <span className="ml-auto font-mono text-[10px] text-emerald-400/80">{t.terminal.deploy}</span>
       </div>
       <div className="px-3.5 py-3 font-mono text-[11px] leading-5">
         <p className="whitespace-nowrap">
@@ -108,9 +97,9 @@ export function HeroTerminal({ className = "" }: { className?: string }) {
           <span className="text-white/90">{seq.cmd.slice(0, typed)}</span>
           {!reduced && <span className="animate-caret text-brand-300">▍</span>}
         </p>
-        {seq.out.map((line, i) => (
+        {out.map((line, i) => (
           <p
-            key={`${seqIdx}-${i}`}
+            key={`${locale}-${seqIdx}-${i}`}
             className={`h-5 whitespace-nowrap transition-opacity duration-300 ${
               i < shownOut ? "opacity-100" : "opacity-0"
             } ${line.tone === "ok" ? "text-emerald-300/90" : "text-brand-200/90"}`}

@@ -2,9 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ArrowRight, Check, FileText, Languages, PackageCheck, ReceiptText } from "lucide-react";
+import { ArrowRight, Check, FileText, PackageCheck, ReceiptText } from "lucide-react";
 import { useErp } from "@/components/demos/erp/lib/store";
-import { erpText, type UiLanguage } from "@/components/demos/erp/lib/i18n";
+import { erpText } from "@/components/demos/erp/lib/i18n";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const CAPABILITIES = [
   { icon: FileText, en: "Quotation to invoice", th: "ใบเสนอราคาถึงใบกำกับภาษี" },
@@ -20,11 +21,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const language = erp.language;
   const t = (en: string, th: string) => erpText(language, en, th);
-
-  const chooseLanguage = (next: UiLanguage) => {
-    erp.setLanguage(next);
-    setError("");
-  };
 
   const login = () => {
     if (username.trim() !== "admin" || password !== "admin") {
@@ -46,7 +42,7 @@ export default function LoginPage() {
                 <p className="mt-0.5 text-[10px] uppercase tracking-[0.16em] text-[#aab8ae]">Business operations system</p>
               </div>
             </div>
-            <Languages size={18} className="text-[#aab8ae]" />
+            <LanguageSwitcher size="compact" tone="onDark" />
           </div>
 
           <p className="mt-12 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#aab8ae]">ERP / Distribution / B2B</p>
@@ -81,20 +77,7 @@ export default function LoginPage() {
               <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#7c847c]">Demo access</p>
               <h2 className="mt-2 text-2xl font-semibold tracking-[-0.025em]">{t("Sign in", "เข้าสู่ระบบ")}</h2>
             </div>
-            <div className="inline-flex border border-[#c6cbc4] bg-[#f7f8f5] p-1" aria-label={t("Language", "ภาษา")}>
-              {(["th", "en"] as const).map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  onClick={() => chooseLanguage(option)}
-                  className={`min-w-14 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.08em] transition-colors ${
-                    language === option ? "bg-[#202b26] text-[#f5f7f3]" : "text-[#687068] hover:text-[#202420]"
-                  }`}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
+            <LanguageSwitcher size="full" />
           </div>
 
           <form

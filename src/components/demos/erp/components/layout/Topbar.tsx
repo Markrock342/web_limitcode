@@ -6,7 +6,8 @@ import { useState } from "react";
 import type { Currency } from "@/components/demos/erp/types/erp";
 import { BRANCHES, WAREHOUSES } from "@/components/demos/erp/data/masters";
 import { useErp } from "@/components/demos/erp/lib/store";
-import { erpText, type UiLanguage } from "@/components/demos/erp/lib/i18n";
+import { erpText } from "@/components/demos/erp/lib/i18n";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Drawer } from "@/components/demos/erp/components/erp/ui";
 
 export function Topbar({ onMenu, onOpenPalette }: { onMenu: () => void; onOpenPalette: () => void }) {
@@ -52,15 +53,7 @@ export function Topbar({ onMenu, onOpenPalette }: { onMenu: () => void; onOpenPa
           {WAREHOUSES.map((warehouse) => <option key={warehouse}>{warehouse}</option>)}
         </select>
 
-        <select
-          className="h-9 border-0 bg-transparent px-1 text-[10px] font-bold uppercase tracking-[0.08em] text-[#59625b] outline-none"
-          value={erp.language}
-          onChange={(event) => erp.setLanguage(event.target.value as UiLanguage)}
-          aria-label={t("Language", "ภาษา")}
-        >
-          <option value="th">TH</option>
-          <option value="en">EN</option>
-        </select>
+        <LanguageSwitcher size="compact" />
 
         <select
           className="hidden h-9 border-0 bg-transparent px-1 text-[10px] font-bold text-[#59625b] outline-none sm:block"

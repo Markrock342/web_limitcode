@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { QUOTATIONS, getQuotation, type Quotation, type QuoteTableRow } from "@/lib/quotations";
 import { PrintButton } from "./PrintButton";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export const dynamicParams = false;
 
@@ -200,7 +201,12 @@ export default async function QuotationPage({ params }: { params: Promise<{ slug
               {q.edition && <span className="ml-1.5 font-medium text-slate-500">({q.edition})</span>}
             </p>
           </div>
-          <PrintButton />
+          <div className="flex shrink-0 items-center gap-2">
+            <span className="print:hidden">
+              <LanguageSwitcher size="compact" />
+            </span>
+            <PrintButton />
+          </div>
         </div>
       </div>
 

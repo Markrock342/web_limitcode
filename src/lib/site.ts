@@ -82,28 +82,33 @@ export const SERVICES: Service[] = [
   },
 ];
 
-export const WHY: { icon: IconName; title: string; desc: string }[] = [
+export const WHY: { id: "workflow" | "real" | "modules" | "handover" | "sme"; icon: IconName; title: string; desc: string }[] = [
   {
+    id: "workflow",
     icon: "spark",
     title: "วาง workflow ก่อนเขียนโค้ด",
     desc: "เราเก็บ Requirement วาด Scope Map และล็อกขอบเขตให้ชัดก่อนลงมือ ไม่รับทำตามสั่งอย่างเดียว",
   },
   {
+    id: "real",
     icon: "layers",
     title: "สร้างระบบที่ทีมใช้ได้จริง",
     desc: "โฟกัส Web App และหลังบ้านสำหรับธุรกิจบริการ — จองคิว CRM Job Order Dashboard AI",
   },
   {
+    id: "modules",
     icon: "rocket",
     title: "เริ่มจากโมดูลที่จำเป็น แล้วต่อยอด",
     desc: "ส่งมอบส่วนที่สร้างมูลค่าก่อน แล้วขยายฟีเจอร์ตามการใช้งานจริง ไม่บloat ตั้งแต่วันแรก",
   },
   {
+    id: "handover",
     icon: "shield",
     title: "ส่งมอบของที่ใช้ได้ ไม่ใช่แค่ไฟล์โค้ด",
     desc: "ฟรีแลนซ์ที่ทำงานเป็นขั้นตอน — มี Demo รายสัปดาห์ UAT Handover และแพ็กเกจดูแลต่อหลังขึ้นระบบ",
   },
   {
+    id: "sme",
     icon: "heart",
     title: "เหมาะกับ SME ที่ยังพึ่ง LINE + Excel",
     desc: "เราเข้าใจงานที่กระจัดกระจาย และช่วยรวมเป็นระบบเดียวที่ทีมและผู้บริหารใช้ร่วมกันได้",
@@ -139,28 +144,33 @@ export const PROCESS: { step: string; title: string; desc: string }[] = [
 ];
 
 /** สถานการณ์จริงที่ลูกค้าเจอ — ใช้แทน “รับทำเว็บทุกชนิด” */
-export const USE_CASES: { icon: IconName; title: string; desc: string }[] = [
+export const USE_CASES: { id: "chat" | "excel" | "status" | "dashboard" | "ai"; icon: IconName; title: string; desc: string }[] = [
   {
+    id: "chat",
     icon: "chat",
     title: "ยังจองคิวผ่านแชทและโทรศัพท์",
     desc: "ลูกค้าทัก LINE ทีมตอบช้า คิวชนกัน — เราเปลี่ยนเป็นระบบจองตารางที่ลูกค้าจองเองได้",
   },
   {
+    id: "excel",
     icon: "layers",
     title: "ทีมใช้ Excel หลายไฟล์",
     desc: "ข้อมูลลูกค้า ออเดอร์ และงานหน้าสนามกระจัดกระจาย — รวมเป็น CRM / Job Order ในที่เดียว",
   },
   {
+    id: "status",
     icon: "rocket",
     title: "ลูกค้าไม่รู้สถานะงาน",
     desc: "ถามซ้ำ ติดตามยาก — ใส่สถานะงาน ปฏิทิน และแจ้งเตือนให้ทุกฝ่ายเห็นตรงกัน",
   },
   {
+    id: "dashboard",
     icon: "dashboard",
     title: "ผู้บริหารไม่มี Dashboard",
     desc: "ตัดสินใจจากความรู้สึก — สร้างรายงานสรุปยอดจอง งาน และรายได้แบบเรียลไทม์",
   },
   {
+    id: "ai",
     icon: "spark",
     title: "อยากใช้ AI แต่ยังไม่มีระบบรองรับ",
     desc: "ไม่ใช่แค่ติด ChatGPT — วาง credit, persona, CMS และแพ็กเกจให้ขายและดูแลต่อได้",
