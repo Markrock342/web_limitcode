@@ -1,38 +1,42 @@
 "use client";
 
-import { type CSSProperties, type PointerEvent, type ReactNode } from "react";
+import { motion, useMotionValue, useReducedMotion } from "motion/react";
+import type { PointerEvent, ReactNode } from "react";
+
+const easeOutQuart = [0.25, 1, 0.5, 1] as const;
+const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
 type Props = {
   children: ReactNode;
   className?: string;
-  delay?: number;
   href?: string;
   external?: boolean;
 };
 
-export function ChannelCard({ children, className = "", delay = 0, href, external }: Props) {
+export function ChannelCard({ children, className = "", href, external }: Props) {
+  const reduced = useReducedMotion();
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+
   const onPointerMove = (e: PointerEvent<HTMLElement>) => {
-    if (e.pointerType !== "mouse") return;
+    if (reduced || e.pointerType !== "mouse") return;
     const el = e.currentTarget;
     const r = el.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width;
     const py = (e.clientY - r.top) / r.height;
-    el.style.setProperty("--rx", `${((0.5 - py) * 9).toFixed(2)}deg`);
-    el.style.setProperty("--ry", `${((px - 0.5) * 11).toFixed(2)}deg`);
+    rotateX.set((0.5 - py) * 9);
+    rotateY.set((px - 0.5) * 11);
     el.style.setProperty("--spot-x", `${(px * 100).toFixed(1)}%`);
     el.style.setProperty("--spot-y", `${(py * 100).toFixed(1)}%`);
   };
 
   const reset = (e: PointerEvent<HTMLElement>) => {
-    const el = e.currentTarget;
-    el.style.setProperty("--rx", "0deg");
-    el.style.setProperty("--ry", "0deg");
-    el.style.setProperty("--spot-x", "50%");
-    el.style.setProperty("--spot-y", "50%");
+    rotateX.set(0);
+    rotateY.set(0);
+    e.currentTarget.style.setProperty("--spot-x", "50%");
+    e.currentTarget.style.setProperty("--spot-y", "50%");
   };
 
-  const style = delay ? ({ animationDelay: `${delay}ms` } satisfies CSSProperties) : undefined;
-  const cls = `contact-card group relative overflow-hidden ${className}`;
   const extras = (
     <>
       <span className="spot-overlay" />
@@ -46,27 +50,45 @@ export function ChannelCard({ children, className = "", delay = 0, href, externa
     </>
   );
 
-  const bind = {
+  const classNameFull = `contact-card group relative overflow-hidden ${className}`;
+  const motionProps = {
+    className: classNameFull,
     onPointerMove,
     onPointerLeave: reset,
     onPointerCancel: reset,
-    className: cls,
-    style,
+    style: reduced ? undefined : { rotateX, rotateY, transformPerspective: 900 },
+    variants: reduced
+      ? undefined
+      : {
+          hidden: { opacity: 0, y: 22 },
+          show: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.55, ease: easeOutExpo },
+          },
+        },
+    whileHover: reduced ? undefined : { y: -6 },
+    whileTap: reduced ? undefined : { scale: 0.985 },
+    transition: { type: "tween" as const, duration: 0.38, ease: easeOutQuart },
   };
 
   if (href) {
     return (
-      <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})} {...bind}>
+      <motion.a
+        href={href}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        {...motionProps}
+      >
         {extras}
         <div className="relative z-1">{children}</div>
-      </a>
+      </motion.a>
     );
   }
 
   return (
-    <div {...bind}>
+    <motion.div {...motionProps}>
       {extras}
       <div className="relative z-1">{children}</div>
-    </div>
+    </motion.div>
   );
 }

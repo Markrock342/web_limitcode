@@ -297,8 +297,6 @@ body {
   .btn-sheen::after {
     display: none;
   }
-  .contact-boot,
-  .contact-console,
   .contact-card,
   .contact-ping,
   .contact-rail {
@@ -326,39 +324,16 @@ body {
 .contact-stage {
   isolation: isolate;
 }
-.contact-boot {
-  animation: contact-boot 0.7s var(--ease-out-expo) both;
-}
-@keyframes contact-boot {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: none; }
-}
-.contact-console {
-  animation: contact-console 0.85s var(--ease-out-expo) 0.12s both;
-}
-@keyframes contact-console {
-  from { opacity: 0; transform: translateY(28px) scale(0.97); }
-  to { opacity: 1; transform: none; }
-}
 .contact-card {
-  --rx: 0deg;
-  --ry: 0deg;
-  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(0);
   transition:
-    transform 0.38s var(--ease-out-quart),
     border-color 0.28s var(--ease-out-quart),
     box-shadow 0.38s var(--ease-out-quart);
-  animation: contact-boot 0.65s var(--ease-out-expo) both;
 }
 @media (hover: hover) and (pointer: fine) {
   .contact-card:hover,
   .contact-card:focus-visible {
-    transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-6px);
     box-shadow: 0 22px 40px -24px rgba(11, 60, 130, 0.45);
   }
-}
-.contact-card:active {
-  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) scale(0.985);
 }
 .contact-ping {
   animation: contact-ping 2.2s var(--ease-out-quart) infinite;
