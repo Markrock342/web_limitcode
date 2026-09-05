@@ -38,7 +38,7 @@ export function Footer() {
             </a>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-8 text-sm min-[480px]:grid-cols-3">
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink">
                 {t.footer.services}
@@ -62,7 +62,7 @@ export function Footer() {
                 <li><Link href="/demo/ai-cms" className="hover:text-brand-700">NovaOracle AI</Link></li>
               </ul>
             </div>
-            <div>
+            <div className="col-span-2 min-[480px]:col-span-1">
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink">
                 {t.footer.contact}
               </p>
@@ -74,12 +74,12 @@ export function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href={CONTACT.emailHref} className="hover:text-brand-700">
+                  <a href={CONTACT.emailHref} className="break-all hover:text-brand-700">
                     {CONTACT.email}
                   </a>
                 </li>
                 <li>
-                  <a href={CONTACT.salesEmailHref} className="hover:text-brand-700">
+                  <a href={CONTACT.salesEmailHref} className="break-all hover:text-brand-700">
                     {CONTACT.salesEmail}
                   </a>
                 </li>

@@ -41,9 +41,9 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={80}>
-            <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-ink sm:text-5xl lg:text-[3.25rem]">
+            <h1 className="mt-4 font-display text-[clamp(1.85rem,1.35rem+3.8vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink">
               {t.hero.lead}{" "}
-              <span className="mt-1 block min-h-[1.15em] text-brand-600 sm:mt-0 sm:inline-block sm:min-w-[18ch]">
+              <span className="mt-1 block min-h-[1.15em] max-w-full text-brand-600 sm:mt-0 sm:inline-block sm:min-w-[18ch]">
                 <Typewriter key={phrases.join("|")} phrases={phrases} />
               </span>
               {t.hero.trail ? <span className="block">{t.hero.trail}</span> : null}
@@ -55,7 +55,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={240}>
-            <ol className="mt-6 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500">
+            <ol className="mt-6 grid grid-cols-2 gap-x-3 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500 sm:flex sm:flex-wrap sm:gap-x-4">
               {["01 Input", "02 Build", "03 Test", "04 Deploy"].map((step) => (
                 <li key={step} className="flex items-center gap-2">
                   <span className="size-1.5 rounded-full bg-brand-500" />
@@ -67,8 +67,8 @@ export function Hero() {
 
           <Reveal delay={280}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <LineButton className="btn-sheen-auto">{t.hero.ctaLine}</LineButton>
-              <GhostButton href="/#services">
+              <LineButton className="btn-sheen-auto w-full sm:w-auto">{t.hero.ctaLine}</LineButton>
+              <GhostButton href="/#services" className="w-full sm:w-auto">
                 {t.hero.ctaGhost}
                 <Icon name="arrow" className="size-4 transition-transform duration-300 ease-out-quart group-hover:translate-x-1" />
               </GhostButton>
@@ -80,7 +80,7 @@ export function Hero() {
               <span className="inline-flex size-6 shrink-0 items-center justify-center bg-[#06C755] text-white">
                 <LineGlyph className="size-3.5" />
               </span>
-              <span className="whitespace-nowrap">
+              <span>
                 {t.hero.lineHint}{" "}
                 <span className="font-display font-bold text-ink">{LINE_ID}</span>
               </span>

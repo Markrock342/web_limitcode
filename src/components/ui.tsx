@@ -47,25 +47,35 @@ export function LineButton({
   className = "",
   children = `ปรึกษาฟรีผ่าน LINE OA`,
   showId = false,
+  iconOnly = false,
 }: {
   className?: string;
   children?: React.ReactNode;
   showId?: boolean;
+  iconOnly?: boolean;
 }) {
+  const label = typeof children === "string" ? children : "LINE OA";
   return (
     <a
       href={LINE_URL}
       target="_blank"
       rel="noopener noreferrer"
-      className={`btn-sheen group inline-flex shrink-0 items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-[#06C755] px-6 py-3.5 text-base font-semibold text-white shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift active:scale-[0.97] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#06C755]/30 ${className}`}
+      aria-label={iconOnly ? label : undefined}
+      className={
+        iconOnly
+          ? `btn-sheen inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-[#06C755] text-white shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift active:scale-[0.97] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#06C755]/30 ${className}`
+          : `btn-sheen group inline-flex max-w-full items-center justify-center gap-2 rounded-full bg-[#06C755] px-5 py-3 text-sm font-semibold text-pretty text-white shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift active:scale-[0.97] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#06C755]/30 sm:gap-2.5 sm:px-6 sm:py-3.5 sm:text-base ${className}`
+      }
     >
       <LineGlyph className="size-5 shrink-0" />
-      <span>{children}</span>
-      {showId && <span className="font-mono text-sm opacity-90">{LINE_ID}</span>}
-      <Icon
-        name="arrow"
-        className="size-4 -translate-x-0.5 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
-      />
+      {iconOnly ? null : <span className="min-w-0 text-center">{children}</span>}
+      {showId && !iconOnly ? <span className="font-mono text-sm opacity-90">{LINE_ID}</span> : null}
+      {iconOnly ? null : (
+        <Icon
+          name="arrow"
+          className="hidden size-4 -translate-x-0.5 opacity-0 transition-all sm:block group-hover:translate-x-0 group-hover:opacity-100"
+        />
+      )}
     </a>
   );
 }
@@ -82,7 +92,7 @@ export function GhostButton({
   return (
     <Link
       href={href}
-      className={`group inline-flex items-center justify-center gap-2 rounded-full border border-brand-200 bg-white px-6 py-3.5 text-base font-semibold text-brand-700 transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:bg-brand-50 active:scale-[0.97] ${className}`}
+      className={`group inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-brand-200 bg-white px-5 py-3 text-sm font-semibold text-brand-700 transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:bg-brand-50 active:scale-[0.97] sm:px-6 sm:py-3.5 sm:text-base ${className}`}
     >
       {children}
     </Link>

@@ -55,7 +55,9 @@ export function LanguageSwitcher({
         aria-controls={menuId}
         aria-label={t.lang.aria}
         onClick={() => setOpen((v) => !v)}
-        className={`inline-flex h-9 items-center gap-2 whitespace-nowrap rounded-full px-3 text-white transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 ${
+        className={`inline-flex h-9 items-center whitespace-nowrap rounded-full text-white transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 ${
+          size === "compact" ? "gap-1.5 px-2.5" : "gap-2 px-3"
+        } ${
           ink
             ? "bg-black focus-visible:ring-offset-white"
             : "bg-black ring-1 ring-white/35 focus-visible:ring-offset-ink"

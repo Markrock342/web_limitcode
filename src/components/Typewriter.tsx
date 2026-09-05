@@ -63,8 +63,8 @@ export function Typewriter({
   }, [reduced, phrases, phrase, chars, phase, typeMs, deleteMs, holdMs]);
 
   return (
-    <span className={`inline-flex items-baseline ${className}`}>
-      <span>{phrase.slice(0, chars)}</span>
+    <span className={`inline max-w-full ${className}`}>
+      <span className="wrap-anywhere">{phrase.slice(0, chars)}</span>
       {!reduced && (
         <span
           aria-hidden

@@ -58,7 +58,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all ${
+      className={`sticky top-0 z-50 overflow-x-clip transition-all ${
         scrolled
           ? "border-b border-slate-200/70 bg-white/85 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
@@ -70,10 +70,10 @@ export function Navbar() {
         className="absolute inset-x-0 top-0 h-0.5 origin-left bg-gradient-to-r from-brand-600 via-brand-400 to-sky-400"
         style={{ transform: "scaleX(0)" }}
       />
-      <nav className="mx-auto flex h-16 w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="relative z-20 flex shrink-0 items-center gap-2.5" onClick={() => setOpen(false)}>
-          <Logo className="size-9" />
-          <BrandWordmark className="text-[13px] sm:text-[15px] 2xl:text-base" />
+      <nav className="mx-auto flex h-16 w-full max-w-7xl items-center gap-2 overflow-x-clip px-4 sm:gap-3 sm:px-6 lg:px-8">
+        <Link href="/" className="relative z-20 flex min-w-0 items-center gap-2 sm:gap-2.5" onClick={() => setOpen(false)}>
+          <Logo className="size-8 sm:size-9" />
+          <BrandWordmark className="hidden text-[13px] min-[400px]:inline sm:text-[15px] 2xl:text-base" />
         </Link>
 
         <div className="hidden min-w-0 flex-1 items-center justify-center overflow-hidden xl:flex">
@@ -90,9 +90,14 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className="relative z-20 ml-auto flex shrink-0 items-center gap-2">
+        <div className="relative z-20 ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
           <LanguageSwitcher size="compact" />
-          <LineButton className="hidden px-4 py-2 text-sm lg:inline-flex">{t.nav.line}</LineButton>
+          <LineButton iconOnly className="xl:hidden">
+            {t.nav.line}
+          </LineButton>
+          <span className="hidden xl:inline-flex">
+            <LineButton className="px-4 py-2 text-sm">{t.nav.line}</LineButton>
+          </span>
           <button
             type="button"
             aria-label={t.nav.menu}
@@ -124,7 +129,7 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
-            <LineButton className="mt-2 w-full lg:hidden">{t.nav.line}</LineButton>
+            <LineButton className="mt-2 w-full">{t.nav.line}</LineButton>
           </div>
         </div>
       )}
