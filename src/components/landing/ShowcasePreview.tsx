@@ -49,7 +49,7 @@ export function ShowcasePreview() {
                   <CropFrame className="border border-slate-200 bg-slate-100">
                     <div className="relative aspect-16/10 overflow-hidden">
                       <Image
-                        src={d.preview}
+                        src={d.preview!}
                         alt={`${t.showcase.previewAlt} ${d.name}`}
                         fill
                         sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 360px"

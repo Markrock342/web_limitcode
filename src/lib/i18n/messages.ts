@@ -186,7 +186,7 @@ export const th = {
     pageKicker: "ตัวอย่างระบบ · Live Demo",
     pageTitle: "ลูกค้าของเรา และเดโมที่กดลองได้",
     pageBody:
-      "เลือกหมวดลูกค้าของเรา จะเห็นเว็บที่ออนไลน์แล้ว เช่น NurseGo KindGo Horasard และ Sirikanchana เดโมม็อกมีแอดมิน/CMS ให้คลิกเล่น การ์ดป้าย Live คือเว็บจริง หมวดโอเพนซอร์สเป็นระบบฟรีจาก GitHub ที่เราลิงก์ไปดู ไม่ใช่งานที่ทีมสร้าง",
+      "เลือกหมวดลูกค้าของเรา จะเห็นเว็บที่ออนไลน์แล้ว เช่น NurseGo KindGo Horasard และ Sirikanchana เดโมม็อกมีแอดมิน/CMS ให้คลิกเล่น การ์ดป้าย Live คือเว็บจริง หมวดโอเพนซอร์สมีตัวอย่างระบบฟรีจาก GitHub กว่า 100 รายการ ที่เราลิงก์ไปดู ไม่ใช่งานที่ทีมสร้าง",
     pageCta: "มีงานระบบ ทักมาคุยได้เลย",
     openLive: "เปิดเว็บจริง",
     openDemo: "เปิดดูตัวอย่าง",
@@ -494,7 +494,7 @@ export const en: Messages = {
     pageKicker: "Sample systems · Live Demo",
     pageTitle: "Our clients, and mockups you can click",
     pageBody:
-      "Filter Our clients to see live sites such as NurseGo, KindGo, Horasard and Sirikanchana. Mockup demos include admin/CMS you can click. A Live badge means the real site. Open source is a free GitHub product we link out to — not something this team built.",
+      "Filter Our clients to see live sites such as NurseGo, KindGo, Horasard and Sirikanchana. Mockup demos include admin/CMS you can click. A Live badge means the real site. Open source lists 100+ free GitHub products we link out to — not something this team built.",
     pageCta: "Got a system brief? Talk to us",
     openLive: "Open live site",
     openDemo: "Open the demo",
@@ -801,7 +801,7 @@ export const zh: Messages = {
     pageKicker: "系统例子 · Live Demo",
     pageTitle: "我们的客户，加上能点的模型",
     pageBody:
-      "筛「我们的客户」看已上线的站，比如 NurseGo、KindGo、Horasard、Sirikanchana。模型演示带后台/CMS，可以点着玩。标了 Live 的是真站。开源一类是 GitHub 上的免费系统，我们只外链过去，不是这支团队做的。",
+      "筛「我们的客户」看已上线的站，比如 NurseGo、KindGo、Horasard、Sirikanchana。模型演示带后台/CMS，可以点着玩。标了 Live 的是真站。开源一类有 100+ 个 GitHub 免费系统，我们只外链过去，不是这支团队做的。",
     pageCta: "有系统题目，拿来聊",
     openLive: "打开真站",
     openDemo: "打开演示",

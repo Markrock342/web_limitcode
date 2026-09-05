@@ -21,17 +21,33 @@ export function DemoCard({ demo }: { demo: Demo }) {
   const ossCredit = demo.openSource
     ? fill(t.showcase.ossCredit, { license: demo.openSource.license })
     : null;
+  const hasPreview = Boolean(demo.preview);
 
   const inner = (
     <>
       <div className="relative aspect-16/10 overflow-hidden bg-slate-100">
-        <Image
-          src={demo.preview}
-          alt={`${t.showcase.previewAlt} ${demo.name}`}
-          fill
-          sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 360px"
-          className="object-cover object-top transition-transform duration-500 ease-out-quart group-hover:scale-[1.03]"
-        />
+        {hasPreview ? (
+          <Image
+            src={demo.preview!}
+            alt={`${t.showcase.previewAlt} ${demo.name}`}
+            fill
+            sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 360px"
+            className="object-cover object-top transition-transform duration-500 ease-out-quart group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div
+            className={`absolute inset-0 bg-linear-to-br ${demo.swatch} transition-transform duration-500 ease-out-quart group-hover:scale-[1.03]`}
+          >
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-size-[24px_24px]" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center text-white">
+              <span className="inline-flex size-12 items-center justify-center border border-white/25 bg-white/10 backdrop-blur-sm">
+                <Icon name={demo.icon} className="size-6" />
+              </span>
+              <p className="font-display text-xl font-bold tracking-tight drop-shadow-sm">{demo.name}</p>
+              <p className="max-w-[18rem] text-xs text-white/75">{demo.tagline}</p>
+            </div>
+          </div>
+        )}
         <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 border border-white/70 bg-white/92 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-700 backdrop-blur">
           <Icon name={demo.icon} className="size-3.5" />
           {category}
