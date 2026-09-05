@@ -58,21 +58,22 @@ export function Navbar() {
   }, []);
 
   return (
-    <header
-      data-analytics-region="navbar"
-      className={`sticky top-0 z-50 overflow-x-clip transition-all ${
-        scrolled
-          ? "border-b border-slate-200/70 bg-white/85 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
-      }`}
-    >
-      <div
-        ref={progressRef}
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-0.5 origin-left bg-gradient-to-r from-brand-600 via-brand-400 to-sky-400"
-        style={{ transform: "scaleX(0)" }}
-      />
-      <nav className="mx-auto flex h-16 w-full max-w-7xl items-center gap-2 overflow-x-clip px-4 sm:gap-3 sm:px-6 lg:px-8">
+    <>
+      <header
+        data-analytics-region="navbar"
+        className={`fixed inset-x-0 top-0 z-50 overflow-x-clip transition-all ${
+          scrolled
+            ? "border-b border-slate-200/70 bg-white/85 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent"
+        }`}
+      >
+        <div
+          ref={progressRef}
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-0.5 origin-left bg-gradient-to-r from-brand-600 via-brand-400 to-sky-400"
+          style={{ transform: "scaleX(0)" }}
+        />
+        <nav className="mx-auto flex h-16 w-full max-w-7xl items-center gap-2 overflow-x-clip px-4 sm:gap-3 sm:px-6 lg:px-8">
         <Link href="/" className="relative z-20 flex min-w-0 items-center gap-2 sm:gap-2.5" onClick={() => setOpen(false)}>
           <Logo className="size-8 sm:size-9" />
           <BrandWordmark className="hidden text-[13px] min-[400px]:inline sm:text-[15px] 2xl:text-base" />
@@ -116,25 +117,27 @@ export function Navbar() {
             </svg>
           </button>
         </div>
-      </nav>
+        </nav>
 
-      {open && (
-        <div className="border-t border-slate-200/70 bg-white xl:hidden">
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-1 px-5 py-4 sm:px-6">
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="rounded-xl px-3 py-3 text-base font-medium text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700"
-              >
-                {item.label}
-              </Link>
-            ))}
-            <LineButton className="mt-2 w-full">{t.nav.line}</LineButton>
+        {open && (
+          <div className="border-t border-slate-200/70 bg-white xl:hidden">
+            <div className="mx-auto flex w-full max-w-7xl flex-col gap-1 px-5 py-4 sm:px-6">
+              {nav.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-xl px-3 py-3 text-base font-medium text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700"
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <LineButton className="mt-2 w-full">{t.nav.line}</LineButton>
+            </div>
           </div>
-        </div>
-      )}
-    </header>
+        )}
+      </header>
+      <div aria-hidden className="h-16 shrink-0" />
+    </>
   );
 }
