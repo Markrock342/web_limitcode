@@ -186,13 +186,70 @@ export const th = {
     pageKicker: "ตัวอย่างระบบ · Live Demo",
     pageTitle: "ลูกค้าของเรา และเดโมที่กดลองได้",
     pageBody:
-      "เลือกหมวดลูกค้าของเรา จะเห็นเว็บที่ออนไลน์แล้ว เช่น NurseGo KindGo Horasard และ Sirikanchana เดโมม็อกมีแอดมิน/CMS ให้คลิกเล่น การ์ดป้าย Live คือเว็บจริง หมวดโอเพนซอร์สมีตัวอย่างระบบฟรีจาก GitHub กว่า 100 รายการ ที่เราลิงก์ไปดู ไม่ใช่งานที่ทีมสร้าง",
+      "เลือกหมวดลูกค้าของเรา จะเห็นเว็บที่ออนไลน์แล้ว เช่น NurseGo KindGo Horasard และ Sirikanchana เดโมม็อกมีแอดมิน/CMS ให้คลิกเล่น การ์ดป้าย Live คือเว็บจริง หมวดโอเพนซอร์สมีตัวอย่างระบบฟรีจาก GitHub กว่า 100 รายการ ให้กดดูแนวระบบได้",
     pageCta: "มีงานระบบ ทักมาคุยได้เลย",
     openLive: "เปิดเว็บจริง",
     openDemo: "เปิดดูตัวอย่าง",
     openOss: "เปิดตัวอย่างโอเพนซอร์ส",
     ossBadge: "Open source",
-    ossCredit: "ไม่ใช่งานของทีม · {license}",
+    ossKinds: {
+      booking: {
+        label: "ระบบจองนัดหมาย / ตารางเวลา",
+        about: "{name} เป็นระบบจองนัด เลือกวัน–เวลา และฝังปุ่มจองในเว็บได้ เหมาะกับคลินิก ร้านบริการ หรือทีมที่นัดลูกค้า",
+      },
+      crm: {
+        label: "ระบบ CRM / ลูกค้าและการขาย",
+        about: "{name} เป็นระบบ CRM สำหรับเก็บลูกค้า ติดตามดีล และดูไปป์ไลน์ขาย ใช้ดูแนวหลังบ้านทีมขายได้",
+      },
+      shop: {
+        label: "ระบบร้านค้าออนไลน์",
+        about: "{name} เป็นระบบขายของออนไลน์ มีสินค้า ตะกร้า และเช็คเอาต์ ใช้ดูแนวเว็บช็อปหรือ headless commerce ได้",
+      },
+      cms: {
+        label: "ระบบ CMS / จัดการเนื้อหา",
+        about: "{name} เป็นระบบจัดการเนื้อหาหรือหลังบ้านข้อมูล ใช้แก้หน้าเว็บ บทความ หรือข้อมูลธุรกิจผ่านแอดมิน",
+      },
+      chat: {
+        label: "ระบบแชท / ดูแลลูกค้า",
+        about: "{name} เป็นกล่องแชทหรืออินบ็อกซ์รวมช่องทางคุยลูกค้า ช่วยทีมตอบจากที่เดียวแทนแชทกระจัดกระจาย",
+      },
+      erp: {
+        label: "ระบบ ERP / บัญชีและธุรกิจ",
+        about: "{name} เป็นระบบ ERP หรือบัญชีสำหรับธุรกิจ ครอบคลุมงานอย่างสต็อก เอกสารขาย–ซื้อ หรือรายงาน",
+      },
+      ops: {
+        label: "ระบบงานภายใน / หลังบ้านทีม",
+        about: "{name} เป็นเครื่องมือหลังบ้านหรืองานภายในทีม เช่น โปรเจกต์ ตารางงาน ฐานข้อมูล หรือแอดมิน",
+      },
+      forms: {
+        label: "ระบบฟอร์ม / สำรวจ / เซ็นเอกสาร",
+        about: "{name} เป็นระบบฟอร์ม สำรวจความคิดเห็น หรือเซ็นเอกสารออนไลน์ ใช้เก็บข้อมูลจากลูกค้าหรือทีม",
+      },
+      analytics: {
+        label: "ระบบวิเคราะห์ข้อมูล / แดชบอร์ด",
+        about: "{name} เป็นระบบวิเคราะห์พฤติกรรมหรือแดชบอร์ดข้อมูล ช่วยดูตัวเลขการใช้งานและรายงาน",
+      },
+      auth: {
+        label: "ระบบล็อกอิน / ยืนยันตัวตน",
+        about: "{name} เป็นระบบยืนยันตัวตนหรือแบ็กเอนด์พร้อม Auth ใช้จัดการผู้ใช้ สิทธิ์ และการเข้าสู่ระบบ",
+      },
+      docs: {
+        label: "ระบบเอกสาร / ความรู้ทีม",
+        about: "{name} เป็นระบบเอกสาร คู่มือ หรือ knowledge base ให้ทีมเขียนและค้นหาข้อมูลร่วมกัน",
+      },
+      automation: {
+        label: "ระบบออโตเมชัน / เวิร์กโฟลว์",
+        about: "{name} เป็นระบบเชื่อมงานอัตโนมัติ ตั้งเวิร์กโฟลว์ให้ระบบคุยกันเอง ลดงานก๊อปปี้ข้อมูลมือ",
+      },
+      ai: {
+        label: "ระบบ AI / แชทบอท",
+        about: "{name} เป็นแพลตฟอร์ม AI หรือแชทบอท ใช้สร้างผู้ช่วย ตอบคำถาม หรือรันโมเดลภาษา",
+      },
+      dev: {
+        label: "เครื่องมือนักพัฒนา",
+        about: "{name} เป็นเครื่องมือสำหรับนักพัฒนา ใช้สร้างหรือดูแลระบบเว็บและ API",
+      },
+    },
     all: "ทั้งหมด",
     categories: {
       "ลูกค้าของเรา": "ลูกค้าของเรา",
@@ -494,13 +551,70 @@ export const en: Messages = {
     pageKicker: "Sample systems · Live Demo",
     pageTitle: "Our clients, and mockups you can click",
     pageBody:
-      "Filter Our clients to see live sites such as NurseGo, KindGo, Horasard and Sirikanchana. Mockup demos include admin/CMS you can click. A Live badge means the real site. Open source lists 100+ free GitHub products we link out to — not something this team built.",
+      "Filter Our clients to see live sites such as NurseGo, KindGo, Horasard and Sirikanchana. Mockup demos include admin/CMS you can click. A Live badge means the real site. Open source lists 100+ free GitHub products you can open to see how each kind of system works.",
     pageCta: "Got a system brief? Talk to us",
     openLive: "Open live site",
     openDemo: "Open the demo",
     openOss: "Open the open-source demo",
     ossBadge: "Open source",
-    ossCredit: "Not studio work · {license}",
+    ossKinds: {
+      booking: {
+        label: "Booking / scheduling",
+        about: "{name} is a scheduling system for picking dates and times, and embedding booking on a site — useful for clinics, service shops, or teams that book clients.",
+      },
+      crm: {
+        label: "CRM / sales pipeline",
+        about: "{name} is a CRM for contacts, deals, and sales pipelines — a reference for customer and sales back offices.",
+      },
+      shop: {
+        label: "Online shop / commerce",
+        about: "{name} is an e-commerce system with catalog, cart, and checkout — a reference for shops or headless commerce.",
+      },
+      cms: {
+        label: "CMS / content admin",
+        about: "{name} is a content or data admin CMS — edit pages, articles, or business data from a back office.",
+      },
+      chat: {
+        label: "Chat / customer inbox",
+        about: "{name} is a chat or omnichannel inbox so the team answers customers in one place instead of scattered threads.",
+      },
+      erp: {
+        label: "ERP / accounting",
+        about: "{name} is an ERP or accounting suite covering stock, sales/purchase docs, or business reports.",
+      },
+      ops: {
+        label: "Internal tools / ops",
+        about: "{name} is an internal or ops tool — projects, boards, databases, or admin consoles for the team.",
+      },
+      forms: {
+        label: "Forms / surveys / e-sign",
+        about: "{name} is a forms, survey, or e-sign product for collecting responses or signed documents online.",
+      },
+      analytics: {
+        label: "Analytics / dashboards",
+        about: "{name} is analytics or a data dashboard for usage metrics and reporting.",
+      },
+      auth: {
+        label: "Auth / identity backend",
+        about: "{name} is an auth or backend identity layer for users, roles, and sign-in.",
+      },
+      docs: {
+        label: "Docs / knowledge base",
+        about: "{name} is a docs or knowledge-base system for writing and searching team knowledge together.",
+      },
+      automation: {
+        label: "Automation / workflows",
+        about: "{name} is a workflow automation tool that connects systems so data moves without manual copy-paste.",
+      },
+      ai: {
+        label: "AI / chatbot platform",
+        about: "{name} is an AI or chatbot platform for assistants, Q&A, or running language models.",
+      },
+      dev: {
+        label: "Developer tooling",
+        about: "{name} is a developer tool for building or running web systems and APIs.",
+      },
+    },
     all: "All",
     categories: {
       "ลูกค้าของเรา": "Our clients",
@@ -801,13 +915,70 @@ export const zh: Messages = {
     pageKicker: "系统例子 · Live Demo",
     pageTitle: "我们的客户，加上能点的模型",
     pageBody:
-      "筛「我们的客户」看已上线的站，比如 NurseGo、KindGo、Horasard、Sirikanchana。模型演示带后台/CMS，可以点着玩。标了 Live 的是真站。开源一类有 100+ 个 GitHub 免费系统，我们只外链过去，不是这支团队做的。",
+      "筛「我们的客户」看已上线的站，比如 NurseGo、KindGo、Horasard、Sirikanchana。模型演示带后台/CMS，可以点着玩。标了 Live 的是真站。开源一类有 100+ 个 GitHub 免费系统，点进去就能看这类系统长什么样。",
     pageCta: "有系统题目，拿来聊",
     openLive: "打开真站",
     openDemo: "打开演示",
     openOss: "打开开源演示",
     ossBadge: "Open source",
-    ossCredit: "不是团队作品 · {license}",
+    ossKinds: {
+      booking: {
+        label: "预约 / 排班系统",
+        about: "{name} 是预约排班系统，可选日期时段，也能嵌进网站，适合诊所、服务店或要约客户的团队。",
+      },
+      crm: {
+        label: "CRM / 销售管线",
+        about: "{name} 是 CRM，用来管客户、跟进商机和销售管线，可作销售后台参考。",
+      },
+      shop: {
+        label: "网店 / 电商系统",
+        about: "{name} 是电商系统，有商品、购物车和结账，可作网店或无头电商参考。",
+      },
+      cms: {
+        label: "CMS / 内容后台",
+        about: "{name} 是内容或数据后台，用来改页面、文章或业务数据。",
+      },
+      chat: {
+        label: "客服聊天 / 收件箱",
+        about: "{name} 是客服聊天或多渠道收件箱，让团队在一个地方回复客户。",
+      },
+      erp: {
+        label: "ERP / 财务业务",
+        about: "{name} 是 ERP 或财务套件，覆盖库存、进销单据或经营报表。",
+      },
+      ops: {
+        label: "内部工具 / 运营后台",
+        about: "{name} 是内部或运营工具，比如项目、看板、数据库或管理后台。",
+      },
+      forms: {
+        label: "表单 / 问卷 / 电子签",
+        about: "{name} 是表单、问卷或电子签产品，用来在线收集反馈或签名文件。",
+      },
+      analytics: {
+        label: "数据分析 / 看板",
+        about: "{name} 是分析或数据看板，用来看使用指标和报表。",
+      },
+      auth: {
+        label: "登录 / 身份认证",
+        about: "{name} 是身份认证或带 Auth 的后端，用来管用户、权限和登录。",
+      },
+      docs: {
+        label: "文档 / 知识库",
+        about: "{name} 是文档或知识库，方便团队一起写和搜资料。",
+      },
+      automation: {
+        label: "自动化 / 工作流",
+        about: "{name} 是工作流自动化工具，让系统互连，减少手工搬数据。",
+      },
+      ai: {
+        label: "AI / 聊天机器人",
+        about: "{name} 是 AI 或聊天机器人平台，用来做助手、问答或跑大模型。",
+      },
+      dev: {
+        label: "开发者工具",
+        about: "{name} 是开发者工具，用来做或维护网站与 API。",
+      },
+    },
     all: "全部",
     categories: {
       "ลูกค้าของเรา": "我们的客户",

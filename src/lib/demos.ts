@@ -32,6 +32,7 @@ export type Demo = {
   openSource?: {
     repo: string;
     license: string;
+    kind: import("./open-source-demos").OssKind;
   };
 };
 

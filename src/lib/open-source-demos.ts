@@ -1,7 +1,7 @@
 import type { Demo } from "./demos";
 import type { IconName } from "./site";
 
-type Kind =
+export type OssKind =
   | "booking"
   | "crm"
   | "shop"
@@ -16,6 +16,8 @@ type Kind =
   | "automation"
   | "ai"
   | "dev";
+
+type Kind = OssKind;
 
 type Seed = {
   slug: string;
@@ -265,14 +267,14 @@ function toDemo(seed: Seed): Demo {
     category: "โอเพนซอร์ส",
     icon: meta.icon,
     tagline: seed.tagline,
-    description: `${seed.name} is an open-source ${meta.tag.toLowerCase()} product. Linked here as a reference demo — not built by LIMIT CODE STUDIO.`,
+    description: seed.tagline,
     liveUrl: seed.url,
     preview: seed.preview ?? "",
     swatch: meta.swatch,
     accentText: meta.accent,
     tags: [meta.tag, seed.license, "Open source"],
     features: [`License: ${seed.license}`, `Source: ${repoHost}`, "Opens the official site"],
-    openSource: { repo: seed.repo, license: seed.license },
+    openSource: { repo: seed.repo, license: seed.license, kind: seed.kind },
   };
 }
 

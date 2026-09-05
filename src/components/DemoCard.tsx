@@ -18,9 +18,11 @@ export function DemoCard({ demo }: { demo: Demo }) {
   const isOss = Boolean(demo.openSource);
   const ctaLabel = isOss ? t.showcase.openOss : isExternal ? t.showcase.openLive : t.showcase.openDemo;
   const category = t.showcase.categories[demo.category];
-  const ossCredit = demo.openSource
-    ? fill(t.showcase.ossCredit, { license: demo.openSource.license })
-    : null;
+  const ossKind = demo.openSource?.kind ? t.showcase.ossKinds[demo.openSource.kind] : null;
+  const tagline = ossKind?.label ?? demo.tagline;
+  const description = ossKind
+    ? fill(ossKind.about, { name: demo.name })
+    : demo.description;
   const hasPreview = Boolean(demo.preview);
 
   const inner = (
@@ -44,7 +46,7 @@ export function DemoCard({ demo }: { demo: Demo }) {
                 <Icon name={demo.icon} className="size-6" />
               </span>
               <p className="font-display text-xl font-bold tracking-tight drop-shadow-sm">{demo.name}</p>
-              <p className="max-w-[18rem] text-xs text-white/75">{demo.tagline}</p>
+              <p className="max-w-[18rem] text-xs text-white/75">{tagline}</p>
             </div>
           </div>
         )}
@@ -69,13 +71,8 @@ export function DemoCard({ demo }: { demo: Demo }) {
 
       <div className="flex flex-1 flex-col p-5">
         <h3 className="font-display text-lg font-bold text-ink">{demo.name}</h3>
-        <p className={`mt-0.5 text-sm font-medium ${demo.accentText}`}>{demo.tagline}</p>
-        {ossCredit ? (
-          <p className="mt-2 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">
-            {ossCredit}
-          </p>
-        ) : null}
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{demo.description}</p>
+        <p className={`mt-0.5 text-sm font-medium ${demo.accentText}`}>{tagline}</p>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{description}</p>
         <div className="mt-4 flex flex-wrap gap-1.5">
           {demo.tags.map((tag) => (
             <span
