@@ -1,4 +1,3 @@
-import type { IconName } from "./site";
 import { OPEN_SOURCE_DEMOS } from "./open-source-demos";
 import type { Demo, DemoCategory } from "./demo-types";
 
