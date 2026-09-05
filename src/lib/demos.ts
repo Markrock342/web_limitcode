@@ -1,41 +1,9 @@
 import type { IconName } from "./site";
 import { OPEN_SOURCE_DEMOS } from "./open-source-demos";
+import type { Demo, DemoCategory } from "./demo-types";
 
+export type { Demo, DemoCategory, OssKind } from "./demo-types";
 export { OPEN_SOURCE_DEMOS } from "./open-source-demos";
-
-export type DemoCategory =
-  | "ลูกค้าของเรา"
-  | "ร้านอาหาร"
-  | "ขายของ"
-  | "จองบริการ"
-  | "ระบบหลังบ้าน"
-  | "เว็บบริษัท"
-  | "อสังหาริมทรัพย์"
-  | "โอเพนซอร์ส";
-
-export type Demo = {
-  slug: string;
-  name: string;
-  category: DemoCategory;
-  icon: IconName;
-  tagline: string;
-  description: string;
-  /** ลิงก์เว็บจริงที่ deploy แล้ว (ถ้ามี การ์ดจะเปิดแท็บใหม่แทน /demo) */
-  liveUrl?: string;
-  /** Empty string = gradient fallback (used for large OSS catalogs) */
-  preview?: string;
-  swatch: string;
-  accentText: string;
-  tags: string[];
-  features: string[];
-  /** Third-party open-source example — not studio work */
-  openSource?: {
-    repo: string;
-    license: string;
-    kind: import("./open-source-demos").OssKind;
-    domain?: string;
-  };
-};
 
 /** ระบบธุรกิจม็อกอัพ (กดลองได้) — ชื่อสมมติทั้งหมด */
 export const SYSTEM_DEMOS: Demo[] = [

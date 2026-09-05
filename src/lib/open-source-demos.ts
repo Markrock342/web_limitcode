@@ -1,21 +1,7 @@
-import type { Demo } from "./demos";
+import type { Demo, OssKind } from "./demo-types";
 import type { IconName } from "./site";
 
-export type OssKind =
-  | "booking"
-  | "crm"
-  | "shop"
-  | "cms"
-  | "chat"
-  | "erp"
-  | "ops"
-  | "forms"
-  | "analytics"
-  | "auth"
-  | "docs"
-  | "automation"
-  | "ai"
-  | "dev";
+export type { OssKind } from "./demo-types";
 
 type Kind = OssKind;
 
