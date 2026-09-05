@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { IBM_Plex_Sans_Thai, Sora } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
+import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { htmlLang, LOCALE_COOKIE, parseLocale } from "@/lib/i18n/config";
 import {
   defaultMetadata,
@@ -52,6 +53,7 @@ export default async function RootLayout({
         <LocaleProvider initialLocale={locale}>
           <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
           {children}
+          <AnalyticsTracker />
         </LocaleProvider>
       </body>
     </html>

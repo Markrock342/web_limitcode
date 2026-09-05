@@ -31,6 +31,9 @@ export function Footer() {
               href={LINE_URL}
               target="_blank"
               rel="noopener noreferrer"
+              data-track-event="line_click"
+              data-track-source="footer"
+              data-track-label="LINE OA"
               className="mt-5 inline-flex items-center gap-2 bg-[#06C755] px-4 py-2 text-sm font-semibold text-white transition hover:brightness-110"
             >
               <LineGlyph className="size-4" />
@@ -104,7 +107,15 @@ export function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href={LINE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-brand-700">
+                  <a
+                    href={LINE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track-event="line_click"
+                    data-track-source="footer_contact_list"
+                    data-track-label="LINE OA"
+                    className="hover:text-brand-700"
+                  >
                     LINE OA {LINE_ID}
                   </a>
                 </li>

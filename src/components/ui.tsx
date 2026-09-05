@@ -48,11 +48,13 @@ export function LineButton({
   children = `ปรึกษาฟรีผ่าน LINE OA`,
   showId = false,
   iconOnly = false,
+  trackingSource,
 }: {
   className?: string;
   children?: React.ReactNode;
   showId?: boolean;
   iconOnly?: boolean;
+  trackingSource?: string;
 }) {
   const label = typeof children === "string" ? children : "LINE OA";
   return (
@@ -60,6 +62,9 @@ export function LineButton({
       href={LINE_URL}
       target="_blank"
       rel="noopener noreferrer"
+      data-track-event="line_click"
+      data-track-source={trackingSource}
+      data-track-label={label}
       aria-label={iconOnly ? label : undefined}
       className={
         iconOnly

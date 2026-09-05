@@ -112,7 +112,16 @@ export function DemoCard({ demo }: { demo: Demo }) {
   if (isExternal) {
     return (
       <CropFrame className="h-full">
-        <a href={href} target="_blank" rel="noopener noreferrer" className={`${cardClass} h-full`}>
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-track-event="work_open"
+          data-track-source="showcase"
+          data-track-item={demo.slug}
+          data-track-kind="live"
+          className={`${cardClass} h-full`}
+        >
           {inner}
         </a>
       </CropFrame>
@@ -121,7 +130,14 @@ export function DemoCard({ demo }: { demo: Demo }) {
 
   return (
     <CropFrame className="h-full">
-      <Link href={href} className={`${cardClass} h-full`}>
+      <Link
+        href={href}
+        data-track-event="work_open"
+        data-track-source="showcase"
+        data-track-item={demo.slug}
+        data-track-kind={isOss ? "oss" : "demo"}
+        className={`${cardClass} h-full`}
+      >
         {inner}
       </Link>
     </CropFrame>

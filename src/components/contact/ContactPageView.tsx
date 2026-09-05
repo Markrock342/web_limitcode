@@ -109,7 +109,7 @@ export function ContactPageView() {
                   </div>
                 </div>
                 <p className="mt-4 text-sm text-white/70">{t.contact.primaryHint}</p>
-                <LineButton className="mt-6 w-full">
+                <LineButton trackingSource="contact_page" className="mt-6 w-full">
                   {t.contact.lineCta} {LINE_ID}
                 </LineButton>
               </div>

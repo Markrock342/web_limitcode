@@ -18,7 +18,7 @@ export function ShowcasePageView() {
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">{t.showcase.pageBody}</p>
           <div className="mt-7">
-            <LineButton>{t.showcase.pageCta}</LineButton>
+            <LineButton trackingSource="showcase_header">{t.showcase.pageCta}</LineButton>
           </div>
         </Container>
       </section>

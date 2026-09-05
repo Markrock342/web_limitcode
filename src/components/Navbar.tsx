@@ -15,6 +15,7 @@ export function Navbar() {
 
   const nav = [
     { href: "/#services", label: t.nav.services },
+    { href: "/#pricing", label: t.nav.pricing },
     { href: "/#why", label: t.nav.why },
     { href: "/#process", label: t.nav.process },
     { href: "/#clients", label: t.nav.clients },
@@ -58,6 +59,7 @@ export function Navbar() {
 
   return (
     <header
+      data-analytics-region="navbar"
       className={`sticky top-0 z-50 overflow-x-clip transition-all ${
         scrolled
           ? "border-b border-slate-200/70 bg-white/85 backdrop-blur-md"

@@ -9,6 +9,7 @@ import { ShowcasePreview } from "@/components/landing/ShowcasePreview";
 import { TechStack } from "@/components/landing/TechStack";
 import { Clients } from "@/components/landing/Clients";
 import { Contact } from "@/components/landing/Contact";
+import { Pricing } from "@/components/landing/Pricing";
 
 export default function Home() {
   return (
@@ -16,13 +17,14 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <Clients />
+        <ShowcasePreview />
         <UseCases />
         <Services />
+        <Pricing />
         <WhyUs />
         <Process />
-        <ShowcasePreview />
         <TechStack />
-        <Clients />
         <Contact />
       </main>
       <Footer />

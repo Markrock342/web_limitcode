@@ -13,7 +13,7 @@ export function Contact() {
   const phrases = [...t.contact.phrases];
 
   return (
-    <section id="contact" className="relative scroll-mt-20 overflow-hidden bg-[#0b1f3a] py-20 text-white sm:py-24">
+    <section id="contact" data-analytics-region="homepage_contact" className="relative scroll-mt-20 overflow-hidden bg-[#0b1f3a] py-20 text-white sm:py-24">
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.12] mask-[radial-gradient(ellipse_at_center,black,transparent_75%)]" />
       <Container className="relative">
         <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">

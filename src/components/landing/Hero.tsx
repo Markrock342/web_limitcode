@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { LINE_ID } from "@/lib/site";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { BrandWordmark, Logo } from "@/components/Logo";
@@ -17,7 +16,7 @@ export function Hero() {
   const phrases = [...t.hero.phrases];
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden" data-analytics-region="hero">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_at_top,black,transparent_72%)]" />
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <span className="beam-x top-[144px] [animation-delay:-4s]" />
@@ -68,7 +67,7 @@ export function Hero() {
           <Reveal delay={280}>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <LineButton className="btn-sheen-auto w-full sm:w-auto">{t.hero.ctaLine}</LineButton>
-              <GhostButton href="/#services" className="w-full sm:w-auto">
+              <GhostButton href="/showcase" className="w-full sm:w-auto">
                 {t.hero.ctaGhost}
                 <Icon name="arrow" className="size-4 transition-transform duration-300 ease-out-quart group-hover:translate-x-1" />
               </GhostButton>
@@ -89,21 +88,30 @@ export function Hero() {
         </div>
 
         <Reveal delay={200}>
-          <HeroVisual alt={t.hero.previewAlt} live={t.hero.live} />
+          <HeroVisual alt={t.hero.previewAlt} live={t.hero.live} title={t.hero.previewTitle} />
         </Reveal>
       </Container>
     </section>
   );
 }
 
-function HeroVisual({ alt, live }: { alt: string; live: string }) {
+function HeroVisual({ alt, live, title }: { alt: string; live: string; title: string }) {
   return (
     <DataFlowFrame>
       <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-        <Link href="/demo/field-crm" className="group relative block overflow-hidden bg-slate-100">
+        <a
+          href="https://sirikanchana.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-track-event="work_open"
+          data-track-source="hero"
+          data-track-item="sirikanchana"
+          data-track-kind="live"
+          className="group relative block overflow-hidden bg-slate-100"
+        >
           <div className="relative aspect-[16/10]">
             <Image
-              src="/showcase/field-crm.jpg"
+              src="/showcase/sirikanchana.jpg"
               alt={alt}
               fill
               sizes="(max-width:1024px) 100vw, 520px"
@@ -114,10 +122,10 @@ function HeroVisual({ alt, live }: { alt: string; live: string }) {
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent px-5 pb-5 pt-20">
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/70">{live}</p>
             <p className="mt-0.5 font-display text-base font-bold text-white">
-              GuardNest Field — CRM / Job Order
+              {title}
             </p>
           </div>
-        </Link>
+        </a>
 
         <Reveal
           variant="scale"

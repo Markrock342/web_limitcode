@@ -39,6 +39,16 @@ npm run build
 npm run start
 ```
 
+## Conversion Analytics
+
+เว็บใช้ Vercel Web Analytics และ custom events โดยไม่ส่งชื่อ เบอร์โทร อีเมล หรือข้อมูลในฟอร์ม:
+
+- `line_click` — คลิก LINE OA พร้อม `source` ของตำแหน่งปุ่ม
+- `work_open` — เปิดงาน Live, Demo หรือ OSS พร้อม `item` และ `kind`
+- `pricing_view` — เห็นส่วนราคาในหน้าแรก
+
+หลัง deploy ให้เปิด Web Analytics ใน Vercel Project Dashboard จึงจะเห็นข้อมูลจริง ส่วน custom events ต้องใช้แพ็กเกจ Vercel ที่รองรับฟีเจอร์นี้
+
 ## โครงสร้างหลัก
 
 ```

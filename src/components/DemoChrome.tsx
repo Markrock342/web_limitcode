@@ -44,6 +44,9 @@ export function DemoChrome({
               href={LINE_URL}
               target="_blank"
               rel="noopener noreferrer"
+              data-track-event="line_click"
+              data-track-source="demo_header"
+              data-track-label={demo.slug}
               className="inline-flex items-center gap-1.5 rounded-full bg-[#06C755] px-3.5 py-1.5 text-xs font-semibold text-white"
             >
               <LineGlyph className="size-4" />
@@ -97,12 +100,24 @@ export function DemoChrome({
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-track-event="work_open"
+                  data-track-source="demo_related"
+                  data-track-item={d.slug}
+                  data-track-kind="live"
                   className={linkClass}
                 >
                   {content}
                 </a>
               ) : (
-                <Link key={d.slug} href={href} className={linkClass}>
+                <Link
+                  key={d.slug}
+                  href={href}
+                  data-track-event="work_open"
+                  data-track-source="demo_related"
+                  data-track-item={d.slug}
+                  data-track-kind="demo"
+                  className={linkClass}
+                >
                   {content}
                 </Link>
               );
@@ -117,6 +132,9 @@ export function DemoChrome({
               href={LINE_URL}
               target="_blank"
               rel="noopener noreferrer"
+              data-track-event="line_click"
+              data-track-source="demo_footer"
+              data-track-label={demo.slug}
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#06C755] px-5 py-2.5 text-sm font-semibold text-white"
             >
               <LineGlyph className="size-4" />
