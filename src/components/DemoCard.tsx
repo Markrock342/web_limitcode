@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Demo } from "@/lib/demos";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { fill } from "@/lib/i18n/format";
 import { CropFrame } from "./ui";
 import { Icon } from "./Icon";
 
@@ -14,8 +15,12 @@ export function DemoCard({ demo }: { demo: Demo }) {
   const { t } = useLocale();
   const href = demo.liveUrl ?? `/demo/${demo.slug}`;
   const isExternal = Boolean(demo.liveUrl);
-  const ctaLabel = isExternal ? t.showcase.openLive : t.showcase.openDemo;
+  const isOss = Boolean(demo.openSource);
+  const ctaLabel = isOss ? t.showcase.openOss : isExternal ? t.showcase.openLive : t.showcase.openDemo;
   const category = t.showcase.categories[demo.category];
+  const ossCredit = demo.openSource
+    ? fill(t.showcase.ossCredit, { license: demo.openSource.license })
+    : null;
 
   const inner = (
     <>
@@ -35,7 +40,11 @@ export function DemoCard({ demo }: { demo: Demo }) {
           {ctaLabel}
           <Icon name="arrow" className="size-3.5" />
         </span>
-        {isExternal ? (
+        {isOss ? (
+          <span className="absolute right-3 top-3 bg-slate-900 px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-white">
+            {t.showcase.ossBadge}
+          </span>
+        ) : isExternal ? (
           <span className="absolute right-3 top-3 bg-emerald-600 px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-white">
             Live
           </span>
@@ -45,6 +54,11 @@ export function DemoCard({ demo }: { demo: Demo }) {
       <div className="flex flex-1 flex-col p-5">
         <h3 className="font-display text-lg font-bold text-ink">{demo.name}</h3>
         <p className={`mt-0.5 text-sm font-medium ${demo.accentText}`}>{demo.tagline}</p>
+        {ossCredit ? (
+          <p className="mt-2 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+            {ossCredit}
+          </p>
+        ) : null}
         <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{demo.description}</p>
         <div className="mt-4 flex flex-wrap gap-1.5">
           {demo.tags.map((tag) => (

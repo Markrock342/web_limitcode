@@ -14,6 +14,7 @@ const FILTER_KEYS: ("all" | DemoCategory)[] = [
   "ร้านอาหาร",
   "จองบริการ",
   "ระบบหลังบ้าน",
+  "โอเพนซอร์ส",
 ];
 
 export function ShowcaseGrid() {

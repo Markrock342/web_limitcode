@@ -17,7 +17,7 @@ export function DemoChrome({
   children: React.ReactNode;
 }) {
   const { t } = useLocale();
-  const others = DEMOS.filter((d) => d.slug !== demo.slug);
+  const others = DEMOS.filter((d) => d.slug !== demo.slug && !d.openSource);
 
   return (
     <div className="flex min-h-screen flex-col bg-white">

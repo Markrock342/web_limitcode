@@ -7,7 +7,8 @@ export type DemoCategory =
   | "จองบริการ"
   | "ระบบหลังบ้าน"
   | "เว็บบริษัท"
-  | "อสังหาริมทรัพย์";
+  | "อสังหาริมทรัพย์"
+  | "โอเพนซอร์ส";
 
 export type Demo = {
   slug: string;
@@ -23,6 +24,11 @@ export type Demo = {
   accentText: string;
   tags: string[];
   features: string[];
+  /** Third-party open-source example — not studio work */
+  openSource?: {
+    repo: string;
+    license: string;
+  };
 };
 
 /** ระบบธุรกิจม็อกอัพ (กดลองได้) — ชื่อสมมติทั้งหมด */
@@ -358,6 +364,90 @@ export const CLIENT_WORK: Demo[] = [
   },
 ];
 
+/** Official open-source products we link to — not LIMIT CODE STUDIO work */
+export const OPEN_SOURCE_DEMOS: Demo[] = [
+  {
+    slug: "oss-calcom",
+    name: "Cal.com",
+    category: "โอเพนซอร์ส",
+    icon: "calendar",
+    tagline: "จองนัดหมายโอเพนซอร์ส",
+    description:
+      "ระบบจองเวลาแบบปฏิทิน จากโปรเจกต์โอเพนซอร์ส Cal.com — ใช้ดูตัวอย่างระบบนัด ไม่ใช่งานที่ทีม LIMIT CODE STUDIO สร้าง",
+    liveUrl: "https://cal.com",
+    preview: "/showcase/oss-calcom.jpg",
+    swatch: "from-[#111111] via-[#292929] to-[#292929]",
+    accentText: "text-slate-800",
+    tags: ["Booking", "AGPL-3.0", "Open source"],
+    features: ["เลือกวันและช่วงเวลา", "ฝังปุ่มจองในเว็บ", "ต้นฉบับ github.com/calcom/cal.com"],
+    openSource: { repo: "https://github.com/calcom/cal.com", license: "AGPL-3.0" },
+  },
+  {
+    slug: "oss-refine-crm",
+    name: "Refine CRM",
+    category: "โอเพนซอร์ส",
+    icon: "layers",
+    tagline: "เดโม CRM กดเล่นได้",
+    description:
+      "ตัวอย่าง CRM จาก Refine (MIT) มีดีล คอนแท็กต์ และแดชบอร์ดให้คลิก — ไม่ใช่ระบบที่ทีมเราเขียน",
+    liveUrl: "https://example.crm.refine.dev",
+    preview: "/showcase/oss-refine-crm.jpg",
+    swatch: "from-[#0f172a] via-sky-600 to-cyan-400",
+    accentText: "text-sky-800",
+    tags: ["CRM", "MIT", "Open source"],
+    features: ["ดีลและคอนแท็กต์", "แดชบอร์ดขาย", "ต้นฉบับ github.com/refinedev/refine"],
+    openSource: { repo: "https://github.com/refinedev/refine", license: "MIT" },
+  },
+  {
+    slug: "oss-medusa",
+    name: "Medusa Store",
+    category: "โอเพนซอร์ส",
+    icon: "cart",
+    tagline: "ร้านค้าโอเพนซอร์ส กดซื้อลองได้",
+    description:
+      "สโตร์ฟรอนต์ทางการของ Medusa (MIT) เลือกสินค้า ใส่ตะกร้า และเช็คเอาต์ได้ — ตัวอย่างระบบขายของ ไม่ใช่งานของทีม",
+    liveUrl: "https://next.medusajs.com/us/collections/clothing",
+    preview: "/showcase/oss-medusa.jpg",
+    swatch: "from-[#0a0a0a] via-[#111] to-violet-500",
+    accentText: "text-violet-800",
+    tags: ["Shop", "MIT", "Open source"],
+    features: ["แคตตาล็อกและตะกร้า", "เช็คเอาต์ตัวอย่าง", "ต้นฉบับ github.com/medusajs/medusa"],
+    openSource: { repo: "https://github.com/medusajs/medusa", license: "MIT" },
+  },
+  {
+    slug: "oss-chatwoot",
+    name: "Chatwoot",
+    category: "โอเพนซอร์ส",
+    icon: "chat",
+    tagline: "กล่องแชทลูกค้าโอเพนซอร์ส",
+    description:
+      "อินบ็อกซ์รวมช่องทางคุยลูกค้า จาก Chatwoot (MIT) — แนว inbox ที่ธุรกิจใช้แทนแชทกระจัดกระจาย ไม่ใช่ระบบที่ทีมสร้าง",
+    liveUrl: "https://www.chatwoot.com",
+    preview: "/showcase/oss-chatwoot.jpg",
+    swatch: "from-[#1f93ff] via-sky-500 to-indigo-500",
+    accentText: "text-sky-700",
+    tags: ["Inbox", "MIT", "Open source"],
+    features: ["รวมแชทหลายช่องทาง", "ทีมตอบจากที่เดียว", "ต้นฉบับ github.com/chatwoot/chatwoot"],
+    openSource: { repo: "https://github.com/chatwoot/chatwoot", license: "MIT" },
+  },
+  {
+    slug: "oss-directus",
+    name: "Directus",
+    category: "โอเพนซอร์ส",
+    icon: "dashboard",
+    tagline: "หลังบ้าน / CMS โอเพนซอร์ส",
+    description:
+      "Directus ใช้ดูตัวอย่างแอดมินและ CMS บนฐานข้อมูลจริง — โปรเจกต์โอเพนซอร์ส ไม่ใช่งานของ LIMIT CODE STUDIO",
+    liveUrl: "https://directus.com",
+    preview: "/showcase/oss-directus.jpg",
+    swatch: "from-[#6644ff] via-violet-500 to-slate-800",
+    accentText: "text-violet-800",
+    tags: ["CMS", "Admin", "Open source"],
+    features: ["จัดการข้อมูลแบบตาราง", "API พร้อมใช้", "ต้นฉบับ github.com/directus/directus"],
+    openSource: { repo: "https://github.com/directus/directus", license: "GPL-3.0" },
+  },
+];
+
 export const DEMOS: Demo[] = [
   ...CLIENT_WORK,
   ...SYSTEM_DEMOS,
@@ -476,6 +566,7 @@ export const DEMOS: Demo[] = [
     tags: ["ซื้อเกม", "เช่าเกม", "เติมเกม"],
     features: ["แคตตาล็อกเกมซื้อ/เช่าแยกหมวด", "การ์ดสินค้าพร้อมราคาและรีวิว", "Hero + สถิติ + CTA สมัครสมาชิก"],
   },
+  ...OPEN_SOURCE_DEMOS,
 ];
 
 export function getDemo(slug: string): Demo | undefined {
