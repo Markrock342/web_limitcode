@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -9,16 +10,18 @@ import { BrandWordmark, Logo } from "./Logo";
 
 export function Navbar() {
   const { t } = useLocale();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState("");
   const progressRef = useRef<HTMLDivElement | null>(null);
 
   const nav = [
-    { href: "/#services", label: t.nav.services },
-    { href: "/#pricing", label: t.nav.pricing },
-    { href: "/#why", label: t.nav.why },
-    { href: "/#process", label: t.nav.process },
-    { href: "/#clients", label: t.nav.clients },
+    { href: "/#services", sectionId: "services", label: t.nav.services },
+    { href: "/#pricing", sectionId: "pricing", label: t.nav.pricing },
+    { href: "/#why", sectionId: "why", label: t.nav.why },
+    { href: "/#process", sectionId: "process", label: t.nav.process },
+    { href: "/#clients", sectionId: "clients", label: t.nav.clients },
     { href: "/showcase", label: t.nav.showcase },
     { href: "/company-profile", label: t.nav.profile },
     { href: "/contact", label: t.nav.contact },
@@ -46,6 +49,34 @@ export function Navbar() {
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveHref(pathname);
+      return;
+    }
+
+    const sections = nav.filter((item): item is typeof item & { sectionId: string } => Boolean(item.sectionId));
+    let raf = 0;
+    const updateActiveSection = () => {
+      raf = 0;
+      const current = sections
+        .map((item) => ({ item, top: document.getElementById(item.sectionId)?.getBoundingClientRect().top ?? Infinity }))
+        .filter(({ top }) => top <= 96)
+        .sort((a, b) => b.top - a.top)[0]?.item;
+      setActiveHref(current?.href ?? "");
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(updateActiveSection);
+    };
+
+    raf = requestAnimationFrame(updateActiveSection);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [pathname, t]);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1280px)");
@@ -82,13 +113,22 @@ export function Navbar() {
         <div className="hidden min-w-0 flex-1 items-center justify-center overflow-hidden xl:flex">
           <div className="flex max-w-full items-center justify-center gap-0.5">
             {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="relative whitespace-nowrap px-2 py-2 text-[13px] font-medium text-slate-600 transition-colors after:absolute after:inset-x-2 after:bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-brand-500 after:transition-transform after:duration-300 after:ease-out-quart hover:text-brand-700 hover:after:scale-x-100 2xl:px-3 2xl:text-sm"
-              >
-                {item.label}
-              </Link>
+              (() => {
+                const active = activeHref === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={active ? "location" : undefined}
+                    onClick={() => setActiveHref(item.href)}
+                    className={`relative whitespace-nowrap px-2 py-2 text-[13px] font-medium transition-colors after:absolute after:inset-x-2 after:bottom-1 after:h-px after:origin-left after:bg-brand-500 after:transition-transform after:duration-300 after:ease-out-quart 2xl:px-3 2xl:text-sm ${
+                      active ? "text-brand-700 after:scale-x-100" : "text-slate-600 after:scale-x-0 hover:text-brand-700 hover:after:scale-x-100"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })()
             ))}
           </div>
         </div>
@@ -123,14 +163,25 @@ export function Navbar() {
           <div className="border-t border-slate-200/70 bg-white xl:hidden">
             <div className="mx-auto flex w-full max-w-7xl flex-col gap-1 px-5 py-4 sm:px-6">
               {nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-xl px-3 py-3 text-base font-medium text-slate-700 transition-colors hover:bg-brand-50 hover:text-brand-700"
-                >
-                  {item.label}
-                </Link>
+                (() => {
+                  const active = activeHref === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      aria-current={active ? "location" : undefined}
+                      onClick={() => {
+                        setActiveHref(item.href);
+                        setOpen(false);
+                      }}
+                      className={`rounded-xl px-3 py-3 text-base font-medium transition-colors ${
+                        active ? "bg-brand-50 text-brand-700" : "text-slate-700 hover:bg-brand-50 hover:text-brand-700"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })()
               ))}
               <LineButton className="mt-2 w-full">{t.nav.line}</LineButton>
             </div>
