@@ -33,6 +33,15 @@ export function ShowcaseGrid() {
     return base.filter((d) => d.openSource?.kind === ossKind);
   }, [active, ossKind]);
 
+  const ossKindsPresent = useMemo(() => {
+    const kinds = new Set(
+      DEMOS.filter((d) => d.category === "โอเพนซอร์ส" && d.openSource?.kind).map(
+        (d) => d.openSource!.kind as OssKind,
+      ),
+    );
+    return OSS_KIND_ORDER.filter((k) => kinds.has(k));
+  }, []);
+
   const chip = (pressed: boolean) =>
     `px-3.5 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors ${
       pressed
@@ -70,7 +79,7 @@ export function ShowcaseGrid() {
           >
             {t.showcase.all}
           </button>
-          {OSS_KIND_ORDER.map((kind) => {
+          {ossKindsPresent.map((kind) => {
             const pressed = ossKind === kind;
             return (
               <button
