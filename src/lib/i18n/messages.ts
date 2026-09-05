@@ -195,58 +195,72 @@ export const th = {
     ossKinds: {
       booking: {
         label: "ระบบจองนัดหมาย / ตารางเวลา",
+        short: "จอง",
         about: "{name} เป็นระบบจองนัด เลือกวัน–เวลา และฝังปุ่มจองในเว็บได้ เหมาะกับคลินิก ร้านบริการ หรือทีมที่นัดลูกค้า",
       },
       crm: {
         label: "ระบบ CRM / ลูกค้าและการขาย",
+        short: "CRM",
         about: "{name} เป็นระบบ CRM สำหรับเก็บลูกค้า ติดตามดีล และดูไปป์ไลน์ขาย ใช้ดูแนวหลังบ้านทีมขายได้",
       },
       shop: {
         label: "ระบบร้านค้าออนไลน์",
+        short: "ร้านค้า",
         about: "{name} เป็นระบบขายของออนไลน์ มีสินค้า ตะกร้า และเช็คเอาต์ ใช้ดูแนวเว็บช็อปหรือ headless commerce ได้",
       },
       cms: {
         label: "ระบบ CMS / จัดการเนื้อหา",
+        short: "CMS",
         about: "{name} เป็นระบบจัดการเนื้อหาหรือหลังบ้านข้อมูล ใช้แก้หน้าเว็บ บทความ หรือข้อมูลธุรกิจผ่านแอดมิน",
       },
       chat: {
         label: "ระบบแชท / ดูแลลูกค้า",
+        short: "แชท",
         about: "{name} เป็นกล่องแชทหรืออินบ็อกซ์รวมช่องทางคุยลูกค้า ช่วยทีมตอบจากที่เดียวแทนแชทกระจัดกระจาย",
       },
       erp: {
         label: "ระบบ ERP / บัญชีและธุรกิจ",
+        short: "ERP",
         about: "{name} เป็นระบบ ERP หรือบัญชีสำหรับธุรกิจ ครอบคลุมงานอย่างสต็อก เอกสารขาย–ซื้อ หรือรายงาน",
       },
       ops: {
         label: "ระบบงานภายใน / หลังบ้านทีม",
+        short: "หลังบ้าน",
         about: "{name} เป็นเครื่องมือหลังบ้านหรืองานภายในทีม เช่น โปรเจกต์ ตารางงาน ฐานข้อมูล หรือแอดมิน",
       },
       forms: {
         label: "ระบบฟอร์ม / สำรวจ / เซ็นเอกสาร",
+        short: "ฟอร์ม",
         about: "{name} เป็นระบบฟอร์ม สำรวจความคิดเห็น หรือเซ็นเอกสารออนไลน์ ใช้เก็บข้อมูลจากลูกค้าหรือทีม",
       },
       analytics: {
         label: "ระบบวิเคราะห์ข้อมูล / แดชบอร์ด",
+        short: "วิเคราะห์",
         about: "{name} เป็นระบบวิเคราะห์พฤติกรรมหรือแดชบอร์ดข้อมูล ช่วยดูตัวเลขการใช้งานและรายงาน",
       },
       auth: {
         label: "ระบบล็อกอิน / ยืนยันตัวตน",
+        short: "Auth",
         about: "{name} เป็นระบบยืนยันตัวตนหรือแบ็กเอนด์พร้อม Auth ใช้จัดการผู้ใช้ สิทธิ์ และการเข้าสู่ระบบ",
       },
       docs: {
         label: "ระบบเอกสาร / ความรู้ทีม",
+        short: "เอกสาร",
         about: "{name} เป็นระบบเอกสาร คู่มือ หรือ knowledge base ให้ทีมเขียนและค้นหาข้อมูลร่วมกัน",
       },
       automation: {
         label: "ระบบออโตเมชัน / เวิร์กโฟลว์",
+        short: "ออโต",
         about: "{name} เป็นระบบเชื่อมงานอัตโนมัติ ตั้งเวิร์กโฟลว์ให้ระบบคุยกันเอง ลดงานก๊อปปี้ข้อมูลมือ",
       },
       ai: {
         label: "ระบบ AI / แชทบอท",
+        short: "AI",
         about: "{name} เป็นแพลตฟอร์ม AI หรือแชทบอท ใช้สร้างผู้ช่วย ตอบคำถาม หรือรันโมเดลภาษา",
       },
       dev: {
         label: "เครื่องมือนักพัฒนา",
+        short: "Dev",
         about: "{name} เป็นเครื่องมือสำหรับนักพัฒนา ใช้สร้างหรือดูแลระบบเว็บและ API",
       },
     },
@@ -560,58 +574,72 @@ export const en: Messages = {
     ossKinds: {
       booking: {
         label: "Booking / scheduling",
+        short: "Booking",
         about: "{name} is a scheduling system for picking dates and times, and embedding booking on a site — useful for clinics, service shops, or teams that book clients.",
       },
       crm: {
         label: "CRM / sales pipeline",
+        short: "CRM",
         about: "{name} is a CRM for contacts, deals, and sales pipelines — a reference for customer and sales back offices.",
       },
       shop: {
         label: "Online shop / commerce",
+        short: "Shop",
         about: "{name} is an e-commerce system with catalog, cart, and checkout — a reference for shops or headless commerce.",
       },
       cms: {
         label: "CMS / content admin",
+        short: "CMS",
         about: "{name} is a content or data admin CMS — edit pages, articles, or business data from a back office.",
       },
       chat: {
         label: "Chat / customer inbox",
+        short: "Chat",
         about: "{name} is a chat or omnichannel inbox so the team answers customers in one place instead of scattered threads.",
       },
       erp: {
         label: "ERP / accounting",
+        short: "ERP",
         about: "{name} is an ERP or accounting suite covering stock, sales/purchase docs, or business reports.",
       },
       ops: {
         label: "Internal tools / ops",
+        short: "Ops",
         about: "{name} is an internal or ops tool — projects, boards, databases, or admin consoles for the team.",
       },
       forms: {
         label: "Forms / surveys / e-sign",
+        short: "Forms",
         about: "{name} is a forms, survey, or e-sign product for collecting responses or signed documents online.",
       },
       analytics: {
         label: "Analytics / dashboards",
+        short: "Analytics",
         about: "{name} is analytics or a data dashboard for usage metrics and reporting.",
       },
       auth: {
         label: "Auth / identity backend",
+        short: "Auth",
         about: "{name} is an auth or backend identity layer for users, roles, and sign-in.",
       },
       docs: {
         label: "Docs / knowledge base",
+        short: "Docs",
         about: "{name} is a docs or knowledge-base system for writing and searching team knowledge together.",
       },
       automation: {
         label: "Automation / workflows",
+        short: "Automation",
         about: "{name} is a workflow automation tool that connects systems so data moves without manual copy-paste.",
       },
       ai: {
         label: "AI / chatbot platform",
+        short: "AI",
         about: "{name} is an AI or chatbot platform for assistants, Q&A, or running language models.",
       },
       dev: {
         label: "Developer tooling",
+        short: "Dev",
         about: "{name} is a developer tool for building or running web systems and APIs.",
       },
     },
@@ -924,58 +952,72 @@ export const zh: Messages = {
     ossKinds: {
       booking: {
         label: "预约 / 排班系统",
+        short: "预约",
         about: "{name} 是预约排班系统，可选日期时段，也能嵌进网站，适合诊所、服务店或要约客户的团队。",
       },
       crm: {
         label: "CRM / 销售管线",
+        short: "CRM",
         about: "{name} 是 CRM，用来管客户、跟进商机和销售管线，可作销售后台参考。",
       },
       shop: {
         label: "网店 / 电商系统",
+        short: "网店",
         about: "{name} 是电商系统，有商品、购物车和结账，可作网店或无头电商参考。",
       },
       cms: {
         label: "CMS / 内容后台",
+        short: "CMS",
         about: "{name} 是内容或数据后台，用来改页面、文章或业务数据。",
       },
       chat: {
         label: "客服聊天 / 收件箱",
+        short: "客服",
         about: "{name} 是客服聊天或多渠道收件箱，让团队在一个地方回复客户。",
       },
       erp: {
         label: "ERP / 财务业务",
+        short: "ERP",
         about: "{name} 是 ERP 或财务套件，覆盖库存、进销单据或经营报表。",
       },
       ops: {
         label: "内部工具 / 运营后台",
+        short: "后台",
         about: "{name} 是内部或运营工具，比如项目、看板、数据库或管理后台。",
       },
       forms: {
         label: "表单 / 问卷 / 电子签",
+        short: "表单",
         about: "{name} 是表单、问卷或电子签产品，用来在线收集反馈或签名文件。",
       },
       analytics: {
         label: "数据分析 / 看板",
+        short: "分析",
         about: "{name} 是分析或数据看板，用来看使用指标和报表。",
       },
       auth: {
         label: "登录 / 身份认证",
+        short: "登录",
         about: "{name} 是身份认证或带 Auth 的后端，用来管用户、权限和登录。",
       },
       docs: {
         label: "文档 / 知识库",
+        short: "文档",
         about: "{name} 是文档或知识库，方便团队一起写和搜资料。",
       },
       automation: {
         label: "自动化 / 工作流",
+        short: "自动化",
         about: "{name} 是工作流自动化工具，让系统互连，减少手工搬数据。",
       },
       ai: {
         label: "AI / 聊天机器人",
+        short: "AI",
         about: "{name} 是 AI 或聊天机器人平台，用来做助手、问答或跑大模型。",
       },
       dev: {
         label: "开发者工具",
+        short: "开发",
         about: "{name} 是开发者工具，用来做或维护网站与 API。",
       },
     },

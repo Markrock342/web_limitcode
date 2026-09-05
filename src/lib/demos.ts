@@ -33,6 +33,7 @@ export type Demo = {
     repo: string;
     license: string;
     kind: import("./open-source-demos").OssKind;
+    domain?: string;
   };
 };
 

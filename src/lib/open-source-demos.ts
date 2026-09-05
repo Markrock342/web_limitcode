@@ -258,9 +258,36 @@ const SEEDS: Seed[] = [
   { slug: "ant-pro", name: "Ant Design Pro", tagline: "Enterprise admin UI", kind: "ops", url: "https://pro.ant.design", repo: "https://github.com/ant-design/ant-design-pro", license: "MIT" },
 ];
 
+export const OSS_KIND_ORDER: OssKind[] = [
+  "booking",
+  "crm",
+  "shop",
+  "erp",
+  "cms",
+  "chat",
+  "ops",
+  "forms",
+  "analytics",
+  "auth",
+  "docs",
+  "automation",
+  "ai",
+  "dev",
+];
+
+function hostFromUrl(url: string) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return "";
+  }
+}
+
 function toDemo(seed: Seed): Demo {
   const meta = KIND[seed.kind];
   const repoHost = seed.repo.replace(/^https?:\/\//, "");
+  const domain = hostFromUrl(seed.url);
+  const preview = seed.preview || `/showcase/oss-covers/${seed.slug}.jpg`;
   return {
     slug: `oss-${seed.slug}`,
     name: seed.name,
@@ -269,12 +296,17 @@ function toDemo(seed: Seed): Demo {
     tagline: seed.tagline,
     description: seed.tagline,
     liveUrl: seed.url,
-    preview: seed.preview ?? "",
+    preview,
     swatch: meta.swatch,
     accentText: meta.accent,
     tags: [meta.tag, seed.license, "Open source"],
     features: [`License: ${seed.license}`, `Source: ${repoHost}`, "Opens the official site"],
-    openSource: { repo: seed.repo, license: seed.license, kind: seed.kind },
+    openSource: {
+      repo: seed.repo,
+      license: seed.license,
+      kind: seed.kind,
+      domain,
+    },
   };
 }
 

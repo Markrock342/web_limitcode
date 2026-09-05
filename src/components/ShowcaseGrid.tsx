@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DEMOS, type DemoCategory } from "@/lib/demos";
+import { OSS_KIND_ORDER, type OssKind } from "@/lib/open-source-demos";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { DemoCard } from "./DemoCard";
 
@@ -20,11 +21,24 @@ const FILTER_KEYS: ("all" | DemoCategory)[] = [
 export function ShowcaseGrid() {
   const { t } = useLocale();
   const [active, setActive] = useState<(typeof FILTER_KEYS)[number]>("all");
+  const [ossKind, setOssKind] = useState<"all" | OssKind>("all");
 
-  const list = useMemo(
-    () => (active === "all" ? DEMOS : DEMOS.filter((d) => d.category === active)),
-    [active],
-  );
+  useEffect(() => {
+    if (active !== "โอเพนซอร์ส") setOssKind("all");
+  }, [active]);
+
+  const list = useMemo(() => {
+    const base = active === "all" ? DEMOS : DEMOS.filter((d) => d.category === active);
+    if (active !== "โอเพนซอร์ส" || ossKind === "all") return base;
+    return base.filter((d) => d.openSource?.kind === ossKind);
+  }, [active, ossKind]);
+
+  const chip = (pressed: boolean) =>
+    `px-3.5 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors ${
+      pressed
+        ? "bg-brand-600 text-white"
+        : "border border-slate-200 bg-white text-slate-600 hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700"
+    }`;
 
   return (
     <div>
@@ -38,11 +52,7 @@ export function ShowcaseGrid() {
               type="button"
               onClick={() => setActive(f)}
               aria-pressed={isActive}
-              className={`px-3.5 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors ${
-                isActive
-                  ? "bg-brand-600 text-white"
-                  : "border border-slate-200 bg-white text-slate-600 hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700"
-              }`}
+              className={chip(isActive)}
             >
               {label}
             </button>
@@ -50,7 +60,38 @@ export function ShowcaseGrid() {
         })}
       </div>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {active === "โอเพนซอร์ส" ? (
+        <div className="mt-3 flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setOssKind("all")}
+            aria-pressed={ossKind === "all"}
+            className={chip(ossKind === "all")}
+          >
+            {t.showcase.all}
+          </button>
+          {OSS_KIND_ORDER.map((kind) => {
+            const pressed = ossKind === kind;
+            return (
+              <button
+                key={kind}
+                type="button"
+                onClick={() => setOssKind(kind)}
+                aria-pressed={pressed}
+                className={chip(pressed)}
+              >
+                {t.showcase.ossKinds[kind].short}
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+
+      <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-slate-400">
+        {list.length} {active === "โอเพนซอร์ส" ? t.showcase.ossBadge : t.showcase.all}
+      </p>
+
+      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((d) => (
           <DemoCard key={d.slug} demo={d} />
         ))}
