@@ -3,13 +3,21 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { QrCode } from "lucide-react";
-import { BASE, DATES, bookingCode, fmtDay, tierFor, useSmashLane } from "../store";
+import { BASE, DATES, bookingCode, fmtDay, priceForZone, useSmashLane, zoneLabel } from "../store";
 
 export function SmashCheckoutPage() {
   const router = useRouter();
   const { state, setState } = useSmashLane();
   const date = DATES[state.dateIdx];
-  const total = state.selectedHours.reduce((s, h) => s + tierFor(h).price, 0);
+  const priceAt = (hour: number) => {
+    const largeCourts = Array.from({ length: 18 }, (_, index) => index + 8);
+    const bookedLarge = state.bookings.filter(
+      (booking) => booking.date === date && booking.hour === hour && booking.paid && booking.status === "confirmed" && booking.court !== null && booking.court >= 8,
+    ).length;
+    const lockedLarge = state.locked.filter((item) => item.startsWith(`${date}|`) && item.endsWith(`|${hour}`) && Number(item.split("|")[1]) >= 8).length;
+    return priceForZone(hour, state.selectedZone, bookedLarge + lockedLarge >= largeCourts.length);
+  };
+  const total = state.selectedHours.reduce((sum, hour) => sum + priceAt(hour).price, 0);
   const bookingName = state.session.role === "member" ? state.session.name : state.name;
 
   if (state.selectedHours.length === 0) {
@@ -30,8 +38,8 @@ export function SmashCheckoutPage() {
       code: i === 0 ? code : `${code}-${i + 1}`,
       date,
       hour,
-      price: tierFor(hour).price,
-      tier: tierFor(hour).id,
+      price: priceAt(hour).price,
+      tier: priceAt(hour).id,
       name: bookingName,
       phone: state.phone,
       court: null as number | null,
@@ -57,10 +65,11 @@ export function SmashCheckoutPage() {
         <ul className="space-y-2 text-sm">
           {state.selectedHours.map((h) => (
             <li key={h} className="flex justify-between">
-              <span>
+              <span className="min-w-0">
                 {String(h).padStart(2, "0")}:00–{String(h + 1).padStart(2, "0")}:00
+                <span className="ml-2 text-xs text-slate-500">{priceAt(h).label}</span>
               </span>
-              <span className="font-semibold">฿{tierFor(h).price}</span>
+              <span className="shrink-0 font-semibold">฿{priceAt(h).price}</span>
             </li>
           ))}
         </ul>
@@ -69,6 +78,7 @@ export function SmashCheckoutPage() {
           <span>฿{total.toLocaleString()}</span>
         </p>
       </div>
+      <p className="text-sm text-slate-600">{zoneLabel(state.selectedZone)}</p>
       <div className="space-y-3 rounded-2xl border border-slate-200 bg-white p-5">
         <label className="block text-sm">
           <span className="font-medium">ชื่อผู้จอง</span>

@@ -5,9 +5,13 @@ import { GUEST_SESSION, type DemoSession } from "@/components/demos/_shell/demoA
 import { fmtThDate, thaiName, thaiPhone } from "@/components/demos/_shell/seed";
 import type { DemoBrandMeta, DemoNavItem } from "@/components/demos/_shell/types";
 
-export const COURTS = 12;
+export const COURTS = 25;
+export const SMALL_COURTS = Array.from({ length: 7 }, (_, index) => index + 1);
+export const LARGE_COURTS = Array.from({ length: 18 }, (_, index) => index + 8);
 export const HOURS = [14, 15, 16, 17, 18, 19, 20, 21];
 export const BASE = "/demo/court-booking";
+
+export type CourtZone = "small" | "large";
 
 export type Booking = {
   id: string;
@@ -33,6 +37,7 @@ export type SmashState = {
   name: string;
   phone: string;
   lastCode: string | null;
+  selectedZone: CourtZone;
 };
 
 export const DATES = Array.from({ length: 7 }, (_, i) => {
@@ -47,6 +52,28 @@ export function tierFor(hour: number) {
   return { id: "promo", price: 150, label: "โปรฯ บ่าย" };
 }
 
+export function courtsForZone(zone: CourtZone) {
+  return zone === "small" ? SMALL_COURTS : LARGE_COURTS;
+}
+
+export function zoneLabel(zone: CourtZone) {
+  return zone === "small" ? "สนามเล็ก 1–7" : "สนามใหญ่ 8–25";
+}
+
+export function priceForZone(hour: number, zone: CourtZone, largeCourtsFull: boolean) {
+  const base = tierFor(hour);
+  const fallbackPromo = zone === "small" && hour < 17 && largeCourtsFull;
+  if (base.id === "promo" && (zone === "large" || fallbackPromo)) {
+    return {
+      ...base,
+      id: fallbackPromo ? "large-full-promo" : base.id,
+      label: fallbackPromo ? "โปรสนามใหญ่เต็ม" : base.label,
+      detail: fallbackPromo ? "สนาม 8–25 เต็มในช่วงเวลานี้" : "ราคาโปรสนามใหญ่",
+    };
+  }
+  return { ...base, detail: "ราคามาตรฐาน" };
+}
+
 export function fmtDay(dateStr: string) {
   return fmtThDate(dateStr);
 }
@@ -55,12 +82,14 @@ function seedBookings(date: string): Booking[] {
   const out: Booking[] = [];
   let n = 0;
   for (const hour of HOURS) {
-    const fill = hour >= 18 ? 4 : hour >= 17 ? 3 : 2;
-    for (let i = 0; i < fill; i++) {
+    const largePromoSlotFull = date === day0 && hour >= 14 && hour < 17;
+    const seededCourts = largePromoSlotFull
+      ? LARGE_COURTS
+      : Array.from({ length: hour >= 18 ? 5 : hour >= 17 ? 4 : 3 }, (_, index) => ((index * 3 + hour) % COURTS) + 1);
+    for (const court of seededCourts) {
       n += 1;
-      const assigned = i < Math.ceil(fill * 0.6);
       out.push({
-        id: `seed-${date}-${hour}-${i}`,
+        id: `seed-${date}-${hour}-${n}`,
         code: `SLA-${date.replaceAll("-", "").slice(2)}-${1000 + n}`,
         date,
         hour,
@@ -68,7 +97,7 @@ function seedBookings(date: string): Booking[] {
         tier: tierFor(hour).id,
         name: thaiName(n),
         phone: thaiPhone(n),
-        court: assigned ? ((i * 3 + hour) % COURTS) + 1 : null,
+        court,
         paid: true,
         status: "confirmed",
       });
@@ -92,6 +121,7 @@ export const smashInitial: SmashState = {
   name: "คุณมาร์ค",
   phone: "081-234-5678",
   lastCode: null,
+  selectedZone: "small",
 };
 
 const store = createDemoStore("lcs-demo-smashlane-v2", smashInitial);
