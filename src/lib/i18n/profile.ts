@@ -1,259 +1,233 @@
 import type { Locale } from "@/lib/i18n/config";
 import {
-  CP_ABOUT,
+  CP_AUDIENCE,
   CP_CONTACT_PAGE,
   CP_COVER,
-  CP_ENGAGEMENT,
-  CP_INDUSTRIES,
-  CP_PROBLEMS,
   CP_PROCESS,
   CP_PROJECTS,
-  CP_SERVICES,
-  CP_TECH,
+  CP_WHAT,
+  CP_WHO,
   CP_WHY,
 } from "@/lib/profile";
 
 const en = {
   cover: {
     ...CP_COVER,
-    headline: "Systems for businesses and organisations",
-    subHeadline: "Scattered work, turned into a system the team can actually run",
-    statement: "From requirement and workflow to a system in production",
+    positioning: "Independent Software Studio",
+    taglineEn: "We turn business workflows into software.",
+    headline: "We build web applications and back-office systems for SMEs and service businesses",
+    subHeadline: "From booking and CRM to job management, dashboards, and AI automation",
     description:
-      "LIMIT CODE STUDIO maps the workflow, designs, and builds — web apps, mobile, CRM, job order, booking, admin dashboards, AI, and internal tools.",
+      "We start from the workflow your business already runs — then design and build systems people can use and grow. We don’t lead with technology for its own sake.",
+    statement: "From floor workflow → software the team opens every day",
   },
-  about: {
-    heading: "We don’t just take websites",
+  who: {
+    heading: "Who we are",
+    en: "Who We Are",
     paragraphs: [
-      "LIMIT CODE STUDIO is a software studio that builds systems for businesses.",
-      "We start from how the work runs today, where the team gets stuck, and what the business wants — then design something people will actually use.",
+      "LIMIT CODE STUDIO (LCS) is an independent software team in Thailand focused on web applications, business systems, and back-office tools for SMEs and service businesses.",
+      "We don’t start by selling technology. We start from real workflows and the problems teams hit day to day — then design something people will actually use.",
     ],
     marketingPhrase:
       "We don’t start with “what kind of website do you want?” We start with how your business works.",
+  },
+  what: {
+    heading: "What we do",
+    en: "What We Do",
+    intro:
+      "From a small business site to a full back office with database, roles, payments, dashboards, and external integrations.",
+    items: [
+      {
+        title: "Custom Web Application",
+        desc: "Real working systems — not brochure pages only",
+      },
+      {
+        title: "Booking & Reservation",
+        desc: "Queues, courts, rooms, services — with payment and admin",
+      },
+      {
+        title: "CRM / ERP / Job & Ops",
+        desc: "Customers, sales, job orders, inventory, and internal workflow",
+      },
+      {
+        title: "AI & Business Automation",
+        desc: "AI assistants and automation that cut repeat work",
+      },
+    ],
+  },
+  audience: {
+    heading: "Who we work with",
+    en: "Who We Work With",
+    intro:
+      "We work with SMEs, service businesses, sports venues, hotels, property, logistics, field service, and any team moving from LINE / Excel / paper into one system.",
     fitTitle: "A fit if you still:",
     fitList: [
-      "Take jobs over LINE",
-      "Juggle several Excel or Google Sheets files",
+      "Take jobs over LINE and things fall through",
+      "Juggle Excel / Google Sheets per person",
       "Keep customer data in pieces",
       "Struggle to track job status",
       "Have no central dashboard",
-      "Need something off-the-shelf software can’t cover",
+      "Need more than off-the-shelf software covers",
     ],
-    highlights: [
-      { no: "01", title: "Understand the business before we write the system" },
-      { no: "02", title: "Lock scope before we start" },
-      { no: "03", title: "Demo and test in rounds" },
-      { no: "04", title: "Grow it and stay on after handover" },
-    ],
-  },
-  services: CP_SERVICES.map((s, i) => {
-    const desc = [
-      "A web system when the workflow is more than a brochure site",
-      "For customers, staff, providers, or field crews",
-      "Leads, follow-up, sales, and contact history",
-      "Track the job from order in to close-out",
-      "Queues, rooms, courts, services, or other resources",
-      "A back office for owners and the team",
-      "Turn Excel / Sheets / manual work into a system",
-      "AI assistant, workflow, prompt / persona, CMS, credit / quota",
-      "LINE OA, payment, maps, external APIs",
-      "Care, monitoring, and further build",
-    ];
-    return { ...s, desc: desc[i] ?? s.desc };
-  }),
-  problems: {
-    heading: "From the mess on the floor to a system you can run",
-    before: CP_PROBLEMS.before.map((b, i) =>
-      ["LINE", "Excel", "Google Sheets", "Paper", "Manual follow-up", "Data split across places"][i] ?? b,
-    ),
-    after: CP_PROBLEMS.after,
-    examples: [
-      { problem: "LINE messages fall through the cracks", solution: "CRM + Follow-up" },
-      { problem: "Each person has their own Excel file", solution: "Centralized System" },
-      { problem: "The owner never knows where a job stands", solution: "Realtime Dashboard" },
-      { problem: "Customers keep asking for status", solution: "Tracking Portal" },
-      { problem: "Month-end reports are still done by hand", solution: "Automated Reporting" },
-    ],
+    industries: CP_AUDIENCE.industries,
   },
   process: {
-    heading: "From the business brief to a system in use",
+    heading: "How we work",
+    en: "How We Work",
+    intro: "Lock scope before we start · demos along the way · real users test before go-live",
     steps: [
-      { no: "01", title: "Requirement & Workflow", desc: "The business, the users, and the pain" },
-      { no: "02", title: "Scope & Architecture", desc: "Modules, permission, data flow, integration" },
+      { no: "01", title: "Requirement & Workflow", desc: "Business, users, and floor pain" },
+      { no: "02", title: "Scope & Architecture", desc: "Modules, permissions, data, integrations" },
       { no: "03", title: "UX/UI Design", desc: "Screens everyone can agree on" },
       { no: "04", title: "Development", desc: "Frontend, backend, and database" },
-      { no: "05", title: "Demo & UAT", desc: "Demos in rounds, tested with real users" },
+      { no: "05", title: "Demo & UAT", desc: "Round demos, tested with real users" },
       { no: "06", title: "Deploy & Handover", desc: "Go live, hand over, train" },
-      { no: "07", title: "Maintenance", desc: "Keep it running and keep building" },
+      { no: "07", title: "Support", desc: "Care and extend when you’re ready" },
     ],
   },
   projects: CP_PROJECTS.map((p) => {
     const desc: Record<string, string> = {
-      KindGo: "A daily-life services platform matching customers with providers across categories",
-      NurseGo: "A platform for nursing and healthcare staff work",
-      Horasard: "AI astrology from a birth chart, then chat by topic, with Free / Pro plans",
       Sirikanchana:
-        "Online badminton court booking for Sirikanchana — pick a slot, book several courts, pay with PromptPay",
+        "Online badminton court booking — multi-court slots, PromptPay, slip review, admin assignment, LINE",
+      NurseGo: "A platform for nursing and healthcare staff work",
+      KindGo: "A daily-life services platform matching customers with providers across categories",
+      Horasard: "AI astrology from a birth chart, topic chat, Free / Pro plans",
       "Marketimes Asia": "Online media and content site for Marketimes Asia",
       สมบัติทัวร์: "A transport-sector project for Sombat Tour",
-      "LIMIT CODE DEMO SYSTEMS":
-        "Interactive sample systems so you can see the work before a project starts",
+      "Interactive Demo Systems":
+        "Clickable prototypes before a real build — not claimed as client production work",
     };
     const note: Record<string, string> = {
-      สมบัติทัวร์: "More detail on the system can be shared as appropriate",
+      สมบัติทัวร์: "System detail can be shared as appropriate",
     };
-    return { ...p, desc: desc[p.name] ?? p.desc, note: p.note ? note[p.name] ?? p.note : p.note };
+    const label = p.kind === "production" ? "Production" : "Demo";
+    return {
+      ...p,
+      label,
+      desc: desc[p.name] ?? p.desc,
+      note: p.note ? note[p.name] ?? p.note : p.note,
+    };
   }),
-  industries: {
-    heading: "A system shaped to the business — not the other way round",
-    note: "If the workflow is specific, we design to how the organisation actually works.",
-    items: CP_INDUSTRIES.items,
-  },
-  engagement: {
-    heading: "How we take the work",
-    models: [
-      { title: "MVP", desc: "Start with the module that matters, so you can try it soon" },
-      { title: "Custom System", desc: "Designed around the business workflow" },
-      { title: "Phased Development", desc: "Build in phases to hold budget and risk" },
-      { title: "Maintenance", desc: "Care and further build, month by month" },
-    ],
-  },
-  tech: CP_TECH,
   why: {
-    heading: "Why businesses build with us",
+    heading: "Why LCS",
+    en: "Why LCS",
+    cards: [
+      { title: "Workflow First", desc: "Understand the process before we write code" },
+      { title: "Scope Transparency", desc: "Agree scope before start — no silent scope creep" },
+      { title: "Visible Progress", desc: "You see progress and demos along the way" },
+      { title: "Built to Extend", desc: "Start with what matters, then grow" },
+      { title: "Handover & Support", desc: "Hand over cleanly and support after deploy" },
+    ],
     quote:
       "A good system isn’t the one with the most features. It’s the one that cuts repeat work, cuts mistakes, and makes the team’s day easier.",
-    cards: [
-      "Map the workflow before we build",
-      "Scope and price in steps",
-      "Demos you can check along the way",
-      "Roles / permissions",
-      "APIs and the systems you already have",
-      "Maintenance after go-live",
-    ],
   },
   contactPage: {
-    heading: "Got a system you want made real?",
-    text: "Send the current workflow, where the team gets stuck, or a sample of what you want. We’ll sketch scope and a first path.",
+    heading: "Start a project",
+    en: "Start a Project",
+    text: "Send the current workflow, where the team gets stuck, or a sample of what you want. We’ll sketch scope and a first path — no charge for the first consult.",
+    cta: "Message LINE OA or email us",
   },
 };
 
 const zh = {
   cover: {
     ...CP_COVER,
-    headline: "给企业和机构做系统",
-    subHeadline: "把散落的活，收成团队真能跑起来的系统",
-    statement: "从需求和工作流，做到真正上线",
+    positioning: "Independent Software Studio",
+    taglineEn: "We turn business workflows into software.",
+    headline: "我们为中小企业和服务型生意做 Web 应用和后台系统",
+    subHeadline: "从预约、CRM、工单、Dashboard，到 AI 自动化",
     description:
-      "LIMIT CODE STUDIO 帮你理清工作流、设计和开发——Web、移动端、CRM、工单、预约、后台、AI，以及内部系统。",
+      "我们先弄清生意真正怎么转，再设计和开发能用、能接着做的系统——不是先卖技术名词。",
+    statement: "从现场流程 → 团队每天打开的系统",
   },
-  about: {
-    heading: "我们接的不只是网站",
+  who: {
+    heading: "我们是谁",
+    en: "Who We Are",
     paragraphs: [
-      "LIMIT CODE STUDIO 是做业务系统的软件工作室。",
-      "先搞清现在怎么干活、团队卡在哪、生意要什么，再做成能真正拿来用的系统。",
+      "LIMIT CODE STUDIO (LCS) 是泰国的一支独立软件团队，专注 Web 应用、业务系统和后台，服务中小企业与服务型生意。",
+      "我们不先卖技术。我们从真实工作流和团队每天卡住的地方开始，再做成能真正拿来用的系统。",
     ],
     marketingPhrase: "我们不问「想要什么样的网站」，先问你的生意现在怎么转。",
+  },
+  what: {
+    heading: "我们做什么",
+    en: "What We Do",
+    intro: "从小企业网站，到带数据库、权限、支付、Dashboard 和对接外部服务的完整后台。",
+    items: [
+      { title: "Custom Web Application", desc: "能干活的系统，不只是宣传页" },
+      { title: "Booking & Reservation", desc: "号、场地、房间、服务——含支付和后台" },
+      { title: "CRM / ERP / Job & Ops", desc: "客户、销售、工单、库存和内部流程" },
+      { title: "AI & Business Automation", desc: "AI 助手和自动化，少做重复活" },
+    ],
+  },
+  audience: {
+    heading: "我们给谁做",
+    en: "Who We Work With",
+    intro:
+      "我们服务中小企业、服务型生意、体育场馆、酒店、地产、物流、现场服务，以及想把 LINE / Excel / 纸质活收成一套系统的团队。",
     fitTitle: "适合还在这样干的生意：",
     fitList: [
-      "接活还靠 LINE",
-      "Excel 或 Google 表格好几份",
+      "靠 LINE 接活还漏单",
+      "每人一份 Excel / 表格",
       "客户资料散着",
       "工单状态跟不住",
       "没有中间那块 Dashboard",
-      "现成软件盖不住，需要按自己来",
+      "现成软件盖不住",
     ],
-    highlights: [
-      { no: "01", title: "先懂生意，再写系统" },
-      { no: "02", title: "开工前把范围锁住" },
-      { no: "03", title: "Demo 和测试按轮来" },
-      { no: "04", title: "交付后还能接着做、接着看" },
-    ],
-  },
-  services: CP_SERVICES.map((s, i) => {
-    const desc = [
-      "流程比宣传网站复杂时，做能干活的 Web 系统",
-      "给客人、员工、服务方或现场团队用",
-      "线索、跟进、销售和联系记录",
-      "从接单跟到收工",
-      "号、房间、场地、服务或其他资源",
-      "给老板和团队的后台",
-      "把 Excel / 表格 / 手工活收成系统",
-      "AI 助手、流程、提示词 / 人设、CMS、点数 / 配额",
-      "LINE OA、支付、地图、外部接口",
-      "维护、监控、继续做",
-    ];
-    return { ...s, desc: desc[i] ?? s.desc };
-  }),
-  problems: {
-    heading: "从现场的乱，收到管得住的系统",
-    before: ["LINE", "Excel", "Google Sheets", "纸", "手工跟进", "数据拆在好几个地方"],
-    after: CP_PROBLEMS.after,
-    examples: [
-      { problem: "LINE 消息漏掉", solution: "CRM + Follow-up" },
-      { problem: "每人一份 Excel", solution: "Centralized System" },
-      { problem: "老板不知道活干到哪", solution: "Realtime Dashboard" },
-      { problem: "客人反复问进度", solution: "Tracking Portal" },
-      { problem: "月底报表还靠手做", solution: "Automated Reporting" },
-    ],
+    industries: CP_AUDIENCE.industries,
   },
   process: {
-    heading: "从生意题目，做到能用的系统",
+    heading: "我们怎么干活",
+    en: "How We Work",
+    intro: "开工前锁范围 · 中途有 Demo · 真人测过再上线",
     steps: [
-      { no: "01", title: "Requirement & Workflow", desc: "生意、使用的人、卡住的地方" },
-      { no: "02", title: "Scope & Architecture", desc: "模块、权限、数据流、对接" },
+      { no: "01", title: "Requirement & Workflow", desc: "生意、使用的人、现场痛点" },
+      { no: "02", title: "Scope & Architecture", desc: "模块、权限、数据、对接" },
       { no: "03", title: "UX/UI Design", desc: "先画出大家认的同一张图" },
       { no: "04", title: "Development", desc: "前端、后端、数据库" },
       { no: "05", title: "Demo & UAT", desc: "按轮交 Demo，跟真人测" },
       { no: "06", title: "Deploy & Handover", desc: "上线、交接、培训" },
-      { no: "07", title: "Maintenance", desc: "接着养，接着做" },
+      { no: "07", title: "Support", desc: "接着养，准备好再扩展" },
     ],
   },
   projects: CP_PROJECTS.map((p) => {
     const desc: Record<string, string> = {
-      KindGo: "日常生活服务平台，把客人和多品类服务方接上",
+      Sirikanchana: "羽毛球馆线上订场：多片场、PromptPay、审单、后台排场、LINE",
       NurseGo: "护理和医疗人员接活的平台",
-      Horasard: "按生日算盘的 AI 占星，按主题聊，带 Free / Pro 套餐",
-      Sirikanchana: "Sirikanchana 羽毛球馆线上订场：按时段订、可多片场、PromptPay 付款",
-      "Marketimes Asia": "Marketimes Asia 的线上媒体和内容站",
+      KindGo: "日常生活服务平台，把客人和多品类服务方接上",
+      Horasard: "按生日算盘的 AI 占星，按主题聊，带 Free / Pro",
+      "Marketimes Asia": "Marketimes Asia 的线上媒体站",
       สมบัติทัวร์: "给 สมบัติทัวร์ 做的运输方向项目",
-      "LIMIT CODE DEMO SYSTEMS": "能点进去的系统例子，开工前就能看见怎么转",
+      "Interactive Demo Systems": "能点的原型，开工前先看怎么转——不当成客户上线项目来宣称",
     };
     const note: Record<string, string> = {
       สมบัติทัวร์: "系统细节可按情况再讲",
     };
-    return { ...p, desc: desc[p.name] ?? p.desc, note: p.note ? note[p.name] ?? p.note : p.note };
+    const label = p.kind === "production" ? "已上线" : "演示";
+    return {
+      ...p,
+      label,
+      desc: desc[p.name] ?? p.desc,
+      note: p.note ? note[p.name] ?? p.note : p.note,
+    };
   }),
-  industries: {
-    heading: "系统迁就生意，不是逼生意迁就系统",
-    note: "流程要是很特别，就按机构真正怎么干来设计。",
-    items: CP_INDUSTRIES.items,
-  },
-  engagement: {
-    heading: "怎么接",
-    models: [
-      { title: "MVP", desc: "先做关键模块，尽快拿去试" },
-      { title: "Custom System", desc: "按生意流程定做" },
-      { title: "Phased Development", desc: "分阶段做，把预算和风险按住" },
-      { title: "Maintenance", desc: "按月维护和继续做" },
-    ],
-  },
-  tech: CP_TECH,
   why: {
-    heading: "为什么生意会找我们做系统",
-    quote: "好系统不是功能最多的那个，是少做重复活、少出错、让团队日子好过一点的那个。",
+    heading: "为什么选 LCS",
+    en: "Why LCS",
     cards: [
-      "先理工作流再开发",
-      "范围和价格按步骤来",
-      "中途有 Demo 可查",
-      "支持角色 / 权限",
-      "能接 API 和现有系统",
-      "上线后还有维护",
+      { title: "Workflow First", desc: "先懂流程，再写代码" },
+      { title: "Scope Transparency", desc: "开工前谈清范围——不偷偷加活加价" },
+      { title: "Visible Progress", desc: "中途看得到进度和 Demo" },
+      { title: "Built to Extend", desc: "先做必要的，再扩展" },
+      { title: "Handover & Support", desc: "交得清，上线后还能接着看" },
     ],
+    quote: "好系统不是功能最多的那个，是少做重复活、少出错、让团队日子好过一点的那个。",
   },
   contactPage: {
-    heading: "有想做成真的系统题目？",
-    text: "把现在的流程、团队卡住的地方、或想要的样子发来。我们先帮你看范围和一条路。",
+    heading: "开始谈系统",
+    en: "Start a Project",
+    text: "把现在的流程、团队卡住的地方、或想要的样子发来。我们先帮你看范围和一条路——初次咨询不收费。",
+    cta: "用 LINE OA 或发邮件即可",
   },
 };
 
@@ -262,14 +236,11 @@ export function getProfileCopy(locale: Locale) {
   if (locale === "zh") return zh;
   return {
     cover: CP_COVER,
-    about: CP_ABOUT,
-    services: CP_SERVICES,
-    problems: CP_PROBLEMS,
+    who: CP_WHO,
+    what: CP_WHAT,
+    audience: CP_AUDIENCE,
     process: CP_PROCESS,
     projects: CP_PROJECTS,
-    industries: CP_INDUSTRIES,
-    engagement: CP_ENGAGEMENT,
-    tech: CP_TECH,
     why: CP_WHY,
     contactPage: CP_CONTACT_PAGE,
   };
