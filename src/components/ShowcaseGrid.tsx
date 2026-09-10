@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { DEMOS, type DemoCategory } from "@/lib/demos";
+import { DEMOS, isStudioLive, type DemoCategory } from "@/lib/demos";
 import { OSS_KIND_ORDER, type OssKind } from "@/lib/open-source-demos";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { DemoCard } from "./DemoCard";
@@ -16,7 +16,7 @@ const STUDIO_FILTERS: DemoCategory[] = [
   "ระบบหลังบ้าน",
 ];
 
-type FilterKey = "all" | DemoCategory | OssKind;
+type FilterKey = "all" | "live" | DemoCategory | OssKind;
 
 function isOssKind(key: FilterKey): key is OssKind {
   return (OSS_KIND_ORDER as string[]).includes(key);
@@ -24,7 +24,7 @@ function isOssKind(key: FilterKey): key is OssKind {
 
 export function ShowcaseGrid() {
   const { t } = useLocale();
-  const [active, setActive] = useState<FilterKey>("all");
+  const [active, setActive] = useState<FilterKey>("live");
 
   const ossKindsPresent = useMemo(() => {
     const kinds = new Set(
@@ -34,23 +34,31 @@ export function ShowcaseGrid() {
   }, []);
 
   const filters = useMemo<FilterKey[]>(
-    () => ["all", ...STUDIO_FILTERS, ...ossKindsPresent],
+    () => ["all", "live", ...STUDIO_FILTERS, ...ossKindsPresent],
     [ossKindsPresent],
   );
 
   const list = useMemo(() => {
-    if (active === "all") return DEMOS;
+    if (active === "live") return DEMOS.filter(isStudioLive);
+    if (active === "all") {
+      const live = DEMOS.filter(isStudioLive);
+      const rest = DEMOS.filter((d) => !isStudioLive(d));
+      return [...live, ...rest];
+    }
     if (isOssKind(active)) {
       return DEMOS.filter((d) => d.openSource?.kind === active);
     }
     return DEMOS.filter((d) => d.category === active);
   }, [active]);
 
-  const countLabel = isOssKind(active)
-    ? t.showcase.ossKinds[active].short
-    : active === "all"
-      ? t.showcase.all
-      : t.showcase.categories[active];
+  const countLabel =
+    active === "live"
+      ? t.showcase.liveFilter
+      : isOssKind(active)
+        ? t.showcase.ossKinds[active].short
+        : active === "all"
+          ? t.showcase.all
+          : t.showcase.categories[active];
 
   const chip = (pressed: boolean) =>
     `px-3.5 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors ${
@@ -67,9 +75,11 @@ export function ShowcaseGrid() {
           const label =
             f === "all"
               ? t.showcase.all
-              : isOssKind(f)
-                ? t.showcase.ossKinds[f].short
-                : t.showcase.categories[f];
+              : f === "live"
+                ? t.showcase.liveFilter
+                : isOssKind(f)
+                  ? t.showcase.ossKinds[f].short
+                  : t.showcase.categories[f];
           return (
             <button
               key={f}

@@ -337,8 +337,81 @@ export const CLIENT_WORK: Demo[] = [
   },
 ];
 
+/** เดโมเว็บที่ deploy แล้ว (ป้าย Live) — ไม่ใช่โอเพนซอร์ส */
+export const LIVE_PRODUCT_DEMOS: Demo[] = [
+  {
+    slug: "ban-suk-jai",
+    name: "Ban Suk Jai Residences",
+    category: "อสังหาริมทรัพย์",
+    icon: "home",
+    tagline: "เว็บโครงการที่พักอาศัย / หอพัก",
+    description:
+      "เว็บไซต์โครงการที่พักอาศัย โชว์ข้อมูลโครงการ ห้องว่าง สิ่งอำนวยความสะดวก และช่องทางติดต่อสอบถาม",
+    liveUrl: "https://test-cursor-one.vercel.app/",
+    preview: "/showcase/ban-suk-jai.jpg",
+    swatch: "from-teal-500 via-emerald-500 to-cyan-600",
+    accentText: "text-teal-700",
+    tags: ["ที่พักอาศัย", "ห้องว่าง", "ติดต่อสอบถาม"],
+    features: ["หน้าแรกโชว์จุดเด่นโครงการ", "รายละเอียดห้องและราคา", "ฟอร์มติดต่อ / สอบถาม"],
+  },
+  {
+    slug: "aurelia-residences",
+    name: "Aurelia Residences",
+    category: "อสังหาริมทรัพย์",
+    icon: "home",
+    tagline: "เว็บ Luxury Living / คอนโดพรีเมียม",
+    description:
+      "เว็บไซต์โทนหรูหรา สำหรับโครงการที่พักระดับพรีเมียม เน้นภาพลักษณ์ ยูนิต สิ่งอำนวยความสะดวก และนัดชมโครงการ",
+    liveUrl: "https://rental-luxury.vercel.app/",
+    preview: "/showcase/aurelia-residences.jpg",
+    swatch: "from-slate-900 via-amber-700 to-amber-500",
+    accentText: "text-amber-800",
+    tags: ["Luxury", "ยูนิต", "นัดชมโครงการ"],
+    features: ["Hero ภาพลักษณ์พรีเมียม", "แกลเลอรียูนิตและราคา", "ฟอร์มนัดชม / ติดต่อ"],
+  },
+  {
+    slug: "termgame",
+    name: "TermGame",
+    category: "ขายของ",
+    icon: "spark",
+    tagline: "ศูนย์รวมเกม ซื้อ · เช่า · เติมเกม",
+    description:
+      "เว็บไซต์ศูนย์รวมเกมออนไลน์ โชว์เกมยอดนิยมสำหรับซื้อและเช่า รีวิวลูกค้า สถิติความน่าเชื่อถือ และใส่ตะกร้าได้ทันที",
+    liveUrl: "https://termgame-iota.vercel.app/",
+    preview: "/showcase/termgame.jpg",
+    swatch: "from-violet-600 via-fuchsia-500 to-cyan-500",
+    accentText: "text-violet-700",
+    tags: ["ซื้อเกม", "เช่าเกม", "เติมเกม"],
+    features: ["แคตตาล็อกเกมซื้อ/เช่าแยกหมวด", "การ์ดสินค้าพร้อมราคาและรีวิว", "Hero + สถิติ + CTA สมัครสมาชิก"],
+  },
+  {
+    slug: "fanrong-language",
+    name: "Fanrong Language",
+    category: "ขายของ",
+    icon: "layers",
+    tagline: "แพลตฟอร์มคอร์สภาษาจีนออนไลน์",
+    description:
+      "เดโมเว็บเรียนคอร์สออนไลน์จากวิดีโอ — เลือกคอร์ส HSK / HSKK / CSCA สมัครเรียน ชำระจำลอง แล้วเข้าห้องเรียนต่อจากบทล่าสุดได้",
+    liveUrl: "https://demolearningcourse.vercel.app",
+    preview: "/showcase/fanrong-language.jpg",
+    swatch: "from-red-700 via-rose-500 to-amber-400",
+    accentText: "text-red-700",
+    tags: ["E-Learning", "คอร์สออนไลน์", "วิดีโอ"],
+    features: [
+      "แคตตาล็อกคอร์สแยกเส้นทางสอบ",
+      "สมัครเรียน + ชำระเงินจำลอง",
+      "ห้องเรียนวิดีโอ จำบทล่าสุดได้",
+    ],
+  },
+];
+
+export function isStudioLive(demo: Demo): boolean {
+  return Boolean(demo.liveUrl) && !demo.openSource;
+}
+
 export const DEMOS: Demo[] = [
   ...CLIENT_WORK,
+  ...LIVE_PRODUCT_DEMOS,
   ...SYSTEM_DEMOS,
   {
     slug: "restaurant",
@@ -409,70 +482,6 @@ export const DEMOS: Demo[] = [
     accentText: "text-amber-700",
     tags: ["องค์กร", "บริการ", "ติดต่อ"],
     features: ["Hero + ตัวเลขความน่าเชื่อถือ", "บริการ 4 ด้าน + ผลงาน", "ฟอร์มติดต่อทีมขาย"],
-  },
-  {
-    slug: "ban-suk-jai",
-    name: "Ban Suk Jai Residences",
-    category: "อสังหาริมทรัพย์",
-    icon: "home",
-    tagline: "เว็บโครงการที่พักอาศัย / หอพัก",
-    description:
-      "เว็บไซต์โครงการที่พักอาศัย โชว์ข้อมูลโครงการ ห้องว่าง สิ่งอำนวยความสะดวก และช่องทางติดต่อสอบถาม",
-    liveUrl: "https://test-cursor-one.vercel.app/",
-    preview: "/showcase/ban-suk-jai.jpg",
-    swatch: "from-teal-500 via-emerald-500 to-cyan-600",
-    accentText: "text-teal-700",
-    tags: ["ที่พักอาศัย", "ห้องว่าง", "ติดต่อสอบถาม"],
-    features: ["หน้าแรกโชว์จุดเด่นโครงการ", "รายละเอียดห้องและราคา", "ฟอร์มติดต่อ / สอบถาม"],
-  },
-  {
-    slug: "aurelia-residences",
-    name: "Aurelia Residences",
-    category: "อสังหาริมทรัพย์",
-    icon: "home",
-    tagline: "เว็บ Luxury Living / คอนโดพรีเมียม",
-    description:
-      "เว็บไซต์โทนหรูหรา สำหรับโครงการที่พักระดับพรีเมียม เน้นภาพลักษณ์ ยูนิต สิ่งอำนวยความสะดวก และนัดชมโครงการ",
-    liveUrl: "https://rental-luxury.vercel.app/",
-    preview: "/showcase/aurelia-residences.jpg",
-    swatch: "from-slate-900 via-amber-700 to-amber-500",
-    accentText: "text-amber-800",
-    tags: ["Luxury", "ยูนิต", "นัดชมโครงการ"],
-    features: ["Hero ภาพลักษณ์พรีเมียม", "แกลเลอรียูนิตและราคา", "ฟอร์มนัดชม / ติดต่อ"],
-  },
-  {
-    slug: "termgame",
-    name: "TermGame",
-    category: "ขายของ",
-    icon: "spark",
-    tagline: "ศูนย์รวมเกม ซื้อ · เช่า · เติมเกม",
-    description:
-      "เว็บไซต์ศูนย์รวมเกมออนไลน์ โชว์เกมยอดนิยมสำหรับซื้อและเช่า รีวิวลูกค้า สถิติความน่าเชื่อถือ และใส่ตะกร้าได้ทันที",
-    liveUrl: "https://termgame-iota.vercel.app/",
-    preview: "/showcase/termgame.jpg",
-    swatch: "from-violet-600 via-fuchsia-500 to-cyan-500",
-    accentText: "text-violet-700",
-    tags: ["ซื้อเกม", "เช่าเกม", "เติมเกม"],
-    features: ["แคตตาล็อกเกมซื้อ/เช่าแยกหมวด", "การ์ดสินค้าพร้อมราคาและรีวิว", "Hero + สถิติ + CTA สมัครสมาชิก"],
-  },
-  {
-    slug: "fanrong-language",
-    name: "Fanrong Language",
-    category: "ขายของ",
-    icon: "layers",
-    tagline: "แพลตฟอร์มคอร์สภาษาจีนออนไลน์",
-    description:
-      "เดโมเว็บเรียนคอร์สออนไลน์จากวิดีโอ — เลือกคอร์ส HSK / HSKK / CSCA สมัครเรียน ชำระจำลอง แล้วเข้าห้องเรียนต่อจากบทล่าสุดได้",
-    liveUrl: "https://demolearningcourse.vercel.app",
-    preview: "/showcase/fanrong-language.jpg",
-    swatch: "from-red-700 via-rose-500 to-amber-400",
-    accentText: "text-red-700",
-    tags: ["E-Learning", "คอร์สออนไลน์", "วิดีโอ"],
-    features: [
-      "แคตตาล็อกคอร์สแยกเส้นทางสอบ",
-      "สมัครเรียน + ชำระเงินจำลอง",
-      "ห้องเรียนวิดีโอ จำบทล่าสุดได้",
-    ],
   },
   ...OPEN_SOURCE_DEMOS,
 ];
