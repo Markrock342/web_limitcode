@@ -455,6 +455,25 @@ export const DEMOS: Demo[] = [
     tags: ["ซื้อเกม", "เช่าเกม", "เติมเกม"],
     features: ["แคตตาล็อกเกมซื้อ/เช่าแยกหมวด", "การ์ดสินค้าพร้อมราคาและรีวิว", "Hero + สถิติ + CTA สมัครสมาชิก"],
   },
+  {
+    slug: "fanrong-language",
+    name: "Fanrong Language",
+    category: "ขายของ",
+    icon: "layers",
+    tagline: "แพลตฟอร์มคอร์สภาษาจีนออนไลน์",
+    description:
+      "เดโมเว็บเรียนคอร์สออนไลน์จากวิดีโอ — เลือกคอร์ส HSK / HSKK / CSCA สมัครเรียน ชำระจำลอง แล้วเข้าห้องเรียนต่อจากบทล่าสุดได้",
+    liveUrl: "https://demolearningcourse.vercel.app",
+    preview: "/showcase/fanrong-language.jpg",
+    swatch: "from-red-700 via-rose-500 to-amber-400",
+    accentText: "text-red-700",
+    tags: ["E-Learning", "คอร์สออนไลน์", "วิดีโอ"],
+    features: [
+      "แคตตาล็อกคอร์สแยกเส้นทางสอบ",
+      "สมัครเรียน + ชำระเงินจำลอง",
+      "ห้องเรียนวิดีโอ จำบทล่าสุดได้",
+    ],
+  },
   ...OPEN_SOURCE_DEMOS,
 ];
 
