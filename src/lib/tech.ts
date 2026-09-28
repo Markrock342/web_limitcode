@@ -70,15 +70,19 @@ export const TECH: TechItem[] = [
   { name: "Antigravity", group: "Tools", icon: "", color: "FFE432", local: "/tech/antigravity.svg" },
   { name: "Devin", group: "Tools", icon: "", color: "21C19A", local: "/tech/devin.svg" },
   { name: "Codex", group: "Tools", icon: "", color: "FFFFFF", local: "/tech/codex.svg" },
+  { name: "Claude Code", group: "Tools", icon: "", color: "D97757", local: "/tech/claude.svg" },
   // AI
   { name: "OpenAI", group: "AI", icon: "", color: "FFFFFF", local: "/tech/openai.svg" },
-  { name: "GPT-5.6 Sol", group: "AI", icon: "", color: "10A37F", local: "/tech/gpt.svg" },
-  { name: "Opus 5", group: "AI", icon: "", color: "D97757", local: "/tech/opus.svg" },
-  { name: "Fable 5", group: "AI", icon: "", color: "A78BFA", local: "/tech/fable.svg" },
+  { name: "GPT-6 Astra", group: "AI", icon: "", color: "10A37F", local: "/tech/gpt.svg" },
+  { name: "GPT-6 Sol", group: "AI", icon: "", color: "10A37F", local: "/tech/gpt.svg" },
+  { name: "Opus 5.5", group: "AI", icon: "", color: "D97757", local: "/tech/opus.svg" },
+  { name: "Fable 5.1", group: "AI", icon: "", color: "A78BFA", local: "/tech/claude.svg" },
+  { name: "Sonnet 5", group: "AI", icon: "", color: "D97757", local: "/tech/claude.svg" },
   { name: "DeepSeek V4 Pro", group: "AI", icon: "", color: "4D6BFE", local: "/tech/deepseek.svg" },
+  { name: "DeepSeek V4.1 Flash", group: "AI", icon: "", color: "4D6BFE", local: "/tech/deepseek.svg" },
   { name: "Composer 2.5", group: "AI", icon: "", color: "FFFFFF", local: "/tech/composer.svg" },
-  { name: "Grok 4.6", group: "AI", icon: "", color: "FFFFFF", local: "/tech/grok.svg" },
-  { name: "Gemini 3.7 Flash", group: "AI", icon: "", color: "8E75B2", local: "/tech/gemini.svg" },
+  { name: "Grok 4.7", group: "AI", icon: "", color: "FFFFFF", local: "/tech/grok.svg" },
+  { name: "Gemini 3.8 Flash", group: "AI", icon: "", color: "8E75B2", local: "/tech/gemini.svg" },
 ];
 
 export const TECH_GROUPS: TechGroup[] = [
