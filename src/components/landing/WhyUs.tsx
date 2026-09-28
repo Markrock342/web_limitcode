@@ -13,7 +13,7 @@ export function WhyUs() {
     <section id="why" data-analytics-region="why_us" className="relative scroll-mt-20 overflow-hidden py-20 sm:py-24">
       <div className="pointer-events-none absolute inset-0 -z-10 sheet-wash" />
       <Container className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
-        <Reveal variant="left" className="lg:sticky lg:top-24">
+        <Reveal variant="left" className="lg:sticky lg:top-[calc(var(--header-h)+2rem)]">
           <SectionTag>{t.why.tag}</SectionTag>
           <h2 className="mt-5 font-display text-[clamp(1.75rem,1.2rem+2vw,2.35rem)] font-bold tracking-tight text-ink">
             {t.why.title}

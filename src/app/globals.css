@@ -355,3 +355,12 @@ body {
 ::selection {
   background: rgba(20, 121, 239, 0.22);
 }
+
+/* Fixed navbar height — grows when the promo bar is showing (see PROMO_ENDS_AT) */
+:root {
+  --header-h: 4rem;
+}
+html[data-promo] {
+  --header-h: 6.25rem;
+  scroll-padding-top: 2.25rem;
+}

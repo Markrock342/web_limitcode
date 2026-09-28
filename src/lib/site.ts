@@ -20,6 +20,16 @@ export const CONTACT = {
   pageFacebookName: "เพจทางการ LIMIT CODE STUDIO",
 } as const;
 
+/**
+ * แถบโปรบนสุดของเว็บ (ข้อความอยู่ใน messages → promo)
+ * แถบหายเองหลังเวลานี้ — ตั้งเป็น null เพื่อปิดทันที
+ */
+export const PROMO_ENDS_AT: string | null = "2026-10-31T23:59:59+07:00";
+
+export function isPromoActive(now = Date.now()): boolean {
+  return PROMO_ENDS_AT !== null && now < Date.parse(PROMO_ENDS_AT);
+}
+
 export const BRAND = {
   name: "LIMIT CODE STUDIO",
   short: "LIMIT CODE",

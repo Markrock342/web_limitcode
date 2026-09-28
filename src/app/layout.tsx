@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { htmlLang, LOCALE_COOKIE, parseLocale } from "@/lib/i18n/config";
+import { isPromoActive } from "@/lib/site";
 import {
   defaultMetadata,
   organizationJsonLd,
@@ -39,6 +40,7 @@ export default async function RootLayout({
     <html
       lang={htmlLang(locale)}
       data-locale={locale}
+      data-promo={isPromoActive() ? "" : undefined}
       className={`${thai.variable} ${display.variable} h-full antialiased`}
     >
       <head>

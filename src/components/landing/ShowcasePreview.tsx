@@ -50,7 +50,7 @@ export function ShowcasePreview() {
         <div className="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2">
           {FEATURED_LIVE.map((work, index) => (
             <Reveal key={work.slug} delay={(index % 2) * 70}>
-              <LiveWorkCard work={work} label={t.showcase.liveBadge} openLabel={t.showcase.openLive} alt={t.showcase.previewAlt} />
+              <LiveWorkCard work={work} label={t.showcase.liveBadge} openLabel={t.showcase.openLive} builtLabel={t.showcase.built} alt={t.showcase.previewAlt} />
             </Reveal>
           ))}
         </div>
@@ -92,7 +92,19 @@ export function ShowcasePreview() {
   );
 }
 
-function LiveWorkCard({ work, label, openLabel, alt }: { work: Demo; label: string; openLabel: string; alt: string }) {
+function LiveWorkCard({
+  work,
+  label,
+  openLabel,
+  builtLabel,
+  alt,
+}: {
+  work: Demo;
+  label: string;
+  openLabel: string;
+  builtLabel: string;
+  alt: string;
+}) {
   return (
     <a
       href={work.liveUrl}
@@ -129,6 +141,25 @@ function LiveWorkCard({ work, label, openLabel, alt }: { work: Demo; label: stri
           <Icon name="arrow" className="size-3.5 -rotate-45" />
         </span>
       </div>
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <span className="text-xs font-semibold text-slate-500">{builtLabel}</span>
+        {work.features.map((feature) => (
+          <span key={feature} className="border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700">
+            {feature}
+          </span>
+        ))}
+      </div>
+      {work.result ? (
+        <p className="mt-3 border-l-2 border-[#087f3a] pl-3 text-sm font-semibold leading-relaxed text-ink">{work.result}</p>
+      ) : null}
+      {work.quote ? (
+        <figure className="mt-4 bg-brand-50/70 px-4 py-3">
+          <blockquote className="text-sm leading-relaxed text-slate-700">“{work.quote.text}”</blockquote>
+          <figcaption className="mt-2 text-xs font-semibold text-slate-600">
+            {work.quote.by} · <span className="font-normal">{work.quote.role}</span>
+          </figcaption>
+        </figure>
+      ) : null}
     </a>
   );
 }

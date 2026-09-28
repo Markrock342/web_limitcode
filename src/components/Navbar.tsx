@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { isPromoActive, LINE_URL } from "@/lib/site";
 import { LineButton } from "./ui";
 import { BrandWordmark, Logo } from "./Logo";
 
@@ -18,6 +19,8 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeHref, setActiveHref] = useState("");
   const progressRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLElement | null>(null);
+  const promo = isPromoActive();
 
   const nav = [
     { href: "/#services", sectionId: "services", label: t.nav.services },
@@ -65,7 +68,7 @@ export function Navbar() {
       raf = 0;
       const current = sections
         .map((item) => ({ item, top: document.getElementById(item.sectionId)?.getBoundingClientRect().top ?? Infinity }))
-        .filter(({ top }) => top <= 96)
+        .filter(({ top }) => top <= (headerRef.current?.offsetHeight ?? 64) + 32)
         .sort((a, b) => b.top - a.top)[0]?.item;
       setActiveHref(current?.href ?? "");
     };
@@ -94,6 +97,7 @@ export function Navbar() {
   return (
     <>
       <header
+        ref={headerRef}
         data-analytics-region="navbar"
         className={`fixed inset-x-0 top-0 z-50 transition-all ${
           scrolled
@@ -107,6 +111,26 @@ export function Navbar() {
           className="absolute inset-x-0 top-0 h-0.5 origin-left bg-gradient-to-r from-brand-600 via-brand-400 to-sky-400"
           style={{ transform: "scaleX(0)" }}
         />
+        {promo && (
+          <a
+            href={LINE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track-event="line_click"
+            data-track-source="promo_bar"
+            data-track-label={t.promo.short}
+            className="group flex h-9 items-center justify-center gap-2.5 bg-ink px-4 text-xs text-white sm:text-sm"
+          >
+            <span className="hidden shrink-0 rounded-full bg-accent-500 px-2 py-0.5 text-[11px] font-bold text-ink sm:inline">
+              {t.promo.label}
+            </span>
+            <span className="truncate font-medium sm:hidden">{t.promo.short}</span>
+            <span className="hidden truncate font-medium sm:inline">{t.promo.full}</span>
+            <span className="shrink-0 font-semibold text-[#5ff0a0] underline-offset-4 group-hover:underline">
+              {t.promo.cta} →
+            </span>
+          </a>
+        )}
         <nav className="mx-auto flex h-16 w-full max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
           <Link href="/" className="relative z-20 flex shrink-0 items-center gap-2 sm:gap-2.5" onClick={() => setOpen(false)}>
             <Logo className="size-8 sm:size-9" />
@@ -193,7 +217,7 @@ export function Navbar() {
           </div>
         )}
       </header>
-      <div aria-hidden className="h-16 shrink-0" />
+      <div aria-hidden className={`${promo ? "h-25" : "h-16"} shrink-0`} />
     </>
   );
 }

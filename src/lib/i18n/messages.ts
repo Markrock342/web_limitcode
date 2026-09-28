@@ -236,6 +236,7 @@ export const th = {
       "เปิดด้วยหมวด LIVE จะเห็นเว็บที่ออนไลน์แล้ว เช่น NurseGo KindGo Horasard Sirikanchana และเดโมอย่าง Fanrong / TermGame เดโมม็อกมีแอดมิน/CMS ให้คลิกเล่น การ์ดป้าย Live คือเว็บจริง มีหมวดจอง CRM ร้านค้า ERP และอื่นๆ เป็นเดโประบบจริงที่กดเล่นได้ พร้อมภาพหน้าจอระบบ",
     pageCta: "มีงานระบบ ทักมาคุยได้เลย",
     openLive: "เปิดเว็บจริง",
+    built: "สิ่งที่เราทำ",
     openDemo: "เปิดดูตัวอย่าง",
     openOss: "เปิดเดโมระบบจริง",
     ossBadge: "Open source",
@@ -342,6 +343,18 @@ export const th = {
   },
   clients: {
     tag: "ลูกค้าของเรา",
+  },
+  video: {
+    tag: "รู้จักเราใน 1 นาที",
+    title: "เปลี่ยน workflow หน้างาน ให้เป็นระบบที่ทีมใช้ได้ทุกวัน",
+    body: "ดูว่าเราทำระบบแบบไหน ทำงานกันยังไง และลูกค้าคือใคร — สรุปไว้ในคลิปเดียว",
+    fallback: "เบราว์เซอร์นี้เล่นวิดีโอไม่ได้",
+  },
+  promo: {
+    label: "โปรเดือนตุลาคม",
+    full: "รับ 3 โปรเจกต์แรก — ฟรีวาง Workflow + ทำ Demo ให้ดูก่อนตัดสินใจ",
+    short: "3 โปรเจกต์แรก ฟรีวางระบบ + Demo",
+    cta: "ทัก LINE",
   },
   contact: {
     init: "contact.init()",
@@ -666,6 +679,7 @@ export const en: Messages = {
       "LIVE opens first: live client sites such as NurseGo, KindGo, Horasard and Sirikanchana, plus demos like Fanrong and TermGame. Mockup demos include admin/CMS you can click. A Live badge means the real site. Booking, CRM, shop, ERP and other chips are product demos with real UI screenshots.",
     pageCta: "Got a system brief? Talk to us",
     openLive: "Open live site",
+    built: "What we built",
     openDemo: "Open the demo",
     openOss: "Open the live demo",
     ossBadge: "Open source",
@@ -772,6 +786,18 @@ export const en: Messages = {
   },
   clients: {
     tag: "Clients",
+  },
+  video: {
+    tag: "Meet us in 1 minute",
+    title: "We turn day-to-day workflows into systems your team uses every day",
+    body: "What we build, how we work, and who we work with — in one short clip.",
+    fallback: "This browser can't play the video.",
+  },
+  promo: {
+    label: "October offer",
+    full: "First 3 projects — free workflow planning + a demo before you decide",
+    short: "First 3 projects: free planning + demo",
+    cta: "Chat on LINE",
   },
   contact: {
     init: "contact.init()",
@@ -1095,6 +1121,7 @@ export const zh: Messages = {
       "默认打开 LIVE：已上线客户站如 NurseGo、KindGo、Horasard、Sirikanchana，以及 Fanrong、TermGame 等演示。模型演示带后台/CMS，可以点着玩。标了 Live 的是真站。预约、CRM、商店、ERP 等分类是可点的真实系统演示，卡片显示界面截图。",
     pageCta: "有系统题目，拿来聊",
     openLive: "打开真站",
+    built: "我们做了什么",
     openDemo: "打开演示",
     openOss: "打开真实演示",
     ossBadge: "Open source",
@@ -1201,6 +1228,18 @@ export const zh: Messages = {
   },
   clients: {
     tag: "客户",
+  },
+  video: {
+    tag: "1 分钟认识我们",
+    title: "把现场工作流程，变成团队每天在用的系统",
+    body: "我们做什么系统、怎么合作、服务过谁——一支短片讲清楚。",
+    fallback: "此浏览器无法播放视频",
+  },
+  promo: {
+    label: "十月优惠",
+    full: "前 3 个项目——免费梳理流程 + 先做 Demo 再决定",
+    short: "前 3 个项目：免费规划 + Demo",
+    cta: "LINE 咨询",
   },
   contact: {
     init: "contact.init()",

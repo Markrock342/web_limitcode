@@ -41,6 +41,14 @@ export type Demo = {
   accentText: string;
   tags: string[];
   features: string[];
+  /** ผลลัพธ์หลังใช้ระบบ (งานลูกค้า) — ใส่เฉพาะตัวเลข/ข้อเท็จจริงที่ลูกค้ายืนยันแล้ว */
+  result?: string;
+  /** คำพูดจริงจากลูกค้า — ขออนุญาตลูกค้าก่อนใส่ */
+  quote?: {
+    text: string;
+    by: string;
+    role: string;
+  };
   /** Third-party open-source example — not studio work */
   openSource?: {
     repo: string;
