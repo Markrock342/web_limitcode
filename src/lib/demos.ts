@@ -1,5 +1,5 @@
 import { OPEN_SOURCE_DEMOS } from "./open-source-demos";
-import type { Demo, DemoCategory } from "./demo-types";
+import type { Demo } from "./demo-types";
 
 export type { Demo, DemoCategory, OssKind } from "./demo-types";
 export { OPEN_SOURCE_DEMOS } from "./open-source-demos";
@@ -339,6 +339,36 @@ export const CLIENT_WORK: Demo[] = [
 
 /** เดโมเว็บที่ deploy แล้ว (ป้าย Live) — ไม่ใช่โอเพนซอร์ส */
 export const LIVE_PRODUCT_DEMOS: Demo[] = [
+  {
+    slug: "oxplo",
+    name: "OXPLO",
+    category: "ระบบหลังบ้าน",
+    icon: "dashboard",
+    tagline: "คลังสินค้า อะไหล่ และงานบริการหลายสาขา",
+    description:
+      "ระบบสาธิตสำหรับธุรกิจเครื่องจักร ดูสต็อกรถและอะไหล่ รับเข้า–โอนสินค้าระหว่างสาขา ติดตามงานซ่อมและตารางช่าง พร้อมข้อมูลตัวอย่างให้ทดลองใช้งาน",
+    liveUrl: "https://oxplo-demo.demo-agent-jum.workers.dev/",
+    preview: "/showcase/oxplo.jpg",
+    swatch: "from-blue-700 via-blue-500 to-slate-600",
+    accentText: "text-blue-700",
+    tags: ["คลังสินค้า", "งานซ่อม", "หลายสาขา"],
+    features: ["สต็อกรถและอะไหล่แยกสาขา", "รับเข้า โอน และตรวจนับสินค้า", "งานซ่อม ตารางช่าง และประกัน"],
+  },
+  {
+    slug: "limitcode-crm",
+    name: "LimitCode CRM",
+    category: "ระบบหลังบ้าน",
+    icon: "layers",
+    tagline: "CRM งานขายและบริการลูกค้าธุรกิจขนส่ง",
+    description:
+      "ระบบสาธิตที่รวมลูกค้าเป้าหมาย ไปป์ไลน์การขาย ใบเสนอราคา และติดตามงานขนส่งกับตู้คอนเทนเนอร์ เปิดเว็บแล้วเลือกบัญชีทดสอบตามบทบาทเพื่อทดลองใช้งาน",
+    liveUrl: "https://democrmch.vercel.app/",
+    preview: "/showcase/limitcode-crm.jpg",
+    swatch: "from-teal-700 via-emerald-500 to-slate-700",
+    accentText: "text-teal-700",
+    tags: ["CRM", "งานขนส่ง", "บัญชีทดสอบ"],
+    features: ["ลูกค้า ไปป์ไลน์ขาย และใบเสนอราคา", "งานขนส่ง ตารางเรือ และตู้คอนเทนเนอร์", "บัญชีทดสอบหลายบทบาท + พอร์ทัลลูกค้า"],
+  },
   {
     slug: "ban-suk-jai",
     name: "Ban Suk Jai Residences",
