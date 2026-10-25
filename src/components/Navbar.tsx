@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { isPromoActive, LINE_URL } from "@/lib/site";
@@ -18,20 +18,22 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeHref, setActiveHref] = useState("");
+  const currentHref = pathname === "/" ? activeHref : pathname;
   const progressRef = useRef<HTMLDivElement | null>(null);
   const headerRef = useRef<HTMLElement | null>(null);
   const promo = isPromoActive();
 
-  const nav = [
+  const nav = useMemo(() => [
     { href: "/#services", sectionId: "services", label: t.nav.services },
     { href: "/#pricing", sectionId: "pricing", label: t.nav.pricing },
     { href: "/#why", sectionId: "why", label: t.nav.why },
     { href: "/#process", sectionId: "process", label: t.nav.process },
     { href: "/#clients", sectionId: "clients", label: t.nav.clients },
+    { href: "/#news", sectionId: "news", label: t.nav.news },
     { href: "/showcase", label: t.nav.showcase },
     { href: "/company-profile", label: t.nav.profile },
     { href: "/contact", label: t.nav.contact },
-  ];
+  ], [t.nav]);
 
   useEffect(() => {
     let raf = 0;
@@ -57,10 +59,7 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (pathname !== "/") {
-      setActiveHref(pathname);
-      return;
-    }
+    if (pathname !== "/") return;
 
     const sections = nav.filter((item): item is typeof item & { sectionId: string } => Boolean(item.sectionId));
     let raf = 0;
@@ -82,7 +81,7 @@ export function Navbar() {
       window.removeEventListener("scroll", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [pathname, t]);
+  }, [pathname, nav]);
 
   useEffect(() => {
     const mq = window.matchMedia(DESKTOP_NAV);
@@ -140,11 +139,13 @@ export function Navbar() {
           <div className="hidden min-w-0 flex-1 justify-center 2xl:flex">
             <div className="flex items-center gap-0.5">
               {nav.map((item) => {
-                const active = activeHref === item.href;
+                const active = currentHref === item.href;
+                const inPage = pathname === "/" && item.sectionId;
+                const NavigationLink = inPage ? "a" : Link;
                 return (
-                  <Link
+                  <NavigationLink
                     key={item.href}
-                    href={item.href}
+                    href={inPage ? `#${item.sectionId}` : item.href}
                     aria-current={active ? "location" : undefined}
                     onClick={() => setActiveHref(item.href)}
                     className={`relative whitespace-nowrap px-2 py-2 text-[13px] font-medium transition-colors after:absolute after:inset-x-2 after:bottom-1 after:h-px after:origin-left after:bg-brand-500 after:transition-transform after:duration-300 after:ease-out-quart ${
@@ -154,7 +155,7 @@ export function Navbar() {
                     }`}
                   >
                     {item.label}
-                  </Link>
+                  </NavigationLink>
                 );
               })}
             </div>
@@ -192,11 +193,13 @@ export function Navbar() {
           <div className="border-t border-slate-200/70 bg-white 2xl:hidden">
             <div className="mx-auto flex w-full max-w-7xl flex-col gap-1 px-5 py-4 sm:px-6">
               {nav.map((item) => {
-                const active = activeHref === item.href;
+                const active = currentHref === item.href;
+                const inPage = pathname === "/" && item.sectionId;
+                const NavigationLink = inPage ? "a" : Link;
                 return (
-                  <Link
+                  <NavigationLink
                     key={item.href}
-                    href={item.href}
+                    href={inPage ? `#${item.sectionId}` : item.href}
                     aria-current={active ? "location" : undefined}
                     onClick={() => {
                       setActiveHref(item.href);
@@ -207,7 +210,7 @@ export function Navbar() {
                     }`}
                   >
                     {item.label}
-                  </Link>
+                  </NavigationLink>
                 );
               })}
               <LineButton className="mt-2 w-full" trackingSource="navbar-menu">

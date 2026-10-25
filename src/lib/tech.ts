@@ -74,7 +74,7 @@ export const TECH: TechItem[] = [
   // AI
   { name: "OpenAI", group: "AI", icon: "", color: "FFFFFF", local: "/tech/openai.svg" },
   { name: "GPT-6 Astra", group: "AI", icon: "", color: "10A37F", local: "/tech/gpt.svg" },
-  { name: "GPT-6 Sol", group: "AI", icon: "", color: "10A37F", local: "/tech/gpt.svg" },
+  { name: "GPT-6.1 Sol", group: "AI", icon: "", color: "10A37F", local: "/tech/gpt.svg" },
   { name: "Opus 5.5", group: "AI", icon: "", color: "D97757", local: "/tech/opus.svg" },
   { name: "Fable 5.1", group: "AI", icon: "", color: "A78BFA", local: "/tech/claude.svg" },
   { name: "Sonnet 5", group: "AI", icon: "", color: "D97757", local: "/tech/claude.svg" },

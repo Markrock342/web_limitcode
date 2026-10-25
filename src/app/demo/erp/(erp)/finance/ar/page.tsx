@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { PhoneCall } from "lucide-react";
 import type { ARInvoice } from "@/components/demos/erp/types/erp";
 import { useErp } from "@/components/demos/erp/lib/store";
@@ -19,7 +19,7 @@ export default function ArPage() {
   const overdue = open.filter((i) => daysOverdue(i.dueDate) > 0);
   const overdueAmt = overdue.reduce((s, i) => s + (i.amount - i.paid), 0);
 
-  const aging = useMemo(() => {
+  const aging = (() => {
     const buckets = [
       { bucket: "Current", amount: 0 },
       { bucket: "1-30", amount: 0 },
@@ -37,7 +37,7 @@ export default function ArPage() {
       else buckets[4].amount += out;
     }
     return buckets;
-  }, [open]);
+  })();
 
   return (
     <div>

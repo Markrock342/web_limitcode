@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { ArrowRight, Search, Zap } from "lucide-react";
 import { QUICK_ACTIONS } from "@/components/demos/erp/lib/nav";
 import { useErp } from "@/components/demos/erp/lib/store";
@@ -14,13 +14,13 @@ interface Hit {
 }
 
 export function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
+  return open ? <CommandPaletteContent onClose={onClose} /> : null;
+}
+
+function CommandPaletteContent({ onClose }: { onClose: () => void }) {
   const erp = useErp();
   const router = useRouter();
   const [q, setQ] = useState("");
-
-  useEffect(() => {
-    if (open) setQ("");
-  }, [open]);
 
   const hits = useMemo<Hit[]>(() => {
     const needle = q.trim().toLowerCase();
@@ -40,8 +40,6 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
     erp.sourcingProjects.forEach((x) => push("Sourcing", `${x.number} — ${x.title}`, `/demo/erp/sourcing/projects/${x.id}`));
     return out.slice(0, 12);
   }, [q, erp]);
-
-  if (!open) return null;
 
   const go = (href: string) => {
     onClose();

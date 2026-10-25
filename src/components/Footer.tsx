@@ -1,14 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BRAND, CONTACT, LINE_ID, LINE_URL } from "@/lib/site";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Container, LineGlyph } from "./ui";
 import { BrandWordmark, Logo } from "./Logo";
+import { VisitorCount } from "./VisitorCount";
 
-export function Footer() {
+export function Footer({ showVisitorCount = false }: { showVisitorCount?: boolean }) {
   const { t, locale } = useLocale();
+  const pathname = usePathname();
   const tagline =
     locale === "th"
       ? BRAND.tagline
@@ -60,6 +63,13 @@ export function Footer() {
               <ul className="mt-3 space-y-2 text-slate-600">
                 <li><Link href="/showcase" className="hover:text-brand-700">{t.footer.allWork}</Link></li>
                 <li><Link href="/#clients" className="hover:text-brand-700">{t.footer.clients}</Link></li>
+                <li>
+                  {pathname === "/" ? (
+                    <a href="#news" className="hover:text-brand-700">{t.nav.news}</a>
+                  ) : (
+                    <Link href="/#news" className="hover:text-brand-700">{t.nav.news}</Link>
+                  )}
+                </li>
                 <li><Link href="/demo/court-booking" className="hover:text-brand-700">SmashLane</Link></li>
                 <li><Link href="/demo/field-crm" className="hover:text-brand-700">GuardNest CRM</Link></li>
                 <li><Link href="/demo/ai-cms" className="hover:text-brand-700">NovaOracle AI</Link></li>
@@ -131,6 +141,11 @@ export function Footer() {
             <LanguageSwitcher size="compact" />
           </div>
         </div>
+        {showVisitorCount && (
+          <div className="mt-5 flex justify-end">
+            <VisitorCount />
+          </div>
+        )}
       </Container>
     </footer>
   );

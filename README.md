@@ -10,6 +10,7 @@
 - **หน้าแรก (`/`)** — Landing Page ภาษาไทยครบทุก section
   - Hero · บริการ 6 แบบ · ทำไมต้องเรา · ขั้นตอนการทำงาน 5 สเต็ป · ตัวอย่างการใช้งาน · ผลงานตัวอย่าง · Tech Stack · ติดต่อ · Footer
 - **ผลงานตัวอย่าง (`/showcase`)** — แกลเลอรีให้ลูกค้า "เลือกแนว" เว็บ พร้อมตัวกรองหมวดหมู่
+- **ข่าวและสื่อ (`/#news`)** — สรุปบทสัมภาษณ์ทีมจาก Marketimes Asia พร้อมเครดิตผู้เขียน วันที่ และลิงก์ต้นฉบับ รองรับไทย อังกฤษ และจีน
 - **Live Demo (`/demo/*`)** — ตัวอย่างเว็บที่กดเข้าไปใช้งานได้จริง เปิดผ่านเว็บของทีม
   - `/demo/restaurant` — เว็บร้านอาหาร/คาเฟ่ + เมนู + จองโต๊ะ
   - `/demo/shop` — เว็บขายของออนไลน์ + ตะกร้า + เช็คเอาท์
@@ -38,6 +39,22 @@ npm run dev      # เปิด http://localhost:3000
 npm run build
 npm run start
 ```
+
+## ตรวจคุณภาพและอัปเดตแพ็กเกจ
+
+ใช้ Node.js 24 และติดตั้ง Browser สำหรับทดสอบครั้งแรกด้วย `npx playwright install chromium`
+
+```bash
+npm run lint       # ESLint
+npm run typecheck  # สร้าง Route Types และตรวจ TypeScript
+npm test           # ทดสอบ Visitor API ด้วยข้อมูลจำลอง ไม่ต้อง Build หรือใช้ Token จริง
+npm run test:e2e   # Build แล้วทดสอบ Desktop/Mobile ด้วย Playwright
+npm run check      # รวมทุกขั้นตอนข้างต้น พร้อม npm audit (High/Critical ต้องผ่าน)
+```
+
+Playwright ใช้ Production Build บน `127.0.0.1:3118` และตรวจข่าว/ภาพทีม เมนู ภาษา ปุ่ม LINE ตัวนับผู้ชม หน้าพิมพ์ และ ERP Demo ที่เกี่ยวข้อง โดยไม่ส่งข้อความ LINE ไม่สร้างลูกค้า และไม่อ่าน Analytics Production; เลขผู้ชมในชุดทดสอบเป็นข้อมูลจำลองเท่านั้น
+
+GitHub Actions รัน `npm run check` เมื่อ Push เข้า `main` หรือเปิด PR ส่วน Dependabot เปิด PR อัปเดต npm/Actions รายสัปดาห์ โดยไม่ Merge หรือ Deploy ให้อัตโนมัติ การอัปเดต Major ของ npm ยังต้องตรวจความเข้ากันได้แยกต่างหาก
 
 ## Conversion Analytics
 
@@ -71,6 +88,18 @@ src/
 
 - LINE OA และข้อความแบรนด์: `src/lib/site.ts` (ตัวแปร `LINE_ID`, `LINE_URL`, `BRAND`)
 - รายการผลงานตัวอย่าง: `src/lib/demos.ts`
+- ข่าวและสื่อ: `src/lib/press.ts` สำหรับข้อมูลแหล่งข่าว และส่วน `press` ใน `src/lib/i18n/messages.ts` สำหรับข้อความทั้ง 3 ภาษา
+- ภาพข่าว: `public/press/marketimes-asia-limitcode-team.webp` ย่อจากภาพทีมในบทความต้นฉบับของ Marketimes Asia โดยคงภาพเต็มและแสดงเครดิตใต้ภาพ URL ต้นทางบันทึกไว้ใน `PRESS_FEATURE.imageSource`
+
+## ยอดผู้เข้าชมหน้าแรก
+
+ด้านล่างสุดของหน้าแรกแสดงไอคอนตาและยอดผู้เข้าชมสะสมจาก Vercel Web Analytics ผ่าน `/api/visitors` ไม่ใช่จำนวนคนออนไลน์ และไม่ใช่จำนวนบุคคลที่ยืนยันตัวตน เริ่มนับเมื่อเปิด Analytics; ผู้เข้าชมรายเดิมอาจนับใหม่ในวันถัดไปตามนิยามของ Vercel
+
+- เปิด Web Analytics ของโปรเจกต์ `web-limitcode` ก่อน Deploy (แพ็กเกจ Hobby มีโควตาฟรีแบบจำกัด)
+- ตั้ง `VISITOR_ANALYTICS_TOKEN` เป็น Secret ฝั่งเซิร์ฟเวอร์ โดยจำกัดสิทธิ์และอายุ Token ให้แคบที่สุดที่บัญชีรองรับ (บางบัญชีจำกัดได้เพียงระดับทีม ไม่ใช่เฉพาะโปรเจกต์) ห้ามใช้ `NEXT_PUBLIC_` หรือ Commit Token
+- ตั้ง `VISITOR_ANALYTICS_PROJECT_ID` และ `VISITOR_ANALYTICS_TEAM_ID` ให้ตรงกับโปรเจกต์และทีม Vercel ของเว็บ
+- API ส่งออกเฉพาะจำนวนรวม ไม่ส่ง Token หรือข้อมูลรายบุคคล และ Cache 5 นาทีเพื่อไม่ให้การแสดงยอดทำให้หน้าเว็บช้า
+- หากดึงข้อมูลไม่ได้ จะแสดง `—` แทนตัวเลขสมมติ; บน Local ต้องตั้งค่า Environment เองเพื่อดูยอดจริง
 
 ## Deploy
 

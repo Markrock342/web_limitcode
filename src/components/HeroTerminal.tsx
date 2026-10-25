@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 
 type Phase = "typing" | "output" | "hold" | "deleting";
@@ -11,41 +11,38 @@ const LINE_MS = 280;
 const HOLD_MS = 1500;
 
 export function HeroTerminal({ className = "" }: { className?: string }) {
+  const { locale } = useLocale();
+  return <TerminalAnimation key={locale} className={className} />;
+}
+
+function subscribeToReducedMotion(onChange: () => void) {
+  const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+function getReducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function getServerReducedMotion() {
+  return false;
+}
+
+function TerminalAnimation({ className }: { className: string }) {
   const { t, locale } = useLocale();
   const sequences = t.terminal.sequences;
   const [seqIdx, setSeqIdx] = useState(0);
   const [typed, setTyped] = useState(0);
   const [shownOut, setShownOut] = useState(0);
   const [phase, setPhase] = useState<Phase>("typing");
-  const [reduced, setReduced] = useState(false);
+  const reduced = useSyncExternalStore(subscribeToReducedMotion, getReducedMotion, getServerReducedMotion);
 
   const seq = sequences[seqIdx] ?? sequences[0];
   const out = [
     { text: seq.ok, tone: "ok" as const },
     { text: seq.info, tone: "info" as const },
   ];
-
-  useEffect(() => {
-    setSeqIdx(0);
-    setTyped(0);
-    setShownOut(0);
-    setPhase("typing");
-  }, [locale]);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => {
-      setReduced(mq.matches);
-      if (mq.matches) {
-        setTyped(sequences[0].cmd.length);
-        setShownOut(2);
-        setPhase("hold");
-      }
-    };
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, [locale, sequences]);
 
   useEffect(() => {
     if (reduced) return;
@@ -94,14 +91,14 @@ export function HeroTerminal({ className = "" }: { className?: string }) {
         <p className="whitespace-nowrap">
           <span className="text-emerald-400">➜</span>{" "}
           <span className="text-sky-300">~</span>{" "}
-          <span className="text-white/90">{seq.cmd.slice(0, typed)}</span>
+          <span className="text-white/90">{reduced ? seq.cmd : seq.cmd.slice(0, typed)}</span>
           {!reduced && <span className="animate-caret text-brand-300">▍</span>}
         </p>
         {out.map((line, i) => (
           <p
             key={`${locale}-${seqIdx}-${i}`}
             className={`h-5 whitespace-nowrap transition-opacity duration-300 ${
-              i < shownOut ? "opacity-100" : "opacity-0"
+              reduced || i < shownOut ? "opacity-100" : "opacity-0"
             } ${line.tone === "ok" ? "text-emerald-300/90" : "text-brand-200/90"}`}
           >
             {line.text}

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 import type { Customer } from "@/components/demos/erp/types/erp";
 import { useErp } from "@/components/demos/erp/lib/store";
 import { displayMoney } from "@/components/demos/erp/lib/format";
@@ -9,8 +9,14 @@ import { DataTable } from "@/components/demos/erp/components/erp/DataTable";
 import { Modal, PageHeader } from "@/components/demos/erp/components/erp/ui";
 
 export default function CustomersPage() {
+  return <Suspense fallback={null}><CustomersView /></Suspense>;
+}
+
+function CustomersView() {
   const erp = useErp();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const requestedCreate = searchParams.get("new") === "1";
   const [createOpen, setCreateOpen] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -22,12 +28,15 @@ export default function CustomersPage() {
     creditLimit: 300_000,
   });
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.location.search.includes("new=1")) {
-      setCreateOpen(true);
-      window.history.replaceState(null, "", "/demo/erp/crm/customers");
+  const closeCreate = () => {
+    setCreateOpen(false);
+    if (requestedCreate) {
+      const remaining = new URLSearchParams(searchParams.toString());
+      remaining.delete("new");
+      const query = remaining.toString();
+      router.replace(`/demo/erp/crm/customers${query ? `?${query}` : ""}`, { scroll: false });
     }
-  }, []);
+  };
 
   const submit = () => {
     if (!form.name.trim()) {
@@ -35,7 +44,7 @@ export default function CustomersPage() {
       return;
     }
     erp.addCustomer(form);
-    setCreateOpen(false);
+    closeCreate();
     setForm({ name: "", taxId: "", industry: "", contact: "", phone: "", paymentTermDays: 30, creditLimit: 300_000 });
   };
 
@@ -124,7 +133,7 @@ export default function CustomersPage() {
       />
 
       {/* create customer modal */}
-      <Modal open={createOpen} onClose={() => setCreateOpen(false)} title="สร้างลูกค้าใหม่ (B2B)">
+      <Modal open={createOpen || requestedCreate} onClose={closeCreate} title="สร้างลูกค้าใหม่ (B2B)">
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <label className="label">ชื่อบริษัท *</label>
@@ -171,7 +180,7 @@ export default function CustomersPage() {
           </div>
         </div>
         <div className="mt-6 flex justify-end gap-2">
-          <button className="btn-outline text-xs" onClick={() => setCreateOpen(false)}>
+          <button className="btn-outline text-xs" onClick={closeCreate}>
             ยกเลิก
           </button>
           <button className="btn-primary text-xs" onClick={submit}>

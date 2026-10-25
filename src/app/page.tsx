@@ -11,6 +11,7 @@ import { Clients } from "@/components/landing/Clients";
 import { IntroVideo } from "@/components/landing/IntroVideo";
 import { Contact } from "@/components/landing/Contact";
 import { Pricing } from "@/components/landing/Pricing";
+import { PressCoverage } from "@/components/landing/PressCoverage";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <main>
         <Hero />
         <Clients />
+        <PressCoverage />
         <IntroVideo />
         <ShowcasePreview />
         <UseCases />
@@ -29,7 +31,7 @@ export default function Home() {
         <TechStack />
         <Contact />
       </main>
-      <Footer />
+      <Footer showVisitorCount />
     </>
   );
 }
