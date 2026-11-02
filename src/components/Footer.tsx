@@ -8,6 +8,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Container, LineGlyph } from "./ui";
 import { BrandWordmark, Logo } from "./Logo";
 import { VisitorCount } from "./VisitorCount";
+import { DbdRegistered } from "./DbdRegistered";
 
 export function Footer({ showVisitorCount = false }: { showVisitorCount?: boolean }) {
   const { t, locale } = useLocale();
@@ -42,6 +43,7 @@ export function Footer({ showVisitorCount = false }: { showVisitorCount?: boolea
               <LineGlyph className="size-4" />
               LINE OA: {LINE_ID}
             </a>
+            <DbdRegistered />
           </div>
 
           <div className="grid grid-cols-2 gap-8 text-sm min-[480px]:grid-cols-3">
