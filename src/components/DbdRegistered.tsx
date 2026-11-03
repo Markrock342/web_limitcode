@@ -1,6 +1,7 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import Image from "next/image";
+import { useState, useSyncExternalStore } from "react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 
 // DBD requires the supplied markup to remain unchanged. This is static,
@@ -17,6 +18,7 @@ const DBD_PROFILE_URL = "https://dbdregistered.dbd.go.th/api/public/shopinfo?par
 export function DbdRegistered() {
   const { locale } = useLocale();
   const approved = useSyncExternalStore(subscribe, isApprovedDomain, serverSnapshot);
+  const [remoteLoaded, setRemoteLoaded] = useState(false);
 
   if (!approved) return null;
 
@@ -26,7 +28,28 @@ export function DbdRegistered() {
       aria-label="DBD Registered — Limitcode Studio"
       className="mt-6 w-80 max-w-full [&_a]:focus-visible:outline-2 [&_a]:focus-visible:outline-offset-4 [&_a]:focus-visible:outline-brand-600 [&_img]:block [&_img]:h-auto [&_img]:max-w-full"
     >
-      <div dangerouslySetInnerHTML={{ __html: DBD_MARKUP }} />
+      <div className="aspect-[324/154]">
+        {/* Keep DBD's original embed intact. Its server can redirect image
+            requests indefinitely, so show an unmodified official copy until
+            the live image has actually loaded. */}
+        <div
+          hidden={!remoteLoaded}
+          onLoadCapture={() => setRemoteLoaded(true)}
+          onErrorCapture={() => setRemoteLoaded(false)}
+          dangerouslySetInnerHTML={{ __html: DBD_MARKUP }}
+        />
+        {!remoteLoaded && (
+          <a href={DBD_PROFILE_URL} target="_blank" rel="noopener noreferrer">
+            <Image
+              src="/trust/dbd-registered.png"
+              alt="DBD Registered — Limitcode Studio"
+              width={324}
+              height={154}
+              unoptimized
+            />
+          </a>
+        )}
+      </div>
       <a
         href={DBD_PROFILE_URL}
         target="_blank"
