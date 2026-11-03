@@ -14,7 +14,7 @@ The ERP demo uses sample data. Do not describe it as a live client installation,
 - `/services/erp` has its own canonical, service description, visible demo disclosure, modules, project assessment information, FAQ, Service and BreadcrumbList structured data.
 - `robots.txt` allows public pages and JS/CSS for all crawlers, including Googlebot, Bingbot and OAI-SearchBot. API/private exclusions remain. User-agent HTTP tests do not prove a real crawler has visited or that all crawler IPs are accepted by a CDN.
 - Demo screens remain available and followable, with explicit `noindex`; they are not marketing landing pages. `noindex` is not authentication or access control.
-- Sitemap includes five canonical marketing pages. Rebuild dates are not represented as content modification dates. Cookie-based translations do not claim separate hreflang URLs.
+- Sitemap includes canonical marketing and guide pages. Rebuild dates are not represented as content modification dates. Cookie-based translations do not claim separate hreflang URLs.
 - Structured data contains factual services, not rankings or review scores. No `llms.txt` or special AI schema is needed to qualify for Google AI features.
 
 ## After production deployment
@@ -27,6 +27,8 @@ The ERP demo uses sample data. Do not describe it as a live client installation,
 6. Add evidence as it becomes available: approved case studies showing the original workflow, delivered screens, migration work, and measured outcomes. Keep demo examples clearly labelled. Seek relevant independent mentions; do not buy ranking links or manufacture reviews.
 
 ## Official references
+
+First-page review and changes from public competitor sources: [erp-first-page-review-2026-11-03.md](erp-first-page-review-2026-11-03.md). The walkthrough `/guides/erp-import-distribution` and downloadable `/resources/erp-project-checklist.csv` support the main ERP service; neither is presented as a live-client case study or a price guarantee.
 
 - Google AI features and website requirements: https://developers.google.com/search/docs/appearance/ai-features
 - Google Search Essentials: https://developers.google.com/search/docs/essentials

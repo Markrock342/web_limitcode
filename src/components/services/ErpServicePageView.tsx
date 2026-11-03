@@ -6,6 +6,7 @@ import erpPreview from "../../../public/showcase/erp.jpg";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Container, LineButton, SectionTag } from "@/components/ui";
 import { erpServiceCopy } from "@/lib/erp-service";
+import { ErpBuyerResources } from "./ErpBuyerResources";
 
 export function ErpServicePageView() {
   const { locale } = useLocale();
@@ -67,6 +68,7 @@ export function ErpServicePageView() {
           <div><h3 className="text-lg font-semibold text-ink">{copy.prepareTitle}</h3><ul className="mt-4 list-disc space-y-3 pl-5 text-slate-600">{copy.prepare.map((item) => <li key={item}>{item}</li>)}</ul></div>
         </section>
 
+        <ErpBuyerResources />
         <section className="border-t border-slate-200 pt-12" aria-labelledby="erp-faq">
           <h2 id="erp-faq" className="font-display text-2xl font-bold text-ink">{copy.faqTitle}</h2>
           <div className="mt-6">{copy.faq.map((item) => <details key={item.q} className="border-b border-slate-200 py-5"><summary className="cursor-pointer font-semibold leading-relaxed text-ink">{item.q}</summary><p className="mt-3 max-w-3xl leading-relaxed text-slate-600">{item.a}</p></details>)}</div>
