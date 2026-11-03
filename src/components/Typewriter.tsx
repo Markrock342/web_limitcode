@@ -20,8 +20,9 @@ export function Typewriter({
   holdMs = 1600,
 }: Props) {
   const [index, setIndex] = useState(0);
-  const [chars, setChars] = useState(0);
-  const [phase, setPhase] = useState<Phase>("typing");
+  // Render a complete service name in HTML before JavaScript or motion.
+  const [chars, setChars] = useState(phrases[0]?.length ?? 0);
+  const [phase, setPhase] = useState<Phase>("hold");
   const [reduced, setReduced] = useState(false);
 
   const phrase = phrases[index] ?? "";

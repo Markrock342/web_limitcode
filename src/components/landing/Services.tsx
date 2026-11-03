@@ -5,6 +5,7 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Container, CropFrame, SectionTag } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
+import { ErpServiceTeaser } from "@/components/services/ErpServiceTeaser";
 
 export function Services() {
   const { t } = useLocale();
@@ -20,7 +21,8 @@ export function Services() {
           <p className="mt-4 text-lg leading-relaxed text-slate-600">{t.services.body}</p>
         </Reveal>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2">
+        <ErpServiceTeaser />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
           {SERVICES.map((s, i) => {
             const copy = t.services.items[s.id as keyof typeof t.services.items];
             return (

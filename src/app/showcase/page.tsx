@@ -7,7 +7,7 @@ import { SYSTEM_DEMOS } from "@/lib/demos";
 
 export const metadata = pageMetadata({
   title: "ตัวอย่างระบบ — Web App และระบบหลังบ้าน",
-  description: `ดูงานลูกค้าจริงอย่าง NurseGo KindGo Horasard และตัวอย่างระบบม็อกอัพ ${SYSTEM_DEMOS.length} ธุรกิจจาก LIMIT CODE STUDIO ที่กดลองใช้ได้จริง`,
+  description: `ดูผลงานและเว็บไซต์ออนไลน์ พร้อมตัวอย่างระบบ ERP และระบบม็อกอัพ ${SYSTEM_DEMOS.length} ธุรกิจจาก LIMIT CODE STUDIO ที่กดลองใช้ได้ แยกเดโมจากผลงานไว้อย่างชัดเจน`,
   path: "/showcase",
   keywords: [
     "ตัวอย่างระบบจอง",

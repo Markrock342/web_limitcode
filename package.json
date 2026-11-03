@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit --incremental false",
+    "seo:submit": "node scripts/submit-indexnow.mjs",
     "test": "playwright test --config=playwright.api.config.ts",
     "test:e2e": "npm run build && playwright test --project=chromium --project=mobile-chromium",
     "check": "npm run lint && npm run typecheck && npm test && npm run test:e2e && npm audit --audit-level=high"

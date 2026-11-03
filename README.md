@@ -56,6 +56,14 @@ Playwright ใช้ Production Build บน `127.0.0.1:3118` และตรว
 
 GitHub Actions รัน `npm run check` เมื่อ Push เข้า `main` หรือเปิด PR ส่วน Dependabot เปิด PR อัปเดต npm/Actions รายสัปดาห์ โดยไม่ Merge หรือ Deploy ให้อัตโนมัติ การอัปเดต Major ของ npm ยังต้องตรวจความเข้ากันได้แยกต่างหาก
 
+## ERP และการค้นหา
+
+หน้าบริการหลัก `/services/erp` อธิบายการรับพัฒนาระบบ ERP พร้อมเดโมข้อมูลจำลอง รองรับไทย อังกฤษ และจีน ส่วนเดโมทั้งหมดกำหนด `noindex` เพื่อไม่ให้หน้าบัญชีและเอกสารจำลองกลายเป็นหน้าค้นหาของธุรกิจ
+
+หลัง Production deployment ใช้ `npm run seo:submit` เพื่อแจ้ง URL ใน sitemap ผ่าน IndexNow หรือเพิ่ม `-- --dry-run` เพื่อตรวจรายการก่อนส่ง คำสั่งตรวจไฟล์ยืนยันสิทธิ์บนโดเมนจริงก่อนส่งเสมอ ส่วน Google ต้องเชื่อม Search Console ของเจ้าของเว็บและส่ง sitemap แยกต่างหาก
+
+แผนคำค้น วิธีวัดผล และการตั้ง Google/Bing verification อยู่ใน [docs/erp-search-plan.md](docs/erp-search-plan.md) การปรับเว็บหรือรับแจ้ง URL สำเร็จไม่ใช่การรับประกันอันดับหน้าแรกหรือการอ้างอิงโดย AI
+
 ## Conversion Analytics
 
 เว็บใช้ Vercel Web Analytics และ custom events โดยไม่ส่งชื่อ เบอร์โทร อีเมล หรือข้อมูลในฟอร์ม:

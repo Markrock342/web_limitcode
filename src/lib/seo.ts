@@ -2,17 +2,20 @@ import type { Metadata } from "next";
 import { CONTACT, LINE_ID, LINE_URL } from "./site";
 import { SYSTEM_DEMOS } from "./demos";
 
-/** เปลี่ยนเป็นโดเมนจริงเมื่อ deploy แล้ว */
+/** Canonical origin: never fall back to an old deployment domain. */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://limitcodestudio.vercel.app";
+  new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.limitcode.shop").origin;
 
 export const SITE_NAME = "LIMIT CODE STUDIO";
 export const SITE_NAME_SHORT = "LIMIT CODE";
 
 export const DEFAULT_DESCRIPTION =
-  "LIMIT CODE STUDIO ทีม 3 คน รับทำเว็บไซต์ ระบบจอง CRM Dashboard และงานที่ธุรกิจใช้จริง เปลี่ยนงานบน LINE/Excel ให้เป็นเว็บและระบบที่ทีมใช้ได้ทุกวัน";
+  "LIMIT CODE STUDIO ทีมฟรีแลนซ์ 3 คน รับทำระบบ ERP ตามการทำงานของธุรกิจ เชื่อมงานขาย จัดซื้อ คลังสินค้า และ CRM พร้อมพัฒนาเว็บไซต์และระบบจอง";
 
 export const SEO_KEYWORDS = [
+  "รับทำ ERP",
+  "รับพัฒนาระบบ ERP",
+  "ERP สำหรับธุรกิจนำเข้าและจัดจำหน่าย",
   "รับทำระบบจองออนไลน์",
   "รับทำระบบหลังบ้าน",
   "รับทำ Web App",
@@ -42,7 +45,7 @@ export const SEO_KEYWORDS = [
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — รับทำระบบจอง CRM และระบบหลังบ้านสำหรับธุรกิจ`,
+    default: `${SITE_NAME} — รับทำระบบ ERP และระบบหลังบ้านสำหรับธุรกิจ`,
     template: `%s | ${SITE_NAME_SHORT}`,
   },
   description: DEFAULT_DESCRIPTION,
@@ -64,11 +67,12 @@ export const defaultMetadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
-    languages: {
-      "th-TH": SITE_URL,
-      "en": SITE_URL,
-      "zh-CN": SITE_URL,
-    },
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    other: process.env.BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
+      : undefined,
   },
   openGraph: {
     type: "website",
@@ -76,7 +80,7 @@ export const defaultMetadata: Metadata = {
     alternateLocale: ["en_US", "zh_CN"],
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — รับทำระบบจอง CRM และระบบหลังบ้านสำหรับธุรกิจ`,
+    title: `${SITE_NAME} — รับทำระบบ ERP และระบบหลังบ้านสำหรับธุรกิจ`,
     description: DEFAULT_DESCRIPTION,
     images: [
       {
@@ -89,7 +93,7 @@ export const defaultMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — รับทำระบบจอง CRM และระบบหลังบ้านสำหรับธุรกิจ`,
+    title: `${SITE_NAME} — รับทำระบบ ERP และระบบหลังบ้านสำหรับธุรกิจ`,
     description: DEFAULT_DESCRIPTION,
     images: ["/brand/lcs-cover.png"],
   },
@@ -130,7 +134,7 @@ export function pageMetadata({
     description,
     keywords: keywords ?? SEO_KEYWORDS,
     robots: noIndex
-      ? { index: false, follow: true }
+      ? { index: false, follow: true, googleBot: { index: false, follow: true } }
       : {
           index: true,
           follow: true,
@@ -164,6 +168,7 @@ export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": `${SITE_URL}/#organization`,
     name: SITE_NAME,
     alternateName: SITE_NAME_SHORT,
     description: DEFAULT_DESCRIPTION,
@@ -196,6 +201,8 @@ export function organizationJsonLd() {
     sameAs: [LINE_URL, CONTACT.facebookHref, CONTACT.pageFacebookHref],
     knowsAbout: [
       "Web App Development",
+      "Custom ERP Development",
+      "ERP for Import and Distribution Businesses",
       "Booking System",
       "CRM",
       "Job Order System",
@@ -219,22 +226,13 @@ export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
     name: SITE_NAME,
     url: SITE_URL,
     description: DEFAULT_DESCRIPTION,
     inLanguage: "th-TH",
     publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/brand/lcs-logo.png`,
-      },
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${SITE_URL}/showcase`,
-      "query-input": "required name=search_term_string",
+      "@id": `${SITE_URL}/#organization`,
     },
   };
 }

@@ -9,6 +9,7 @@ import { Container, LineGlyph } from "./ui";
 import { BrandWordmark, Logo } from "./Logo";
 import { VisitorCount } from "./VisitorCount";
 import { DbdRegistered } from "./DbdRegistered";
+import { erpServiceCopy, ERP_SERVICE_PATH } from "@/lib/erp-service";
 
 export function Footer({ showVisitorCount = false }: { showVisitorCount?: boolean }) {
   const { t, locale } = useLocale();
@@ -52,6 +53,7 @@ export function Footer({ showVisitorCount = false }: { showVisitorCount?: boolea
                 {t.footer.services}
               </p>
               <ul className="mt-3 space-y-2 text-slate-600">
+                <li><Link href={ERP_SERVICE_PATH} className="hover:text-brand-700">{erpServiceCopy[locale].tag}</Link></li>
                 <li><Link href="/#services" className="hover:text-brand-700">{t.footer.booking}</Link></li>
                 <li><Link href="/#services" className="hover:text-brand-700">{t.footer.crm}</Link></li>
                 <li><Link href="/#services" className="hover:text-brand-700">{t.footer.dashboard}</Link></li>
