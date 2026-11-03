@@ -7,6 +7,7 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Container, LineButton, SectionTag } from "@/components/ui";
 import { erpServiceCopy } from "@/lib/erp-service";
 import { ErpBuyerResources } from "./ErpBuyerResources";
+import { CASE_STUDIES_PATH, caseStudyLabels } from "@/lib/case-studies";
 
 export function ErpServicePageView() {
   const { locale } = useLocale();
@@ -69,6 +70,11 @@ export function ErpServicePageView() {
         </section>
 
         <ErpBuyerResources />
+        <section className="border-t border-slate-200 py-10">
+          <h2 className="font-display text-2xl font-bold text-ink">{caseStudyLabels[locale].erpLead}</h2>
+          <p className="mt-4 max-w-3xl leading-relaxed text-slate-600">{caseStudyLabels[locale].erpBody}</p>
+          <Link href={CASE_STUDIES_PATH} className="mt-4 inline-flex min-h-11 items-center font-semibold text-brand-700 underline underline-offset-4">{caseStudyLabels[locale].all} →</Link>
+        </section>
         <section className="border-t border-slate-200 pt-12" aria-labelledby="erp-faq">
           <h2 id="erp-faq" className="font-display text-2xl font-bold text-ink">{copy.faqTitle}</h2>
           <div className="mt-6">{copy.faq.map((item) => <details key={item.q} className="border-b border-slate-200 py-5"><summary className="cursor-pointer font-semibold leading-relaxed text-ink">{item.q}</summary><p className="mt-3 max-w-3xl leading-relaxed text-slate-600">{item.a}</p></details>)}</div>

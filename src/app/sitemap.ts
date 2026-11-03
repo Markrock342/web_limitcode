@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
 import { ERP_GUIDE_PATH } from "@/lib/erp-guide";
+import { CASE_STUDIES, CASE_STUDIES_PATH, caseStudyPath } from "@/lib/case-studies";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Canonical marketing pages only. Demo accounts/forms contain sample data.
   // Omit lastModified rather than reporting every build as a content change.
-  return ["", "/services/erp", ERP_GUIDE_PATH, "/showcase", "/company-profile", "/contact"].map((path) => ({
+  return ["", "/services/erp", ERP_GUIDE_PATH, "/showcase", "/company-profile", "/contact", CASE_STUDIES_PATH, ...CASE_STUDIES.map(study => caseStudyPath(study.slug))].map((path) => ({
     url: `${SITE_URL}${path}`,
   }));
 }

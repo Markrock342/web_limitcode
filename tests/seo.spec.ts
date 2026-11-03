@@ -3,6 +3,7 @@ import { SITE_URL } from "../src/lib/seo";
 import { ERP_SERVICE_PATH, erpServiceCopy } from "../src/lib/erp-service";
 import { ERP_GUIDE_DATE, ERP_GUIDE_PATH, erpGuideCopy } from "../src/lib/erp-guide";
 import { ERP_CHECKLIST_PATH, erpBuyerCopy } from "../src/lib/erp-buyers";
+import { CASE_STUDIES, CASE_STUDIES_PATH, caseStudyPath } from "../src/lib/case-studies";
 import { PURCHASE_ORDERS, QUOTATIONS, SALES_ORDERS, SHIPMENTS, SOURCING_PROJECTS } from "../src/components/demos/erp/data/docs";
 
 test("homepage exposes the primary service in HTML without JavaScript", async ({ browser, baseURL }) => {
@@ -42,7 +43,9 @@ test("sitemap contains canonical marketing pages instead of demo accounts and fo
   const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
   expect(urls).toContain(`${SITE_URL}${ERP_SERVICE_PATH}`);
   expect(urls).toContain(`${SITE_URL}${ERP_GUIDE_PATH}`);
-  expect(urls).toHaveLength(6);
+  expect(urls).toContain(`${SITE_URL}${CASE_STUDIES_PATH}`);
+  for (const study of CASE_STUDIES) expect(urls).toContain(`${SITE_URL}${caseStudyPath(study.slug)}`);
+  expect(urls).toHaveLength(11);
   expect(urls.every((value) => new URL(value).origin === SITE_URL)).toBe(true);
   expect(xml).not.toMatch(/\/demo\/|\/quotation\/|<lastmod>/);
 });

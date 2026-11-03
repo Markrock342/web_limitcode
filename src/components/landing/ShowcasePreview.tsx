@@ -7,6 +7,7 @@ import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Container, CropFrame, LineButton, SectionTag } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
+import { CASE_STUDY_SLUGS, caseStudyLabels, caseStudyPath } from "@/lib/case-studies";
 
 const LIVE_ORDER = ["sirikanchana", "nursego", "kindgo", "horasard"];
 const FEATURED_LIVE = LIVE_ORDER.map((slug) => CLIENT_WORK.find((item) => item.slug === slug)).filter(
@@ -105,7 +106,10 @@ function LiveWorkCard({
   builtLabel: string;
   alt: string;
 }) {
+  const { locale } = useLocale();
+  const hasStudy = CASE_STUDY_SLUGS.some(slug => slug === work.slug);
   return (
+    <div>
     <a
       href={work.liveUrl}
       target="_blank"
@@ -161,6 +165,8 @@ function LiveWorkCard({
         </figure>
       ) : null}
     </a>
+    {hasStudy ? <Link href={caseStudyPath(work.slug)} className="mt-2 inline-flex min-h-11 items-center gap-2 font-semibold text-brand-700 underline underline-offset-4">{caseStudyLabels[locale].read} →</Link> : null}
+    </div>
   );
 }
 

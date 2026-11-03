@@ -3,9 +3,11 @@
 import { Container, LineButton, SectionTag } from "@/components/ui";
 import { ShowcaseGrid } from "@/components/ShowcaseGrid";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import Link from "next/link";
+import { CASE_STUDIES_PATH, caseStudyLabels } from "@/lib/case-studies";
 
 export function ShowcasePageView() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
 
   return (
     <main>
@@ -17,8 +19,9 @@ export function ShowcasePageView() {
             {t.showcase.pageTitle}
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">{t.showcase.pageBody}</p>
-          <div className="mt-7">
+          <div className="mt-7 flex flex-wrap items-center gap-5">
             <LineButton trackingSource="showcase_header">{t.showcase.pageCta}</LineButton>
+            <Link href={CASE_STUDIES_PATH} className="inline-flex min-h-11 items-center font-semibold text-brand-700 underline underline-offset-4">{caseStudyLabels[locale].tag} →</Link>
           </div>
         </Container>
       </section>
