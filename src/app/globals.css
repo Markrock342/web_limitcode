@@ -39,6 +39,8 @@
 :root {
   --background: #ffffff;
   --foreground: #0a1430;
+  /* Light only: stops mobile browsers from auto-darkening the page */
+  color-scheme: only light;
 }
 
 html {

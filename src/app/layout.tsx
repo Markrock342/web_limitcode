@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { cookies } from "next/headers";
 import { IBM_Plex_Sans_Thai, Sora } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
@@ -28,6 +28,12 @@ const display = Sora({
 });
 
 export const metadata: Metadata = defaultMetadata;
+
+/** เว็บมีธีมสว่างอย่างเดียว — บอกเบราว์เซอร์มือถือไม่ให้กลับสีเองเมื่อเครื่องเปิดโหมดมืด */
+export const viewport: Viewport = {
+  colorScheme: "only light",
+  themeColor: "#ffffff",
+};
 
 export default async function RootLayout({
   children,
