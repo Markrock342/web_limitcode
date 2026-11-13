@@ -18,12 +18,11 @@ export function Footer({ showVisitorCount = false }: { showVisitorCount?: boolea
     locale === "th"
       ? BRAND.tagline
       : locale === "en"
-        ? "Three-person freelance team, not a company. Websites, booking, CRM, and the tools a business actually uses."
-        : "三人独立接案团队，不是公司。网站、预约、CRM，以及生意真正在用的那摊。";
+        ? "Freelance team, not a company. Websites, booking, CRM, and the tools a business actually uses."
+        : "独立接案团队，不是公司。网站、预约、CRM，以及生意真正在用的那摊。";
 
   return (
-    <footer className="mt-auto border-t border-slate-200 bg-[#f7f9fc]">
-      <div className="h-px bg-linear-to-r from-brand-600 via-brand-400 to-sky-400" />
+    <footer className="mt-auto border-t border-line bg-white">
       <Container className="py-14">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-md">
@@ -39,7 +38,7 @@ export function Footer({ showVisitorCount = false }: { showVisitorCount?: boolea
               data-track-event="line_click"
               data-track-source="footer"
               data-track-label="LINE OA"
-              className="mt-5 inline-flex items-center gap-2 bg-[#06C755] px-4 py-2 text-sm font-semibold text-white transition hover:brightness-110"
+              className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#06C755] px-4 py-2 text-sm font-semibold text-white shadow-card transition hover:brightness-105"
             >
               <LineGlyph className="size-4" />
               LINE OA: {LINE_ID}
@@ -49,7 +48,7 @@ export function Footer({ showVisitorCount = false }: { showVisitorCount?: boolea
 
           <div className="grid grid-cols-2 gap-8 text-sm min-[480px]:grid-cols-3">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink">
+              <p className="text-sm font-semibold text-ink">
                 {t.footer.services}
               </p>
               <ul className="mt-3 space-y-2 text-slate-600">
@@ -61,7 +60,7 @@ export function Footer({ showVisitorCount = false }: { showVisitorCount?: boolea
               </ul>
             </div>
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink">
+              <p className="text-sm font-semibold text-ink">
                 {t.footer.work}
               </p>
               <ul className="mt-3 space-y-2 text-slate-600">
@@ -80,7 +79,7 @@ export function Footer({ showVisitorCount = false }: { showVisitorCount?: boolea
               </ul>
             </div>
             <div className="col-span-2 min-[480px]:col-span-1">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink">
+              <p className="text-sm font-semibold text-ink">
                 {t.footer.contact}
               </p>
               <ul className="mt-3 space-y-2 text-slate-600">
@@ -138,7 +137,7 @@ export function Footer({ showVisitorCount = false }: { showVisitorCount?: boolea
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-slate-200 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} LIMIT CODE STUDIO</p>
           <div className="flex flex-wrap items-center gap-3">
             <p>{t.footer.madeBy}</p>

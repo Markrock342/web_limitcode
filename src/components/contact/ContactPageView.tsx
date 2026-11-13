@@ -51,7 +51,6 @@ export function ContactPageView() {
               {fill(t.contact.pageLead, {
                 person: CONTACT.person,
                 role: CONTACT.role,
-                n: CONTACT.teamSize,
               })}
             </p>
             <div className="mt-7">

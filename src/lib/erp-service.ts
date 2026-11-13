@@ -7,7 +7,7 @@ const th = {
   title: "รับทำระบบ ERP ตามการทำงานของธุรกิจ",
   heading: "รับทำระบบ ERP",
   headingDetail: "ให้เข้ากับงานของธุรกิจ",
-  description: "LIMIT CODE STUDIO ทีมฟรีแลนซ์ 3 คน รับพัฒนาระบบ ERP สำหรับธุรกิจนำเข้าและจัดจำหน่าย B2B เชื่อมงานขาย จัดซื้อ คลังสินค้า และข้อมูลการเงินในระบบเดียว โดยตกลงขอบเขตกับทีมที่ใช้งานจริงก่อนเริ่มพัฒนา",
+  description: "LIMIT CODE STUDIO ทีมฟรีแลนซ์รับพัฒนาระบบ ERP สำหรับธุรกิจนำเข้าและจัดจำหน่าย B2B เชื่อมงานขาย จัดซื้อ คลังสินค้า และข้อมูลการเงินในระบบเดียว โดยตกลงขอบเขตกับทีมที่ใช้งานจริงก่อนเริ่มพัฒนา",
   consult: "ปรึกษาฟรี",
   demo: "ลองใช้เดโม ERP",
   home: "หน้าแรก",
@@ -61,7 +61,7 @@ export const erpServiceCopy: Record<Locale, typeof th> = {
   en: {
     tag: "Custom ERP development", title: "Custom ERP development for your business workflows",
     heading: "Custom ERP development", headingDetail: "Built around how your business works",
-    description: "LIMIT CODE STUDIO is a three-person freelance team developing ERP for B2B import and distribution workflows. Connect sales, purchasing, inventory, and financial information with a scope agreed with the people who use the system.",
+    description: "LIMIT CODE STUDIO is a freelance team developing ERP for B2B import and distribution workflows. Connect sales, purchasing, inventory, and financial information with a scope agreed with the people who use the system.",
     consult: "Free consultation", demo: "Try the ERP demo", home: "Home",
     demoAlt: "LCS Enterprise ERP demo for B2B import and distribution workflows", demoCaption: "LCS Enterprise ERP · Interactive demo with sample data",
     introTitle: "When scattered spreadsheets cannot keep up", intro: "Sales owns the quotation, purchasing owns the purchase order, and stock or cost updates still happen in chat. We help connect documents and status so teams can reduce duplicate entry and see who handles the next step.",
@@ -95,7 +95,7 @@ export const erpServiceCopy: Record<Locale, typeof th> = {
   },
   zh: {
     tag: "ERP 定制开发", title: "按企业工作流程定制 ERP 系统", heading: "ERP 定制开发", headingDetail: "让系统适应企业的工作方式",
-    description: "LIMIT CODE STUDIO 是三人的自由职业开发团队，为 B2B 进口及分销业务开发 ERP。按实际使用者确认的范围，连接销售、采购、库存与财务信息。",
+    description: "LIMIT CODE STUDIO 是自由职业开发团队，为 B2B 进口及分销业务开发 ERP。按实际使用者确认的范围，连接销售、采购、库存与财务信息。",
     consult: "免费咨询", demo: "试用 ERP 演示", home: "首页", demoAlt: "适用于 B2B 进口与分销流程的 LCS Enterprise ERP 演示", demoCaption: "LCS Enterprise ERP · 使用模拟数据的演示系统",
     introTitle: "当分散的 Excel 已经跟不上业务", intro: "报价在销售手中，采购单在采购部门，库存和成本还要在聊天中询问。我们帮助连接单据与状态，减少重复录入，让每个人清楚自己负责的下一步。",
     fitTitle: "适合哪些企业", fit: ["需要连接销售、采购和收货流程的进口商与分销商", "需要跟踪报价、客户信用和交付状态的 B2B 团队", "现有工具无法支持关键流程，或数据分散在多个系统的企业"],

@@ -9,8 +9,8 @@ import { isPromoActive, LINE_URL } from "@/lib/site";
 import { LineButton } from "./ui";
 import { BrandWordmark, Logo } from "./Logo";
 
-/** Desktop horizontal nav needs ~1536px; below that use the menu button. */
-const DESKTOP_NAV = "(min-width: 1536px)";
+/** Desktop horizontal nav needs ~1280px; below that use the menu button. */
+const DESKTOP_NAV = "(min-width: 1280px)";
 
 export function Navbar() {
   const { t } = useLocale();
@@ -100,7 +100,7 @@ export function Navbar() {
         data-analytics-region="navbar"
         className={`fixed inset-x-0 top-0 z-50 transition-all ${
           scrolled
-            ? "border-b border-slate-200/70 bg-white/85 backdrop-blur-md"
+            ? "border-b border-line bg-white/80 shadow-[0_1px_0_rgba(16,24,40,0.02),0_8px_24px_-16px_rgba(16,24,40,0.18)] backdrop-blur-md"
             : "border-b border-transparent bg-transparent"
         }`}
       >
@@ -136,7 +136,7 @@ export function Navbar() {
             <BrandWordmark className="hidden text-[13px] min-[400px]:inline sm:text-[15px]" />
           </Link>
 
-          <div className="hidden min-w-0 flex-1 justify-center 2xl:flex">
+          <div className="hidden min-w-0 flex-1 justify-center xl:flex">
             <div className="flex items-center gap-0.5">
               {nav.map((item) => {
                 const active = currentHref === item.href;
@@ -148,10 +148,10 @@ export function Navbar() {
                     href={inPage ? `#${item.sectionId}` : item.href}
                     aria-current={active ? "location" : undefined}
                     onClick={() => setActiveHref(item.href)}
-                    className={`relative whitespace-nowrap px-2 py-2 text-[13px] font-medium transition-colors after:absolute after:inset-x-2 after:bottom-1 after:h-px after:origin-left after:bg-brand-500 after:transition-transform after:duration-300 after:ease-out-quart ${
+                    className={`whitespace-nowrap rounded-full px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
                       active
-                        ? "text-brand-700 after:scale-x-100"
-                        : "text-slate-600 after:scale-x-0 hover:text-brand-700 hover:after:scale-x-100"
+                        ? "bg-brand-50 text-brand-700"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-ink"
                     }`}
                   >
                     {item.label}
@@ -163,11 +163,11 @@ export function Navbar() {
 
           <div className="relative z-20 ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
             <LanguageSwitcher size="compact" />
-            <LineButton iconOnly className="2xl:hidden" trackingSource="navbar">
+            <LineButton iconOnly className="xl:hidden" trackingSource="navbar">
               {t.nav.line}
             </LineButton>
-            <span className="hidden 2xl:inline-flex">
-              <LineButton className="px-3.5 py-2 text-sm" trackingSource="navbar">
+            <span className="hidden xl:inline-flex">
+              <LineButton size="sm" trackingSource="navbar">
                 {t.nav.line}
               </LineButton>
             </span>
@@ -176,7 +176,7 @@ export function Navbar() {
               aria-label={t.nav.menu}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex size-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 2xl:hidden"
+              className="inline-flex size-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 xl:hidden"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="size-5">
                 {open ? (
@@ -190,7 +190,7 @@ export function Navbar() {
         </nav>
 
         {open && (
-          <div className="border-t border-slate-200/70 bg-white 2xl:hidden">
+          <div className="border-t border-slate-200/70 bg-white xl:hidden">
             <div className="mx-auto flex w-full max-w-7xl flex-col gap-1 px-5 py-4 sm:px-6">
               {nav.map((item) => {
                 const active = currentHref === item.href;

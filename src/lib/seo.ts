@@ -10,7 +10,7 @@ export const SITE_NAME = "LIMIT CODE STUDIO";
 export const SITE_NAME_SHORT = "LIMIT CODE";
 
 export const DEFAULT_DESCRIPTION =
-  "LIMIT CODE STUDIO ทีมฟรีแลนซ์ 3 คน รับทำระบบ ERP ตามการทำงานของธุรกิจ เชื่อมงานขาย จัดซื้อ คลังสินค้า และ CRM พร้อมพัฒนาเว็บไซต์และระบบจอง";
+  "LIMIT CODE STUDIO ทีมฟรีแลนซ์รับทำระบบ ERP ตามการทำงานของธุรกิจ เชื่อมงานขาย จัดซื้อ คลังสินค้า และ CRM พร้อมพัฒนาเว็บไซต์และระบบจอง";
 
 export const SEO_KEYWORDS = [
   "รับทำ ERP",

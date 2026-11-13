@@ -25,6 +25,85 @@ export function SectionTag({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** Pill label above section headings (shadcn/ui Badge pattern). */
+export function Badge({
+  children,
+  className = "",
+  tone = "brand",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  tone?: "brand" | "dark";
+}) {
+  const toneClass =
+    tone === "dark"
+      ? "border-white/15 bg-white/10 text-white"
+      : "border-brand-200/80 bg-white text-brand-700 shadow-card";
+  return (
+    <span
+      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold ${toneClass} ${className}`}
+    >
+      {children}
+    </span>
+  );
+}
+
+/** White surface card with soft elevation. */
+export function Card({
+  children,
+  className = "",
+  as = "div",
+  interactive = false,
+  labelledBy,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  as?: "div" | "article" | "li" | "section";
+  interactive?: boolean;
+  labelledBy?: string;
+}) {
+  const Tag = as;
+  return (
+    <Tag
+      aria-labelledby={labelledBy}
+      className={`relative rounded-2xl border border-line bg-white shadow-card ${interactive ? "card-lift hover:border-brand-200" : ""} ${className}`}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+/** Standard section header: badge, title, body. */
+export function SectionHeading({
+  tag,
+  title,
+  body,
+  id,
+  align = "left",
+  className = "",
+}: {
+  tag: React.ReactNode;
+  title: React.ReactNode;
+  body?: React.ReactNode;
+  id?: string;
+  align?: "left" | "center";
+  className?: string;
+}) {
+  const center = align === "center";
+  return (
+    <div className={`${center ? "mx-auto text-center" : ""} max-w-2xl ${className}`}>
+      <Badge>{tag}</Badge>
+      <h2
+        id={id}
+        className="mt-4 text-balance font-display text-[clamp(1.75rem,1.2rem+2vw,2.6rem)] font-bold leading-tight tracking-tight text-ink"
+      >
+        {title}
+      </h2>
+      {body ? <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600">{body}</p> : null}
+    </div>
+  );
+}
+
 export function CropFrame({
   children,
   className = "",
@@ -49,13 +128,16 @@ export function LineButton({
   showId = false,
   iconOnly = false,
   trackingSource,
+  size = "md",
 }: {
   className?: string;
   children?: React.ReactNode;
   showId?: boolean;
   iconOnly?: boolean;
   trackingSource?: string;
+  size?: "md" | "sm";
 }) {
+  const sizeClass = size === "sm" ? "px-4 py-2 text-sm" : "px-5 py-3 text-sm sm:px-6 sm:py-3.5 sm:text-base";
   const label = typeof children === "string" ? children : "LINE OA";
   return (
     <a
@@ -69,7 +151,7 @@ export function LineButton({
       className={
         iconOnly
           ? `btn-sheen inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-[#06C755] text-white shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift active:scale-[0.97] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#06C755]/30 ${className}`
-          : `btn-sheen group inline-flex max-w-full items-center justify-center gap-2 rounded-full bg-[#06C755] px-5 py-3 text-sm font-semibold text-pretty text-white shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift active:scale-[0.97] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#06C755]/30 sm:gap-2.5 sm:px-6 sm:py-3.5 sm:text-base ${className}`
+          : `btn-sheen group inline-flex max-w-full items-center justify-center gap-2 rounded-full bg-[#06C755] ${sizeClass} font-semibold text-pretty text-white shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift active:scale-[0.97] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#06C755]/30 sm:gap-2.5 ${className}`
       }
     >
       <LineGlyph className="size-5 shrink-0" />
@@ -97,7 +179,7 @@ export function GhostButton({
   return (
     <Link
       href={href}
-      className={`group inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-brand-200 bg-white px-5 py-3 text-sm font-semibold text-brand-700 transition-all hover:-translate-y-0.5 hover:border-brand-300 hover:bg-brand-50 active:scale-[0.97] sm:px-6 sm:py-3.5 sm:text-base ${className}`}
+      className={`group inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-line bg-white px-5 py-3 text-sm font-semibold text-ink shadow-card transition-all hover:-translate-y-0.5 hover:border-brand-200 hover:text-brand-700 hover:shadow-card-hover active:scale-[0.97] focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-500/20 sm:px-6 sm:py-3.5 sm:text-base ${className}`}
     >
       {children}
     </Link>

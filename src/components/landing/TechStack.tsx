@@ -40,7 +40,10 @@ export function TechStack() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-9">
+      </Container>
+
+      <div className="relative mx-auto mt-12 w-full max-w-[1400px] px-5 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9">
           {TECH_GROUPS.map((g, i) => {
             const style = GROUP_STYLE[g];
             const items = TECH.filter((item) => item.group === g);
@@ -55,7 +58,7 @@ export function TechStack() {
                     {items.map((item) => (
                       <li key={item.name} className="flex items-center gap-2.5">
                         <TechLogo item={item} size={18} />
-                        <span className="text-sm font-medium leading-tight text-white/85">{item.name}</span>
+                        <span className="text-[13px] font-medium leading-tight text-white/85">{item.name}</span>
                       </li>
                     ))}
                   </ul>
@@ -64,7 +67,7 @@ export function TechStack() {
             );
           })}
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

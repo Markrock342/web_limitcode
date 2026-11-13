@@ -1,140 +1,160 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { SYSTEM_DEMOS } from "@/lib/demos";
+import { SITE_URL } from "@/lib/seo";
 import { LINE_ID } from "@/lib/site";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { BrandWordmark, Logo } from "@/components/Logo";
-import { Container, LineButton, GhostButton, LineGlyph } from "@/components/ui";
-import { Reveal } from "@/components/Reveal";
+import { Container, LineButton, GhostButton } from "@/components/ui";
 import { Icon } from "@/components/Icon";
+import { BrandWordmark, Logo } from "@/components/Logo";
 import { HeroTerminal } from "@/components/HeroTerminal";
 import { Typewriter } from "@/components/Typewriter";
-import { DataFlowFrame } from "@/components/DataFlowFrame";
+
+const delay = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 export function Hero() {
   const { t } = useLocale();
   const phrases = [...t.hero.phrases];
 
   return (
-    <section className="relative overflow-hidden" data-analytics-region="hero">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_at_top,black,transparent_72%)]" />
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <span className="beam-x top-[144px] [animation-delay:-4s]" />
-        <span className="beam-x top-[288px] [animation-delay:1.8s] [animation-duration:11s]" />
-        <span className="beam-y left-[336px] [animation-delay:-7s]" />
-      </div>
-      <div className="pointer-events-none absolute -top-24 -left-24 -z-10 size-[28rem] animate-aurora rounded-full bg-brand-300/25 blur-3xl" />
-      <div className="pointer-events-none absolute -top-10 right-0 -z-10 size-[24rem] animate-aurora rounded-full bg-sky-300/20 blur-3xl [animation-delay:-9s]" />
+    <section className="relative isolate overflow-hidden" data-analytics-region="hero">
+      <div aria-hidden className="hero-backdrop absolute inset-0 -z-20" />
+      <div aria-hidden className="hero-dots absolute inset-0 -z-10" />
 
-      <Container className="grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
-        <div>
-          <Reveal>
-            <div className="flex items-center gap-3">
-              <Logo className="size-11 shrink-0 sm:size-12" />
-              <BrandWordmark className="text-[clamp(1.05rem,4.4vw,1.5rem)] sm:text-2xl" />
+      <Container className="grid items-center gap-14 pb-16 pt-10 sm:pt-16 lg:grid-cols-[1fr_1.08fr] lg:gap-10 lg:pb-24 lg:pt-20">
+        <div className="min-w-0">
+          <div className="hero-in flex items-center gap-3" style={delay(0)}>
+            <Logo className="size-10 shrink-0" />
+            <div className="min-w-0">
+              <BrandWordmark className="text-base" />
+              <p className="text-sm text-slate-600">{t.hero.eyebrow}</p>
             </div>
-          </Reveal>
+          </div>
 
-          <Reveal delay={40}>
-            <p className="mt-5 text-sm font-medium text-brand-700">{t.hero.eyebrow}</p>
-          </Reveal>
-
-          <Reveal delay={80}>
-            <h1 className="mt-4 font-display text-[clamp(1.85rem,1.35rem+3.8vw,3.25rem)] font-extrabold leading-[1.15] tracking-tight text-ink">
+          <h1
+            className="hero-in mt-6 font-display text-[clamp(2.1rem,1.4rem+3.6vw,3.9rem)] font-extrabold leading-[1.12] tracking-tight text-ink"
+            style={delay(80)}
+          >
+            <span className="block">
               {t.hero.lead}{" "}
-              <span className="mt-1 block min-h-[1.15em] max-w-full text-brand-600 sm:mt-0 sm:inline-block sm:min-w-[18ch]">
+              <span className="inline-block min-h-[1.12em] max-w-full text-brand-600">
                 <Typewriter key={phrases.join("|")} phrases={phrases} />
               </span>
-              {t.hero.trail ? <span className="block">{t.hero.trail}</span> : null}
-            </h1>
-          </Reveal>
+            </span>
+            {t.hero.trail ? <span className="block">{t.hero.trail}</span> : null}
+          </h1>
 
-          <Reveal delay={160}>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">{t.hero.body}</p>
-          </Reveal>
+          <p className="hero-in mt-6 max-w-xl text-pretty text-lg leading-relaxed text-slate-600" style={delay(160)}>
+            {t.hero.body}
+          </p>
 
-          <Reveal delay={240}>
-            <ol className="mt-6 grid grid-cols-2 gap-x-3 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500 sm:flex sm:flex-wrap sm:gap-x-4">
-              {["01 Input", "02 Build", "03 Test", "04 Deploy"].map((step) => (
-                <li key={step} className="flex items-center gap-2">
-                  <span className="size-1.5 rounded-full bg-brand-500" />
-                  {step}
-                </li>
-              ))}
-            </ol>
-          </Reveal>
+          <div className="hero-in mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={delay(240)}>
+            <LineButton className="btn-sheen-auto w-full sm:w-auto" trackingSource="hero">
+              {t.hero.ctaLine}
+            </LineButton>
+            <GhostButton href="/showcase" className="w-full sm:w-auto">
+              {t.hero.ctaGhost}
+              <Icon name="arrow" className="size-4 transition-transform duration-300 ease-out-quart group-hover:translate-x-1" />
+            </GhostButton>
+          </div>
 
-          <Reveal delay={280}>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <LineButton className="btn-sheen-auto w-full sm:w-auto">{t.hero.ctaLine}</LineButton>
-              <GhostButton href="/showcase" className="w-full sm:w-auto">
-                {t.hero.ctaGhost}
-                <Icon name="arrow" className="size-4 transition-transform duration-300 ease-out-quart group-hover:translate-x-1" />
-              </GhostButton>
-            </div>
-          </Reveal>
+          <p className="hero-in mt-4 text-sm text-slate-500" style={delay(280)}>
+            {t.hero.lineHint} <span className="font-semibold text-ink">{LINE_ID}</span>
+          </p>
 
-          <Reveal delay={360}>
-            <p className="mt-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-              <span className="inline-flex size-6 shrink-0 items-center justify-center bg-[#06C755] text-white">
-                <LineGlyph className="size-3.5" />
-              </span>
-              <span>
-                {t.hero.lineHint}{" "}
-                <span className="font-display font-bold text-ink">{LINE_ID}</span>
-              </span>
-            </p>
-          </Reveal>
+          <dl
+            className="hero-in mt-10 hidden max-w-xl grid-cols-3 gap-3 border-t border-line pt-6 sm:grid"
+            style={delay(340)}
+          >
+            {t.why.stats.map((stat) => (
+              <div key={stat.k} className="flex items-start gap-2.5">
+                <span className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-600 text-white">
+                  <Icon name="check" className="size-3" />
+                </span>
+                <div className="min-w-0">
+                  <dt className="text-sm font-semibold text-ink">{stat.k}</dt>
+                  <dd className="text-xs text-slate-500">{stat.v}</dd>
+                </div>
+              </div>
+            ))}
+          </dl>
         </div>
 
-        <Reveal delay={200}>
-          <HeroVisual alt={t.hero.previewAlt} live={t.hero.live} title={t.hero.previewTitle} />
-        </Reveal>
+        <div className="hero-in min-w-0" style={delay(200)}>
+          <HeroVisual previewLabel={t.showcase.previewAlt} badge={t.showcase.demoBadge} />
+        </div>
       </Container>
     </section>
   );
 }
 
-function HeroVisual({ alt, live, title }: { alt: string; live: string; title: string }) {
-  return (
-    <DataFlowFrame>
-      <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-        <a
-          href="https://sirikanchana.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-track-event="work_open"
-          data-track-source="hero"
-          data-track-item="sirikanchana"
-          data-track-kind="live"
-          className="group relative block overflow-hidden bg-slate-100"
-        >
-          <div className="relative aspect-[16/10]">
-            <Image
-              src="/showcase/sirikanchana.jpg"
-              alt={alt}
-              fill
-              sizes="(max-width:1024px) 100vw, 520px"
-              className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
-              priority
-            />
-          </div>
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent px-5 pb-5 pt-20">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/70">{live}</p>
-            <p className="mt-0.5 font-display text-base font-bold text-white">
-              {title}
-            </p>
-          </div>
-        </a>
+const HERO_DEMO = SYSTEM_DEMOS.find((demo) => demo.slug === "erp")!;
+const HERO_DEMO_HREF = `/demo/${HERO_DEMO.slug}`;
+const SITE_HOST = new URL(SITE_URL).host;
 
-        <Reveal
-          variant="scale"
-          delay={400}
-          className="relative z-30 mt-4 sm:absolute sm:-bottom-6 sm:-left-4 sm:mt-0 sm:w-[252px]"
-        >
-          <HeroTerminal />
-        </Reveal>
+function HeroVisual({ previewLabel, badge }: { previewLabel: string; badge: string }) {
+  return (
+    <div className="relative mx-auto w-full max-w-xl pb-6 sm:pb-12 lg:max-w-none lg:pl-6">
+      {/* Second project peeking out behind — gives depth */}
+      <div
+        aria-hidden
+        className="absolute -right-2 -top-6 hidden w-[58%] rotate-[4deg] overflow-hidden rounded-2xl border border-white/70 bg-white shadow-float sm:block lg:-right-6"
+      >
+        <div className="relative aspect-[16/11]">
+          <Image src="/showcase/nursego.jpg" alt="" fill sizes="340px" className="object-cover object-top" />
+        </div>
       </div>
-    </DataFlowFrame>
+
+      {/* Main browser window */}
+      <Link
+        href={HERO_DEMO_HREF}
+        data-track-event="work_open"
+        data-track-source="hero"
+        data-track-item={HERO_DEMO.slug}
+        data-track-kind="demo"
+        className="group relative block overflow-hidden rounded-2xl border border-line bg-white shadow-float transition-transform duration-500 ease-out-quart hover:-translate-y-1 sm:mr-[10%] sm:mt-10"
+      >
+        <div className="flex items-center gap-2 border-b border-line bg-slate-50/90 px-4 py-2.5">
+          <span className="size-2.5 rounded-full bg-[#ff5f57]" />
+          <span className="size-2.5 rounded-full bg-[#febc2e]" />
+          <span className="size-2.5 rounded-full bg-[#28c840]" />
+          <span className="ml-3 flex min-w-0 flex-1 items-center gap-1.5 rounded-md border border-line bg-white px-2.5 py-1 text-[11px] text-slate-500">
+            <svg viewBox="0 0 16 16" className="size-3 shrink-0 text-emerald-600" fill="currentColor" aria-hidden>
+              <path d="M8 1a3.5 3.5 0 0 0-3.5 3.5V6H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-.5V4.5A3.5 3.5 0 0 0 8 1Zm2 5H6V4.5a2 2 0 1 1 4 0V6Z" />
+            </svg>
+            <span className="truncate">{SITE_HOST}{HERO_DEMO_HREF}</span>
+          </span>
+        </div>
+        <div className="relative aspect-[16/10] bg-slate-100">
+          <Image
+            src={HERO_DEMO.preview!}
+            alt={`${previewLabel} ${HERO_DEMO.name}`}
+            fill
+            sizes="(max-width:1024px) 100vw, 620px"
+            className="object-cover object-top transition-transform duration-700 ease-out-quart group-hover:scale-[1.02]"
+            loading="eager"
+            fetchPriority="high"
+          />
+        </div>
+      </Link>
+
+      {/* Project label card */}
+      <div className="relative z-10 mt-4 sm:absolute sm:-left-4 sm:top-[46%] sm:mt-0 sm:max-w-[290px] lg:-left-2">
+        <div className="flex items-start gap-3 rounded-2xl border border-line bg-white/95 p-3.5 shadow-float backdrop-blur">
+          <span className="mt-1.5 size-2 shrink-0 rounded-full bg-brand-600" />
+          <span className="min-w-0">
+            <span className="block text-[11px] font-semibold text-brand-700">{badge}</span>
+            <span className="mt-0.5 block text-pretty text-sm font-semibold leading-snug text-ink">{HERO_DEMO.name}</span>
+          </span>
+        </div>
+      </div>
+
+      {/* Terminal — deploy pipeline */}
+      <div className="absolute -bottom-2 right-0 z-10 hidden w-[264px] sm:block lg:right-2">
+        <HeroTerminal />
+      </div>
+    </div>
   );
 }

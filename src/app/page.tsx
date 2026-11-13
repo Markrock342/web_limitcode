@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="bg-canvas">
         <Hero />
         <Clients />
         <PressCoverage />

@@ -48,7 +48,7 @@ export const th = {
     sourceNote: "สรุปจากบทความต้นฉบับภาษาไทย · เปิดเว็บไซต์สำนักข่าวในแท็บใหม่",
   },
   hero: {
-    eyebrow: "ทีมพัฒนา 3 คน · คุยตรงกับคนทำ · มีผู้รับผิดชอบชัดเจน",
+    eyebrow: "ทีมพัฒนาเว็บและระบบสำหรับ SME",
     lead: "รับทำ",
     phrases: ["ระบบ ERP", "เว็บไซต์", "ระบบจอง", "CRM / Job Order", "Admin Dashboard"],
     trail: "ให้ธุรกิจใช้ได้จริง",
@@ -82,35 +82,42 @@ export const th = {
   },
   useCases: {
     tag: "ปัญหาที่เราแก้",
+    before: "ตอนนี้",
+    after: "หลังมีระบบ",
     title: "ถ้ายังทำงานแบบนี้อยู่ เราช่วยได้",
     body: "เว็บใหม่ก็ได้ ระบบใหม่ก็ได้ เริ่มจากงานที่ทำอยู่ตอนนี้ แล้วทำให้ใช้จริงได้",
     items: {
       chat: {
         title: "ยังจองคิวผ่านแชทและโทรศัพท์",
-        desc: "ลูกค้าทัก LINE ทีมตอบช้า คิวชนกัน — เปลี่ยนเป็นตารางจองที่ลูกค้ากดเองได้",
+        pain: "ลูกค้าทัก LINE ทีมตอบช้า คิวชนกัน",
+        fix: "ลูกค้ากดจองเองจากตารางเวลา",
       },
       excel: {
         title: "ทีมใช้ Excel หลายไฟล์",
-        desc: "ลูกค้า ออเดอร์ งานหน้าสนาม กระจัดกระจาย — รวมเป็น CRM / Job Order ที่เดียว",
+        pain: "ข้อมูลลูกค้า ออเดอร์ และงานหน้าสนาม อยู่คนละไฟล์",
+        fix: "รวมเป็น CRM / Job Order ที่เดียว",
       },
       status: {
         title: "ลูกค้าไม่รู้สถานะงาน",
-        desc: "ถามซ้ำ ตามยาก — ใส่สถานะ ปฏิทิน และแจ้งเตือนให้ทุกฝ่ายเห็นตรงกัน",
+        pain: "ลูกค้าถามซ้ำ ทีมตามงานยาก",
+        fix: "มีสถานะ ปฏิทิน และแจ้งเตือน ทุกฝ่ายเห็นตรงกัน",
       },
       dashboard: {
         title: "เจ้าของกิจการไม่มี Dashboard",
-        desc: "ตัดสินใจจากความรู้สึก — สรุปยอดจอง งาน และรายได้ให้ดูได้ทันที",
+        pain: "ต้องตัดสินใจจากความรู้สึก",
+        fix: "เห็นยอดจอง งาน และรายได้ทันทีที่เปิดระบบ",
       },
       ai: {
         title: "อยากใช้ AI แต่ยังไม่มีระบบรองรับ",
-        desc: "ไม่ใช่แค่ติด ChatGPT — วาง credit, persona, CMS และแพ็กเกจให้ขายและดูแลต่อได้",
+        pain: "มีแค่แชตบอทที่ต่อ ChatGPT ไว้เฉย ๆ",
+        fix: "วางระบบเครดิต persona, CMS และแพ็กเกจ ให้ขายและดูแลต่อได้",
       },
     },
   },
   services: {
     tag: "งานที่เราทำ",
     title: "เว็บไซต์ก็รับ ระบบก็รับ คุยมาได้เลย",
-    body: "รับทำหน้าเว็บบริษัท ระบบจอง CRM Dashboard และงานที่ยังทำบน LINE กับ Excel ทีม 3 คน คุยตรง ล็อกขอบเขตแล้วลงมือ",
+    body: "รับทำหน้าเว็บบริษัท ระบบจอง CRM Dashboard และงานที่ยังทำบน LINE กับ Excel คุยตรงกับทีม ล็อกขอบเขตแล้วลงมือ",
     items: {
       booking: {
         title: "ระบบจองและบริหารคิว",
@@ -145,6 +152,13 @@ export const th = {
     includes: "ขอบเขตตัวอย่างที่รวม",
     recommended: "SME เริ่มจากแพ็กนี้บ่อย",
     packages: {
+      erp: {
+        title: "ระบบ ERP โรงงาน",
+        desc: "เชื่อมงานขาย จัดซื้อ คลังวัตถุดิบ และฝ่ายผลิตไว้ในระบบเดียว ทำทีละส่วนตามที่โรงงานต้องใช้ก่อน",
+        range: "300,000–1,500,000",
+        fit: "โรงงานผลิตที่จัดซื้อ คลัง และฝ่ายผลิตต้องใช้ข้อมูลชุดเดียวกัน",
+        includes: ["BOM และใบสั่งผลิต", "PR / PO และการอนุมัติ", "สต็อกวัตถุดิบและสินค้าสำเร็จรูป", "สิทธิ์ผู้ใช้แยกตามฝ่าย และรายงานผู้บริหาร"],
+      },
       website: {
         title: "เว็บไซต์บริษัท",
         desc: "เว็บที่อธิบายธุรกิจ สร้างความน่าเชื่อถือ และพาลูกค้าไปติดต่อหรือขอใบเสนอราคา",
@@ -344,8 +358,8 @@ export const th = {
   },
   tech: {
     kicker: "เทคโนโลยีที่เราใช้",
-    title: "ของที่ใช้กันอยู่ และดูแลต่อได้",
-    body: "เลือกเครื่องมือที่ใช้กันทั่วไป วางให้ต่อยอดได้ ไม่ล็อกจนย้ายต่อไม่ได้",
+    title: "เครื่องมือที่เราใช้ทำระบบ",
+    body: "เป็นเครื่องมือมาตรฐานที่นักพัฒนาส่วนใหญ่รู้จัก ทีมอื่นรับไปดูแลต่อได้",
     groups: {
       Languages: "ภาษา",
       Frontend: "Frontend",
@@ -376,7 +390,7 @@ export const th = {
   contact: {
     init: "contact.init()",
     phrases: ["ส่งงานมาได้เลย", "เว็บก็ทำ ระบบก็ทำ", "ทัก LINE OA ได้เลย"],
-    body: "เว็บไซต์ก็รับ ระบบก็รับ — ส่งตัวอย่างที่อยากได้ หรือเล่างานที่ทำอยู่ตอนนี้มาได้เลย ทีม 3 คน ช่วยดูแนวทางให้ครับ",
+    body: "เว็บไซต์ก็รับ ระบบก็รับ — ส่งตัวอย่างที่อยากได้ หรือเล่างานที่ทำอยู่ตอนนี้มาได้เลย ทีมเราช่วยดูแนวทางให้ครับ",
     help: [
       "อยากได้เว็บไซต์บริษัท หน้าโปรโมท หรือเว็บที่ลูกค้าเข้ามาใช้",
       "อยากได้ระบบจอง CRM Dashboard หรือหลังบ้านทีม",
@@ -391,7 +405,7 @@ export const th = {
     console: "ดูช่องทางติดต่อทั้งหมด →",
     pageKicker: "contact.console()",
     pageH1: "คุยกับ {name} ได้เลย · {role}",
-    pageLead: "{person} · {role} ของทีม {n} คน เว็บไซต์ก็ทำ ระบบก็ทำ ส่งงานมาคุยได้เลย ปรึกษาฟรี",
+    pageLead: "{person} · {role} ของทีม เว็บไซต์ก็ทำ ระบบก็ทำ ส่งงานมาคุยได้เลย ปรึกษาฟรี",
     primary: "primary channel",
     primaryHint: "ช่องทางหลักสำหรับคุยงาน ล็อกขอบเขต และส่งตัวอย่างระบบ",
     tapToCall: "กดเบอร์นี้เพื่อโทร ·",
@@ -508,7 +522,7 @@ export const en: Messages = {
     sourceNote: "Summary of the original Thai-language article · Opens the publisher’s website in a new tab.",
   },
   hero: {
-    eyebrow: "A three-person build team · direct access · clear ownership",
+    eyebrow: "Web and system development for SMEs",
     lead: "Build",
     phrases: ["ERP systems", "websites", "booking systems", "CRM / Job Order", "Admin Dashboards"],
     trail: "the business can actually use",
@@ -542,28 +556,35 @@ export const en: Messages = {
   },
   useCases: {
     tag: "Problems we take",
+    before: "Today",
+    after: "With a system",
     title: "If the business still works like this, we can help",
     body: "A new site is fine. A new system is fine. We start from the work you do today and turn it into something people actually use.",
     items: {
       chat: {
         title: "Bookings still live in chat and phone calls",
-        desc: "Customers ping LINE, the team replies late, slots collide. We turn that into a timetable they can book themselves.",
+        pain: "Customers ping LINE, the team replies late, slots collide.",
+        fix: "Customers book themselves from a timetable.",
       },
       excel: {
         title: "The team juggles several Excel files",
-        desc: "Customers, orders, and field jobs sit in different sheets. We pull them into one CRM / Job Order.",
+        pain: "Customers, orders, and field jobs sit in different sheets.",
+        fix: "One CRM / Job Order for everything.",
       },
       status: {
         title: "Customers never know where the job stands",
-        desc: "They keep asking. We add job status, a calendar, and alerts so everyone sees the same thing.",
+        pain: "They keep asking, and the team struggles to follow up.",
+        fix: "Job status, a calendar, and alerts everyone can see.",
       },
       dashboard: {
         title: "Owners have no dashboard",
-        desc: "Decisions come from gut feel. We put bookings, jobs, and revenue on a live summary.",
+        pain: "Decisions come from gut feel.",
+        fix: "Bookings, jobs, and revenue on a live summary.",
       },
       ai: {
         title: "You want AI, but nothing to hang it on",
-        desc: "Not just wiring ChatGPT. Credits, personas, CMS, and plans you can sell and keep running.",
+        pain: "A chatbot wired to ChatGPT and nothing else.",
+        fix: "Credits, personas, CMS, and plans you can sell and keep running.",
       },
     },
   },
@@ -605,6 +626,13 @@ export const en: Messages = {
     includes: "Example scope included",
     recommended: "A common SME starting point",
     packages: {
+      erp: {
+        title: "Factory ERP",
+        desc: "Sales, purchasing, raw-material stock, and production in one system, built one part at a time, starting with what the factory needs first.",
+        range: "300,000–1,500,000",
+        fit: "Manufacturers where purchasing, warehouse, and production need the same data",
+        includes: ["BOM and production orders", "PR / PO with approvals", "Raw-material and finished-goods stock", "Permissions by department and management reports"],
+      },
       website: {
         title: "Company website",
         desc: "A site that explains the business, builds trust, and moves customers towards an enquiry or quotation.",
@@ -804,8 +832,8 @@ export const en: Messages = {
   },
   tech: {
     kicker: "What we build with",
-    title: "Current tools, still maintainable later",
-    body: "Mainstream stack. Room to grow. Nothing locked so tight you cannot move.",
+    title: "The tools we build with",
+    body: "Standard tools most developers already know, so your own team can take over the system later.",
     groups: {
       Languages: "Languages",
       Frontend: "Frontend",
@@ -851,7 +879,7 @@ export const en: Messages = {
     console: "Open the full contact console →",
     pageKicker: "contact.console()",
     pageH1: "Talk to {name} · {role}",
-    pageLead: "{person} · {role} on a {n}-person team. Sites and systems. Send the brief. Free to talk it through.",
+    pageLead: "{person} · {role}. Sites and systems. Send the brief. Free to talk it through.",
     primary: "primary channel",
     primaryHint: "The main place to talk through the brief, lock scope, and send sample systems",
     tapToCall: "Tap to call ·",
@@ -967,7 +995,7 @@ export const zh: Messages = {
     sourceNote: "本文为泰文原文摘要 · 将在新标签页打开媒体网站。",
   },
   hero: {
-    eyebrow: "3 人开发团队 · 直接跟做事的人聊 · 负责人清楚",
+    eyebrow: "为中小企业开发网站与业务系统",
     lead: "做真正拿来用的",
     phrases: ["ERP 系统", "网站", "预约系统", "CRM / Job Order", "Admin Dashboard"],
     trail: "",
@@ -1001,35 +1029,42 @@ export const zh: Messages = {
   },
   useCases: {
     tag: "我们在解的问题",
+    before: "现在",
+    after: "有系统之后",
     title: "生意要是还这样干，我们可以上手",
     body: "新网站可以，新系统也可以。从你现在手头的活开始，做成能真正拿来用的东西。",
     items: {
       chat: {
         title: "预约还靠聊天和打电话",
-        desc: "客人在 LINE 里喊，团队回得慢，档期撞车。我们改成客人自己在表上约。",
+        pain: "客人在 LINE 里喊，团队回得慢，档期撞车。",
+        fix: "客人自己在时间表上预约。",
       },
       excel: {
         title: "团队抱着好几份 Excel",
-        desc: "客户、订单、现场工单散在不同表里。收成一套 CRM / Job Order。",
+        pain: "客户、订单、现场工单散在不同表里。",
+        fix: "收成一套 CRM / Job Order。",
       },
       status: {
         title: "客人不知道活干到哪了",
-        desc: "翻来覆去问。加上工单状态、日历和提醒，大家看到的是同一份。",
+        pain: "客人翻来覆去问，团队跟进吃力。",
+        fix: "工单状态、日历和提醒，大家看到的是同一份。",
       },
       dashboard: {
         title: "老板没有 Dashboard",
-        desc: "凭感觉拍板。把预约、工单和营收做成实时汇总。",
+        pain: "只能凭感觉拍板。",
+        fix: "预约、工单和营收随时查看。",
       },
       ai: {
         title: "想用 AI，但下面没有系统托着",
-        desc: "不是接个 ChatGPT 就完。点数、人设、CMS、套餐，能卖也能继续养。",
+        pain: "只是接了个 ChatGPT 聊天机器人。",
+        fix: "点数、人设、CMS、套餐，能卖也能继续维护。",
       },
     },
   },
   services: {
     tag: "我们接的活",
     title: "网站也接，系统也接，把题目拿来谈",
-    body: "公司官网、预约、CRM、Dashboard，还有还在 LINE 和 Excel 上转的活。三人团队，直接谈，范围锁清再动手。",
+    body: "公司官网、预约、CRM、Dashboard，还有还在 LINE 和 Excel 上转的活。直接跟团队谈，范围锁清再动手。",
     items: {
       booking: {
         title: "预约和排队",
@@ -1064,6 +1099,13 @@ export const zh: Messages = {
     includes: "示例范围包括",
     recommended: "中小企业常从这里开始",
     packages: {
+      erp: {
+        title: "工厂 ERP 系统",
+        desc: "销售、采购、原料库存和生产放在同一套系统里，按工厂最先需要的部分分步开发。",
+        range: "300,000–1,500,000",
+        fit: "采购、仓库和生产部门需要共用同一份数据的制造工厂",
+        includes: ["BOM 与生产工单", "PR / PO 及审批", "原料与成品库存", "按部门划分权限，含管理报表"],
+      },
       website: {
         title: "公司网站",
         desc: "把业务讲清、建立信任，并把客户带到咨询或索取报价。",
@@ -1263,8 +1305,8 @@ export const zh: Messages = {
   },
   tech: {
     kicker: "我们用的技术",
-    title: "用现在的工具，以后也养得起",
-    body: "选通行技术，系统留得住往后加的空间，不绑死到走不了。",
+    title: "我们开发用的工具",
+    body: "都是多数开发者熟悉的通用工具，以后您有自己的团队也能接手维护。",
     groups: {
       Languages: "语言",
       Frontend: "Frontend",
@@ -1295,7 +1337,7 @@ export const zh: Messages = {
   contact: {
     init: "contact.init()",
     phrases: ["把题目发过来", "网站也做，系统也做", "现在就加 LINE OA"],
-    body: "网站也接，系统也接——把想要的样子发来，或讲讲现在怎么干活。三人团队，先帮你看个大概。",
+    body: "网站也接，系统也接——把想要的样子发来，或讲讲现在怎么干活。团队先帮你看个大概。",
     help: [
       "想做公司网站、落地页，或客人会进来用的站",
       "想做预约、CRM、Dashboard，或团队后台",
@@ -1310,7 +1352,7 @@ export const zh: Messages = {
     console: "打开全部联系方式 →",
     pageKicker: "contact.console()",
     pageH1: "找 {name}（{role}）聊就行",
-    pageLead: "{person} · {role}，{n} 人团队。网站也做，系统也做。把题目拿来谈，免费。",
+    pageLead: "{person} · {role}。网站也做，系统也做。把题目拿来谈，免费。",
     primary: "primary channel",
     primaryHint: "谈需求、锁范围、发系统例子，主要走这条",
     tapToCall: "点这个号码打出去 ·",

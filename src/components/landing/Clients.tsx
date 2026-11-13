@@ -3,50 +3,51 @@
 import Image from "next/image";
 import { CLIENTS } from "@/lib/site";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { Container, CropFrame, SectionTag } from "@/components/ui";
+import { Container } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 
 export function Clients() {
   const { t } = useLocale();
 
   return (
-    <section id="clients" className="scroll-mt-20 py-16 sm:py-20">
+    <section id="clients" className="relative scroll-mt-20 bg-white py-12 sm:py-14">
+      <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+      <span aria-hidden className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-transparent via-brand-500 to-transparent" />
+
       <Container>
         <Reveal>
-          <SectionTag>{t.clients.tag}</SectionTag>
+          <div className="flex items-center justify-center gap-5">
+            <span aria-hidden className="h-px w-14 bg-gradient-to-r from-transparent to-violet-400 sm:w-24" />
+            <p className="bg-gradient-to-r from-violet-700 to-brand-600 bg-clip-text font-display text-lg font-bold text-transparent sm:text-xl">
+              {t.clients.tag}
+            </p>
+            <span aria-hidden className="h-px w-14 bg-gradient-to-l from-transparent to-brand-400 sm:w-24" />
+          </div>
         </Reveal>
 
-        <Reveal className="mt-8">
-          <CropFrame className="border border-slate-200 bg-white">
-            <div className="sheet-wash px-6 py-10 sm:px-10 sm:py-12">
-              <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-8 sm:gap-x-14 sm:gap-y-10">
-                {CLIENTS.map((client) => (
-                  <li key={client.name}>
-                    <a
-                      href={client.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="client-link inline-flex items-center justify-center"
-                      aria-label={client.name}
-                    >
-                      <Image
-                        src={client.logo}
-                        alt={client.name}
-                        width={client.width}
-                        height={client.height}
-                        className={
-                          client.height > client.width
-                            ? "client-logo h-20 w-auto max-w-[120px] object-contain sm:h-24 sm:max-w-[140px]"
-                            : "client-logo h-9 w-auto max-w-[160px] object-contain sm:h-11 sm:max-w-[220px]"
-                        }
-                      />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </CropFrame>
-        </Reveal>
+        <ul className="mt-8 grid grid-cols-3 items-center gap-y-6 lg:grid-cols-6">
+          {CLIENTS.map((client, i) => (
+            <Reveal as="li" key={client.name} delay={i * 80} variant="scale">
+              <a
+                href={client.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={client.name}
+                className="group flex h-20 items-center justify-center px-3 sm:px-5"
+              >
+                <Image
+                  src={client.logo}
+                  alt={client.name}
+                  width={client.width}
+                  height={client.height}
+                  className={`w-auto object-contain transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105 ${
+                    client.height > client.width ? "h-16 sm:h-20" : "max-h-10 max-w-full sm:max-h-11"
+                  }`}
+                />
+              </a>
+            </Reveal>
+          ))}
+        </ul>
       </Container>
     </section>
   );

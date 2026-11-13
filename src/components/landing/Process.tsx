@@ -2,44 +2,38 @@
 
 import { PROCESS } from "@/lib/site";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { Container, SectionTag } from "@/components/ui";
+import { Card, Container, SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 
 export function Process() {
   const { t } = useLocale();
 
   return (
-    <section id="process" className="scroll-mt-20 border-y border-slate-200/80 bg-[#f7f9fc] py-20 sm:py-24">
+    <section id="process" className="scroll-mt-20 py-16 sm:py-20">
       <Container>
-        <Reveal className="max-w-2xl">
-          <SectionTag>{t.process.tag}</SectionTag>
-          <h2 className="mt-5 font-display text-[clamp(1.75rem,1.2rem+2vw,2.35rem)] font-bold tracking-tight text-ink">
-            {t.process.title}
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">{t.process.body}</p>
+        <Reveal>
+          <SectionHeading tag={t.process.tag} title={t.process.title} body={t.process.body} />
         </Reveal>
 
-        <div className="relative mt-14">
-          <Reveal
-            variant="draw"
-            delay={120}
-            className="absolute left-4 right-4 top-[15px] hidden h-px bg-slate-300 lg:block"
-          />
-          <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
-            {PROCESS.map((p, i) => {
-              const copy = t.process.items[p.step as keyof typeof t.process.items];
-              return (
-                <Reveal as="li" key={p.step} delay={i * 90} className="relative">
-                  <span className="relative z-10 mb-4 inline-flex size-8 items-center justify-center border border-brand-200 bg-white font-mono text-[11px] font-bold tabular-nums text-brand-700">
-                    {p.step}
-                  </span>
-                  <h3 className="font-display text-base font-bold text-ink">{copy.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{copy.desc}</p>
-                </Reveal>
-              );
-            })}
-          </ol>
-        </div>
+        <Reveal className="mt-12">
+          <Card className="relative px-6 py-8 sm:px-8 lg:px-10 lg:py-10">
+            <span aria-hidden className="absolute left-14 right-14 top-[3.75rem] hidden h-px bg-line lg:block" />
+            <ol className="relative grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+              {PROCESS.map((p) => {
+                const copy = t.process.items[p.step as keyof typeof t.process.items];
+                return (
+                  <li key={p.step}>
+                    <span className="inline-flex size-10 items-center justify-center rounded-full bg-brand-600 text-sm font-bold tabular-nums text-white ring-4 ring-white">
+                      {Number(p.step)}
+                    </span>
+                    <h3 className="mt-4 font-display text-base font-bold text-ink">{copy.title}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{copy.desc}</p>
+                  </li>
+                );
+              })}
+            </ol>
+          </Card>
+        </Reveal>
       </Container>
     </section>
   );

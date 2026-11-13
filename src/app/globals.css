@@ -22,8 +22,15 @@
   --color-accent-400: #ffb36b;
   --color-accent-500: #ff9d2e;
 
+  /* Surface tokens — cool-grey canvas + white cards (shadcn/ui-style elevation) */
+  --color-canvas: #f3f5f9;
+  --color-line: #e3e8ef;
+
   --shadow-soft: 0 1px 2px rgba(10, 20, 48, 0.05), 0 12px 32px -12px rgba(11, 97, 214, 0.2);
   --shadow-lift: 0 24px 60px -24px rgba(11, 60, 130, 0.4);
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04), 0 2px 8px -2px rgba(16, 24, 40, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(16, 24, 40, 0.04), 0 16px 32px -12px rgba(16, 24, 40, 0.16);
+  --shadow-float: 0 2px 6px rgba(16, 24, 40, 0.06), 0 30px 60px -20px rgba(11, 40, 100, 0.35);
 
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -142,6 +149,27 @@ body {
   66% { transform: translate3d(-2.5rem, 2rem, 0) scale(0.96); }
 }
 .animate-aurora { animation: aurora 18s ease-in-out infinite; }
+
+/* Spinning colour halo behind a featured image */
+@keyframes aura-spin {
+  to { transform: rotate(360deg); }
+}
+.aura-ring {
+  background: conic-gradient(from 0deg, #8b5cf6, #1479ef, #22d3ee, #d946ef, #8b5cf6);
+  filter: blur(34px);
+  animation: aura-spin 10s linear infinite;
+}
+
+/* Light running along a "before → after" connector */
+@keyframes flow-run {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+.flow-line {
+  background-image: linear-gradient(90deg, transparent 0%, var(--flow, #8b5cf6) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: flow-run 2.4s linear infinite;
+}
 
 /* Button sheen — light sweep across primary CTAs */
 .btn-sheen {
@@ -277,6 +305,8 @@ body {
   .animate-float-slow,
   .animate-marquee,
   .animate-aurora,
+  .aura-ring,
+  .flow-line,
   .animate-caret,
   .node-pulse,
   .scan-line,
@@ -354,6 +384,65 @@ body {
 
 ::selection {
   background: rgba(20, 121, 239, 0.22);
+}
+
+/* ── Homepage hero ─────────────────────────────────────────── */
+.hero-backdrop {
+  background:
+    radial-gradient(60rem 36rem at 78% 30%, rgba(20, 121, 239, 0.16), transparent 62%),
+    radial-gradient(40rem 28rem at 8% 0%, rgba(116, 182, 255, 0.18), transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, var(--color-canvas) 100%);
+}
+.hero-dots {
+  background-image: radial-gradient(rgba(10, 20, 48, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, black, transparent 75%);
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float-y { animation: float-y 7s ease-in-out infinite; }
+@keyframes live-ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  80%, 100% { transform: scale(2.4); opacity: 0; }
+}
+.live-ping { animation: live-ping 1.8s var(--ease-out-quart) infinite; }
+/* Load-in for above-the-fold content (no IntersectionObserver wait) */
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-in {
+  animation: hero-in 0.8s var(--ease-out-quart) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Card lift used by homepage cards */
+.card-lift {
+  transition:
+    transform 0.3s var(--ease-out-quart),
+    box-shadow 0.3s var(--ease-out-quart),
+    border-color 0.3s var(--ease-out-quart);
+}
+@media (hover: hover) and (pointer: fine) {
+  .card-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-y,
+  .live-ping,
+  .hero-in {
+    animation: none;
+  }
+  .card-lift,
+  .card-lift:hover {
+    transition: none;
+    transform: none;
+  }
 }
 
 /* Fixed navbar height — grows when the promo bar is showing (see PROMO_ENDS_AT) */

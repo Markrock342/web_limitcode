@@ -6,7 +6,6 @@ export const CONTACT = {
   person: "Mark Kitti",
   personThai: "คุณ Mark",
   role: "Project Manager",
-  teamSize: 3,
   phoneDisplay: "084-265-2544",
   phoneHref: "tel:+66842652544",
   email: "limitcodestudio@gmail.com",
@@ -33,7 +32,7 @@ export function isPromoActive(now = Date.now()): boolean {
 export const BRAND = {
   name: "LIMIT CODE STUDIO",
   short: "LIMIT CODE",
-  tagline: "ทีมฟรีแลนซ์ 3 คน ไม่ใช่บริษัท รับทำเว็บไซต์ ระบบจอง CRM และงานที่ธุรกิจใช้จริง",
+  tagline: "ทีมฟรีแลนซ์ ไม่ใช่บริษัท รับทำเว็บไซต์ ระบบจอง CRM และงานที่ธุรกิจใช้จริง",
 };
 
 export type IconName =
