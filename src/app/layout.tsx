@@ -29,9 +29,13 @@ const display = Sora({
 
 export const metadata: Metadata = defaultMetadata;
 
-/** เว็บมีธีมสว่างอย่างเดียว — บอกเบราว์เซอร์มือถือไม่ให้กลับสีเองเมื่อเครื่องเปิดโหมดมืด */
+/**
+ * เว็บมีธีมสว่างอย่างเดียว แต่แท็กนี้ต้องประกาศ "light dark":
+ * Samsung Internet จะกลับสีทุกเว็บที่ไม่ได้ระบุว่ารองรับ dark
+ * สีจริงยังถูกล็อกเป็นสว่างด้วย `color-scheme: only light` ใน globals.css (Chrome อ่านค่านั้น)
+ */
 export const viewport: Viewport = {
-  colorScheme: "only light",
+  colorScheme: "light dark",
   themeColor: "#ffffff",
 };
 

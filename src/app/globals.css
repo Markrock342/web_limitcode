@@ -39,7 +39,7 @@
 :root {
   --background: #ffffff;
   --foreground: #0a1430;
-  /* Light only: stops mobile browsers from auto-darkening the page */
+  /* Light only: keeps colours and form controls light even though the meta tag says "light dark" (see layout.tsx) */
   color-scheme: only light;
 }
 
