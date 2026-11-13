@@ -76,13 +76,13 @@ export const TECH: TechItem[] = [
   { name: "GPT-6 Astra", group: "AI", icon: "", color: "10A37F", local: "/tech/gpt.svg" },
   { name: "GPT-6.1 Sol", group: "AI", icon: "", color: "10A37F", local: "/tech/gpt.svg" },
   { name: "Opus 5.5", group: "AI", icon: "", color: "D97757", local: "/tech/opus.svg" },
-  { name: "Fable 5.1", group: "AI", icon: "", color: "A78BFA", local: "/tech/claude.svg" },
-  { name: "Sonnet 5", group: "AI", icon: "", color: "D97757", local: "/tech/claude.svg" },
+  { name: "Fable 5.2", group: "AI", icon: "", color: "A78BFA", local: "/tech/claude.svg" },
+  { name: "Sonnet 5.5", group: "AI", icon: "", color: "D97757", local: "/tech/claude.svg" },
   { name: "DeepSeek V4 Pro", group: "AI", icon: "", color: "4D6BFE", local: "/tech/deepseek.svg" },
   { name: "DeepSeek V4.1 Flash", group: "AI", icon: "", color: "4D6BFE", local: "/tech/deepseek.svg" },
   { name: "Composer 2.5", group: "AI", icon: "", color: "FFFFFF", local: "/tech/composer.svg" },
   { name: "Grok 4.7", group: "AI", icon: "", color: "FFFFFF", local: "/tech/grok.svg" },
-  { name: "Gemini 3.8 Flash", group: "AI", icon: "", color: "8E75B2", local: "/tech/gemini.svg" },
+  { name: "Gemini 4 Hydrogen", group: "AI", icon: "", color: "8E75B2", local: "/tech/gemini.svg" },
 ];
 
 export const TECH_GROUPS: TechGroup[] = [
